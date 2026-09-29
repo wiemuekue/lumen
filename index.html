@@ -163,6 +163,7 @@
   .lh > div:first-child { min-width: 0; }
   .eyebrow { font-size: 13px; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; color: var(--label2); margin-bottom: 2px; }
   .lh h1 { font-family: var(--font-display); font-size: 34px; line-height: 41px; font-weight: 800; letter-spacing: -0.025em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .lh h1 .greet { display: block; font-size: 22px; line-height: 28px; font-weight: 700; letter-spacing: -0.01em; color: var(--label2); overflow: hidden; text-overflow: ellipsis; }
   .section-title { font-size: 13px; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; color: var(--label2); padding: 26px 6px 8px; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
   .section-title small { text-transform: none; letter-spacing: 0; font-weight: 500; font-size: 13px; }
   .section-note { font-size: 14px; line-height: 1.4; color: var(--label2); padding: 0 6px 12px; margin-top: -2px; }
@@ -534,7 +535,8 @@
   .stamp.yes { right: 16px; color: var(--green); transform: rotate(10deg); }
   .stamp.no { left: 16px; color: var(--red); transform: rotate(-10deg); }
   .stamp.yes.high { color: var(--orange); }
-  .stamp.no.low { color: var(--blue); }
+  .stamp.no.low, .stamp.yes.low { color: var(--blue); }
+  .stamp.no.high { color: var(--orange); }
   .stamp.yes.wow { color: #BF5AF2; }
   .stamp.no.known { color: var(--label2); }
   .sw-hint { display: flex; justify-content: space-between; gap: 10px; font-size: 13px; font-weight: 700; color: var(--label3); margin: 14px 10px 0; }
@@ -3571,6 +3573,991 @@
       ["Rot verschwindet schon in wenigen Metern weitgehend.", "Blaues Licht dringt …", 1, "Tiefer: weit über 30 Meter.", ["weniger tief", "tiefer"]]
     ]
   };
+  /* Meeresbiologie & Tiefsee */
+  CONTENT.meer = {
+    cards: [
+      {
+        id: "mb-04", category: "Meeresbiologie & Tiefsee", tagColor: "#0D9488",
+        title: "Korallenriffe – Regenwälder der Meere",
+        story: "Riffbildende Korallen sind winzige Tiere, sogenannte Polypen, die Kalkskelette bauen und in riesigen Kolonien leben. In ihrem Gewebe wohnen einzellige Algen, die Zooxanthellen: Sie betreiben Photosynthese, versorgen die Koralle mit Nährstoffen und verleihen ihr die leuchtenden Farben. Wird das Wasser zu warm, stoßen die Korallen die Algen ab und bleichen aus – hält der Hitzestress an, verhungern sie. Obwohl Riffe nur einen winzigen Teil des Meeresbodens bedecken, leben dort rund ein Viertel aller Meeresarten.",
+        funFact: "Das Great Barrier Reef vor Australien erstreckt sich über rund 2.300 Kilometer und gilt als größtes von Lebewesen erschaffenes Bauwerk der Erde – es ist sogar aus dem All zu erkennen.",
+        quiz: {
+          question: "Was passiert bei der Korallenbleiche?",
+          options: ["Die Korallen verlieren ihre symbiotischen Algen", "Die Korallen werden von Sand bedeckt", "Die Korallen wachsen besonders schnell"],
+          correct: 0,
+          explanation: "Bei Hitzestress stoßen Korallen ihre Zooxanthellen ab – ohne sie fehlen Farbe und Nahrung."
+        }
+      },
+      {
+        id: "mb-05", category: "Meeresbiologie & Tiefsee", tagColor: "#0D9488",
+        title: "Der Blauwal – das größte Tier aller Zeiten",
+        story: "Der Blauwal wird über 30 Meter lang und weit über 100 Tonnen schwer – schwerer als jeder Dinosaurier, soweit wir wissen. Trotzdem ernährt er sich von winzigen Krebstierchen, dem Krill: Mit einem gewaltigen Maul nimmt er Wasser auf und presst es durch seine Barten, sodass nur die Beute zurückbleibt. Seine tiefen Rufe gehören zu den lautesten Geräuschen im Tierreich und können Hunderte Kilometer weit reichen. Durch den industriellen Walfang wurde er im 20. Jahrhundert fast ausgerottet.",
+        funFact: "Das Herz eines Blauwals wiegt rund 180 Kilogramm, und allein seine Zunge bringt etwa so viel auf die Waage wie ein Elefant.",
+        quiz: {
+          question: "Wovon ernährt sich der Blauwal hauptsächlich?",
+          options: ["Von Robben", "Von Krill", "Von Tintenfischen"],
+          correct: 1,
+          explanation: "Er filtert täglich mehrere Tonnen der kleinen Krebstiere aus dem Wasser."
+        }
+      },
+      {
+        id: "mb-06", category: "Meeresbiologie & Tiefsee", tagColor: "#0D9488",
+        title: "Haie – älter als die Bäume",
+        story: "Haie schwimmen seit über 400 Millionen Jahren durch die Meere – damit sind sie älter als die ersten Bäume und viel älter als die Dinosaurier. Mit den Lorenzinischen Ampullen, winzigen gelgefüllten Poren an der Schnauze, spüren sie sogar die schwachen elektrischen Felder, die die Muskeln ihrer Beute erzeugen. Ihre Zähne werden ein Leben lang ersetzt, bei manchen Arten Tausende Male. Von über 500 Haiarten sind nur sehr wenige für Menschen gefährlich – umgekehrt töten Menschen jedes Jahr Millionen Haie.",
+        funFact: "Der Grönlandhai kann vermutlich rund 400 Jahre alt werden und ist damit das langlebigste bekannte Wirbeltier. Manche heute lebenden Tiere könnten schon zur Zeit des Dreißigjährigen Krieges geschwommen sein.",
+        quiz: {
+          question: "Womit spüren Haie elektrische Felder ihrer Beute?",
+          options: ["Mit ihren Kiemen", "Mit den Lorenzinischen Ampullen", "Mit ihrer Rückenflosse"],
+          correct: 1,
+          explanation: "Die Sinnesorgane an der Schnauze reagieren auf winzigste elektrische Spannungen."
+        }
+      }
+    ],
+    wissen: [
+      ["Die Stockwerke des Ozeans", "Bis etwa 200 Meter reicht die lichtdurchflutete Zone, bis rund 1.000 Meter die Dämmerzone. Darunter beginnt die ewige Dunkelheit der Tiefsee, und in den Tiefseegräben liegt die hadale Zone."],
+      ["Plankton – das Fundament", "Plankton sind alle Lebewesen, die mit der Strömung treiben, von mikroskopischen Algen bis zu Quallen. Das pflanzliche Phytoplankton bildet die Basis fast aller Nahrungsketten im Meer."],
+      ["Krill", "Krill sind garnelenartige Krebstiere, die in riesigen Schwärmen vor allem im Südpolarmeer leben. Wale, Robben, Pinguine und Fische hängen von ihnen ab."],
+      ["Die größte Wanderung der Welt", "Jede Nacht steigen Milliarden Tiere aus der Dämmerzone an die Oberfläche, um zu fressen, und kehren im Morgengrauen zurück. Diese tägliche Vertikalwanderung ist die größte Tierwanderung der Erde."],
+      ["Anglerfisch-Liebe", "Bei manchen Tiefsee-Anglerfischen beißt sich das winzige Männchen am Weibchen fest und verschmilzt mit ihm. Es lebt fortan als Anhängsel, das nur noch Spermien liefert."],
+      ["Der Riesenkalmar", "Der Riesenkalmar kann über zehn Meter lang werden und hat die größten Augen im Tierreich – so groß wie ein Teller. Lebend gefilmt wurde er erst 2012."],
+      ["Der Vampirtintenfisch", "Trotz seines Namens saugt der Vampirtintenfisch kein Blut, sondern frisst herabrieselnde Partikel. Bei Gefahr stülpt er seinen Umhang über den Kopf und stößt leuchtenden Schleim aus."],
+      ["Walfall", "Sinkt ein toter Wal auf den Meeresboden, entsteht eine Oase: Aasfresser, Würmer und Bakterien leben jahrzehntelang von seinem Körper. Manche Arten kommen fast nur an solchen Walskeletten vor."],
+      ["Meeresschnee", "Aus der hellen Zone rieseln ständig Flocken aus abgestorbenem Plankton, Kot und Staub in die Tiefe. Dieser Meeresschnee ist die Hauptnahrungsquelle vieler Tiefseebewohner."],
+      ["Seegraswiesen", "Seegras ist eine Blütenpflanze, die unter Wasser wächst. Seegraswiesen speichern viel Kohlenstoff im Boden, dienen als Kinderstube für Fische und kommen auch in Nord- und Ostsee vor."],
+      ["Kelpwälder und Seeotter", "Riesentang kann über 30 Meter hoch wachsen und bildet Unterwasserwälder. Seeotter schützen sie, indem sie Seeigel fressen, die sonst den Tang kahl fressen würden."],
+      ["Die unsterbliche Qualle", "Die kleine Qualle Turritopsis dohrnii kann sich bei Stress in ein Jugendstadium zurückverwandeln und den Lebenszyklus neu beginnen. Theoretisch ist sie damit biologisch unsterblich."],
+      ["Clownfische", "Clownfische leben geschützt zwischen den Nesselarmen von Seeanemonen, deren Gift ihnen nichts anhaben kann. Alle Clownfische schlüpfen als Männchen; das größte Tier einer Gruppe wird zum Weibchen."],
+      ["Putzerstationen", "An Putzerstationen lassen sich große Fische von kleinen Putzerfischen und Garnelen Parasiten entfernen. Selbst Raubfische halten dabei still und öffnen das Maul."],
+      ["Der Gesang der Buckelwale", "Buckelwal-Männchen singen komplexe Lieder, die über Stunden dauern können. Die Lieder verändern sich von Jahr zu Jahr und verbreiten sich wie Hits von einer Population zur nächsten."],
+      ["Halbschlaf der Delfine", "Delfine schlafen jeweils nur mit einer Gehirnhälfte, während die andere wach bleibt. So können sie weiter atmen und auf Gefahren achten."],
+      ["Heimkehr der Meeresschildkröten", "Meeresschildkrötenweibchen kehren nach Jahrzehnten zum Strand zurück, an dem sie selbst geschlüpft sind. Sie orientieren sich dabei vermutlich am Erdmagnetfeld."],
+      ["Das Rätsel der Aale", "Europäische Aale wandern Tausende Kilometer zum Laichen in die Sargassosee im Atlantik. Beim Laichen wurde bis heute noch nie ein Aal beobachtet."],
+      ["Die Ozeanversauerung", "Die Meere nehmen einen großen Teil des ausgestoßenen CO₂ auf und werden dadurch saurer. Muscheln, Schnecken und Korallen fällt es dann schwerer, ihre Kalkschalen zu bauen."],
+      ["Überfischung", "Ein großer Teil der weltweiten Fischbestände gilt als überfischt oder maximal genutzt. Schutzgebiete, Fangquoten und bewusster Konsum helfen, Bestände zu erholen."],
+      ["Schwämme – uralte Tiere", "Schwämme gehören zu den ursprünglichsten Tieren überhaupt. Sie haben weder Organe noch Nerven und filtern ihre Nahrung aus dem Wasser, das sie durch ihren porösen Körper pumpen."],
+      ["Mangroven", "Mangroven sind Bäume, die im Salzwasser der Tropenküsten wachsen. Sie schützen Küsten vor Sturmfluten, speichern viel Kohlenstoff und dienen Jungfischen als Kinderstube."],
+      ["Der Hochseevertrag", "2023 einigten sich die Vereinten Nationen auf ein Abkommen zum Schutz der Hohen See. Es soll ermöglichen, Schutzgebiete auch in internationalen Gewässern einzurichten."],
+      ["Die Kunst der Tarnung", "Viele Meerestiere tarnen sich perfekt: Plattfische passen ihre Farbe dem Boden an, Sepien wechseln Muster in Sekundenbruchteilen, und Fetzenfische sehen aus wie treibender Tang."],
+      ["Das unbekannte Meer", "Nur ein kleiner Teil des Meeresbodens ist in hoher Auflösung kartiert – die Oberfläche von Mond und Mars kennen wir teils genauer. Mit jeder Expedition werden neue Arten entdeckt."]
+    ],
+    facts: [
+      "Die Zunge eines Blauwals wiegt etwa so viel wie ein ausgewachsener Elefant.",
+      "Ein Blauwalkalb nimmt beim Säugen bis zu rund 90 Kilogramm pro Tag zu.",
+      "Pottwale haben das schwerste Gehirn im Tierreich – rund acht Kilogramm.",
+      "Pottwale schlafen senkrecht im Wasser treibend, wie riesige Baumstämme.",
+      "Bei Seepferdchen werden die Männchen schwanger und bringen die Jungen zur Welt.",
+      "Weiße Sandstrände in den Tropen bestehen zu einem großen Teil aus den Ausscheidungen von Papageifischen, die Korallen abknabbern.",
+      "Der Schlag eines Fangschreckenkrebses ist so schnell, dass das Wasser verdampft und kleine Lichtblitze entstehen.",
+      "Fangschreckenkrebse besitzen 12 bis 16 Typen von Farbrezeptoren – wir Menschen nur drei.",
+      "Knallkrebse erzeugen beim Zuschnappen ihrer Schere eine Blase, in der für einen Augenblick Temperaturen wie auf der Sonnenoberfläche herrschen.",
+      "Seeotter halten sich beim Schlafen an den Pfoten fest, damit sie nicht auseinandertreiben.",
+      "Große Tümmler geben sich individuelle Pfiffe – eine Art Name, auf den sie reagieren.",
+      "Der Stoßzahn des Narwals ist ein spiralförmig gewachsener Zahn, der bis zu drei Meter lang werden kann.",
+      "Seesterne haben kein Gehirn – und manche können aus einem einzigen Arm einen ganzen neuen Körper bilden.",
+      "Quallen bestehen zu rund 95 Prozent aus Wasser.",
+      "Würfelquallen haben 24 Augen, von denen einige sogar Linsen besitzen.",
+      "Orcas sind keine Wale im engeren Sinn, sondern die größten Delfine.",
+      "Der Gespensterfisch hat einen durchsichtigen Kopf, durch den er nach oben schauen kann.",
+      "Der Blobfisch sieht nur an Land so traurig aus – in der Tiefsee hält der Wasserdruck seinen Körper in Form.",
+      "Die Lederschildkröte kann über 1.000 Meter tief tauchen.",
+      "Der Walhai ist der größte Fisch der Welt und frisst ausschließlich Plankton und kleine Fische.",
+      "Manche Tiefseeorganismen wachsen zu riesigen Formen heran – Forscher sprechen vom Tiefsee-Gigantismus.",
+      "Kraken können ihre Hautfarbe ändern, obwohl sie vermutlich farbenblind sind.",
+      "Die Tiefsee ist der größte Lebensraum der Erde – sie macht den weitaus größten Teil des bewohnbaren Raums aus.",
+      "Einige Tiefseefische haben rote Farbe als Tarnung: Weil kein rotes Licht bis in die Tiefe dringt, wirken sie dort schwarz.",
+      "Inzwischen waren mehr Menschen im Challengertief als auf dem Mond – seit 2019 tauchten über 20 Menschen bis zum tiefsten Punkt der Meere hinab.",
+      "Das Leuchten mancher Strände nachts stammt von Einzellern, die bei Bewegung aufblitzen – sogenanntes Meeresleuchten.",
+      "Ein Pottwal kann über eine Stunde lang tauchen, ohne zu atmen.",
+      "Die Nordsee ist im Durchschnitt nur rund 90 Meter tief.",
+      "Der Heilbutt und andere Plattfische schlüpfen symmetrisch – erst später wandert ein Auge auf die andere Seite.",
+      "Haie müssen nicht alle ständig schwimmen – manche Arten können ruhend am Boden atmen.",
+      "Die Dornenkrone, ein Seestern, kann ganze Korallenriffe kahl fressen.",
+      "Manche Muscheln können mehrere Hundert Jahre alt werden – eine Islandmuschel wurde über 500 Jahre alt."
+    ],
+    quiz: [
+      ["Bis zu welcher Tiefe reicht die lichtdurchflutete Zone ungefähr?", ["200 Meter", "20 Meter", "2.000 Meter"], 0, "Darunter beginnt die Dämmerzone."],
+      ["Was ist Phytoplankton?", ["Pflanzliches Plankton", "Tierisches Plankton", "Ein Fisch"], 0, "Es bildet die Basis vieler Nahrungsketten."],
+      ["Was frisst der Blauwal hauptsächlich?", ["Krill", "Robben", "Haie"], 0, "Er filtert Krill mit seinen Barten."],
+      ["Was ist die größte tägliche Tierwanderung?", ["Die Vertikalwanderung im Meer", "Der Vogelzug", "Die Gnuwanderung"], 0, "Milliarden Tiere steigen nachts auf."],
+      ["Was passiert mit dem Männchen mancher Anglerfische?", ["Es verschmilzt mit dem Weibchen", "Es wird gefressen", "Es wird zum Weibchen"], 0, "Es lebt dann als Anhängsel."],
+      ["Welches Tier hat die größten Augen?", ["Riesen- und Kolosskalmare", "Der Blauwal", "Der Adler"], 0, "Ihre Augen sind so groß wie Teller."],
+      ["Was frisst der Vampirtintenfisch?", ["Herabrieselnde Partikel", "Blut", "Große Fische"], 0, "Trotz des Namens ist er harmlos."],
+      ["Was ist ein Walfall?", ["Ein toter Wal auf dem Meeresboden als Lebensraum", "Ein Wasserfall", "Ein Sprung eines Wals"], 0, "Er ernährt Tiere jahrzehntelang."],
+      ["Was ist Meeresschnee?", ["Herabsinkende organische Flocken", "Gefrorenes Meerwasser", "Schaum auf Wellen"], 0, "Nahrung für viele Tiefseebewohner."],
+      ["Was ist Seegras?", ["Eine Blütenpflanze", "Eine Alge", "Ein Pilz"], 0, "Es wächst unter Wasser und blüht sogar."],
+      ["Warum sind Seeotter wichtig für Kelpwälder?", ["Sie fressen Seeigel", "Sie pflanzen Tang", "Sie düngen das Wasser"], 0, "Sonst würden Seeigel den Tang kahl fressen."],
+      ["Welche Qualle gilt als biologisch unsterblich?", ["Turritopsis dohrnii", "Die Ohrenqualle", "Die Würfelqualle"], 0, "Sie kann sich in ein Jugendstadium zurückverwandeln."],
+      ["Warum werden Clownfische nicht von Anemonen genesselt?", ["Sie sind vor dem Gift geschützt", "Sie sind zu schnell", "Anemonen sind harmlos"], 0, "Eine Schleimschicht schützt sie."],
+      ["Als was schlüpfen alle Clownfische?", ["Als Männchen", "Als Weibchen", "Als Zwitter ohne Geschlecht"], 0, "Das größte Tier wird zum Weibchen."],
+      ["Was passiert an Putzerstationen?", ["Kleine Tiere entfernen Parasiten von großen Fischen", "Fische laichen", "Haie jagen"], 0, "Eine Symbiose zum beiderseitigen Vorteil."],
+      ["Was ist besonders an Buckelwal-Gesängen?", ["Sie verändern sich und verbreiten sich zwischen Populationen", "Sie sind immer gleich", "Nur Weibchen singen"], 0, "Wie musikalische Moden."],
+      ["Wie schlafen Delfine?", ["Mit einer Gehirnhälfte", "Gar nicht", "Am Strand"], 0, "Die andere Hälfte bleibt wach."],
+      ["Wohin kehren Meeresschildkröten zum Eierlegen zurück?", ["Zum eigenen Geburtsstrand", "In Flüsse", "Auf Eisschollen"], 0, "Nach Jahrzehnten auf See."],
+      ["Wo laichen Europäische Aale?", ["In der Sargassosee", "Im Rhein", "In der Ostsee"], 0, "Beobachtet wurde es noch nie."],
+      ["Was bewirkt die Ozeanversauerung?", ["Kalkbildung wird erschwert", "Das Meer wird süßer", "Fische wachsen schneller"], 0, "Muscheln und Korallen leiden besonders."],
+      ["Was bilden Korallenpolypen?", ["Kalkskelette", "Glasfasern", "Holz"], 0, "Daraus entstehen ganze Riffe."],
+      ["Wer wohnt im Gewebe riffbildender Korallen?", ["Zooxanthellen-Algen", "Bakterien allein", "Kleine Fische"], 0, "Sie liefern Nährstoffe und Farbe."],
+      ["Wie lang ist das Great Barrier Reef ungefähr?", ["Rund 2.300 km", "Rund 23 km", "Rund 23.000 km"], 0, "Es liegt vor Australiens Ostküste."],
+      ["Wie lange gibt es Haie schon?", ["Über 400 Millionen Jahre", "Seit 1 Million Jahren", "Seit 10.000 Jahren"], 0, "Länger als Bäume."],
+      ["Welches Wirbeltier wird wohl am ältesten?", ["Der Grönlandhai", "Der Blauwal", "Der Elefant"], 0, "Vermutlich rund 400 Jahre."],
+      ["Wie viele Haiarten sind für Menschen gefährlich?", ["Nur sehr wenige", "Fast alle", "Die Hälfte"], 0, "Die meisten sind harmlos."],
+      ["Welches Tier bringt als Männchen die Jungen zur Welt?", ["Das Seepferdchen", "Der Hai", "Der Delfin"], 0, "Das Weibchen legt die Eier in seine Bruttasche."],
+      ["Woraus bestehen viele weiße Tropenstrände zum Teil?", ["Aus Ausscheidungen von Papageifischen", "Aus Salz", "Aus Muschelkalk allein"], 0, "Sie zermahlen Korallenkalk zu Sand."],
+      ["Wie viele Farbrezeptortypen hat ein Fangschreckenkrebs?", ["12 bis 16", "3", "1"], 0, "Deutlich mehr als der Mensch."],
+      ["Warum halten sich Seeotter beim Schlafen fest?", ["Damit sie nicht auseinandertreiben", "Aus Kälte", "Zum Spielen"], 0, "Man nennt sie liebevoll „Hand in Hand“-Schläfer."],
+      ["Was ist der Stoßzahn des Narwals?", ["Ein Zahn", "Ein Horn", "Ein Knochen der Nase"], 0, "Ein spiralig gewachsener Eckzahn."],
+      ["Welches Tier hat 24 Augen?", ["Die Würfelqualle", "Der Krake", "Der Seestern"], 0, "Einige ihrer Augen haben Linsen."],
+      ["Zu welcher Tiergruppe gehören Orcas?", ["Zu den Delfinen", "Zu den Haien", "Zu den Robben"], 0, "Sie sind die größten Delfine."],
+      ["Warum sieht der Blobfisch an Land so zerfließend aus?", ["Ohne Wasserdruck verliert sein Körper die Form", "Er ist krank", "Er ist ein Pilz"], 0, "In der Tiefe sieht er ganz normal aus."],
+      ["Was ist Meeresleuchten?", ["Leuchten von Einzellern bei Bewegung", "Spiegelung des Mondes", "Ölfilm"], 0, "Eine Form der Biolumineszenz."],
+      ["Wie tief ist die Nordsee im Durchschnitt?", ["Rund 90 Meter", "Rund 900 Meter", "Rund 9 Meter"], 0, "Sie ist ein flaches Schelfmeer."],
+      ["Was passiert bei jungen Plattfischen?", ["Ein Auge wandert auf die andere Seite", "Sie verlieren die Flossen", "Sie wechseln die Farbe nicht"], 0, "Sie schlüpfen zunächst symmetrisch."],
+      ["Welcher Seestern kann Korallenriffe kahl fressen?", ["Die Dornenkrone", "Der Gemeine Seestern", "Der Schlangenstern"], 0, "Massenvermehrungen schädigen Riffe stark."],
+      ["Wie alt wurde die älteste bekannte Islandmuschel?", ["Über 500 Jahre", "Etwa 50 Jahre", "Etwa 5 Jahre"], 0, "Sie ist eines der langlebigsten Tiere."],
+      ["Was schützt der Hochseevertrag von 2023?", ["Die Hohe See", "Nur Küsten", "Flüsse"], 0, "Er ermöglicht Schutzgebiete in internationalen Gewässern."],
+      ["Wo wachsen Mangroven?", ["An tropischen Salzwasserküsten", "In der Arktis", "In Wüsten"], 0, "Sie vertragen Salzwasser."],
+      ["Was können Sepien in Sekundenbruchteilen?", ["Farbe und Muster wechseln", "Fliegen", "Wachsen"], 0, "Spezielle Farbzellen machen es möglich."],
+      ["Wie viel wiegt das Herz eines Blauwals etwa?", ["Rund 180 kg", "Rund 18 kg", "Rund 1,8 Tonnen"], 0, "So viel wie mehrere Menschen."],
+      ["Womit spüren Haie elektrische Felder?", ["Lorenzinische Ampullen", "Seitenlinie allein", "Zähne"], 0, "Poren an der Schnauze."],
+      ["Was sind Schwämme?", ["Sehr ursprüngliche Tiere", "Pflanzen", "Pilze"], 0, "Sie haben weder Organe noch Nerven."]
+    ],
+    tf: [
+      ["Korallen sind mit Quallen und Seeanemonen verwandt.", true, "Sie alle gehören zu den Nesseltieren."],
+      ["Der Blauwal ist das größte bekannte Tier aller Zeiten.", true, "Er übertrifft sogar die größten Dinosaurier an Gewicht."],
+      ["Haie gibt es länger als Bäume.", true, "Über 400 Millionen Jahre."],
+      ["Der Grönlandhai kann mehrere Hundert Jahre alt werden.", true, "Vermutlich rund 400 Jahre."],
+      ["Beim Seepferdchen trägt das Weibchen die Jungen aus.", false, "Das Männchen wird schwanger."],
+      ["Delfine schlafen mit einer Gehirnhälfte.", true, "Die andere bleibt wachsam."],
+      ["Der Vampirtintenfisch saugt Blut.", false, "Er frisst herabrieselnde Partikel."],
+      ["Alle Clownfische schlüpfen als Männchen.", true, "Das größte wird zum Weibchen."],
+      ["Die Laichplätze der Europäischen Aale liegen in der Nordsee.", false, "Sie liegen in der Sargassosee."],
+      ["Seegras ist eine Blütenpflanze.", true, "Es blüht sogar unter Wasser."],
+      ["Quallen bestehen fast vollständig aus Wasser.", true, "Zu rund 95 Prozent."],
+      ["Orcas sind Haie.", false, "Sie sind die größten Delfine."],
+      ["Der Walhai ist ein gefährlicher Jäger großer Tiere.", false, "Er frisst Plankton und kleine Fische."],
+      ["Seesterne haben ein großes Gehirn.", false, "Sie haben gar kein Gehirn."],
+      ["Die Ozeanversauerung erschwert den Kalkbau von Muscheln.", true, "Saures Wasser löst Kalk."],
+      ["Der Stoßzahn des Narwals ist ein Horn.", false, "Er ist ein Zahn."],
+      ["Die unsterbliche Qualle kann sich in ein Jugendstadium zurückverwandeln.", true, "So beginnt ihr Lebenszyklus neu."],
+      ["Pottwale haben das schwerste Gehirn im Tierreich.", true, "Rund acht Kilogramm."],
+      ["Papageifische tragen zur Bildung von Sandstränden bei.", true, "Sie zermahlen Korallenkalk."],
+      ["Alle Haie müssen ständig schwimmen, um zu atmen.", false, "Manche Arten können ruhend atmen."],
+      ["Würfelquallen haben Augen.", true, "Sogar 24 Stück."],
+      ["Der Blobfisch sieht in der Tiefsee genauso zerlaufen aus wie an Land.", false, "Der Wasserdruck hält ihn in Form."],
+      ["Krill ist ein großer Raubfisch.", false, "Krill sind kleine Krebstiere."],
+      ["Buckelwal-Lieder verändern sich von Jahr zu Jahr.", true, "Sie verbreiten sich zwischen Populationen."],
+      ["Die Nordsee ist im Durchschnitt über 1.000 Meter tief.", false, "Sie ist im Schnitt nur rund 90 Meter tief."],
+      ["Seeotter halten sich beim Schlafen an den Pfoten.", true, "So treiben sie nicht auseinander."],
+      ["Riffbildende Korallen leben mit Algen in Symbiose.", true, "Die Zooxanthellen versorgen sie mit Nährstoffen."],
+      ["Der Riesenkalmar wurde schon vor hundert Jahren lebend gefilmt.", false, "Erst 2012 gelang die erste Filmaufnahme in der Tiefe."],
+      ["Die Dornenkrone ist ein Seestern, der Korallen frisst.", true, "Sie kann Riffe kahl fressen."],
+      ["Große Tümmler rufen sich mit individuellen Pfiffen.", true, "Eine Art Namen."],
+      ["Mangroven wachsen nur im Süßwasser.", false, "Sie wachsen im Salzwasser der Küsten."],
+      ["Der Meeresboden ist vollständig in hoher Auflösung kartiert.", false, "Nur ein kleiner Teil ist genau kartiert."]
+    ],
+    hl: [
+      ["Ein Afrikanischer Elefant wiegt bis etwa 6 Tonnen.", "Ein ausgewachsener Blauwal wiegt …", 1, "Mehr: weit über 100 Tonnen.", ["weniger", "mehr"]],
+      ["Ein menschliches Herz wiegt rund 300 Gramm.", "Das Herz eines Blauwals wiegt …", 1, "Mehr: rund 180 Kilogramm.", ["weniger", "mehr"]],
+      ["Bäume gibt es seit rund 385 Millionen Jahren.", "Haie gibt es seit …", 1, "Länger: über 400 Millionen Jahren.", ["kürzer", "länger"]],
+      ["Ein Mensch wird selten älter als 100 Jahre.", "Ein Grönlandhai kann werden …", 1, "Älter: vermutlich rund 400 Jahre.", ["jünger", "älter"]],
+      ["Das Auge eines Riesenkalmars misst bis zu rund 27 cm.", "Das menschliche Auge misst …", 0, "Weniger: rund 2,4 cm.", ["weniger", "mehr"]],
+      ["Die lichtdurchflutete Zone reicht bis etwa 200 m.", "Die Dämmerzone reicht bis …", 1, "Tiefer: etwa 1.000 m.", ["weniger tief", "tiefer"]],
+      ["Der Walhai wird über 12 Meter lang.", "Der Riesenhai, zweitgrößter Fisch, wird …", 0, "Kürzer: rund 10 Meter.", ["kürzer", "länger"]],
+      ["Der Mensch hat drei Typen von Farbrezeptoren.", "Ein Fangschreckenkrebs hat …", 1, "Mehr: 12 bis 16.", ["weniger", "mehr"]],
+      ["Ein Pottwalgehirn wiegt rund 8 kg.", "Ein menschliches Gehirn wiegt …", 0, "Weniger: rund 1,4 kg.", ["weniger", "mehr"]],
+      ["Zwölf Menschen haben den Mond betreten.", "Die Zahl der Menschen, die das Challengertief erreicht haben, ist …", 1, "Größer: inzwischen über 20.", ["kleiner", "größer"]],
+      ["Das Great Barrier Reef ist rund 2.300 km lang.", "Die Luftlinie von Flensburg nach Garmisch-Partenkirchen ist …", 0, "Kürzer: rund 850 km.", ["kürzer", "länger"]],
+      ["Die Nordsee ist im Schnitt rund 90 m tief.", "Der Pazifik ist im Durchschnitt …", 1, "Tiefer: rund 4.000 m.", ["weniger tief", "tiefer"]]
+    ]
+  };
+  /* Antike Philosophie (Stoa) */
+  CONTENT.stoa = {
+    cards: [
+      {
+        id: "ph-04", category: "Antike Philosophie (Stoa)", tagColor: "#64748B",
+        title: "Seneca – Philosoph am Hof des Nero",
+        story: "Lucius Annaeus Seneca war einer der reichsten und mächtigsten Männer Roms – und zugleich ein Philosoph, der über Genügsamkeit schrieb. Unter Kaiser Claudius wurde er für Jahre nach Korsika verbannt, danach holte man ihn als Lehrer und Berater des jungen Nero zurück. In seinen 124 „Briefen an Lucilius“ gibt er Ratschläge zu Zeit, Freundschaft, Angst und Tod, die bis heute gelesen werden. Nach einer Verschwörung gegen Nero befahl ihm der Kaiser im Jahr 65 den Selbstmord, den Seneca mit stoischer Gelassenheit vollzog.",
+        funFact: "Senecas Bruder Gallio taucht sogar in der Bibel auf: Als Statthalter in Korinth wies er eine Anklage gegen den Apostel Paulus ab.",
+        quiz: {
+          question: "Wessen Lehrer und Berater war Seneca?",
+          options: ["Mark Aurel", "Nero", "Augustus"],
+          correct: 1,
+          explanation: "Seneca erzog den jungen Nero und prägte die ersten, als gut geltenden Regierungsjahre mit."
+        }
+      },
+      {
+        id: "ph-05", category: "Antike Philosophie (Stoa)", tagColor: "#64748B",
+        title: "Das Schlimmste vorausdenken",
+        story: "Stoiker übten gezielt, sich mögliche Verluste und Schwierigkeiten auszumalen – die „praemeditatio malorum“. Das klingt düster, sollte aber gelassener machen: Wer Rückschläge vorher durchdenkt, wird von ihnen weniger überrollt und schätzt zugleich mehr, was er hat. Seneca empfahl außerdem, ab und zu freiwillig einfach zu leben, und an jedem Abend auf den Tag zurückzublicken: Was habe ich gut gemacht, was kann ich besser machen? Heute greifen Coaches und Psychologen solche Übungen wieder auf.",
+        funFact: "Seneca riet, an einigen Tagen nur schlichtes Brot zu essen und auf hartem Lager zu schlafen – und sich dann zu fragen: „Ist es das, was ich gefürchtet habe?“",
+        quiz: {
+          question: "Was bedeutet „praemeditatio malorum“?",
+          options: ["Das Vorausdenken möglicher Übel", "Das Meditieren über glückliche Momente", "Das Verdrängen negativer Gedanken"],
+          correct: 0,
+          explanation: "Die Übung soll gegen Schicksalsschläge wappnen und Dankbarkeit wecken."
+        }
+      },
+      {
+        id: "ph-06", category: "Antike Philosophie (Stoa)", tagColor: "#64748B",
+        title: "Chrysipp – der zweite Gründer",
+        story: "Nach Zenon und seinem Nachfolger Kleanthes übernahm Chrysipp von Soloi die Leitung der Schule und baute die Stoa zu einem geschlossenen System aus. Er soll über 700 Schriften verfasst haben – überliefert sind davon nur Bruchstücke. Besonders in der Logik leistete er Pionierarbeit: Er entwickelte eine Aussagenlogik mit Schlussregeln, die man erst im 20. Jahrhundert wieder richtig würdigte. In der Antike hieß es deshalb: „Gäbe es Chrysipp nicht, gäbe es keine Stoa.“",
+        funFact: "Einer antiken Anekdote zufolge starb Chrysipp an einem Lachanfall: Er sah einen Esel Feigen fressen und rief, man solle ihm auch Wein zum Hinunterspülen geben.",
+        quiz: {
+          question: "Auf welchem Gebiet leistete Chrysipp besondere Pionierarbeit?",
+          options: ["In der Aussagenlogik", "In der Astronomie", "In der Medizin"],
+          correct: 0,
+          explanation: "Seine Logik mit Aussagen und Schlussregeln war ihrer Zeit weit voraus."
+        }
+      }
+    ],
+    wissen: [
+      ["Kleanthes – der Wasserträger", "Zenons Nachfolger Kleanthes war ein ehemaliger Faustkämpfer, der nachts als Wasserträger arbeitete, um tagsüber Philosophie studieren zu können. Berühmt ist sein „Hymnus an Zeus“, ein Loblied auf die göttliche Vernunft."],
+      ["Der Logos", "Für die Stoiker durchdringt eine göttliche Vernunft, der Logos, die gesamte Welt. Weil auch der Mensch Vernunft besitzt, kann er diese Ordnung erkennen und im Einklang mit ihr leben."],
+      ["Das Pneuma", "Die Stoiker stellten sich ein feines, feurig-luftiges Pneuma vor, das alle Dinge zusammenhält und belebt. Es galt als Träger der göttlichen Vernunft in der Welt."],
+      ["Der Weltenbrand", "Nach stoischer Lehre geht der Kosmos in großen Zyklen in einem Weltenbrand auf und entsteht danach neu. Jeder Zyklus soll sich dabei in allen Einzelheiten wiederholen."],
+      ["Oikeiosis – das Sich-Zueignen", "Jedes Lebewesen strebt von Geburt an danach, sich selbst zu erhalten. Beim Menschen weitet sich diese Fürsorge nach stoischer Lehre auf Familie, Mitbürger und schließlich die ganze Menschheit aus."],
+      ["Bürger der Welt", "Die Stoiker sahen alle Menschen als Teil einer einzigen, vernünftigen Weltgemeinschaft. Dieser Kosmopolitismus beeinflusste später das Naturrecht und Ideen universeller Menschenrechte."],
+      ["Nur die Tugend ist gut", "Für die Stoiker ist allein die Tugend wirklich gut und allein das Laster wirklich schlecht. Gesundheit, Reichtum oder Ruhm tragen nichts zur Glückseligkeit bei, wenn der Charakter fehlt."],
+      ["Die gleichgültigen Dinge", "Alles außer Tugend und Laster nannten die Stoiker „Adiaphora“, gleichgültige Dinge. Manche davon, wie Gesundheit, sind „vorzuziehen“, andere, wie Krankheit, „zu meiden“ – über Glück entscheiden sie aber nicht."],
+      ["Apatheia ist keine Apathie", "Das stoische Ideal der Apatheia meint nicht Gefühllosigkeit, sondern Freiheit von zerstörerischen Leidenschaften. Ein Stoiker kann Freude empfinden, lässt sich aber nicht von Angst oder Gier beherrschen."],
+      ["Die vier Leidenschaften", "Die Stoiker unterschieden vier Hauptaffekte: Lust, Begierde, Furcht und Kummer. Sie entstehen aus falschen Urteilen darüber, was gut oder schlecht ist."],
+      ["Gute Gefühle", "Den Leidenschaften stellten die Stoiker drei gute Gefühlszustände gegenüber: vernünftige Freude, vernünftiges Wollen und vernünftige Vorsicht. Der Weise empfindet sie, ohne die Kontrolle zu verlieren."],
+      ["Erste Regungen", "Selbst ein Weiser erschrickt bei einem Donnerschlag oder errötet. Solche unwillkürlichen ersten Regungen sind nach stoischer Lehre noch keine Leidenschaft – entscheidend ist, ob man ihnen zustimmt."],
+      ["Die Prohairesis", "Epiktet nannte unsere Fähigkeit, Urteile zu fällen und Entscheidungen zu treffen, Prohairesis. Sie ist das Einzige, was uns wirklich gehört und was uns niemand nehmen kann."],
+      ["Der Blick von oben", "Mark Aurel stellte sich vor, auf die Erde von hoch oben herabzuschauen: winzige Städte, flüchtige Streitigkeiten, das große Ganze. Diese Übung relativiert Ärger und Sorgen."],
+      ["Memento mori", "Stoiker erinnerten sich regelmäßig an die eigene Sterblichkeit. Das sollte nicht bedrücken, sondern dazu anspornen, jeden Tag bewusst und sinnvoll zu nutzen."],
+      ["Das Schicksal lieben", "Die Stoiker lehrten, das Unabänderliche nicht nur hinzunehmen, sondern gutzuheißen. Friedrich Nietzsche prägte dafür viel später die Formel „amor fati“ – Liebe zum Schicksal."],
+      ["Musonius Rufus", "Der römische Stoiker Musonius Rufus war Lehrer Epiktets und wurde „römischer Sokrates“ genannt. Er vertrat die ungewöhnliche Ansicht, dass auch Frauen Philosophie studieren sollten."],
+      ["Die mittlere Stoa", "Panaitios und Poseidonios brachten die Stoa im 2. und 1. Jahrhundert vor Christus nach Rom und machten sie für die römische Oberschicht attraktiv. Über Cicero wirkte ihr Denken weit in die lateinische Welt."],
+      ["Stoa und Epikur", "Epikur lehrte fast zur selben Zeit in Athen, in seinem „Garten“. Während die Stoiker Tugend und Pflicht betonten, suchten die Epikureer das Glück in maßvoller Lust und Seelenruhe."],
+      ["Die Kyniker als Vorbilder", "Zenon lernte zunächst beim Kyniker Krates. Die Kyniker um Diogenes lebten radikal bedürfnislos – die Stoiker übernahmen davon die Genügsamkeit, aber nicht die provokante Lebensweise."],
+      ["Das stoische Leben als Übung", "Für die Stoiker war Philosophie keine Theorie, sondern tägliche Praxis. Wie ein Athlet sollte man die Seele durch Übung stärken."],
+      ["Neostoizismus", "Im 16. Jahrhundert belebte der Gelehrte Justus Lipsius die Stoa mit seinem Werk „De Constantia“ neu. In Zeiten religiöser Kriege bot sie Halt durch innere Standhaftigkeit."],
+      ["Stoa und Psychotherapie", "Die kognitive Verhaltenstherapie greift den stoischen Gedanken auf, dass unsere Bewertungen Gefühle beeinflussen. Albert Ellis und Aaron Beck beriefen sich ausdrücklich auf Epiktet."],
+      ["Das Gelassenheitsgebet", "Das bekannte Gebet um die Gelassenheit, Dinge hinzunehmen, die man nicht ändern kann, und den Mut, Dinge zu ändern, die man ändern kann, erinnert stark an Epiktet. Es stammt vom Theologen Reinhold Niebuhr aus dem 20. Jahrhundert."],
+      ["Die abendliche Rückschau", "Seneca prüfte sich jeden Abend: Welche Schwäche habe ich heute überwunden, wo habe ich gefehlt? Diese Selbstprüfung sollte ohne Selbstverurteilung zu stetiger Besserung führen."]
+    ],
+    facts: [
+      "Das Wort „stoisch“ im Sinne von unerschütterlich gelassen geht direkt auf die antike Philosophenschule zurück.",
+      "Epiktet schrieb selbst kein einziges Buch – seine Lehren zeichnete sein Schüler Arrian auf.",
+      "Einer Legende nach wurde Epiktets Bein von seinem früheren Herrn so verdreht, dass es brach – Epiktet soll ihn nur ruhig gewarnt haben.",
+      "Mark Aurel gilt als der letzte der sogenannten fünf guten Kaiser Roms.",
+      "Die bronzene Reiterstatue Mark Aurels in Rom überstand das Mittelalter wohl nur, weil man sie für ein Bildnis des christlichen Kaisers Konstantin hielt.",
+      "Seneca verbrachte mehrere Jahre im Exil auf der Insel Korsika.",
+      "Chrysipp soll über 700 Schriften verfasst haben – keine davon ist vollständig erhalten.",
+      "Zenon soll gesagt haben: Wir haben zwei Ohren und einen Mund, damit wir mehr zuhören als reden.",
+      "Seneca schrieb: „Wir leiden öfter in der Vorstellung als in der Wirklichkeit.“",
+      "Von Seneca stammt auch der Satz: „Wer überall ist, ist nirgends.“",
+      "Mark Aurel notierte: „Was sich dem Handeln in den Weg stellt, wird zum Weg.“",
+      "Der römische Politiker Cato der Jüngere galt als Inbegriff stoischer Standhaftigkeit – sogar George Washington ließ ein Theaterstück über ihn aufführen.",
+      "Mark Aurels „Selbstbetrachtungen“ bestehen aus zwölf Büchern kurzer Notizen.",
+      "Friedrich der Große bewunderte Mark Aurel – wie dieser galt er vielen als „Philosoph auf dem Thron“.",
+      "Die Stoa war rund fünf Jahrhunderte lang eine der einflussreichsten Philosophenschulen der Antike.",
+      "Die Stoiker gelten als Mitbegründer der Aussagenlogik – lange vor der modernen Mathematik.",
+      "Kleanthes wurde fast hundert Jahre alt.",
+      "Musonius Rufus wurde mehrfach von römischen Kaisern ins Exil geschickt.",
+      "Seneca war einer der reichsten Männer Roms – Kritiker warfen ihm Heuchelei vor, weil er zugleich die Armut pries.",
+      "Epiktet unterrichtete nach seiner Verbannung aus Rom in der griechischen Stadt Nikopolis.",
+      "Der Apostel Paulus soll in Athen mit Stoikern und Epikureern diskutiert haben – so berichtet die Apostelgeschichte.",
+      "Das Wort „Stoa“ bezeichnet eine Säulenhalle – ein öffentlicher, jedem zugänglicher Ort.",
+      "Mark Aurel ernannte seinen Sohn Commodus zum Nachfolger – ausgerechnet einen der berüchtigtsten Kaiser.",
+      "Stoische Ideen findet man bis heute in Ratgebern, im Spitzensport und in der Resilienzforschung.",
+      "Seneca schrieb neben philosophischen Werken auch blutige Tragödien, die Shakespeare beeinflussten.",
+      "Die Stoiker unterschieden bereits zwischen Aussage und Satz – eine erstaunlich moderne Sprachphilosophie.",
+      "„Solange du lebst, lerne, wie man lebt“ – so lautet ein Grundgedanke Senecas.",
+      "Mark Aurel lernte schon als Kind die Stoa kennen – sein Lehrer Junius Rusticus lieh ihm Epiktets Lehrgespräche.",
+      "Die Stoiker hielten die Welt für einen einzigen lebendigen, vernünftigen Organismus.",
+      "Der Philosoph Diogenes von Sinope, ein Vorbild der frühen Stoiker, soll in einem großen Tonfass gelebt haben.",
+      "In Epiktets Lehre ist der Mensch wie ein Schauspieler: Die Rolle vergibt ein anderer – sie gut zu spielen, liegt bei uns.",
+      "Seneca verglich das Leben mit einem Theaterstück: Es kommt nicht darauf an, wie lang es ist, sondern wie gut es gespielt wird."
+    ],
+    quiz: [
+      ["Wer gründete die Stoa?", ["Zenon von Kition", "Epikur", "Platon"], 0, "Um 300 v. Chr. in Athen."],
+      ["Was bedeutet „Stoa“ ursprünglich?", ["Säulenhalle", "Gelassenheit", "Tugend"], 0, "Zenon lehrte in der Stoa Poikile."],
+      ["Wer war Zenons direkter Nachfolger?", ["Kleanthes", "Chrysipp", "Seneca"], 0, "Nach ihm übernahm Chrysipp."],
+      ["Womit verdiente Kleanthes sein Geld?", ["Als Wasserträger", "Als Händler", "Als Soldat"], 0, "Nachts trug er Wasser, tagsüber studierte er."],
+      ["Was ist für Stoiker das einzig wahre Gut?", ["Die Tugend", "Der Reichtum", "Die Gesundheit"], 0, "Alles andere ist gleichgültig für das Glück."],
+      ["Wie nannten die Stoiker gleichgültige Dinge?", ["Adiaphora", "Eudaimonia", "Logos"], 0, "Etwa Reichtum, Ruhm oder Krankheit."],
+      ["Was bedeutet stoische Apatheia?", ["Freiheit von zerstörerischen Leidenschaften", "Gefühllosigkeit", "Faulheit"], 0, "Sie ist nicht mit Apathie zu verwechseln."],
+      ["Welche vier Hauptaffekte nannten die Stoiker?", ["Lust, Begierde, Furcht, Kummer", "Liebe, Hass, Neid, Stolz", "Freude, Trauer, Wut, Ekel"], 0, "Sie entstehen aus falschen Urteilen."],
+      ["Was ist der Logos in der Stoa?", ["Die göttliche Vernunft der Welt", "Ein Tempel", "Ein Buch"], 0, "Er durchdringt den ganzen Kosmos."],
+      ["Was ist nach Epiktet die Prohairesis?", ["Unsere Fähigkeit zu urteilen und zu entscheiden", "Das Schicksal", "Die Gesundheit"], 0, "Sie allein gehört wirklich uns."],
+      ["Wie heißt Epiktets bekanntestes Werk?", ["Handbüchlein der Moral", "Selbstbetrachtungen", "Briefe an Lucilius"], 0, "Aufgezeichnet von seinem Schüler Arrian."],
+      ["Wer schrieb die „Briefe an Lucilius“?", ["Seneca", "Mark Aurel", "Cicero"], 0, "Insgesamt 124 Briefe."],
+      ["Wessen Lehrer war Seneca?", ["Nero", "Caligula", "Trajan"], 0, "Er erzog den jungen Kaiser."],
+      ["Wohin wurde Seneca verbannt?", ["Nach Korsika", "Nach Sizilien", "Nach Ägypten"], 0, "Unter Kaiser Claudius."],
+      ["Wie starb Seneca?", ["Auf Befehl Neros durch eigene Hand", "Im Kampf", "An Altersschwäche"], 0, "Nach der Pisonischen Verschwörung im Jahr 65."],
+      ["In welcher Sprache schrieb Mark Aurel?", ["Griechisch", "Latein", "Hebräisch"], 0, "Die Sprache der Philosophie."],
+      ["Wo schrieb Mark Aurel viele seiner Notizen?", ["Im Feldlager an der Donau", "In der Bibliothek von Alexandria", "Auf einem Schiff"], 0, "Während der Markomannenkriege."],
+      ["Wer war Epiktets Lehrer?", ["Musonius Rufus", "Seneca", "Zenon"], 0, "Man nannte ihn den römischen Sokrates."],
+      ["Was lehrte Musonius Rufus Ungewöhnliches?", ["Auch Frauen sollten Philosophie studieren", "Man solle nur Fleisch essen", "Sport sei schädlich"], 0, "Eine für seine Zeit fortschrittliche Haltung."],
+      ["Wie viele Schriften soll Chrysipp verfasst haben?", ["Über 700", "Genau 12", "Keine"], 0, "Überliefert sind nur Fragmente."],
+      ["Welches Fach revolutionierte Chrysipp?", ["Die Logik", "Die Medizin", "Die Architektur"], 0, "Er entwickelte eine Aussagenlogik."],
+      ["Was ist die „praemeditatio malorum“?", ["Vorausdenken möglicher Übel", "Ein Festessen", "Ein Gebet an Zeus"], 0, "Eine Übung gegen Schicksalsschläge."],
+      ["Was bedeutet „memento mori“?", ["Bedenke, dass du sterben wirst", "Lebe im Moment", "Sei tapfer"], 0, "Eine Erinnerung an die Vergänglichkeit."],
+      ["Wer prägte die Formel „amor fati“?", ["Friedrich Nietzsche", "Seneca", "Kant"], 0, "Die Idee geht auf die Stoiker zurück."],
+      ["Was ist der „Blick von oben“?", ["Eine Übung zur Relativierung von Sorgen", "Eine Astronomie-Methode", "Ein Gebet"], 0, "Mark Aurel nutzte sie häufig."],
+      ["Welche Schule gründete Epikur?", ["Den Garten", "Die Akademie", "Das Lykeion"], 0, "Die Akademie gehört zu Platon, das Lykeion zu Aristoteles."],
+      ["Bei wem lernte Zenon zuerst?", ["Beim Kyniker Krates", "Bei Platon", "Bei Epikur"], 0, "Die Kyniker waren Vorbilder der Stoa."],
+      ["Was bedeutet Kosmopolitismus?", ["Weltbürgertum", "Liebe zum Kosmos", "Sternenkunde"], 0, "Alle Menschen gehören zu einer Gemeinschaft."],
+      ["Wer belebte die Stoa im 16. Jahrhundert neu?", ["Justus Lipsius", "Martin Luther", "Erasmus"], 0, "Mit dem Werk „De Constantia“."],
+      ["Welche Therapie beruft sich auf Epiktet?", ["Die kognitive Verhaltenstherapie", "Die Psychoanalyse", "Die Hypnose"], 0, "Ellis und Beck nannten ihn als Vorbild."],
+      ["Wer schrieb das Gelassenheitsgebet?", ["Reinhold Niebuhr", "Mark Aurel", "Seneca"], 0, "Es erinnert an Epiktets Lehre."],
+      ["Was taten Stoiker am Ende des Tages?", ["Eine Selbstprüfung", "Ein Festmahl", "Eine Opferzeremonie"], 0, "Seneca prüfte sich jeden Abend."],
+      ["Was lehrte die Stoa über Weltzyklen?", ["Ein Weltenbrand beendet und erneuert den Kosmos", "Die Welt ist ewig unverändert", "Die Welt entstand aus Wasser allein"], 0, "Die Zyklen sollen sich wiederholen."],
+      ["Was ist das Pneuma?", ["Ein feuriger Lebenshauch, der alles durchdringt", "Ein Gott", "Eine Säulenhalle"], 0, "Es hält die Welt zusammen."],
+      ["Wie viele Kardinaltugenden kennt die Stoa?", ["Vier", "Sieben", "Zwei"], 0, "Weisheit, Tapferkeit, Gerechtigkeit, Mäßigung."],
+      ["Wo lehrte Epiktet nach seiner Verbannung?", ["In Nikopolis", "In Athen", "In Rom"], 0, "In Nordwestgriechenland."],
+      ["Welche Statue überlebte, weil man sie für Konstantin hielt?", ["Die Reiterstatue Mark Aurels", "Der Laokoon", "Die Venus von Milo"], 0, "Sie steht heute im Kapitolinischen Museum."],
+      ["Wen ernannte Mark Aurel zum Nachfolger?", ["Seinen Sohn Commodus", "Seneca", "Trajan"], 0, "Commodus gilt als einer der schlechtesten Kaiser."],
+      ["Was sind die „ersten Regungen“ in der Stoa?", ["Unwillkürliche Reaktionen wie Erschrecken", "Die ersten Wörter eines Kindes", "Die Morgenstunden"], 0, "Erst die Zustimmung macht sie zur Leidenschaft."],
+      ["Welches Tier sah Chrysipp angeblich vor seinem Tod?", ["Einen Esel, der Feigen fraß", "Einen Hund", "Eine Eule"], 0, "Er soll sich totgelacht haben."],
+      ["Wer brachte die Stoa nach Rom?", ["Panaitios und Poseidonios", "Zenon", "Sokrates"], 0, "Die sogenannte mittlere Stoa."],
+      ["Wie nannte man Musonius Rufus?", ["Den römischen Sokrates", "Den weinenden Philosophen", "Den Göttlichen"], 0, "Wegen seiner mündlichen Lehrweise."],
+      ["Welcher Römer galt als Inbegriff stoischer Standhaftigkeit?", ["Cato der Jüngere", "Julius Cäsar", "Caligula"], 0, "Er widersetzte sich Caesar bis zuletzt."],
+      ["Wie sah Epiktet den Menschen im Leben?", ["Als Schauspieler, der seine Rolle gut spielen soll", "Als Sklaven des Schicksals ohne Wahl", "Als Gott"], 0, "Die Rolle vergibt ein anderer."],
+      ["Was ist nach stoischer Lehre „vorzuziehen“?", ["Zum Beispiel Gesundheit", "Die Tugend", "Das Laster"], 0, "Gesundheit ist ein vorzuziehendes Gleichgültiges."]
+    ],
+    tf: [
+      ["Stoiker sollten gar keine Gefühle haben.", false, "Sie strebten nach Freiheit von zerstörerischen Leidenschaften, nicht nach Gefühllosigkeit."],
+      ["Epiktet war ein freigelassener Sklave.", true, "Er wurde nach seiner Freilassung Philosoph."],
+      ["Mark Aurel schrieb seine Selbstbetrachtungen für die Öffentlichkeit.", false, "Sie waren private Notizen."],
+      ["Seneca war ein sehr reicher Mann.", true, "Kritiker warfen ihm deshalb Heuchelei vor."],
+      ["Epiktet schrieb seine Lehren selbst auf.", false, "Sein Schüler Arrian zeichnete sie auf."],
+      ["Für Stoiker ist Reichtum ein wahres Gut.", false, "Er ist ein gleichgültiges Ding."],
+      ["Die Stoa ist nach einer Säulenhalle benannt.", true, "Nach der Stoa Poikile in Athen."],
+      ["Chrysipp gilt als zweiter Gründer der Stoa.", true, "Er systematisierte die Lehre."],
+      ["Epikur und die Stoiker vertraten dieselbe Lehre.", false, "Epikur suchte Glück in maßvoller Lust, die Stoa in der Tugend."],
+      ["Musonius Rufus war Epiktets Lehrer.", true, "Er wurde römischer Sokrates genannt."],
+      ["Mark Aurel schrieb auf Latein.", false, "Er schrieb auf Griechisch."],
+      ["Die Formel „amor fati“ stammt von Nietzsche.", true, "Die Idee ist aber stoisch."],
+      ["Die kognitive Verhaltenstherapie greift stoische Gedanken auf.", true, "Etwa Epiktets Satz über Meinungen."],
+      ["Seneca wurde nach Korsika verbannt.", true, "Unter Kaiser Claudius."],
+      ["Zenon lernte zuerst bei einem Kyniker.", true, "Bei Krates."],
+      ["Stoiker hielten Philosophie für reine Theorie.", false, "Sie verstanden sie als tägliche Übung."],
+      ["Nach stoischer Lehre sind alle Menschen Teil einer Weltgemeinschaft.", true, "Das ist der Kosmopolitismus."],
+      ["Chrysipp schrieb nur ein einziges Buch.", false, "Er soll über 700 Schriften verfasst haben."],
+      ["Seneca starb friedlich im hohen Alter.", false, "Nero befahl ihm den Selbstmord."],
+      ["Das Gelassenheitsgebet stammt aus dem 20. Jahrhundert.", true, "Von Reinhold Niebuhr."],
+      ["Die Stoiker unterschieden vier Kardinaltugenden.", true, "Weisheit, Tapferkeit, Gerechtigkeit, Mäßigung."],
+      ["Mark Aurels Nachfolger Commodus war ein vorbildlicher Stoiker.", false, "Er gilt als einer der schlechtesten Kaiser."],
+      ["Der Logos ist für Stoiker die göttliche Vernunft der Welt.", true, "Er durchdringt den ganzen Kosmos."],
+      ["Die praemeditatio malorum soll ängstlicher machen.", false, "Sie soll gelassener machen."],
+      ["Die Stoiker trugen zur Entwicklung der Logik bei.", true, "Besonders Chrysipp."],
+      ["Justus Lipsius lebte in der Antike.", false, "Er lebte im 16. Jahrhundert."],
+      ["Epiktet unterrichtete in Nikopolis.", true, "Nach seiner Verbannung aus Rom."],
+      ["Nach Epiktet liegt unser Ruf in unserer Macht.", false, "Der Ruf hängt von anderen ab."],
+      ["Die Reiterstatue Mark Aurels steht in Rom.", true, "Das Original im Kapitolinischen Museum."],
+      ["Kleanthes war vor seiner Philosophenzeit Faustkämpfer.", true, "Und arbeitete nachts als Wasserträger."],
+      ["Seneca schrieb auch Tragödien.", true, "Sie beeinflussten spätere Dramatiker."],
+      ["Die Stoa existierte nur wenige Jahre.", false, "Sie war rund fünf Jahrhunderte einflussreich."]
+    ],
+    hl: [
+      ["Zenon begann um 300 v. Chr. zu lehren.", "Mark Aurel wurde Kaiser …", 1, "Später: im Jahr 161 n. Chr.", ["früher", "später"]],
+      ["Seneca schrieb 124 Briefe an Lucilius.", "Chrysipp soll Schriften verfasst haben …", 1, "Mehr: über 700.", ["weniger", "mehr"]],
+      ["Mark Aurels Selbstbetrachtungen haben 12 Bücher.", "Die Zahl der stoischen Kardinaltugenden ist …", 0, "Kleiner: vier.", ["kleiner", "größer"]],
+      ["Die Stoiker kannten vier Hauptleidenschaften.", "Die Zahl der guten Gefühlszustände (Eupatheiai) war …", 0, "Kleiner: drei.", ["kleiner", "größer"]],
+      ["Epiktet lebte etwa von 50 bis 135 n. Chr.", "Seneca starb …", 0, "Früher: im Jahr 65 n. Chr.", ["früher", "später"]],
+      ["Mark Aurel regierte 19 Jahre (161–180).", "Nero regierte …", 0, "Kürzer: 14 Jahre (54–68).", ["kürzer", "länger"]],
+      ["Die Stoa entstand um 300 v. Chr.", "Epikur gründete seine Schule, den Garten …", 0, "Etwas früher: um 306 v. Chr.", ["früher", "später"]],
+      ["Sokrates starb 399 v. Chr.", "Zenon begann in Athen zu lehren …", 1, "Später: um 300 v. Chr.", ["früher", "später"]],
+      ["Justus Lipsius erneuerte die Stoa im 16. Jahrhundert.", "Albert Ellis entwickelte seine rational-emotive Therapie …", 1, "Später: in den 1950er-Jahren.", ["früher", "später"]],
+      ["Die Selbstbetrachtungen entstanden um 170–180 n. Chr.", "Lipsius’ Werk „De Constantia“ erschien …", 1, "Später: 1584.", ["früher", "später"]],
+      ["Mark Aurel starb im Jahr 180.", "Das Weströmische Reich endete …", 1, "Später: 476.", ["früher", "später"]],
+      ["Seneca wurde um 4 v. Chr. geboren.", "Mark Aurel wurde geboren …", 1, "Später: 121 n. Chr.", ["früher", "später"]]
+    ]
+  };
+  /* Menschliches Gehirn & Neurowissenschaften */
+  CONTENT.gehirn = {
+    cards: [
+      {
+        id: "ne-04", category: "Menschliches Gehirn & Neurowissenschaften", tagColor: "#DB2777",
+        title: "Der Mann ohne neue Erinnerungen",
+        story: "1953 entfernten Chirurgen dem jungen Henry Molaison, in der Forschung als Patient H.M. bekannt, Teile beider Schläfenlappen samt Hippocampus, um seine schwere Epilepsie zu lindern. Die Anfälle wurden seltener – doch H.M. konnte fortan keine neuen bewussten Erinnerungen mehr bilden. Jedes Gespräch, jede Begegnung vergaß er nach wenigen Minuten, während ältere Erinnerungen weitgehend erhalten blieben. Jahrzehntelange Untersuchungen mit ihm zeigten, dass der Hippocampus für das Speichern neuer Erlebnisse und Fakten unverzichtbar ist.",
+        funFact: "H.M. lernte trotzdem, einen Stern im Spiegel nachzuzeichnen, und wurde darin von Tag zu Tag besser – obwohl er sich an keine einzige Übungsstunde erinnern konnte. Motorisches Lernen funktioniert also über andere Hirnbereiche.",
+        quiz: {
+          question: "Was konnte Patient H.M. nach seiner Operation nicht mehr?",
+          options: ["Sprechen", "Neue bewusste Erinnerungen bilden", "Sehen"],
+          correct: 1,
+          explanation: "Ohne Hippocampus konnte er neue Erlebnisse und Fakten nicht mehr dauerhaft speichern."
+        }
+      },
+      {
+        id: "ne-05", category: "Menschliches Gehirn & Neurowissenschaften", tagColor: "#DB2777",
+        title: "Die Vergessenskurve",
+        story: "1885 veröffentlichte der deutsche Psychologe Hermann Ebbinghaus eine bahnbrechende Studie: Er lernte sinnlose Silben auswendig und prüfte, wie schnell er sie wieder vergaß. Das Ergebnis war die Vergessenskurve – schon nach einem Tag ist ohne Wiederholung ein großer Teil des Gelernten verschwunden. Doch jede Wiederholung flacht die Kurve ab. Besonders wirksam ist es, Stoff in wachsenden Abständen zu wiederholen und sich aktiv abzufragen, statt nur erneut zu lesen – genau das Prinzip, auf dem Lernkarten und Micro-Learning beruhen.",
+        funFact: "Ebbinghaus war bei seinen Experimenten seine eigene und einzige Versuchsperson – er lernte über Jahre Tausende sinnlose Silben wie „DAX“ oder „BOK“.",
+        quiz: {
+          question: "Welche Lernstrategie flacht die Vergessenskurve besonders stark ab?",
+          options: ["Einmal sehr lange lernen", "Wiederholen in wachsenden Abständen mit Selbsttest", "Den Stoff nur noch einmal durchlesen"],
+          correct: 1,
+          explanation: "Verteiltes Wiederholen und aktives Abrufen verankern Wissen am nachhaltigsten."
+        }
+      },
+      {
+        id: "ne-06", category: "Menschliches Gehirn & Neurowissenschaften", tagColor: "#DB2777",
+        title: "Dopamin – der Botenstoff der Erwartung",
+        story: "Dopamin gilt oft als „Glückshormon“, doch das greift zu kurz: Vor allem signalisiert es, ob etwas besser läuft als erwartet. Versuche zeigten, dass Dopamin-Nervenzellen stark feuern, wenn eine unerwartete Belohnung kommt – und später schon beim Signal, das die Belohnung ankündigt. So treibt Dopamin Motivation und Lernen an. Sterben die dopaminbildenden Zellen in einer kleinen Hirnregion, der Substantia nigra, entsteht die Parkinson-Krankheit mit Zittern und steifen Bewegungen.",
+        funFact: "Bleibt eine erwartete Belohnung aus, sinkt die Aktivität der Dopamin-Zellen sogar unter das Normalmaß – das Gehirn registriert die Enttäuschung ganz buchstäblich.",
+        quiz: {
+          question: "Welche Krankheit entsteht durch den Verlust dopaminbildender Nervenzellen?",
+          options: ["Alzheimer", "Parkinson", "Migräne"],
+          correct: 1,
+          explanation: "Bei Parkinson sterben vor allem Dopamin-Zellen der Substantia nigra ab."
+        }
+      }
+    ],
+    wissen: [
+      ["Drei große Bereiche", "Das Großhirn steuert Denken, Sprache und bewusstes Handeln, das Kleinhirn koordiniert Bewegungen und Gleichgewicht. Der Hirnstamm regelt lebenswichtige Funktionen wie Atmung und Herzschlag."],
+      ["Zwei Hälften, ein Balken", "Die beiden Großhirnhälften sind über den Balken verbunden, ein Bündel aus rund 200 Millionen Nervenfasern. Die linke Hälfte steuert vor allem die rechte Körperseite und umgekehrt."],
+      ["Der Mythos vom Links- und Rechtshirn", "Es gibt keine „Linkshirn-“ oder „Rechtshirn-Menschen“. Zwar sind manche Funktionen wie Sprache meist links stärker verankert, doch fast jede komplexe Leistung nutzt beide Hälften gemeinsam."],
+      ["Der Stirnlappen", "Der Frontallappen ist für Planung, Entscheidungen und Impulskontrolle zuständig. Er reift als letzter Bereich des Gehirns – oft erst Mitte zwanzig."],
+      ["Die Sprachzentren", "Das Broca-Areal im Stirnlappen ist wichtig für das Sprechen, das Wernicke-Areal im Schläfenlappen für das Sprachverständnis. Schädigungen führen zu sehr unterschiedlichen Sprachstörungen."],
+      ["Der Homunkulus", "Im motorischen und sensorischen Kortex ist der Körper wie eine Landkarte abgebildet. Hände, Lippen und Zunge nehmen dabei überproportional viel Platz ein – ein verzerrtes Männchen, der Homunkulus."],
+      ["Die Amygdala", "Der mandelförmige Kern tief im Schläfenlappen bewertet blitzschnell, ob etwas gefährlich ist. Er ist zentral für Angst und dafür, dass emotionale Erlebnisse besonders gut im Gedächtnis bleiben."],
+      ["Der Hypothalamus", "Der kleine Hypothalamus steuert Hunger, Durst, Körpertemperatur und den Schlaf-Wach-Rhythmus. Über die Hirnanhangsdrüse lenkt er auch viele Hormone."],
+      ["Gliazellen", "Neben den Nervenzellen gibt es etwa ebenso viele Gliazellen. Sie versorgen und isolieren die Neuronen, räumen auf und beeinflussen sogar die Signalübertragung."],
+      ["Die Myelinschicht", "Viele Nervenfasern sind von einer fettreichen Myelinschicht umhüllt. Sie wirkt wie die Isolierung eines Kabels und beschleunigt die Signalleitung enorm."],
+      ["Botenstoffe", "Neurotransmitter wie Glutamat, GABA, Serotonin und Dopamin übertragen Signale an den Synapsen. Glutamat wirkt meist erregend, GABA hemmend – das Gleichgewicht ist entscheidend."],
+      ["Der blinde Fleck", "Dort, wo der Sehnerv das Auge verlässt, gibt es keine Sinneszellen. Das Gehirn füllt diese Lücke so geschickt mit Informationen aus der Umgebung, dass wir sie nie bemerken."],
+      ["Farbensehen", "Die meisten Menschen haben drei Typen von Zapfen für rotes, grünes und blaues Licht. Aus deren Mischung setzt das Gehirn Millionen Farbtöne zusammen."],
+      ["Geruch und Erinnerung", "Gerüche gelangen auf direktem Weg in Hirnregionen für Gefühle und Gedächtnis. Deshalb wecken Düfte oft schlagartig lebhafte Erinnerungen."],
+      ["Das Gehirn fühlt keinen Schmerz", "Das Gehirngewebe selbst besitzt keine Schmerzrezeptoren. Deshalb können manche Operationen am wachen Patienten durchgeführt werden, der dabei sogar spricht."],
+      ["Phantomschmerz", "Viele Menschen spüren nach einer Amputation Schmerzen in einem Körperteil, der nicht mehr existiert. Die Landkarte im Gehirn bleibt bestehen und erzeugt weiter Empfindungen."],
+      ["Der Placebo-Effekt", "Allein die Erwartung einer Behandlung kann Beschwerden messbar lindern. Das Gehirn schüttet dabei unter anderem körpereigene Schmerzmittel aus."],
+      ["Multitasking ist ein Mythos", "Bei anspruchsvollen Aufgaben kann das Gehirn nicht wirklich zwei Dinge gleichzeitig tun. Es schaltet schnell hin und her – und jeder Wechsel kostet Zeit und Konzentration."],
+      ["Der unsichtbare Gorilla", "In einem berühmten Experiment zählten Versuchspersonen Ballpässe in einem Video. Rund die Hälfte bemerkte nicht, dass eine Person im Gorillakostüm mitten durchs Bild lief."],
+      ["Stress und Cortisol", "Bei Stress schüttet der Körper Cortisol aus, das kurzfristig leistungsfähig macht. Dauerhafter Stress kann jedoch Gedächtnis und Schlaf beeinträchtigen."],
+      ["Bewegung macht schlau", "Körperliche Bewegung fördert die Durchblutung und die Bildung von Wachstumsfaktoren im Gehirn. Regelmäßiger Sport wird mit besserem Gedächtnis und Konzentration in Verbindung gebracht."],
+      ["Musik im Kopf", "Beim Musizieren arbeiten Hören, Motorik, Gefühl und Gedächtnis gleichzeitig. Bei Berufsmusikern sind bestimmte Hirnbereiche, etwa Teile des Balkens, messbar ausgeprägter."],
+      ["Das Babygehirn", "In den ersten Lebensjahren bildet das Gehirn mehr Synapsen, als es später braucht. Ungenutzte Verbindungen werden wieder abgebaut – nach dem Prinzip „use it or lose it“."],
+      ["Traumschlaf", "Die lebhaftesten Träume erleben wir im REM-Schlaf, in dem sich die Augen schnell bewegen. Gleichzeitig ist die Körpermuskulatur weitgehend gelähmt, damit wir die Träume nicht ausleben."],
+      ["Koffein gegen Müdigkeit", "Im Laufe des Tages sammelt sich im Gehirn der Botenstoff Adenosin an und macht müde. Koffein blockiert seine Andockstellen – die Müdigkeit wird dadurch nur aufgeschoben."]
+    ],
+    facts: [
+      "Das Kleinhirn macht nur etwa ein Zehntel des Gehirnvolumens aus, enthält aber rund 80 Prozent aller Nervenzellen.",
+      "Die Behauptung, wir nutzten nur zehn Prozent unseres Gehirns, ist ein Mythos – bildgebende Verfahren zeigen Aktivität im gesamten Gehirn.",
+      "Im Darm arbeiten mehrere hundert Millionen Nervenzellen – man spricht deshalb auch vom „Bauchhirn“.",
+      "Man kann sich nicht selbst kitzeln, weil das Kleinhirn die eigene Bewegung vorhersagt und die Empfindung dämpft.",
+      "Nach 17 bis 19 Stunden ohne Schlaf ist die Reaktionsfähigkeit ähnlich eingeschränkt wie mit rund 0,5 Promille Alkohol im Blut.",
+      "Das Gehirn eines Erwachsenen besteht zu rund drei Vierteln aus Wasser.",
+      "Ausgebreitet wäre die gefaltete Großhirnrinde etwa so groß wie eine doppelte Zeitungsseite.",
+      "Das Gehirn von Albert Einstein wurde nach seinem Tod 1955 vom Pathologen entnommen und jahrzehntelang untersucht.",
+      "1848 durchbohrte eine Eisenstange den Kopf des Bahnarbeiters Phineas Gage – er überlebte, doch seine Persönlichkeit veränderte sich stark.",
+      "Rund zwei Prozent der Menschen sind gesichtsblind und erkennen selbst vertraute Personen kaum am Gesicht.",
+      "Der Mensch hat weit mehr als fünf Sinne – etwa auch Gleichgewichtssinn, Temperatur-, Schmerz- und Lagesinn.",
+      "Gähnen ist ansteckend – schon das Lesen über Gähnen kann den Impuls auslösen.",
+      "Déjà-vu-Erlebnisse haben die meisten Menschen schon einmal erlebt; vermutlich entsteht dabei ein kurzes Vertrautheitsgefühl ohne echte Erinnerung.",
+      "Goldfische haben kein Drei-Sekunden-Gedächtnis – sie können sich Dinge monatelang merken.",
+      "Kinder, die früh eine Gehirnhälfte verlieren, können sich oft erstaunlich gut erholen – die verbleibende Hälfte übernimmt viele Aufgaben.",
+      "Etwa jeder zehnte Mensch ist Linkshänder.",
+      "Die Nervenzellen, die Schmerz melden, sind oft langsamer als die für Berührung – deshalb spürt man beim Anstoßen erst den Druck und dann den Schmerz.",
+      "Beim Lernen im Schlaf hilft es nicht, Vokabeln vom Band abzuspielen – aber Schlaf nach dem Lernen festigt das Gelernte.",
+      "Die meisten Menschen träumen jede Nacht, erinnern sich aber nur an einen kleinen Teil ihrer Träume.",
+      "Der Geruch von frischem Kaffee kann allein schon wacher machen – noch bevor man einen Schluck getrunken hat.",
+      "Das Gehirn verbraucht etwa gleich viel Energie, egal ob wir Sudoku lösen oder dösen – der Unterschied beträgt nur wenige Prozent.",
+      "Beim „Es liegt mir auf der Zunge“-Phänomen kennt man oft schon den Anfangsbuchstaben oder die Silbenzahl des gesuchten Wortes.",
+      "Das Gehirn eines Pottwals ist das schwerste im Tierreich, doch das Verhältnis zum Körper ist beim Menschen deutlich größer.",
+      "Babys werden mit fast allen Nervenzellen geboren, die sie jemals haben werden – das Gehirn wächst danach vor allem durch Verbindungen und Myelin.",
+      "Ein schlafender Mensch nimmt Geräusche wahr: Den eigenen Namen erkennt das Gehirn sogar im Schlaf.",
+      "Beim Bildschirmlesen blinzeln wir deutlich seltener als sonst – deshalb werden die Augen schneller trocken.",
+      "Die Hirnrinde ist nur etwa zwei bis vier Millimeter dick.",
+      "Sprachen lernen verändert die Hirnstruktur: Bei Mehrsprachigen sind bestimmte Areale dichter vernetzt.",
+      "Das Gehirn kann Gesichter in Wolken, Steckdosen oder Autofronten erkennen – dieses Phänomen heißt Pareidolie.",
+      "Lachen ist ansteckend: Das Gehirn bereitet schon beim Hören von Lachen die eigenen Lachmuskeln vor.",
+      "Die Kapazität des Langzeitgedächtnisses gilt als praktisch unbegrenzt – der Engpass ist eher das Abrufen.",
+      "Schon wenige Minuten Pause mit geschlossenen Augen nach dem Lernen können das Behalten verbessern."
+    ],
+    quiz: [
+      ["Welcher Hirnteil koordiniert Bewegungen und Gleichgewicht?", ["Das Kleinhirn", "Der Hypothalamus", "Die Amygdala"], 0, "Das Kleinhirn stimmt Bewegungen fein ab."],
+      ["Was verbindet die beiden Großhirnhälften?", ["Der Balken", "Der Hirnstamm", "Das Rückenmark"], 0, "Rund 200 Millionen Fasern verbinden die Hälften."],
+      ["Welche Körperseite steuert die linke Hirnhälfte vor allem?", ["Die rechte", "Die linke", "Beide gleich"], 0, "Die Bahnen kreuzen sich."],
+      ["Welcher Hirnbereich reift als letzter?", ["Der Stirnlappen", "Das Kleinhirn", "Der Hirnstamm"], 0, "Oft erst Mitte zwanzig."],
+      ["Wofür ist das Broca-Areal wichtig?", ["Für das Sprechen", "Für das Sehen", "Für den Geruch"], 0, "Das Wernicke-Areal ist für das Verstehen zuständig."],
+      ["Was ist der Homunkulus?", ["Eine Körperlandkarte im Gehirn", "Ein Hormon", "Eine Nervenzelle"], 0, "Hände und Lippen sind darin besonders groß."],
+      ["Welche Region ist zentral für Angst?", ["Die Amygdala", "Das Kleinhirn", "Der Balken"], 0, "Sie bewertet blitzschnell Gefahren."],
+      ["Was regelt der Hypothalamus unter anderem?", ["Hunger und Körpertemperatur", "Das Sehen", "Das Sprechen"], 0, "Er steuert viele Grundbedürfnisse."],
+      ["Was beschleunigt die Signalleitung in Nervenfasern?", ["Die Myelinschicht", "Wasser", "Zucker"], 0, "Sie wirkt wie eine Kabelisolierung."],
+      ["Welcher Botenstoff wirkt meist hemmend?", ["GABA", "Glutamat", "Adrenalin"], 0, "Glutamat wirkt meist erregend."],
+      ["Warum bemerken wir den blinden Fleck nicht?", ["Das Gehirn füllt die Lücke auf", "Er existiert nicht", "Wir blinzeln"], 0, "Es ergänzt die fehlende Information."],
+      ["Wie viele Zapfentypen haben die meisten Menschen?", ["Drei", "Einen", "Zehn"], 0, "Für rotes, grünes und blaues Licht."],
+      ["Warum wecken Gerüche oft starke Erinnerungen?", ["Sie gelangen direkt in Gefühls- und Gedächtnisregionen", "Weil die Nase groß ist", "Weil sie laut sind"], 0, "Der Riechweg ist besonders direkt."],
+      ["Warum sind manche Operationen am wachen Patienten möglich?", ["Das Gehirngewebe hat keine Schmerzrezeptoren", "Weil Patienten tapfer sind", "Weil das Gehirn betäubt schläft"], 0, "Die Kopfhaut wird dabei betäubt."],
+      ["Was ist Phantomschmerz?", ["Schmerz in einem amputierten Körperteil", "Eingebildeter Kopfschmerz", "Schmerz im Traum"], 0, "Die Körperkarte im Gehirn bleibt bestehen."],
+      ["Was zeigt der Placebo-Effekt?", ["Erwartung kann Beschwerden lindern", "Medikamente wirken nie", "Schmerz ist eingebildet"], 0, "Das Gehirn setzt eigene Schmerzmittel frei."],
+      ["Was passiert beim Multitasking wirklich?", ["Das Gehirn wechselt schnell zwischen Aufgaben", "Beide Aufgaben laufen perfekt parallel", "Das Gehirn schaltet ab"], 0, "Jeder Wechsel kostet Zeit."],
+      ["Was bemerkten viele Teilnehmer im Gorilla-Experiment nicht?", ["Eine Person im Gorillakostüm", "Den Ball", "Die Musik"], 0, "Ein Beispiel für Unaufmerksamkeitsblindheit."],
+      ["Welches Hormon wird bei Stress ausgeschüttet?", ["Cortisol", "Insulin", "Melatonin"], 0, "Kurzfristig hilfreich, dauerhaft belastend."],
+      ["Wie wirkt Koffein?", ["Es blockiert Adenosin-Rezeptoren", "Es erzeugt Energie", "Es ersetzt Schlaf"], 0, "Die Müdigkeit wird nur verschoben."],
+      ["In welcher Schlafphase träumen wir am lebhaftesten?", ["Im REM-Schlaf", "Im Tiefschlaf", "Beim Einschlafen"], 0, "Die Augen bewegen sich dabei schnell."],
+      ["Was passiert im Babygehirn mit ungenutzten Synapsen?", ["Sie werden abgebaut", "Sie verdoppeln sich", "Sie werden zu Muskeln"], 0, "„Use it or lose it“."],
+      ["Welche Hirnregion wurde bei Patient H.M. entfernt?", ["Der Hippocampus", "Das Kleinhirn", "Der Balken"], 0, "Samt Teilen der Schläfenlappen."],
+      ["Was konnte H.M. trotzdem noch lernen?", ["Bewegungsfertigkeiten wie Spiegelzeichnen", "Neue Namen", "Neue Telefonnummern"], 0, "Motorisches Lernen blieb erhalten."],
+      ["Wer entdeckte die Vergessenskurve?", ["Hermann Ebbinghaus", "Sigmund Freud", "Iwan Pawlow"], 0, "Er veröffentlichte sie 1885."],
+      ["Was lernte Ebbinghaus auswendig?", ["Sinnlose Silben", "Gedichte", "Telefonbücher"], 0, "So vermied er Vorwissen."],
+      ["Was signalisiert Dopamin vor allem?", ["Dass etwas besser läuft als erwartet", "Schmerz", "Müdigkeit"], 0, "Es treibt Motivation und Lernen an."],
+      ["Wo sterben bei Parkinson Nervenzellen ab?", ["In der Substantia nigra", "Im Kleinhirn", "In der Netzhaut"], 0, "Dort wird Dopamin gebildet."],
+      ["Wie viele Nervenzellen enthält das Kleinhirn im Verhältnis?", ["Rund 80 % aller Nervenzellen", "Rund 1 %", "Rund 20 %"], 0, "Obwohl es klein ist."],
+      ["Warum kann man sich nicht selbst kitzeln?", ["Das Kleinhirn sagt die Bewegung vorher", "Die Haut ist zu dick", "Weil man lacht"], 0, "Die erwartete Berührung wird gedämpft."],
+      ["Wie viele Nervenzellen arbeiten im Darm etwa?", ["Mehrere hundert Millionen", "Zehn", "86 Milliarden"], 0, "Man spricht vom Bauchhirn."],
+      ["Was ist Pareidolie?", ["Gesichter in Dingen erkennen", "Angst vor Höhen", "Doppeltsehen"], 0, "Etwa in Wolken oder Steckdosen."],
+      ["Was geschah mit Phineas Gage?", ["Eine Eisenstange durchbohrte seinen Kopf", "Er verlor sein Gehör", "Er wurde gesichtsblind"], 0, "Seine Persönlichkeit veränderte sich."],
+      ["Wie dick ist die Hirnrinde etwa?", ["Zwei bis vier Millimeter", "Zwei Zentimeter", "Zwei Mikrometer"], 0, "Sie ist stark gefaltet."],
+      ["Was ist Gesichtsblindheit?", ["Die Unfähigkeit, Gesichter zu erkennen", "Blindheit auf einem Auge", "Angst vor Gesichtern"], 0, "Rund zwei Prozent sind betroffen."],
+      ["Was hilft nach dem Lernen beim Festigen?", ["Schlaf", "Lautes Fernsehen", "Viel Zucker"], 0, "Im Schlaf werden Inhalte gefestigt."],
+      ["Was entspricht in etwa 17–19 Stunden ohne Schlaf?", ["Rund 0,5 Promille Alkohol", "Einer Tasse Kaffee", "Einem Mittagsschlaf"], 0, "Die Reaktion ist deutlich verlangsamt."],
+      ["Was ist der „Mythos der zehn Prozent“?", ["Die falsche Behauptung, wir nutzten nur 10 % des Gehirns", "Ein Lernerfolg", "Ein Test"], 0, "Das Gehirn ist überall aktiv."],
+      ["Warum spürt man beim Anstoßen erst Druck, dann Schmerz?", ["Schmerzfasern leiten langsamer", "Schmerz ist eingebildet", "Der Druck ist lauter"], 0, "Berührungsfasern sind schneller."],
+      ["Wie viele Menschen sind etwa Linkshänder?", ["Rund 10 %", "Rund 50 %", "Rund 1 %"], 0, "Etwa jeder zehnte Mensch."],
+      ["Was erkennt das Gehirn sogar im Schlaf?", ["Den eigenen Namen", "Farben", "Gerüche nie"], 0, "Es verarbeitet wichtige Reize weiter."],
+      ["Was macht die Muskulatur im REM-Schlaf?", ["Sie ist weitgehend gelähmt", "Sie ist besonders aktiv", "Sie wächst"], 0, "So leben wir die Träume nicht aus."],
+      ["Wie groß ist die Kapazität des Langzeitgedächtnisses?", ["Praktisch unbegrenzt", "Genau 1.000 Fakten", "Nur für ein Jahr"], 0, "Schwierig ist eher das Abrufen."],
+      ["Was fördert regelmäßige Bewegung im Gehirn?", ["Durchblutung und Wachstumsfaktoren", "Den blinden Fleck", "Die Vergesslichkeit"], 0, "Das kommt Gedächtnis und Konzentration zugute."],
+      ["Welche Sinnesart meldet die Lage unserer Gliedmaßen?", ["Der Lagesinn", "Der Geruchssinn", "Der Tastsinn allein"], 0, "Er heißt auch Propriozeption."]
+    ],
+    tf: [
+      ["Wir nutzen nur zehn Prozent unseres Gehirns.", false, "Das ist ein Mythos."],
+      ["Das Kleinhirn enthält die meisten Nervenzellen des Gehirns.", true, "Rund 80 Prozent."],
+      ["Es gibt eindeutig „Linkshirn-“ und „Rechtshirn-Menschen“.", false, "Beide Hälften arbeiten zusammen."],
+      ["Das Gehirngewebe selbst spürt keinen Schmerz.", true, "Es hat keine Schmerzrezeptoren."],
+      ["Der Frontallappen ist schon bei Kindern voll ausgereift.", false, "Er reift oft bis Mitte zwanzig."],
+      ["Multitasking bei anspruchsvollen Aufgaben ist ineffizient.", true, "Jeder Wechsel kostet Zeit."],
+      ["Koffein erzeugt neue Energie im Gehirn.", false, "Es blockiert nur Müdigkeitssignale."],
+      ["Goldfische haben ein Gedächtnis von drei Sekunden.", false, "Sie können sich monatelang erinnern."],
+      ["Im REM-Schlaf träumen wir besonders lebhaft.", true, "Die Augen bewegen sich dabei schnell."],
+      ["Man kann sich selbst nicht kitzeln.", true, "Das Kleinhirn dämpft vorhersehbare Berührungen."],
+      ["Dopamin ist ausschließlich ein Glückshormon.", false, "Es signalisiert vor allem Erwartungen und Belohnungsfehler."],
+      ["Parkinson hängt mit Dopaminmangel zusammen.", true, "Dopamin-Zellen sterben ab."],
+      ["Der Mensch hat genau fünf Sinne.", false, "Es gibt deutlich mehr, etwa Gleichgewicht und Temperatur."],
+      ["Gerüche können starke Erinnerungen auslösen.", true, "Sie gelangen direkt in Gefühls- und Gedächtnisregionen."],
+      ["Die Hirnrinde ist mehrere Zentimeter dick.", false, "Sie ist nur zwei bis vier Millimeter dick."],
+      ["Ebbinghaus experimentierte an sich selbst.", true, "Er war seine einzige Versuchsperson."],
+      ["Wiederholen in wachsenden Abständen hilft beim Behalten.", true, "Das zeigt die Forschung zum verteilten Lernen."],
+      ["Patient H.M. konnte keine neuen Bewegungen mehr lernen.", false, "Motorisches Lernen funktionierte weiter."],
+      ["Babys bilden mehr Synapsen, als sie später brauchen.", true, "Ungenutzte werden abgebaut."],
+      ["Stress macht auf Dauer das Gedächtnis besser.", false, "Dauerstress beeinträchtigt Gedächtnis und Schlaf."],
+      ["Im Darm arbeiten Hunderte Millionen Nervenzellen.", true, "Das sogenannte Bauchhirn."],
+      ["Die rechte Gehirnhälfte steuert die rechte Hand.", false, "Sie steuert vor allem die linke Körperseite."],
+      ["Der Placebo-Effekt kann Beschwerden messbar lindern.", true, "Erwartung wirkt auf das Gehirn."],
+      ["Schlafmangel wirkt ähnlich wie Alkohol auf die Reaktionszeit.", true, "17–19 Stunden wach entsprechen etwa 0,5 Promille."],
+      ["Gliazellen sind nutzlose Füllmasse.", false, "Sie versorgen, isolieren und schützen Nervenzellen."],
+      ["Die Amygdala ist wichtig für Angst.", true, "Sie bewertet Gefahren blitzschnell."],
+      ["Beim Bildschirmlesen blinzeln wir häufiger.", false, "Wir blinzeln seltener – die Augen trocknen aus."],
+      ["Die meisten Menschen träumen jede Nacht.", true, "Sie erinnern sich nur selten daran."],
+      ["Musizieren verändert das Gehirn.", true, "Bestimmte Bereiche sind bei Musikern ausgeprägter."],
+      ["Den eigenen Namen erkennt das Gehirn auch im Schlaf.", true, "Wichtige Reize werden weiterverarbeitet."],
+      ["Phineas Gage starb sofort nach seinem Unfall.", false, "Er überlebte, veränderte sich aber stark."],
+      ["Das Gehirn besteht größtenteils aus Wasser.", true, "Zu rund drei Vierteln."]
+    ],
+    hl: [
+      ["Das Kleinhirn macht rund 10 % des Hirnvolumens aus.", "Sein Anteil an allen Nervenzellen des Gehirns ist …", 1, "Größer: rund 80 %.", ["kleiner", "größer"]],
+      ["Ein menschliches Gehirn wiegt rund 1,4 kg.", "Ein Elefantengehirn wiegt …", 1, "Mehr: rund 5 kg.", ["weniger", "mehr"]],
+      ["Myelinisierte Nervenfasern leiten bis zu 120 m/s.", "Dünne, marklose Schmerzfasern leiten …", 0, "Langsamer: etwa 1 m/s.", ["langsamer", "schneller"]],
+      ["Das Arbeitsgedächtnis fasst nur wenige Einheiten.", "Die Kapazität des Langzeitgedächtnisses ist …", 1, "Größer: praktisch unbegrenzt.", ["kleiner", "größer"]],
+      ["Ebbinghaus veröffentlichte die Vergessenskurve 1885.", "Donald Hebb formulierte seine Lernregel …", 1, "Später: 1949.", ["früher", "später"]],
+      ["Patient H.M. wurde 1953 operiert.", "Der Unfall von Phineas Gage geschah …", 0, "Früher: 1848.", ["früher", "später"]],
+      ["Das Gehirn hat rund 86 Milliarden Nervenzellen.", "Im Darm arbeiten Nervenzellen …", 0, "Weniger: mehrere hundert Millionen.", ["weniger", "mehr"]],
+      ["Erwachsene brauchen etwa 7–9 Stunden Schlaf.", "Neugeborene schlafen am Tag …", 1, "Mehr: etwa 14–17 Stunden.", ["weniger", "mehr"]],
+      ["Der Stirnlappen reift erst bis Mitte zwanzig.", "Die Sehrinde reift …", 0, "Früher: vor allem in der frühen Kindheit.", ["früher", "später"]],
+      ["Menschen haben drei Zapfentypen.", "Hunde haben …", 0, "Weniger: zwei.", ["weniger", "mehr"]],
+      ["17–19 Stunden wach wirken wie etwa 0,5 Promille.", "24 Stunden ohne Schlaf entsprechen …", 1, "Mehr: etwa 1 Promille.", ["weniger", "mehr"]],
+      ["Normalerweise blinzeln wir etwa 15- bis 20-mal pro Minute.", "Beim konzentrierten Bildschirmlesen blinzeln wir …", 0, "Seltener.", ["seltener", "häufiger"]]
+    ]
+  };
+  /* Pilznetzwerke (Myzel) */
+  CONTENT.pilze = {
+    cards: [
+      {
+        id: "my-04", category: "Pilznetzwerke (Myzel)", tagColor: "#A16207",
+        title: "Pilze sind keine Pflanzen",
+        story: "Lange zählte man Pilze zu den Pflanzen, doch sie bilden ein eigenes Reich des Lebens. Sie betreiben keine Photosynthese, sondern ernähren sich von organischen Stoffen, die sie mit Enzymen außerhalb ihres Körpers zersetzen und dann aufnehmen. Ihre Zellwände bestehen aus Chitin – demselben Material wie der Panzer von Insekten. Was wir im Wald als Pilz sammeln, ist nur der Fruchtkörper, vergleichbar mit einem Apfel am Baum; der eigentliche Organismus lebt als Myzel verborgen im Boden oder im Holz.",
+        funFact: "Genetisch sind Pilze näher mit Tieren – und damit auch mit uns Menschen – verwandt als mit Pflanzen.",
+        quiz: {
+          question: "Woraus bestehen die Zellwände von Pilzen?",
+          options: ["Aus Zellulose", "Aus Chitin", "Aus Kalk"],
+          correct: 1,
+          explanation: "Chitin kennt man sonst vor allem aus den Panzern von Insekten und Krebsen."
+        }
+      },
+      {
+        id: "my-05", category: "Pilznetzwerke (Myzel)", tagColor: "#A16207",
+        title: "Der Grüne Knollenblätterpilz",
+        story: "Der Grüne Knollenblätterpilz ist für die meisten tödlichen Pilzvergiftungen in Europa verantwortlich. Seine Amatoxine zerstören die Leberzellen – und das Tückische: Die ersten Beschwerden treten erst sechs bis 24 Stunden nach dem Essen auf, wenn das Gift längst im Körper ist. Nach heftigem Durchfall folgt oft eine trügerische Besserung, bevor die Leber versagt. Verwechselt wird er vor allem mit Champignons, doch er hat stets weiße Lamellen, einen Ring am Stiel und eine knollige Verdickung mit Scheide an der Stielbasis.",
+        funFact: "Ein Wirkstoff aus der Mariendistel, das Silibinin, wird als Gegenmittel eingesetzt: Er hindert das Gift daran, in die Leberzellen einzudringen.",
+        quiz: {
+          question: "Woran erkennt man den Knollenblätterpilz im Unterschied zum Champignon?",
+          options: ["An rosa bis braunen Lamellen", "An immer weißen Lamellen und einer Knolle am Stielgrund", "An einem roten Hut mit weißen Punkten"],
+          correct: 1,
+          explanation: "Champignons haben rosa bis dunkelbraune Lamellen – beim Knollenblätterpilz bleiben sie weiß."
+        }
+      },
+      {
+        id: "my-06", category: "Pilznetzwerke (Myzel)", tagColor: "#A16207",
+        title: "Penicillin – ein Schimmelpilz verändert die Welt",
+        story: "Als der schottische Bakteriologe Alexander Fleming 1928 aus dem Urlaub zurückkam, bemerkte er auf einer Bakterienkultur einen Schimmelpilz, um den herum keine Bakterien wuchsen. Der Pilz Penicillium produzierte einen Stoff, der Bakterien abtötete: das Penicillin. Erst Howard Florey und Ernst Chain gelang es um 1940, es in größeren Mengen herzustellen, und im Zweiten Weltkrieg rettete es unzählige Leben. 1945 erhielten die drei dafür den Nobelpreis – und Antibiotika revolutionierten die Medizin.",
+        funFact: "Auch Brot, Bier und Wein verdanken wir Pilzen: Die Backhefe ist ein einzelliger Pilz, der Zucker zu Alkohol und Kohlendioxid vergärt – die Gasbläschen lassen den Teig aufgehen.",
+        quiz: {
+          question: "Wer entdeckte 1928 das Penicillin?",
+          options: ["Robert Koch", "Alexander Fleming", "Louis Pasteur"],
+          correct: 1,
+          explanation: "Fleming entdeckte den Effekt zufällig auf einer vergessenen Bakterienkultur."
+        }
+      }
+    ],
+    wissen: [
+      ["Hyphen und Myzel", "Pilze wachsen als hauchdünne Fäden, die Hyphen, an ihren Spitzen weiter. Das Geflecht aus Hyphen heißt Myzel und durchzieht Boden, Holz oder Laub oft auf riesigen Flächen."],
+      ["Der Fruchtkörper", "Der sichtbare Pilz mit Hut und Stiel ist nur das Fortpflanzungsorgan des Myzels. Er entsteht, wenn die Bedingungen stimmen, und verbreitet die Sporen."],
+      ["Milliarden Sporen", "Ein einziger Fruchtkörper kann Milliarden winziger Sporen freisetzen, die mit dem Wind verbreitet werden. Sporen sind so klein und zahlreich, dass sie praktisch überall in der Luft schweben."],
+      ["Lamellen und Röhren", "Unter dem Hut tragen Pilze die sporenbildende Schicht – bei Lamellenpilzen auf feinen Blättchen, bei Röhrlingen wie dem Steinpilz in schwammartigen Röhren. Das ist ein wichtiges Bestimmungsmerkmal."],
+      ["Die Müllabfuhr des Waldes", "Viele Pilze sind Zersetzer: Sie bauen totes Holz, Laub und andere Reste ab und machen die Nährstoffe wieder verfügbar. Ohne sie würde der Wald in seinen eigenen Abfällen ersticken."],
+      ["Weißfäule und Braunfäule", "Manche Pilze können Lignin abbauen, den harten Holzstoff, und hinterlassen helles, faseriges Holz – die Weißfäule. Andere zersetzen vor allem die Zellulose, und das Holz zerfällt braun und würfelig."],
+      ["Pilze als Parasiten", "Manche Pilze befallen lebende Pflanzen oder Tiere. Das Mutterkorn etwa wächst an Getreide und enthielt Gifte, die im Mittelalter schwere Vergiftungswellen auslösten."],
+      ["Flechten – eine Lebensgemeinschaft", "Flechten sind Doppelwesen aus einem Pilz und einer Alge oder einem Cyanobakterium. Der Pilz bietet Schutz, der Partner liefert Zucker – zusammen besiedeln sie sogar nackten Fels."],
+      ["Hefe", "Hefen sind einzellige Pilze, die sich durch Knospung vermehren. Seit Jahrtausenden nutzen Menschen sie für Brot, Bier und Wein."],
+      ["Edelschimmel im Käse", "Roquefort und Gorgonzola werden mit blauem, Camembert und Brie mit weißem Edelschimmel veredelt. Die Pilze verändern Geschmack und Konsistenz des Käses."],
+      ["Trüffel", "Trüffel wachsen unterirdisch in Symbiose mit Bäumen wie Eichen und Haselsträuchern. Ihr intensiver Duft lockt Tiere an, die sie ausgraben – deshalb suchen Trüffelsucher mit Hunden oder Schweinen."],
+      ["Goldene Regeln beim Sammeln", "Nur Pilze essen, die man sicher kennt, und im Zweifel eine Pilzberatungsstelle fragen. Apps und Bilder allein reichen für eine sichere Bestimmung nicht aus."],
+      ["Der Steinpilz", "Der Steinpilz ist einer der begehrtesten Speisepilze. Er lebt in Symbiose mit Fichten, Kiefern, Buchen oder Eichen und hat unter dem Hut ein weißliches bis olivgrünes Röhrenfutter."],
+      ["Der Pfifferling", "Pfifferlinge erkennt man an ihrer dottergelben Farbe und den leistenartigen Adern unter dem Hut, die am Stiel herablaufen. Sie wachsen oft in Moos unter Fichten und Buchen."],
+      ["Der Parasol", "Der Parasol oder Riesenschirmling kann einen Hutdurchmesser von 30 Zentimetern erreichen. Sein Stiel ist genattert, und der Ring lässt sich verschieben."],
+      ["Der Fliegenpilz", "Der rote Fliegenpilz mit weißen Flocken ist giftig, aber selten tödlich. Seine Wirkstoffe Ibotensäure und Muscimol lösen Rauschzustände, Verwirrung und Erbrechen aus."],
+      ["Der Kahle Krempling", "Der Kahle Krempling galt früher als essbar. Heute weiß man, dass er nach wiederholtem Verzehr eine gefährliche Immunreaktion auslösen kann, die sogar tödlich enden kann."],
+      ["Pilze und Tschernobyl", "Nach der Reaktorkatastrophe 1986 gelangte radioaktives Cäsium auch in süddeutsche Waldböden. Manche Wildpilze wie Maronenröhrlinge können in einigen Regionen noch heute erhöhte Werte aufweisen."],
+      ["Der Zombie-Pilz", "Der tropische Pilz Ophiocordyceps befällt Ameisen, bringt sie dazu, an einem Pflanzenstängel emporzuklettern, und lässt dann aus ihrem Kopf einen Fruchtkörper wachsen. So verteilt er seine Sporen von oben."],
+      ["Hexenringe", "Manchmal wachsen Pilze in einem perfekten Kreis auf einer Wiese. Das Myzel breitet sich vom Zentrum gleichmäßig nach außen aus – früher glaubte man, dort hätten Hexen getanzt."],
+      ["Pilze als Werkstoff", "Aus Myzel lassen sich leichte Verpackungen, Dämmstoffe und lederähnliche Materialien herstellen. Sie wachsen auf landwirtschaftlichen Reststoffen und sind kompostierbar."],
+      ["Pilze in der Medizin", "Neben Penicillin stammen weitere wichtige Medikamente aus Pilzen, etwa Ciclosporin, das bei Organtransplantationen Abstoßungsreaktionen verhindert."],
+      ["Die unbekannte Vielfalt", "Wissenschaftlich beschrieben sind rund 150.000 Pilzarten. Schätzungen gehen jedoch von mehreren Millionen Arten weltweit aus – die meisten sind noch unentdeckt."],
+      ["Pilze züchten", "Austernpilze und Shiitake lassen sich auf Holz, Stroh oder sogar Kaffeesatz züchten. Anders als Mykorrhizapilze brauchen sie keinen lebenden Baumpartner."],
+      ["Rost- und Mehltaupilze", "Viele Pflanzenkrankheiten werden von Pilzen verursacht, etwa Rostpilze an Getreide oder Echter Mehltau an Gurken und Rosen. In der Landwirtschaft können sie große Ernteverluste verursachen."]
+    ],
+    facts: [
+      "Pilze sind genetisch näher mit Tieren verwandt als mit Pflanzen.",
+      "Ein einziger Riesenbovist kann Billionen Sporen bilden – mehr, als es Sterne in der Milchstraße gibt.",
+      "Die meisten tödlichen Pilzvergiftungen in Europa gehen auf den Grünen Knollenblätterpilz zurück.",
+      "Der Fliegenpilz hat seinen Namen vermutlich daher, dass man ihn früher in Milch einweichte, um Fliegen zu betäuben.",
+      "Im Mittelalter löste Mutterkorn im Brot das „Antoniusfeuer“ aus – mit brennenden Schmerzen und abfallenden Gliedmaßen.",
+      "Aus dem Mutterkorn stammende Stoffe dienten als Ausgangspunkt für die Synthese von LSD im Jahr 1938.",
+      "Pilze können Plastik zersetzen: Einige Arten bauen bestimmte Kunststoffe wie Polyurethan ab.",
+      "Im zerstörten Reaktor von Tschernobyl wachsen schwarze Pilze, die offenbar sogar von radioaktiver Strahlung profitieren.",
+      "Pilze produzieren Vitamin D, wenn sie UV-Licht ausgesetzt werden – ähnlich wie unsere Haut.",
+      "Der Riesenbovist kann über einen halben Meter Durchmesser erreichen.",
+      "Der teuerste Speisepilz ist der Weiße Alba-Trüffel, für den Spitzenpreise von mehreren Tausend Euro pro Kilogramm gezahlt werden.",
+      "Die ältesten bekannten Pilzfossilien sind rund eine Milliarde Jahre alt – Pilze gab es also lange, bevor Pflanzen das Land eroberten.",
+      "Der Schwefelporling wird wegen seines Geschmacks auch „Hähnchenpilz“ genannt.",
+      "Das Myzel des Hallimaschs leuchtet im Dunkeln grünlich.",
+      "Ötzi, die Gletschermumie, trug Birkenporlinge bei sich – vermutlich als Heilmittel oder Zunder.",
+      "Den Zunderschwamm nutzten Menschen jahrtausendelang, um Feuer zu entfachen und Glut zu transportieren.",
+      "Kulturchampignons machen den größten Teil der in Deutschland gegessenen Pilze aus.",
+      "Hefepilze verdoppeln sich unter idealen Bedingungen etwa alle anderthalb bis zwei Stunden.",
+      "Aufgewärmte Pilzgerichte sind nicht per se giftig – sie sollten aber schnell gekühlt und gut erhitzt werden, weil Pilzeiweiß leicht verdirbt.",
+      "Manche Pilze werfen ihre Sporen aktiv aus: Der Pillenwerfer schleudert seine Sporenkapsel über zwei Meter weit.",
+      "Die Stinkmorchel lockt mit Aasgeruch Fliegen an, die ihre Sporen verbreiten.",
+      "Der Hexenröhrling läuft beim Anschneiden sofort tiefblau an – ist gekocht aber essbar.",
+      "Der Satansröhrling ist giftig und riecht im Alter unangenehm nach Aas.",
+      "Einer Theorie zufolge entstanden im Karbon so riesige Kohlelager, weil es noch kaum Pilze gab, die Holz vollständig abbauen konnten.",
+      "Einige Pilze locken Fadenwürmer mit Lockstoffen an und fangen sie mit klebrigen Schlingen – Pilze als Jäger.",
+      "Der Blutende Zahnschwamm sondert rote Tropfen ab, die wie Blut aussehen.",
+      "Das größte Lebewesen der Erde, gemessen an der Fläche, ist vermutlich ein Pilz in Oregon.",
+      "Pilze können durch Asphalt brechen: Wachsende Fruchtkörper entwickeln enormen Druck.",
+      "In Japan wird der Matsutake-Pilz so geschätzt, dass er oft als edles Geschenk überreicht wird.",
+      "Morcheln sind begehrte Frühjahrspilze – roh sind sie jedoch giftig und müssen gut gegart werden.",
+      "Zu den Pilzen gehören auch Erreger von Fußpilz und Hefepilzinfektionen beim Menschen.",
+      "Pilzsporen können in der Atmosphäre sogar an der Bildung von Wolken und Regentropfen beteiligt sein."
+    ],
+    quiz: [
+      ["Wie heißen die feinen Pilzfäden?", ["Hyphen", "Sporen", "Lamellen"], 0, "Ihr Geflecht nennt man Myzel."],
+      ["Was ist der sichtbare Pilz im Wald?", ["Der Fruchtkörper", "Der ganze Organismus", "Eine Wurzel"], 0, "Das Myzel bleibt verborgen."],
+      ["Womit verbreiten sich Pilze?", ["Mit Sporen", "Mit Samen", "Mit Früchten"], 0, "Sporen sind winzig und zahlreich."],
+      ["Was tragen Röhrlinge unter dem Hut?", ["Schwammartige Röhren", "Lamellen", "Stacheln"], 0, "Etwa der Steinpilz."],
+      ["Welche Rolle spielen viele Pilze im Wald?", ["Sie zersetzen totes Material", "Sie betreiben Photosynthese", "Sie fressen Tiere"], 0, "Sie recyceln Nährstoffe."],
+      ["Was bauen Weißfäule-Pilze ab?", ["Lignin", "Kalk", "Wasser"], 0, "Das harte Holzmaterial."],
+      ["Was verursachte im Mittelalter das Antoniusfeuer?", ["Mutterkorn", "Fliegenpilz", "Hefe"], 0, "Ein Getreidepilz mit starken Giften."],
+      ["Woraus bestehen Flechten?", ["Aus einem Pilz und einer Alge", "Aus Moos und Farn", "Aus Bakterien allein"], 0, "Eine Lebensgemeinschaft."],
+      ["Welcher Pilz lässt Brot aufgehen?", ["Hefe", "Pfifferling", "Fliegenpilz"], 0, "Sie produziert Kohlendioxid."],
+      ["Welcher Käse wird mit Blauschimmel veredelt?", ["Roquefort", "Gouda", "Emmentaler"], 0, "Auch Gorgonzola."],
+      ["Mit welchen Tieren sucht man Trüffel?", ["Hunden oder Schweinen", "Katzen", "Pferden"], 0, "Sie riechen den Duft unter der Erde."],
+      ["Was ist die wichtigste Sammelregel?", ["Nur sicher bekannte Pilze essen", "Alle weißen Pilze sind essbar", "Was Tiere fressen, ist sicher"], 0, "Im Zweifel die Pilzberatung fragen."],
+      ["Woran erkennt man Pfifferlinge?", ["Dottergelb mit Leisten unter dem Hut", "Rot mit weißen Punkten", "Braun mit Röhren"], 0, "Die Leisten laufen am Stiel herab."],
+      ["Wie groß kann der Hut eines Parasols werden?", ["Bis etwa 30 cm", "Bis 3 cm", "Bis 3 m"], 0, "Er heißt auch Riesenschirmling."],
+      ["Welche Wirkstoffe enthält der Fliegenpilz?", ["Ibotensäure und Muscimol", "Koffein", "Penicillin"], 0, "Sie wirken berauschend und giftig."],
+      ["Warum ist der Kahle Krempling gefährlich?", ["Wiederholter Verzehr kann eine Immunreaktion auslösen", "Er ist radioaktiv", "Er ist extrem scharf"], 0, "Das Paxillus-Syndrom kann tödlich sein."],
+      ["Welche Pilze können heute noch radioaktiv belastet sein?", ["Manche Wildpilze wie Maronenröhrlinge", "Zuchtchampignons", "Hefe"], 0, "Folge von Tschernobyl in Teilen Süddeutschlands."],
+      ["Was macht der Zombie-Pilz mit Ameisen?", ["Er steuert ihr Verhalten", "Er schützt sie", "Er ernährt sie"], 0, "Und wächst dann aus ihrem Kopf."],
+      ["Was sind Hexenringe?", ["Kreisförmig wachsende Pilze", "Alte Steinkreise", "Baumringe"], 0, "Das Myzel wächst gleichmäßig nach außen."],
+      ["Welches Medikament aus Pilzen hilft bei Transplantationen?", ["Ciclosporin", "Aspirin", "Insulin"], 0, "Es verhindert Abstoßungsreaktionen."],
+      ["Wie viele Pilzarten sind wissenschaftlich beschrieben?", ["Rund 150.000", "Rund 1.500", "Rund 150 Millionen"], 0, "Geschätzt gibt es Millionen."],
+      ["Worauf kann man Austernpilze züchten?", ["Auf Kaffeesatz oder Stroh", "Auf Glas", "Auf Metall"], 0, "Sie sind Zersetzer."],
+      ["Was verursacht Echter Mehltau?", ["Einen Pilzbefall bei Pflanzen", "Zu viel Sonne", "Frost"], 0, "Ein weißer Belag auf Blättern."],
+      ["Mit wem sind Pilze genetisch näher verwandt?", ["Mit Tieren", "Mit Pflanzen", "Mit Bakterien"], 0, "Sie gehören zu den Opisthokonten."],
+      ["Woraus bestehen Pilzzellwände?", ["Chitin", "Zellulose", "Holz"], 0, "Wie Insektenpanzer."],
+      ["Welcher Pilz verursacht die meisten tödlichen Vergiftungen?", ["Der Grüne Knollenblätterpilz", "Der Fliegenpilz", "Der Steinpilz"], 0, "Seine Amatoxine zerstören die Leber."],
+      ["Wann treten Symptome beim Knollenblätterpilz auf?", ["Nach 6 bis 24 Stunden", "Sofort", "Nach einer Woche"], 0, "Das macht ihn so gefährlich."],
+      ["Welche Pflanze liefert ein Gegenmittel gegen Knollenblätterpilz-Gift?", ["Die Mariendistel", "Die Kamille", "Der Löwenzahn"], 0, "Der Wirkstoff heißt Silibinin."],
+      ["Welche Farbe haben die Lamellen des Knollenblätterpilzes?", ["Weiß", "Rosa", "Schwarz"], 0, "Champignons haben rosa bis braune Lamellen."],
+      ["Wer entdeckte das Penicillin?", ["Alexander Fleming", "Robert Koch", "Marie Curie"], 0, "Im Jahr 1928."],
+      ["Welcher Pilz produziert Penicillin?", ["Penicillium", "Hefe", "Hallimasch"], 0, "Ein Schimmelpilz."],
+      ["Wann erhielten Fleming, Florey und Chain den Nobelpreis?", ["1945", "1928", "1901"], 0, "Für die Entdeckung und Entwicklung des Penicillins."],
+      ["Was nutzte Ötzi den Birkenporling vermutlich?", ["Als Heilmittel oder Zunder", "Als Nahrung", "Als Schmuck"], 0, "Er trug ihn bei sich."],
+      ["Wofür wurde der Zunderschwamm genutzt?", ["Zum Feuermachen", "Zum Färben", "Zum Kochen"], 0, "Er glimmt lange."],
+      ["Wie heißt der Pilz, der seine Sporenkapsel über zwei Meter schleudert?", ["Pillenwerfer", "Stinkmorchel", "Bovist"], 0, "Er zielt dabei aufs Licht."],
+      ["Womit lockt die Stinkmorchel Fliegen an?", ["Mit Aasgeruch", "Mit Farbe", "Mit Wärme"], 0, "Die Fliegen verbreiten ihre Sporen."],
+      ["Was passiert beim Anschneiden des Hexenröhrlings?", ["Er läuft blau an", "Er wird rot", "Nichts"], 0, "Gekocht ist er essbar."],
+      ["Wie heißt der Schwefelporling umgangssprachlich?", ["Hähnchenpilz", "Fischpilz", "Käsepilz"], 0, "Wegen seines Geschmacks."],
+      ["Was können manche Pilze mit Fadenwürmern tun?", ["Sie fangen sie mit Schlingen", "Sie ernähren sie", "Sie meiden sie"], 0, "Fleischfressende Pilze."],
+      ["Welcher Pilz ist roh giftig und muss gut gegart werden?", ["Die Morchel", "Der Champignon", "Der Austernpilz"], 0, "Morcheln nie roh essen."],
+      ["Was produzieren Pilze unter UV-Licht?", ["Vitamin D", "Vitamin C", "Zucker"], 0, "Ähnlich wie unsere Haut."],
+      ["Wie alt sind die ältesten bekannten Pilzfossilien?", ["Rund eine Milliarde Jahre", "Rund 10.000 Jahre", "Rund 1 Million Jahre"], 0, "Pilze sind uralt."],
+      ["Wo wachsen strahlungsliebende schwarze Pilze?", ["Im Reaktor von Tschernobyl", "In der Sahara", "Auf dem Mond"], 0, "Sie scheinen Strahlung zu nutzen."],
+      ["Welcher Trüffel gilt als der teuerste?", ["Der Weiße Alba-Trüffel", "Der Sommertrüffel", "Der Burgundertrüffel"], 0, "Er erzielt Spitzenpreise."],
+      ["Welcher Speisepilz wird in Deutschland am meisten gegessen?", ["Der Zuchtchampignon", "Der Steinpilz", "Der Pfifferling"], 0, "Er wird in großen Mengen kultiviert."]
+    ],
+    tf: [
+      ["Pilze sind Pflanzen.", false, "Sie bilden ein eigenes Reich."],
+      ["Pilze betreiben Photosynthese.", false, "Sie ernähren sich von organischen Stoffen."],
+      ["Der sichtbare Pilz ist nur der Fruchtkörper.", true, "Das Myzel lebt verborgen."],
+      ["Flechten bestehen aus Pilz und Alge.", true, "Eine enge Lebensgemeinschaft."],
+      ["Alle weißen Pilze sind essbar.", false, "Der Knollenblätterpilz ist weiß bis grünlich und tödlich."],
+      ["Der Fliegenpilz ist harmlos.", false, "Er ist giftig."],
+      ["Der Knollenblätterpilz verursacht sofort Beschwerden.", false, "Die Symptome kommen erst nach Stunden."],
+      ["Penicillin stammt aus einem Schimmelpilz.", true, "Aus Penicillium."],
+      ["Hefe ist ein Pilz.", true, "Ein einzelliger Pilz."],
+      ["Pilze sind näher mit Tieren als mit Pflanzen verwandt.", true, "Das zeigt das Erbgut."],
+      ["Trüffel wachsen an der Oberfläche auf Bäumen.", false, "Sie wachsen unterirdisch."],
+      ["Pilz-Apps reichen für eine sichere Bestimmung.", false, "Im Zweifel immer Fachleute fragen."],
+      ["Pfifferlinge haben Röhren unter dem Hut.", false, "Sie haben Leisten."],
+      ["Der Kahle Krempling kann nach wiederholtem Essen gefährlich werden.", true, "Durch eine Immunreaktion."],
+      ["Mutterkorn wächst an Getreide.", true, "Vor allem an Roggen."],
+      ["Morcheln kann man bedenkenlos roh essen.", false, "Roh sind sie giftig."],
+      ["Pilze können Vitamin D bilden.", true, "Unter UV-Licht."],
+      ["Es sind bereits alle Pilzarten der Welt beschrieben.", false, "Die meisten sind noch unbekannt."],
+      ["Hexenringe entstehen durch gleichmäßig wachsendes Myzel.", true, "Vom Zentrum nach außen."],
+      ["Ciclosporin wird aus einem Pilz gewonnen.", true, "Es hilft bei Transplantationen."],
+      ["Pilze spielen beim Abbau von Totholz kaum eine Rolle.", false, "Sie sind die wichtigsten Zersetzer."],
+      ["Die Stinkmorchel duftet nach Blumen.", false, "Sie riecht nach Aas."],
+      ["Der Hexenröhrling läuft beim Anschneiden blau an.", true, "Gekocht ist er essbar."],
+      ["Pilzzellwände bestehen aus Chitin.", true, "Wie Insektenpanzer."],
+      ["Ötzi trug Pilze bei sich.", true, "Birkenporlinge und Zunderschwamm."],
+      ["Der Weiße Alba-Trüffel ist ein günstiger Alltagspilz.", false, "Er gehört zu den teuersten Lebensmitteln."],
+      ["Manche Pilze fangen Fadenwürmer.", true, "Mit klebrigen Schlingen."],
+      ["Austernpilze brauchen einen lebenden Baum als Partner.", false, "Sie wachsen auf totem Material."],
+      ["Pilzsporen schweben praktisch überall in der Luft.", true, "Sie sind winzig und zahlreich."],
+      ["Aus Myzel kann man Verpackungsmaterial herstellen.", true, "Leicht und kompostierbar."],
+      ["Die Backhefe erzeugt beim Gären Kohlendioxid.", true, "Die Bläschen lockern den Teig."],
+      ["Der Riesenbovist wird höchstens tennisballgroß.", false, "Er kann über einen halben Meter groß werden."]
+    ],
+    hl: [
+      ["Der Hallimasch in Oregon bedeckt rund 9,6 km².", "Das Tempelhofer Feld in Berlin ist …", 0, "Kleiner: rund 3,5 km².", ["kleiner", "größer"]],
+      ["Beschrieben sind rund 150.000 Pilzarten.", "Die geschätzte Gesamtzahl der Pilzarten ist …", 1, "Größer: mehrere Millionen.", ["kleiner", "größer"]],
+      ["Knollenblätterpilz: Symptome nach 6–24 Stunden.", "Beim Fliegenpilz beginnen die Beschwerden meist …", 0, "Früher: oft schon nach 30 Minuten bis 2 Stunden.", ["früher", "später"]],
+      ["Fleming entdeckte das Penicillin 1928.", "Den Nobelpreis dafür gab es …", 1, "Später: 1945.", ["früher", "später"]],
+      ["Ein großer Steinpilzhut misst bis zu etwa 25 cm.", "Ein Riesenbovist erreicht …", 1, "Mehr: über 50 cm Durchmesser.", ["weniger", "mehr"]],
+      ["Mykorrhiza gibt es seit über 400 Millionen Jahren.", "Die ersten Dinosaurier lebten vor …", 0, "Kürzerer Zeit: rund 230 Millionen Jahren.", ["kürzerer Zeit", "längerer Zeit"]],
+      ["Ein frischer Champignon besteht zu rund 90 % aus Wasser.", "Der Wasseranteil getrockneter Steinpilze ist …", 0, "Kleiner: rund 10 %.", ["kleiner", "größer"]],
+      ["Die Cheops-Pyramide ist rund 4.500 Jahre alt.", "Das höchste für den Oregon-Hallimasch geschätzte Alter ist …", 1, "Höher: bis zu rund 8.600 Jahre.", ["niedriger", "höher"]],
+      ["Pilzsporen sind nur wenige Mikrometer groß.", "Ein menschliches Haar ist dick …", 1, "Mehr: rund 50–100 Mikrometer.", ["weniger", "mehr"]],
+      ["Ein Riesenbovist kann Billionen Sporen bilden.", "Die Zahl der Sterne in der Milchstraße ist …", 0, "Kleiner: 100–400 Milliarden.", ["kleiner", "größer"]],
+      ["Hefe gärt am besten bei rund 30 °C.", "Die Temperatur, bei der Hefe abstirbt, ist …", 1, "Höher: ab etwa 50–60 °C.", ["niedriger", "höher"]],
+      ["Cäsium-137 hat eine Halbwertszeit von rund 30 Jahren.", "Seit der Tschernobyl-Katastrophe 1986 vergingen bis 2026 …", 1, "Mehr: 40 Jahre.", ["weniger", "mehr"]]
+    ]
+  };
+  /* Mittelalterliche Alltagsgeschichte */
+  CONTENT.mittelalter = {
+    cards: [
+      {
+        id: "ma-04", category: "Mittelalterliche Alltagsgeschichte", tagColor: "#9F1239",
+        title: "Stadtluft macht frei",
+        story: "Ab dem 12. Jahrhundert wuchsen in Mitteleuropa zahlreiche Städte, oft geschützt durch Mauern und ausgestattet mit Markt- und eigenem Stadtrecht. Wer als unfreier Bauer in die Stadt floh und dort ein Jahr und einen Tag lebte, ohne von seinem Herrn zurückgefordert zu werden, galt vielerorts als frei – daher der Spruch „Stadtluft macht frei“. In den Städten organisierten sich Handwerker in Zünften, die Preise, Qualität und Ausbildung regelten. Trotzdem waren die meisten mittelalterlichen Städte klein: Viele hatten nur wenige Tausend Einwohner.",
+        funFact: "Köln war um 1300 mit rund 40.000 Einwohnern eine der größten Städte im deutschsprachigen Raum – heute hat es über eine Million.",
+        quiz: {
+          question: "Was bedeutete der Rechtssatz „Stadtluft macht frei“?",
+          options: ["In Städten gab es keine Steuern", "Unfreie wurden nach einem Jahr und einem Tag in der Stadt frei", "Stadtbewohner durften keine Waffen tragen"],
+          correct: 1,
+          explanation: "Wurde ein geflohener Höriger innerhalb dieser Frist nicht zurückgefordert, war er vielerorts frei."
+        }
+      },
+      {
+        id: "ma-05", category: "Mittelalterliche Alltagsgeschichte", tagColor: "#9F1239",
+        title: "Ritter – mehr Alltag als Heldensage",
+        story: "Der Weg zum Ritter begann oft schon mit etwa sieben Jahren als Page an einem fremden Hof, wo Jungen Benehmen, Reiten und Waffenführung lernten. Als Knappe begleitete man später einen Ritter, bis man um das 21. Lebensjahr den Ritterschlag erhielt. Viele Ritter waren keine reichen Adeligen, sondern Dienstleute eines Herrn, die Burgen verwalteten, Abgaben eintrieben und Recht sprachen. Das Leben auf der Burg war oft zugig, kalt und beengt – mit Glanz und Minnesang hatte der Alltag wenig zu tun.",
+        funFact: "Eine gut sitzende Plattenrüstung wog meist nur etwa 20 bis 25 Kilogramm und verteilte sich über den ganzen Körper. Ritter konnten darin laufen, aufsteigen und sogar vom Boden aufstehen – Kräne zum Aufs-Pferd-Heben sind eine Legende.",
+        quiz: {
+          question: "Wie viel wog eine typische Plattenrüstung ungefähr?",
+          options: ["Etwa 5 Kilogramm", "Etwa 20 bis 25 Kilogramm", "Über 100 Kilogramm"],
+          correct: 1,
+          explanation: "Das Gewicht verteilte sich gut über den Körper – viel beweglicher als oft angenommen."
+        }
+      },
+      {
+        id: "ma-06", category: "Mittelalterliche Alltagsgeschichte", tagColor: "#9F1239",
+        title: "Der Schwarze Tod",
+        story: "Zwischen 1347 und 1351 raste die Pest durch Europa und tötete schätzungsweise ein Drittel der Bevölkerung. Der Erreger, das Bakterium Yersinia pestis, wurde vor allem durch Rattenflöhe übertragen, bei der Lungenpest aber auch direkt von Mensch zu Mensch. Die Menschen verstanden die Ursache nicht und suchten Erklärungen in Gottes Zorn, giftigen Dünsten oder schoben die Schuld grausam auf Minderheiten. Die Katastrophe veränderte Gesellschaft und Wirtschaft: Arbeitskräfte wurden knapp, und die Löhne stiegen.",
+        funFact: "Das Wort „Quarantäne“ stammt vom italienischen „quaranta giorni“, vierzig Tage: So lange mussten Schiffe in manchen Häfen warten, bevor die Besatzung an Land durfte.",
+        quiz: {
+          question: "Welcher Anteil der europäischen Bevölkerung starb etwa am Schwarzen Tod?",
+          options: ["Rund ein Zehntel", "Rund ein Drittel", "Fast alle"],
+          correct: 1,
+          explanation: "Schätzungen gehen von einem Drittel bis zur Hälfte der Bevölkerung aus."
+        }
+      }
+    ],
+    wissen: [
+      ["Die drei Stände", "Die mittelalterliche Gesellschaft verstand sich als Ordnung von drei Ständen: Geistliche, die beten, Adelige, die kämpfen, und Bauern, die arbeiten. Man wurde in seinen Stand hineingeboren."],
+      ["Das Lehnswesen", "Ein König oder Fürst vergab Land als Lehen an Vasallen, die ihm dafür Treue und Kriegsdienst schuldeten. Diese Vasallen gaben selbst wieder Land an Untervasallen weiter."],
+      ["Die Grundherrschaft", "Die meisten Bauern lebten in Abhängigkeit von einem Grundherrn. Sie bewirtschafteten sein Land und mussten Abgaben in Naturalien leisten sowie Frondienste erbringen."],
+      ["Die Dreifelderwirtschaft", "Die Felder eines Dorfes wurden in drei Teile geteilt: Wintergetreide, Sommergetreide und Brache. Durch den jährlichen Wechsel erholte sich der Boden, und die Erträge stiegen."],
+      ["Mensch und Vieh unter einem Dach", "Viele Bauern lebten in Wohnstallhäusern, in denen Menschen und Tiere unter einem Dach wohnten. Die Tiere spendeten im Winter Wärme."],
+      ["Kleiderordnungen", "Viele Städte erließen Kleiderordnungen, die festlegten, wer welche Stoffe, Farben und Pelze tragen durfte. So blieb der Stand eines Menschen auf den ersten Blick erkennbar."],
+      ["Lebenserwartung", "Die durchschnittliche Lebenserwartung war niedrig, vor allem weil sehr viele Kinder früh starben. Wer die Kindheit überlebte, konnte durchaus 50, 60 oder mehr Jahre alt werden."],
+      ["Klöster als Zentren", "Klöster waren Orte des Gebets, der Arbeit und des Wissens. Nach der Regel des heiligen Benedikt – „bete und arbeite“ – schrieben Mönche in Skriptorien Bücher ab und bewahrten antikes Wissen."],
+      ["Hildegard von Bingen", "Die Äbtissin Hildegard von Bingen schrieb im 12. Jahrhundert über Theologie, Medizin, Pflanzenkunde und Musik. Sie korrespondierte mit Kaisern und Päpsten und wurde 2012 zur Kirchenlehrerin erhoben."],
+      ["Die ersten Universitäten", "Die Universität von Bologna gilt als älteste Europas. Die älteste Universität im heutigen Deutschland ist die 1386 gegründete Universität Heidelberg."],
+      ["Pilgerreisen", "Viele Menschen pilgerten zu heiligen Orten wie Rom, Jerusalem oder Santiago de Compostela. Die Reise dauerte Monate und war gefährlich, versprach aber Seelenheil."],
+      ["Die Hanse", "Die Hanse war ein Bund von Kaufleuten und Städten rund um Nord- und Ostsee, mit Lübeck als Zentrum. Mit ihren Koggen handelte sie mit Hering, Salz, Tuch, Pelzen und Getreide."],
+      ["Messen und Märkte", "Auf großen Messen wie in Frankfurt oder der Champagne trafen sich Händler aus ganz Europa. Das Wort „Messe“ erinnert daran, dass Märkte oft an kirchliche Feiertage gebunden waren."],
+      ["Zünfte und Meisterstück", "Wer Meister werden wollte, lernte als Lehrling, arbeitete als Geselle und fertigte schließlich ein Meisterstück an. Die Zunft wachte über Qualität, Preise und die Zahl der Werkstätten."],
+      ["Die Walz", "Gesellen zogen nach der Lehre oft jahrelang auf Wanderschaft, um andernorts neue Techniken zu lernen. Diese Tradition der Walz gibt es bei einigen Handwerken bis heute."],
+      ["Burgen", "Burgen waren Wohnsitz, Verwaltungszentrum und Zufluchtsort. Viele wurden auf Hügeln oder Felsen erbaut und durch Mauern, Gräben und Bergfriede geschützt."],
+      ["Turniere", "Bei Turnieren übten Ritter den Kampf und zeigten ihr Können vor Publikum. Sie waren gesellschaftliche Großereignisse – und trotz stumpfer Waffen oft gefährlich."],
+      ["Minnesang", "Minnesänger wie Walther von der Vogelweide besangen die verehrte, oft unerreichbare Dame. Die höfische Liebesdichtung war ein Spiel mit festen Regeln."],
+      ["Fastnacht", "Vor der Fastenzeit feierten die Menschen ausgelassen und aßen noch einmal Fleisch, Fett und Süßes. Daraus entwickelten sich Fastnacht und Karneval."],
+      ["Medizin der vier Säfte", "Die Medizin folgte der antiken Lehre von vier Körpersäften: Blut, Schleim, gelbe und schwarze Galle. Krankheiten galten als Ungleichgewicht, das man etwa mit Aderlass behandelte."],
+      ["Die Erde war nicht flach", "Dass man im Mittelalter die Erde für eine Scheibe hielt, ist ein Mythos. Gebildete Menschen wussten seit der Antike, dass sie eine Kugel ist – der Reichsapfel symbolisiert genau das."],
+      ["Hexenverfolgung – später als gedacht", "Die großen Hexenverfolgungen fanden nicht im Mittelalter, sondern vor allem in der Frühen Neuzeit statt, etwa zwischen 1560 und 1630. Das Bild vom „finsteren Mittelalter“ trügt hier."],
+      ["Das Recht der ersten Nacht", "Für ein angebliches Recht von Herren, die erste Nacht mit Bräuten ihrer Untertanen zu verbringen, gibt es keine verlässlichen Belege. Historiker halten es weitgehend für eine Legende."],
+      ["Namen entstehen", "Im Mittelalter setzten sich Familiennamen durch, weil es in wachsenden Orten zu viele Menschen mit gleichem Vornamen gab. Viele verweisen auf Berufe: Müller, Schmidt, Schneider oder Becker."],
+      ["Pergament", "Bücher wurden auf Pergament geschrieben, aufwendig bearbeiteten Tierhäuten. Für eine große Handschrift brauchte man die Häute vieler Tiere – Bücher waren entsprechend kostbar."]
+    ],
+    facts: [
+      "Der Kölner Dom wurde 1248 begonnen – und erst 1880 fertiggestellt.",
+      "Die Redewendung „Das geht auf keine Kuhhaut“ stammt aus der Zeit, als man auf Pergament aus Tierhaut schrieb.",
+      "„Etwas im Schilde führen“ geht auf Ritter zurück, deren Wappen auf dem Schild ihre Absichten und Herkunft verrieten.",
+      "„Mit Kind und Kegel“ – „Kegel“ bezeichnete früher ein uneheliches Kind.",
+      "Jemanden „an den Pranger stellen“ erinnert an eine mittelalterliche Strafe, bei der Verurteilte öffentlich zur Schau gestellt wurden.",
+      "Ein „Pechvogel“ war ursprünglich ein Vogel, der an einer mit Pech bestrichenen Rute kleben blieb.",
+      "Den Fehdehandschuh warf man als Zeichen der Herausforderung zum Kampf hin.",
+      "Gabeln setzten sich beim Essen erst spät durch – im Mittelalter aß man mit Messer, Löffel und Fingern.",
+      "Statt Tellern dienten oft dicke Brotscheiben als Unterlage für Fleisch und Soße.",
+      "Die Brille wurde um 1280 in Italien erfunden.",
+      "Mit Leonardo Fibonaccis Buch von 1202 verbreiteten sich die arabischen Ziffern und die Null in Europa.",
+      "Der Begriff „Mittelalter“ stammt von Gelehrten der Renaissance, die die Zeit zwischen Antike und ihrer Gegenwart abwerten wollten.",
+      "Till Eulenspiegel soll im 14. Jahrhundert gelebt haben – seine Streiche wurden um 1500 gedruckt.",
+      "Die Brezel soll in Klöstern entstanden sein – ihre Form wird oft mit verschränkten, betenden Armen erklärt.",
+      "Lübeck wurde als „Königin der Hanse“ bezeichnet.",
+      "Das Wort „Hanse“ bedeutete ursprünglich so viel wie Gruppe oder Schar.",
+      "Viele mittelalterliche Städte hatten weniger Einwohner als heutige Dörfer.",
+      "Bauern arbeiteten nicht ununterbrochen: Zahlreiche kirchliche Feiertage bescherten ihnen viele freie Tage im Jahr.",
+      "Keuschheitsgürtel sind nach heutigem Wissen weitgehend eine spätere Erfindung – als Alltagsgegenstand im Mittelalter sind sie nicht belegt.",
+      "Glasfenster waren teuer und selten – viele Häuser hatten nur Holzläden, geölte Tierhäute oder Pergament vor den Fenstern.",
+      "Der Bamberger Reiter aus dem 13. Jahrhundert ist eine der berühmtesten Reiterfiguren des Mittelalters – wen er darstellt, ist bis heute unklar.",
+      "Die Kogge war das typische Handelsschiff der Hanse – ein nahezu vollständiges Exemplar liegt heute im Deutschen Schifffahrtsmuseum in Bremerhaven.",
+      "Im Mittelalter begann das neue Jahr je nach Region an Weihnachten, am 25. März oder zu Ostern – nicht überall am 1. Januar.",
+      "Viele Kinder arbeiteten schon früh mit – auf dem Feld, im Haushalt oder in der Werkstatt.",
+      "Salz war so wertvoll, dass man es „weißes Gold“ nannte; Städte wie Lüneburg wurden damit reich.",
+      "Die Pest kehrte nach 1351 immer wieder – über Jahrhunderte gab es neue Ausbrüche.",
+      "Die ersten Ritterorden wie die Templer entstanden während der Kreuzzüge.",
+      "Walther von der Vogelweide ist einer der bekanntesten Dichter des Mittelalters – wo er begraben liegt, ist umstritten.",
+      "Die Gotik brachte hohe, lichtdurchflutete Kirchen mit Spitzbögen und großen bunten Fenstern.",
+      "Mittelalterliche Handschriften wurden oft mit Gold verziert – man nennt solche Bücher illuminiert.",
+      "Das Schachspiel kam im Mittelalter über die arabische Welt nach Europa und wurde bei Adeligen sehr beliebt.",
+      "Hühner, Schweine und Gänse liefen in vielen Städten frei durch die Gassen."
+    ],
+    quiz: [
+      ["Welche drei Stände kannte die mittelalterliche Gesellschaft?", ["Geistliche, Adelige, Bauern", "Könige, Händler, Sklaven", "Ritter, Mönche, Bürger allein"], 0, "Beten, kämpfen und arbeiten."],
+      ["Was ist ein Lehen?", ["Verliehenes Land gegen Treue und Dienst", "Ein Steuerbescheid", "Ein Kirchenamt"], 0, "Grundlage des Lehnswesens."],
+      ["Was war die Dreifelderwirtschaft?", ["Ein Wechsel aus Winter-, Sommergetreide und Brache", "Drei Bauern teilen sich ein Feld", "Drei Ernten pro Jahr"], 0, "Der Boden konnte sich so erholen."],
+      ["Warum lebten Menschen und Vieh oft unter einem Dach?", ["Die Tiere spendeten Wärme", "Aus Platzmangel in der Stadt", "Aus religiösen Gründen"], 0, "Das Wohnstallhaus war praktisch."],
+      ["Wozu dienten Kleiderordnungen?", ["Den Stand sichtbar zu machen", "Mode zu fördern", "Stoff zu sparen"], 0, "Nicht jeder durfte alles tragen."],
+      ["Warum war die durchschnittliche Lebenserwartung niedrig?", ["Vor allem wegen hoher Kindersterblichkeit", "Weil alle mit 30 starben", "Wegen Kälte"], 0, "Erwachsene wurden oft deutlich älter."],
+      ["Was bedeutet „ora et labora“?", ["Bete und arbeite", "Friede sei mit dir", "Lerne und lehre"], 0, "Die Regel des heiligen Benedikt."],
+      ["Wer war Hildegard von Bingen?", ["Eine Äbtissin und Universalgelehrte", "Eine Königin", "Eine Ritterin"], 0, "Sie schrieb über Medizin, Musik und Theologie."],
+      ["Welche ist die älteste Universität im heutigen Deutschland?", ["Heidelberg", "Berlin", "München"], 0, "Gegründet 1386."],
+      ["Welches Pilgerziel lag in Spanien?", ["Santiago de Compostela", "Rom", "Jerusalem"], 0, "Der Jakobsweg führt dorthin."],
+      ["Welche Stadt war das Zentrum der Hanse?", ["Lübeck", "München", "Köln"], 0, "Man nannte sie Königin der Hanse."],
+      ["Wie hieß das typische Schiff der Hanse?", ["Kogge", "Galeere", "Karavelle"], 0, "Ein bauchiger Segler."],
+      ["Womit schlossen Gesellen ihre Ausbildung zum Meister ab?", ["Mit einem Meisterstück", "Mit einer Prüfung in Latein", "Mit einem Turnier"], 0, "Die Zunft prüfte es."],
+      ["Was ist die Walz?", ["Die Wanderschaft von Gesellen", "Ein Tanz", "Eine Steuer"], 0, "Sie dient dem Lernen in der Fremde."],
+      ["Was ist ein Bergfried?", ["Der Hauptturm einer Burg", "Ein Friedhof", "Ein Burggraben"], 0, "Er diente als letzte Zuflucht."],
+      ["Wer war Walther von der Vogelweide?", ["Ein Minnesänger", "Ein König", "Ein Mönch"], 0, "Einer der bekanntesten Dichter seiner Zeit."],
+      ["Was feierte man vor der Fastenzeit?", ["Fastnacht", "Erntedank", "Ostern"], 0, "Daraus wurde der Karneval."],
+      ["Nach welcher Lehre arbeitete die mittelalterliche Medizin?", ["Der Lehre der vier Säfte", "Der Keimtheorie", "Der Genetik"], 0, "Krankheit galt als Ungleichgewicht."],
+      ["Was glaubten Gebildete im Mittelalter über die Form der Erde?", ["Sie ist eine Kugel", "Sie ist eine Scheibe", "Sie ist ein Würfel"], 0, "Der Reichsapfel steht dafür."],
+      ["Wann fanden die großen Hexenverfolgungen vor allem statt?", ["In der Frühen Neuzeit", "Im Frühmittelalter", "In der Antike"], 0, "Ihr Höhepunkt lag etwa 1560 bis 1630."],
+      ["Warum entstanden Familiennamen?", ["Zu viele Menschen hatten denselben Vornamen", "Der König befahl es", "Wegen der Steuer allein"], 0, "Oft nach Berufen wie Müller oder Schmidt."],
+      ["Worauf schrieb man im Mittelalter Bücher?", ["Auf Pergament", "Auf Papyrus aus Ägypten", "Auf Plastik"], 0, "Bearbeitete Tierhaut."],
+      ["Wann wurde der Kölner Dom fertig?", ["1880", "1248", "1500"], 0, "Nach über 600 Jahren."],
+      ["Woher stammt die Wendung „Das geht auf keine Kuhhaut“?", ["Von Pergament aus Tierhaut", "Von Lederschuhen", "Von Trommeln"], 0, "So viel Sündenregister passte auf keine Haut."],
+      ["Was war ein „Kegel“ in „mit Kind und Kegel“?", ["Ein uneheliches Kind", "Ein Spielzeug", "Ein Hund"], 0, "Heute kennt man nur noch die Redewendung."],
+      ["Was diente oft als Teller?", ["Dicke Brotscheiben", "Porzellan", "Glasschalen"], 0, "Das Brot saugte Soße auf."],
+      ["Wann wurde die Brille erfunden?", ["Um 1280", "Um 800", "Um 1700"], 0, "In Italien."],
+      ["Wer verbreitete die arabischen Ziffern in Europa?", ["Leonardo Fibonacci", "Karl der Große", "Gutenberg"], 0, "Mit seinem Rechenbuch von 1202."],
+      ["Von wem stammt der Begriff „Mittelalter“?", ["Von Renaissance-Gelehrten", "Von mittelalterlichen Mönchen", "Von Napoleon"], 0, "Er sollte die Zeit abwerten."],
+      ["Was bedeutet „Quarantäne“ ursprünglich?", ["Vierzig Tage", "Vier Wochen", "Gesundheit"], 0, "Vom italienischen „quaranta giorni“."],
+      ["Welcher Erreger verursachte die Pest?", ["Das Bakterium Yersinia pestis", "Ein Virus", "Ein Pilz"], 0, "Übertragen vor allem durch Flöhe."],
+      ["Wann wütete der Schwarze Tod in Europa?", ["1347 bis 1351", "1618 bis 1648", "1066"], 0, "Er tötete etwa ein Drittel der Menschen."],
+      ["Welche Folge hatte die Pest für Arbeiter?", ["Die Löhne stiegen", "Die Löhne sanken", "Nichts änderte sich"], 0, "Arbeitskräfte wurden knapp."],
+      ["Wie lange musste ein Unfreier in der Stadt leben, um frei zu werden?", ["Ein Jahr und einen Tag", "Eine Woche", "Zehn Jahre"], 0, "Nach dieser Frist galt er vielerorts als frei."],
+      ["Was regelten Zünfte?", ["Preise, Qualität und Ausbildung", "Kriege", "Kirchenlieder"], 0, "Sie waren Handwerkerverbände."],
+      ["Mit welchem Alter begann die Ausbildung zum Ritter oft?", ["Mit etwa sieben Jahren", "Mit 20 Jahren", "Mit 40 Jahren"], 0, "Zunächst als Page."],
+      ["Wie nannte man den Ritter in Ausbildung?", ["Knappe", "Schultheiß", "Vogt"], 0, "Er begleitete einen Ritter."],
+      ["Wie gut konnte man sich in einer Plattenrüstung bewegen?", ["Erstaunlich gut", "Fast gar nicht", "Nur mit einem Kran"], 0, "Das Gewicht verteilte sich über den Körper."],
+      ["Womit aß man im Mittelalter meist?", ["Mit Messer, Löffel und Fingern", "Mit Stäbchen", "Mit Gabel und Messer"], 0, "Gabeln kamen erst spät auf."],
+      ["Was nannte man „weißes Gold“?", ["Salz", "Zucker", "Silber"], 0, "Lüneburg wurde dadurch reich."],
+      ["Was war eine Kleiderordnung?", ["Vorschriften, wer welche Kleidung tragen darf", "Ein Schrank", "Eine Schneiderzunft"], 0, "Sie hielt Standesunterschiede sichtbar."],
+      ["Welcher Baustil brachte Spitzbögen und große Fenster?", ["Die Gotik", "Die Romanik", "Der Barock"], 0, "Etwa ab dem 12. Jahrhundert."],
+      ["Welches Brettspiel wurde bei Adeligen besonders beliebt?", ["Schach", "Monopoly", "Mühle ausschließlich"], 0, "Es kam über die arabische Welt."],
+      ["Wie nennt man mit Gold verzierte Handschriften?", ["Illuminiert", "Graviert", "Gebrannt"], 0, "Von lateinisch „erleuchten“."],
+      ["Was war die Aufgabe vieler Ritter im Alltag?", ["Burgen verwalten und Abgaben eintreiben", "Nur Drachen jagen", "Nur Turniere reiten"], 0, "Viele waren Dienstleute eines Herrn."]
+    ],
+    tf: [
+      ["Im Mittelalter hielten Gebildete die Erde für eine Scheibe.", false, "Sie wussten, dass sie eine Kugel ist."],
+      ["Die meisten Hexenverbrennungen fanden im Mittelalter statt.", false, "Der Höhepunkt lag in der Frühen Neuzeit."],
+      ["Der Kölner Dom wurde im Mittelalter begonnen.", true, "Baubeginn war 1248."],
+      ["Im Mittelalter aß man vor allem mit Gabeln.", false, "Gabeln setzten sich erst spät durch."],
+      ["Die Pest wurde vor allem über Flöhe übertragen.", true, "Rattenflöhe spielten eine große Rolle."],
+      ["Das „Recht der ersten Nacht“ ist gut belegt.", false, "Historiker halten es weitgehend für eine Legende."],
+      ["Ritterrüstungen waren so schwer, dass man Kräne brauchte.", false, "Ritter konnten selbst aufsteigen."],
+      ["Die Universität Heidelberg ist die älteste in Deutschland.", true, "Sie wurde 1386 gegründet."],
+      ["Die Hanse war ein Bund von Kaufleuten und Städten.", true, "Mit Lübeck als Zentrum."],
+      ["Alle Menschen im Mittelalter starben vor 40.", false, "Wer die Kindheit überlebte, wurde oft deutlich älter."],
+      ["Familiennamen wie Müller oder Schmidt gehen auf Berufe zurück.", true, "Sie entstanden im Mittelalter."],
+      ["Die Brille wurde im Mittelalter erfunden.", true, "Um 1280 in Italien."],
+      ["Bauern hatten im Mittelalter nie freie Tage.", false, "Viele kirchliche Feiertage waren arbeitsfrei."],
+      ["Das Wort „Quarantäne“ bezieht sich auf 40 Tage.", true, "Vom italienischen „quaranta“."],
+      ["Mittelalterliche Städte waren meist Großstädte.", false, "Die meisten hatten nur wenige Tausend Einwohner."],
+      ["Nach der Pest stiegen die Löhne.", true, "Weil Arbeitskräfte knapp wurden."],
+      ["Keuschheitsgürtel waren im Mittelalter weit verbreitet.", false, "Das ist nicht belegt."],
+      ["Hildegard von Bingen schrieb über Medizin und Musik.", true, "Sie war eine Universalgelehrte."],
+      ["Ein Knappe war ein Ritter in Ausbildung.", true, "Er begleitete einen Ritter."],
+      ["Der Begriff „Mittelalter“ stammt aus dem Mittelalter selbst.", false, "Er wurde in der Renaissance geprägt."],
+      ["Pergament wird aus Tierhaut hergestellt.", true, "Deshalb waren Bücher kostbar."],
+      ["Die Dreifelderwirtschaft ließ jedes Jahr ein Feld brachliegen.", true, "So erholte sich der Boden."],
+      ["Salz war im Mittelalter billig und überall verfügbar.", false, "Es galt als „weißes Gold“."],
+      ["Die Gotik ist für Spitzbögen bekannt.", true, "Und für hohe, lichte Kirchen."],
+      ["Walther von der Vogelweide war ein Minnesänger.", true, "Einer der berühmtesten seiner Zeit."],
+      ["Glasfenster waren in jedem Bauernhaus Standard.", false, "Sie waren teuer und selten."],
+      ["Die Pest verschwand nach 1351 für immer.", false, "Sie kehrte immer wieder zurück."],
+      ["Fastnacht wurde vor der Fastenzeit gefeiert.", true, "Man aß noch einmal reichlich."],
+      ["Zünfte legten Qualitätsstandards fest.", true, "Sie regelten Ausbildung und Preise."],
+      ["Die Kogge war ein Kriegsschiff der Wikinger.", false, "Sie war das Handelsschiff der Hanse."],
+      ["Im Mittelalter begann das neue Jahr überall am 1. Januar.", false, "Der Jahresbeginn unterschied sich regional."],
+      ["Fibonacci trug zur Verbreitung der Null in Europa bei.", true, "Mit seinem Rechenbuch von 1202."]
+    ],
+    hl: [
+      ["Der Bau des Kölner Doms begann 1248.", "Fertiggestellt wurde der Dom …", 1, "Später: 1880.", ["früher", "später"]],
+      ["Köln hatte um 1300 rund 40.000 Einwohner.", "Köln hat heute Einwohner …", 1, "Mehr: über eine Million.", ["weniger", "mehr"]],
+      ["Ein Kettenhemd wog etwa 10–15 kg.", "Eine vollständige Plattenrüstung wog …", 1, "Mehr: etwa 20–25 kg.", ["weniger", "mehr"]],
+      ["Der Schwarze Tod tötete etwa ein Drittel der Menschen in Europa.", "Der Anteil der Weltbevölkerung, der an der Spanischen Grippe 1918–1920 starb, war …", 0, "Kleiner: grob 1–3 %.", ["kleiner", "größer"]],
+      ["Die Universität Bologna gilt als 1088 gegründet.", "Die Universität Heidelberg wurde gegründet …", 1, "Später: 1386.", ["früher", "später"]],
+      ["Gutenbergs Bibel entstand um 1454.", "Die ersten mechanischen Räderuhren kamen auf …", 0, "Früher: im späten 13. Jahrhundert.", ["früher", "später"]],
+      ["Fibonaccis Rechenbuch erschien 1202.", "Die Brille wurde erfunden …", 1, "Später: um 1280.", ["früher", "später"]],
+      ["Die klassische Quarantäne dauerte 40 Tage.", "Die erste Isolationsfrist in Ragusa (Dubrovnik) 1377 war …", 0, "Kürzer: 30 Tage.", ["kürzer", "länger"]],
+      ["Pagen begannen oft mit etwa sieben Jahren.", "Den Ritterschlag erhielt man meist mit etwa …", 1, "Älter: um 21 Jahre.", ["jünger", "älter"]],
+      ["Lübeck wurde 1143 gegründet.", "Der letzte Hansetag fand statt …", 1, "Später: 1669.", ["früher", "später"]],
+      ["Karl der Große wurde im Jahr 800 zum Kaiser gekrönt.", "Die Schlacht auf dem Lechfeld fand statt …", 1, "Später: 955.", ["früher", "später"]],
+      ["Wandergesellen sind traditionell mindestens drei Jahre und einen Tag unterwegs.", "Die Frist, nach der „Stadtluft frei machte“, war …", 0, "Kürzer: ein Jahr und ein Tag.", ["kürzer", "länger"]]
+    ]
+  };
 
   /* =====================================================================
      DATEN AUFBEREITEN
@@ -3604,7 +4591,16 @@
       add({ id: id, type: "quiz", q: q[0], o: order.map(k => q[1][k]), a: order.indexOf(q[2]), x: q[3] });
     });
     (src.tf || []).forEach((t, i) => add({ id: cat.key + ":t" + i, type: "tf", s: t[0], a: !!t[1], x: t[2] }));
-    (src.hl || []).forEach((h, i) => add({ id: cat.key + ":h" + i, type: "hl", ref: h[0], p: h[1], a: h[2] ? 1 : 0, x: h[3], l: h[4] || ["kleiner", "größer"] }));
+    (src.hl || []).forEach((h, i) => {
+      // Bei etwa der Hälfte der Vergleiche die Seiten tauschen, damit „rechts“ nicht immer „größer“ bedeutet
+      const id = cat.key + ":h" + i;
+      let hh = 0;
+      for (let c = 0; c < id.length; c++) hh = (Math.imul(hh, 31) + id.charCodeAt(c)) >>> 0;
+      const swap = ((hh >>> 3) & 1) === 1;
+      const l = (h[4] || ["kleiner", "größer"]).slice();
+      const a = h[2] ? 1 : 0;
+      add({ id: id, type: "hl", ref: h[0], p: h[1], a: swap ? 1 - a : a, x: h[3], l: swap ? [l[1], l[0]] : l, swap: swap });
+    });
     b.all = [].concat(b.card, b.wissen, b.fact, b.quiz, b.tf, b.hl);
     BY_CAT[cat.key] = b;
   });
@@ -4203,7 +5199,7 @@
     ensureDeck();
     const p = currentProfile();
     $("#homeEyebrow").textContent = fmtLong.format(new Date());
-    $("#homeTitle").textContent = greeting() + ", " + p.name;
+    $("#homeTitle").innerHTML = '<span class="greet">' + greeting() + ',</span>' + esc(p.name);
     $("#homeAvatar").innerHTML = avatarHTML(p, 40);
     renderStreakPill();
 
@@ -4556,8 +5552,9 @@
       body = '<p class="sw-text">' + esc(it.s) + "</p>";
       hint = "<span>← Falsch</span><span>Richtig →</span>";
     } else {
-      stamps = '<span class="stamp no low">' + esc(it.l[0]) + '</span><span class="stamp yes high">' + esc(it.l[1]) + "</span>";
-      kicker = "⚖️ " + esc(it.l[1].charAt(0).toUpperCase() + it.l[1].slice(1)) + " oder " + esc(it.l[0]) + "?";
+      const hi = it.swap ? it.l[0] : it.l[1], lo = it.swap ? it.l[1] : it.l[0];
+      stamps = '<span class="stamp no ' + (it.swap ? "high" : "low") + '">' + esc(it.l[0]) + '</span><span class="stamp yes ' + (it.swap ? "low" : "high") + '">' + esc(it.l[1]) + "</span>";
+      kicker = "⚖️ " + esc(hi.charAt(0).toUpperCase() + hi.slice(1)) + " oder " + esc(lo) + "?";
       body = '<div class="hl-ref"><small>Zum Vergleich</small>' + esc(it.ref) + '</div><p class="sw-text">' + esc(it.p) + "</p>";
       hint = "<span>← " + esc(it.l[0]) + "</span><span>" + esc(it.l[1]) + " →</span>";
     }
@@ -4593,7 +5590,7 @@
     if (it.type === "fact") return '<button class="btn-choice known" data-action="pl-swipe" data-v="0">🤓 Kannte ich</button><button class="btn-choice wow" data-action="pl-swipe" data-v="1">🤯 Neu für mich</button>';
     if (st.decided !== null) return next(true);
     if (it.type === "tf") return '<button class="btn-choice no" data-action="pl-swipe" data-v="0">' + I.cross + ' Falsch</button><button class="btn-choice yes" data-action="pl-swipe" data-v="1">' + I.check + " Richtig</button>";
-    return '<button class="btn-choice low" data-action="pl-swipe" data-v="0">' + I.down + " " + esc(it.l[0]) + '</button><button class="btn-choice high" data-action="pl-swipe" data-v="1">' + I.up + " " + esc(it.l[1]) + "</button>";
+    return '<button class="btn-choice ' + (it.swap ? "high" : "low") + '" data-action="pl-swipe" data-v="0">' + (it.swap ? I.up : I.down) + " " + esc(it.l[0]) + '</button><button class="btn-choice ' + (it.swap ? "low" : "high") + '" data-action="pl-swipe" data-v="1">' + (it.swap ? I.down : I.up) + " " + esc(it.l[1]) + "</button>";
   }
   function deckNextLabel() {
     const d = state.daily;

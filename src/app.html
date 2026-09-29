@@ -163,6 +163,7 @@
   .lh > div:first-child { min-width: 0; }
   .eyebrow { font-size: 13px; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; color: var(--label2); margin-bottom: 2px; }
   .lh h1 { font-family: var(--font-display); font-size: 34px; line-height: 41px; font-weight: 800; letter-spacing: -0.025em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .lh h1 .greet { display: block; font-size: 22px; line-height: 28px; font-weight: 700; letter-spacing: -0.01em; color: var(--label2); overflow: hidden; text-overflow: ellipsis; }
   .section-title { font-size: 13px; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; color: var(--label2); padding: 26px 6px 8px; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
   .section-title small { text-transform: none; letter-spacing: 0; font-weight: 500; font-size: 13px; }
   .section-note { font-size: 14px; line-height: 1.4; color: var(--label2); padding: 0 6px 12px; margin-top: -2px; }
@@ -534,7 +535,8 @@
   .stamp.yes { right: 16px; color: var(--green); transform: rotate(10deg); }
   .stamp.no { left: 16px; color: var(--red); transform: rotate(-10deg); }
   .stamp.yes.high { color: var(--orange); }
-  .stamp.no.low { color: var(--blue); }
+  .stamp.no.low, .stamp.yes.low { color: var(--blue); }
+  .stamp.no.high { color: var(--orange); }
   .stamp.yes.wow { color: #BF5AF2; }
   .stamp.no.known { color: var(--label2); }
   .sw-hint { display: flex; justify-content: space-between; gap: 10px; font-size: 13px; font-weight: 700; color: var(--label3); margin: 14px 10px 0; }
@@ -834,7 +836,16 @@
       add({ id: id, type: "quiz", q: q[0], o: order.map(k => q[1][k]), a: order.indexOf(q[2]), x: q[3] });
     });
     (src.tf || []).forEach((t, i) => add({ id: cat.key + ":t" + i, type: "tf", s: t[0], a: !!t[1], x: t[2] }));
-    (src.hl || []).forEach((h, i) => add({ id: cat.key + ":h" + i, type: "hl", ref: h[0], p: h[1], a: h[2] ? 1 : 0, x: h[3], l: h[4] || ["kleiner", "größer"] }));
+    (src.hl || []).forEach((h, i) => {
+      // Bei etwa der Hälfte der Vergleiche die Seiten tauschen, damit „rechts“ nicht immer „größer“ bedeutet
+      const id = cat.key + ":h" + i;
+      let hh = 0;
+      for (let c = 0; c < id.length; c++) hh = (Math.imul(hh, 31) + id.charCodeAt(c)) >>> 0;
+      const swap = ((hh >>> 3) & 1) === 1;
+      const l = (h[4] || ["kleiner", "größer"]).slice();
+      const a = h[2] ? 1 : 0;
+      add({ id: id, type: "hl", ref: h[0], p: h[1], a: swap ? 1 - a : a, x: h[3], l: swap ? [l[1], l[0]] : l, swap: swap });
+    });
     b.all = [].concat(b.card, b.wissen, b.fact, b.quiz, b.tf, b.hl);
     BY_CAT[cat.key] = b;
   });
@@ -1433,7 +1444,7 @@
     ensureDeck();
     const p = currentProfile();
     $("#homeEyebrow").textContent = fmtLong.format(new Date());
-    $("#homeTitle").textContent = greeting() + ", " + p.name;
+    $("#homeTitle").innerHTML = '<span class="greet">' + greeting() + ',</span>' + esc(p.name);
     $("#homeAvatar").innerHTML = avatarHTML(p, 40);
     renderStreakPill();
 
@@ -1786,8 +1797,9 @@
       body = '<p class="sw-text">' + esc(it.s) + "</p>";
       hint = "<span>← Falsch</span><span>Richtig →</span>";
     } else {
-      stamps = '<span class="stamp no low">' + esc(it.l[0]) + '</span><span class="stamp yes high">' + esc(it.l[1]) + "</span>";
-      kicker = "⚖️ " + esc(it.l[1].charAt(0).toUpperCase() + it.l[1].slice(1)) + " oder " + esc(it.l[0]) + "?";
+      const hi = it.swap ? it.l[0] : it.l[1], lo = it.swap ? it.l[1] : it.l[0];
+      stamps = '<span class="stamp no ' + (it.swap ? "high" : "low") + '">' + esc(it.l[0]) + '</span><span class="stamp yes ' + (it.swap ? "low" : "high") + '">' + esc(it.l[1]) + "</span>";
+      kicker = "⚖️ " + esc(hi.charAt(0).toUpperCase() + hi.slice(1)) + " oder " + esc(lo) + "?";
       body = '<div class="hl-ref"><small>Zum Vergleich</small>' + esc(it.ref) + '</div><p class="sw-text">' + esc(it.p) + "</p>";
       hint = "<span>← " + esc(it.l[0]) + "</span><span>" + esc(it.l[1]) + " →</span>";
     }
@@ -1823,7 +1835,7 @@
     if (it.type === "fact") return '<button class="btn-choice known" data-action="pl-swipe" data-v="0">🤓 Kannte ich</button><button class="btn-choice wow" data-action="pl-swipe" data-v="1">🤯 Neu für mich</button>';
     if (st.decided !== null) return next(true);
     if (it.type === "tf") return '<button class="btn-choice no" data-action="pl-swipe" data-v="0">' + I.cross + ' Falsch</button><button class="btn-choice yes" data-action="pl-swipe" data-v="1">' + I.check + " Richtig</button>";
-    return '<button class="btn-choice low" data-action="pl-swipe" data-v="0">' + I.down + " " + esc(it.l[0]) + '</button><button class="btn-choice high" data-action="pl-swipe" data-v="1">' + I.up + " " + esc(it.l[1]) + "</button>";
+    return '<button class="btn-choice ' + (it.swap ? "high" : "low") + '" data-action="pl-swipe" data-v="0">' + (it.swap ? I.up : I.down) + " " + esc(it.l[0]) + '</button><button class="btn-choice ' + (it.swap ? "low" : "high") + '" data-action="pl-swipe" data-v="1">' + (it.swap ? I.down : I.up) + " " + esc(it.l[1]) + "</button>";
   }
   function deckNextLabel() {
     const d = state.daily;
