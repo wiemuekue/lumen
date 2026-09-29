@@ -4,17 +4,12 @@ import pathlib, re, subprocess, sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SRC = ROOT / "src"
-ORDER = ["schildkroeten", "mythologie", "voegel", "pflanzen", "umwelt", "kosmos", "erde", "suedafrika",
-         "disney", "maerchen", "tauchen", "meer", "stoa", "gehirn", "pilze", "mittelalter"]
 
 def main():
     parts = [(SRC / "data" / "_legacy.js").read_text(encoding="utf-8")]
-    for key in ORDER:
-        f = SRC / "data" / f"{key}.js"
-        if f.exists():
+    for f in sorted((SRC / "data").glob("*.js")):
+        if not f.name.startswith("_"):
             parts.append(f.read_text(encoding="utf-8"))
-        else:
-            print(f"Hinweis: {f.name} fehlt noch", file=sys.stderr)
     data = "\n".join(p.strip() for p in parts)
     data = "\n".join("  " + line if line else "" for line in data.splitlines())
     app = (SRC / "app.html").read_text(encoding="utf-8")

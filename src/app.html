@@ -372,6 +372,25 @@
   .theme-grid.recent .theme-tile { min-height: 124px; padding: 12px; border-radius: 22px; }
   .theme-grid.recent .cat-icon { width: 40px; height: 40px; border-radius: 12px; font-size: 21px; }
   .theme-grid.recent .tt-name { font-size: 13.5px; }
+  .group-list { display: flex; flex-direction: column; gap: 12px; }
+  .group-card { width: 100%; border-radius: 24px; padding: 14px; display: flex; align-items: center; gap: 14px; text-align: left; position: relative; overflow: hidden; transition: transform 0.15s ease; }
+  .group-card:active { transform: scale(0.98); }
+  .group-card::before { content: ""; position: absolute; inset: 0; background: radial-gradient(90% 120% at 0% 0%, rgba(var(--c-rgb), 0.22), transparent 65%); pointer-events: none; }
+  .group-card > * { position: relative; }
+  .g-ico { flex: none; width: 58px; height: 58px; border-radius: 17px; display: grid; place-items: center; font-size: 30px; background: linear-gradient(145deg, rgba(var(--c-rgb), 0.95), rgba(var(--c-rgb), 0.62)); box-shadow: 0 8px 18px rgba(var(--c-rgb), 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.4); }
+  .g-ico.plain { background: var(--fill); box-shadow: none; }
+  .g-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+  .g-text b { font-size: 17px; font-weight: 700; letter-spacing: -0.01em; }
+  .g-sub { font-size: 13px; color: var(--label2); font-weight: 500; }
+  .g-emojis { font-size: 15px; letter-spacing: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; opacity: 0.95; }
+  .g-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+  .g-actions button { height: 48px; font-size: 15px; border-radius: 16px; padding: 0 8px; }
+  .g-actions svg { width: 15px; height: 15px; flex: none; }
+  .story + .story { margin-top: 0.8em; }
+  #themeContent.nav-in { animation: navIn 0.32s var(--ease-out); }
+  #themeContent.nav-back { animation: navBack 0.32s var(--ease-out); }
+  @keyframes navIn { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: none; } }
+  @keyframes navBack { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: none; } }
   .new-tag { display: inline-block; vertical-align: 1px; margin-left: 4px; font-size: 9.5px; font-weight: 800; letter-spacing: 0.06em; padding: 2px 5px; border-radius: 5px; color: #fff; background: var(--c); }
 
   .back-btn { display: inline-flex; align-items: center; gap: 2px; height: 38px; padding: 0 12px 0 4px; margin: 6px 0 0 -4px; border-radius: 19px; color: var(--tint); font-size: 17px; font-weight: 500; transition: opacity 0.15s ease; }
@@ -770,7 +789,7 @@
   /* =====================================================================
      THEMEN
      ===================================================================== */
-  const CATEGORIES = [
+  const ALL_CATEGORIES = [
     { key: "schildkroeten", name: "Griechische Landschildkröten", short: "Schildkröten", emoji: "🐢", color: "#C8603E", suggested: false,
       desc: "Testudo hermanni: Panzer, Winterstarre, Lebensraum, Ernährung – und die faszinierende Welt der Schildkröten." },
     { key: "mythologie", name: "Griechische Mythologie", short: "Mythologie", emoji: "⚡", color: "#7C3AED", suggested: false,
@@ -785,7 +804,7 @@
       desc: "Sterne, Planeten, Schwarze Löcher, Galaxien und die Geschichte des Universums." },
     { key: "erde", name: "Erde allgemein", short: "Erde", emoji: "🌋", color: "#DC2626", suggested: false,
       desc: "Plattentektonik, Vulkane, Ozeane, Atmosphäre, Klima und das Innere unseres Planeten." },
-    { key: "suedafrika", name: "Flora & Fauna in Südafrika", short: "Südafrika", emoji: "🦁", color: "#D97706", suggested: false,
+    { key: "suedafrika", name: "Flora & Fauna in Südafrika", short: "Südafrikas Natur", emoji: "🦁", color: "#D97706", suggested: false,
       desc: "Fynbos, Big Five, Karoo, Küsten und Wüsten – die Naturwunder am Kap." },
     { key: "disney", name: "Disney", short: "Disney", emoji: "🏰", color: "#C026D3", suggested: false,
       desc: "Von Micky Maus bis Encanto: Filme, Figuren, Musik, Parks und Geschichte des Studios." },
@@ -802,19 +821,101 @@
     { key: "pilze", name: "Pilznetzwerke (Myzel)", short: "Myzel", emoji: "🍄", color: "#A16207", suggested: true,
       desc: "Mykorrhiza, das Wood Wide Web, Speise- und Giftpilze und der vielleicht größte Organismus der Erde." },
     { key: "mittelalter", name: "Mittelalterliche Alltagsgeschichte", short: "Mittelalter", emoji: "⚔️", color: "#9F1239", suggested: true,
-      desc: "Essen, Arbeit, Städte, Burgen, Klöster, Feste und Mythen über das Leben im Mittelalter." }
+      desc: "Essen, Arbeit, Städte, Burgen, Klöster, Feste und Mythen über das Leben im Mittelalter." },
+    { key: "tiere", name: "Tiere allgemein", short: "Tierwelt", emoji: "🐘", color: "#B45309", suggested: true,
+      desc: "Säugetiere, Reptilien, Amphibien, Fische und Wirbellose: Rekorde, Sinne, Tarnung, Wanderungen und erstaunliche Anpassungen." },
+    { key: "dinos", name: "Dinosaurier & Urzeit", short: "Urzeit", emoji: "🦖", color: "#4D7C0F", suggested: true,
+      desc: "Saurier, Flugsaurier und Meeresreptilien, Massenaussterben, Fossilien und die Welt der frühen Säugetiere." },
+    { key: "insekten", name: "Insekten & Krabbeltiere", short: "Insekten", emoji: "🐝", color: "#CA8A04", suggested: true,
+      desc: "Bienen, Ameisenstaaten, Käfer, Schmetterlinge, Spinnen und die Wunder der Metamorphose." },
+    { key: "haustiere", name: "Haustiere – Hund & Katze", short: "Hund & Katze", emoji: "🐾", color: "#EA580C", suggested: true,
+      desc: "Wie Hunde und Katzen denken, riechen, hören und kommunizieren – und wie sie zu unseren Mitbewohnern wurden." },
+    { key: "regenwald", name: "Regenwald & Dschungel", short: "Regenwald", emoji: "🌳", color: "#15803D", suggested: true,
+      desc: "Die Stockwerke des Waldes, Amazonas, Kongo und Borneo, Artenvielfalt, Epiphyten und Bedrohungen." },
+    { key: "nationalparks", name: "Nationalparks der Welt", short: "Nationalparks", emoji: "🏔️", color: "#0F766E", suggested: true,
+      desc: "Yellowstone, Serengeti, Galápagos, Torres del Paine, Bayerischer Wald und die Idee des Naturschutzgebiets." },
+    { key: "wetter", name: "Wetter & Klima", short: "Wetter", emoji: "🌦️", color: "#0284C7", suggested: true,
+      desc: "Wolken, Wind, Gewitter, Hochs und Tiefs, Wetterrekorde und wie Klima und Wetter zusammenhängen." },
+    { key: "koerper", name: "Menschlicher Körper & Medizin", short: "Körper", emoji: "🫀", color: "#E11D48", suggested: true,
+      desc: "Herz, Lunge, Verdauung, Immunsystem, Knochen und Muskeln – und die Meilensteine der Medizin." },
+    { key: "psychologie", name: "Psychologie & Denkfehler", short: "Psychologie", emoji: "🤔", color: "#9333EA", suggested: true,
+      desc: "Wahrnehmung, Gedächtnis, Motivation, Gewohnheiten und die typischen Fallen, in die unser Denken tappt." },
+    { key: "kueche", name: "Küchenwissenschaft & Ernährung", short: "Küche", emoji: "🍳", color: "#F59E0B", suggested: true,
+      desc: "Warum Brot aufgeht, Steaks bräunen und Zwiebeln tränen – dazu Nährstoffe, Vitamine und Geschmack." },
+    { key: "aegypten", name: "Altes Ägypten", short: "Ägypten", emoji: "🏺", color: "#B7791F", suggested: true,
+      desc: "Pharaonen, Pyramiden, Hieroglyphen, Mumien, Götter und der Alltag am Nil." },
+    { key: "rom", name: "Römisches Reich", short: "Rom", emoji: "🏟️", color: "#B91C1C", suggested: true,
+      desc: "Von der Gründungssage bis zum Untergang: Legionen, Kaiser, Alltag in Rom und die Römer in Germanien." },
+    { key: "entdecker", name: "Entdecker & Seefahrt", short: "Entdecker", emoji: "🧭", color: "#1D4ED8", suggested: true,
+      desc: "Wikinger, Zheng He, Kolumbus, Magellan, Cook, Humboldt und die Wettläufe zu den Polen." },
+    { key: "erfindungen", name: "Erfindungen & Erfinder", short: "Erfindungen", emoji: "⚙️", color: "#0369A1", suggested: true,
+      desc: "Vom Rad über Buchdruck und Dampfmaschine bis zu Glühbirne, Penicillin und Smartphone." },
+    { key: "kunst", name: "Kunst & berühmte Gemälde", short: "Kunst", emoji: "🎨", color: "#BE185D", suggested: true,
+      desc: "Höhlenmalerei, Renaissance, Impressionismus, Moderne – berühmte Werke und die Geschichten dahinter." },
+    { key: "musik", name: "Klassische Musik & Instrumente", short: "Klassik", emoji: "🎻", color: "#7E22CE", suggested: true,
+      desc: "Bach, Mozart, Beethoven und Co., Epochen der Musik, das Orchester und wie Instrumente klingen." },
+    { key: "bauwerke", name: "Bauwerke der Welt", short: "Bauwerke", emoji: "🏗️", color: "#78716C", suggested: true,
+      desc: "Pyramiden, Kathedralen, Brücken, Wolkenkratzer und Weltwunder – und die Technik dahinter." },
+    { key: "sprache", name: "Sprache & Wortherkunft", short: "Sprache", emoji: "🔤", color: "#4338CA", suggested: true,
+      desc: "Woher unsere Wörter und Redewendungen kommen, wie Sprachen verwandt sind und sich verändern." },
+    { key: "nordisch", name: "Nordische Mythologie", short: "Nordisch", emoji: "🪓", color: "#334155", suggested: true,
+      desc: "Odin, Thor, Loki und Freya, die neun Welten um Yggdrasil und das Weltende Ragnarök." },
+    { key: "physik", name: "Physik im Alltag", short: "Physik", emoji: "⚛️", color: "#1E40AF", suggested: true,
+      desc: "Licht, Schall, Wärme, Kräfte und Magnetismus – und warum der Himmel blau ist." },
+    { key: "chemie", name: "Chemie & Elemente", short: "Chemie", emoji: "🧪", color: "#16A34A", suggested: true,
+      desc: "Atome, Periodensystem, Reaktionen und die Chemie in Küche, Körper und Alltag." },
+    { key: "raumfahrt", name: "Raumfahrt", short: "Raumfahrt", emoji: "🚀", color: "#4F46E5", suggested: true,
+      desc: "Sputnik, Apollo, ISS, Marsrover und Raumsonden – wie Menschen ins All aufbrachen." },
+    { key: "computer", name: "Computer & Internet", short: "Computer", emoji: "💻", color: "#0E7490", suggested: true,
+      desc: "Wie Computer rechnen, wie das Internet funktioniert und wer die Pioniere der digitalen Welt waren." },
+    { key: "mathe", name: "Zahlen & Mathe-Kuriositäten", short: "Mathe", emoji: "🔢", color: "#C026D3", suggested: true,
+      desc: "Pi, Primzahlen, Unendlichkeit, Wahrscheinlichkeit und verblüffende Paradoxien." },
+    { key: "griechenland", name: "Griechenland heute", short: "Griechenland", emoji: "🇬🇷", color: "#0369A1", suggested: true,
+      desc: "Inseln und Landschaften, Küche, Sprache, Feste und der Alltag im heutigen Griechenland." },
+    { key: "italien", name: "Italien heute", short: "Italien", emoji: "🇮🇹", color: "#2F855A", suggested: true,
+      desc: "Regionen, Küche, Kaffee, Kultur, Sprache und Lebensart zwischen Alpen und Sizilien." },
+    { key: "sa", name: "Südafrika allgemein", short: "Südafrika", emoji: "🇿🇦", color: "#EAB308", suggested: true,
+      desc: "Geschichte, Apartheid und Mandela, elf Amtssprachen, Städte, Küche, Sport und Kultur der Regenbogennation." },
+    { key: "laender", name: "Länder & Hauptstädte", short: "Länder", emoji: "🌍", color: "#0D9488", suggested: true,
+      desc: "Hauptstädte, Grenzen, Geografie-Rekorde und kuriose Fakten über die Länder der Welt." },
+    { key: "film", name: "Filmklassiker & Kino", short: "Film", emoji: "🎬", color: "#DC2626", suggested: true,
+      desc: "Von den Brüdern Lumière bis zum Blockbuster: Filmgeschichte, Tricktechnik und berühmte Szenen." },
+    { key: "olympia", name: "Olympia & Sportgeschichte", short: "Sport", emoji: "🏅", color: "#D97706", suggested: true,
+      desc: "Antike Spiele, moderne Olympiaden, Rekorde, Legenden und die Geschichte großer Sportarten." },
+    { key: "kaffee", name: "Kaffee, Tee & Kakao", short: "Kaffee & Tee", emoji: "☕", color: "#92400E", suggested: true,
+      desc: "Herkunft, Anbau, Verarbeitung, Kultur und Wirkung der drei großen Genussgetränke." }
+  ];
+
+  const GROUPS = [
+    { key: "natur", name: "Tiere & Natur", emoji: "🐾", color: "#16A34A", desc: "Tiere aller Art, Pflanzen, Pilze, Meere und wilde Landschaften.",
+      keys: ["tiere", "schildkroeten", "voegel", "insekten", "haustiere", "dinos", "meer", "pflanzen", "pilze", "regenwald", "suedafrika", "nationalparks"] },
+    { key: "erde", name: "Erde, Klima & Weltall", emoji: "🌍", color: "#2563EB", desc: "Unser Planet, sein Wetter, seine Zukunft – und alles, was dahinter liegt.",
+      keys: ["erde", "wetter", "umwelt", "kosmos"] },
+    { key: "mensch", name: "Mensch & Körper", emoji: "🫀", color: "#E11D48", desc: "Wie unser Körper funktioniert, wie wir denken, fühlen und uns ernähren.",
+      keys: ["koerper", "gehirn", "psychologie", "kueche"] },
+    { key: "kultur", name: "Geschichte & Kultur", emoji: "🏺", color: "#B45309", desc: "Alte Reiche, Mythen, Märchen, Kunst, Musik, Sprache und große Entdeckungen.",
+      keys: ["aegypten", "rom", "mittelalter", "mythologie", "nordisch", "maerchen", "stoa", "entdecker", "erfindungen", "kunst", "musik", "bauwerke", "sprache"] },
+    { key: "technik", name: "Wissenschaft & Technik", emoji: "⚛️", color: "#4F46E5", desc: "Physik, Chemie, Mathe, Computer und der Aufbruch ins All.",
+      keys: ["physik", "chemie", "mathe", "computer", "raumfahrt"] },
+    { key: "welt", name: "Welt & Freizeit", emoji: "✈️", color: "#0891B2", desc: "Länder und Lebensart, Film, Sport, Genuss und Abenteuer unter Wasser.",
+      keys: ["griechenland", "italien", "sa", "laender", "tauchen", "disney", "film", "olympia", "kaffee"] }
   ];
 
   const CONTENT = {};
-  CATEGORIES.forEach(c => { CONTENT[c.key] = {}; });
+  ALL_CATEGORIES.forEach(c => { CONTENT[c.key] = {}; });
 
   /*@@DATA@@*/
+
+  // Nur Themen mit Inhalten anzeigen
+  const CATEGORIES = ALL_CATEGORIES.filter(c => Object.keys(CONTENT[c.key]).length || LEGACY_CARDS.some(l => l.category === c.name));
 
   /* =====================================================================
      DATEN AUFBEREITEN
      ===================================================================== */
   const CAT_BY_NAME = Object.fromEntries(CATEGORIES.map(c => [c.name, c]));
   const CAT_BY_KEY = Object.fromEntries(CATEGORIES.map(c => [c.key, c]));
+  GROUPS.forEach(g => { g.keys = g.keys.filter(k => CAT_BY_KEY[k]); g.keys.forEach(k => { CAT_BY_KEY[k].group = g.key; }); });
+  const GROUP_BY_KEY = Object.fromEntries(GROUPS.map(g => [g.key, g]));
   const ITEMS = [];
   const ITEM_BY_ID = {};
   const BY_CAT = {};
@@ -871,7 +972,7 @@
     tf: { name: "Richtig oder Falsch", short: "Richtig/Falsch", icon: "✅", color: "#30D158", types: ["tf"], desc: "Nach rechts oder links wischen" },
     hl: { name: "Größer oder Kleiner", short: "Größer/Kleiner", icon: "⚖️", color: "#FF9F0A", types: ["hl"], desc: "Schätzen, vergleichen, wischen" },
     fact: { name: "Fun Facts", short: "Fun Facts", icon: "💡", color: "#FFB800", types: ["fact"], desc: "Überraschendes zum Staunen" },
-    wissen: { name: "Wissenswertes", short: "Wissen", icon: "📖", color: "#BF5AF2", types: ["wissen", "card"], desc: "Kurz erklärt und gut gemerkt" },
+    wissen: { name: "Wissenswertes", short: "Wissen", icon: "📖", color: "#BF5AF2", types: ["wissen", "card"], desc: "Ausführlich erklärt, Zusammenhänge verstehen" },
     karten: { name: "Lernkarten", short: "Lernkarten", icon: "🗂️", color: "#FF375F", types: ["card"], desc: "Geschichte, Fun Fact und Quiz" },
     review: { name: "Fehler wiederholen", short: "Wiederholen", icon: "🔁", color: "#FF453A", types: ["quiz", "tf", "hl", "card"], desc: "Was beim letzten Mal nicht saß" },
     saved: { name: "Gemerkte Inhalte", short: "Gemerkt", icon: "⭐", color: "#FFB800", types: ["card", "wissen", "fact", "quiz", "tf", "hl"], desc: "Deine Favoriten" }
@@ -1022,7 +1123,7 @@
     ensureDeck();
     save();
     TTS.pick();
-    Object.assign(ui, { focusId: null, celebrate: false, blitz: null, arcQuery: "", arcFilter: "all", arcType: "all", arcLimit: 60, themeKey: null });
+    Object.assign(ui, { focusId: null, celebrate: false, blitz: null, arcQuery: "", arcFilter: "all", arcType: "all", arcLimit: 60, themeKey: null, navStack: [] });
     const si = $("#searchInput"); if (si) si.value = "";
     hideThemePage(true);
     renderAll();
@@ -1033,7 +1134,7 @@
     return '<span class="avatar" style="--s:' + size + "px;--a1:" + col[0] + ";--a2:" + col[1] + '">' + esc((p && p.avatar) || "🙂") + "</span>";
   }
 
-  const ui = { tab: "today", focusId: null, celebrate: false, blitz: null, arcQuery: "", arcFilter: "all", arcType: "all", arcLimit: 60, sheet: null, session: null, themeKey: null, edit: null };
+  const ui = { tab: "today", focusId: null, celebrate: false, blitz: null, arcQuery: "", arcFilter: "all", arcType: "all", arcLimit: 60, sheet: null, session: null, themeKey: null, navStack: [], edit: null };
 
   const isActive = cat => !!state.active[cat.key];
   const activeCats = () => CATEGORIES.filter(isActive);
@@ -1370,7 +1471,7 @@
     }
     let body = "";
     const kicker = '<div class="card-top">' + badgeHTML(cat) + '<span class="meta-tag">' + TYPE_INFO[it.type].icon + " " + TYPE_INFO[it.type].label + "</span></div>";
-    if (it.type === "wissen") body = '<h2 class="card-title">' + esc(it.t) + '</h2><div class="card-actions">' + playBtn(it) + star + '</div><p class="story">' + esc(it.x) + "</p>";
+    if (it.type === "wissen") body = '<h2 class="card-title">' + esc(it.t) + '</h2><div class="card-actions">' + playBtn(it) + star + "</div>" + paras(it.x);
     else if (it.type === "fact") body = '<div class="card-actions">' + playBtn(it) + star + '</div><div class="funfact" style="margin-top:0"><div class="ff-head">' + I.bulb + "Schon gewusst?</div><p>" + esc(it.f) + "</p></div>";
     else if (it.type === "quiz") body = '<div class="card-actions">' + playBtn(it) + star + '</div><div class="quiz bare"><p class="question big">' + esc(it.q) + '</p><div class="options">' + optionsHTML(it, { solved: true, readOnly: true }) + "</div>" + explainHTML(it, true, true) + "</div>";
     else if (it.type === "tf") body = '<div class="card-actions">' + playBtn(it) + star + '</div><p class="question big">' + esc(it.s) + '</p><span class="res-reveal">' + (it.a ? "✓ Richtig" : "✗ Falsch") + '</span><p class="res-explain">' + esc(it.x) + "</p>";
@@ -1516,6 +1617,21 @@
   /* =====================================================================
      KATEGORIEN & THEMENSEITE
      ===================================================================== */
+  const isGroupKey = key => typeof key === "string" && key.indexOf("g:") === 0;
+  function keysFor(key) {
+    if (key === "mix") return activeKeys();
+    if (key === "g:all") return CATEGORIES.map(c => c.key);
+    if (isGroupKey(key)) return GROUP_BY_KEY[key.slice(2)].keys.slice();
+    return [key];
+  }
+  function metaFor(key) {
+    if (key === "mix") return { name: "Alles im Mix", short: "Alles im Mix", emoji: "🎲", color: "#5E5CE6" };
+    if (key === "g:all") return { name: "Alle Themen A–Z", short: "Alle Themen", emoji: "🗂️", color: "#5E5CE6", desc: "Jedes Thema auf einen Blick – alphabetisch sortiert." };
+    if (isGroupKey(key)) { const g = GROUP_BY_KEY[key.slice(2)]; return { name: g.name, short: g.name, emoji: g.emoji, color: g.color, desc: g.desc }; }
+    const c = CAT_BY_KEY[key]; return { name: c.name, short: c.short, emoji: c.emoji, color: c.color, desc: c.desc };
+  }
+  const byName = (a, b) => a.name.localeCompare(b.name, "de");
+  function paras(text) { return String(text).split(/\n\s*\n/).map(t => '<p class="story">' + esc(t.trim()) + "</p>").join(""); }
   function touchRecent(key) {
     if (!state || !CAT_BY_KEY[key]) return;
     state.recent = [key].concat(state.recent.filter(k => k !== key)).slice(0, 6);
@@ -1542,6 +1658,14 @@
       '<span class="tt-sub">' + (compact ? "" : plural(tot, "Inhalt", "Inhalte") + " · ") + Math.round(s / tot * 100) + ' %</span><span class="mini-bar"><i style="width:' + Math.round(s / tot * 100) + '%"></i></span></button>' +
       (on || compact ? "" : '<button class="tt-add" style="' + catStyle(cat) + '" data-action="add-mix" data-key="' + cat.key + '" aria-label="' + esc(cat.name) + ' zum Mix hinzufügen">' + I.plus + "</button>") + "</div>";
   }
+  function groupCardHTML(g) {
+    const cats = g.keys.map(k => CAT_BY_KEY[k]);
+    const tot = totalCount(g.keys), on = cats.filter(isActive).length;
+    const seen = seenCount(g.keys);
+    return '<button class="group-card glass" style="' + catStyle(g) + '" data-action="open-theme" data-key="g:' + g.key + '"><span class="g-ico">' + g.emoji + '</span><span class="g-text"><b>' + esc(g.name) + '</b>' +
+      '<span class="g-sub">' + plural(cats.length, "Thema", "Themen") + " · " + on + " im Mix · " + Math.round(seen / Math.max(1, tot) * 100) + ' %</span><span class="g-emojis">' + cats.slice().sort(byName).map(c => c.emoji).join(" ") + "</span></span>" +
+      '<span class="chev">' + I.chevron + "</span></button>";
+  }
   function renderCategories() {
     if (!state) return;
     const act = activeCats(), rest = CATEGORIES.filter(c => !isActive(c));
@@ -1551,10 +1675,10 @@
     if (recent.length) {
       html += '<div class="section-title">Zuletzt benutzt</div><div class="theme-grid recent">' + recent.map(c => themeTileHTML(c, true)).join("") + "</div>";
     }
-    const all = CATEGORIES.slice().sort((a, b) => a.name.localeCompare(b.name, "de"));
-    html += '<div class="section-title">Alle Themen<small>A–Z · ' + act.length + " im Mix</small></div>" +
-      (rest.length ? '<p class="section-note">Mit ＋ nimmst du ein Thema in deinen täglichen Mix auf. Reinschauen geht jederzeit mit einem Tipp.</p>' : "") +
-      '<div class="theme-grid">' + all.map(c => themeTileHTML(c)).join("") + "</div>";
+    html += '<div class="section-title">Themengruppen<small>' + plural(CATEGORIES.length, "Thema", "Themen") + " · " + act.length + ' im Mix</small></div><div class="group-list">' +
+      GROUPS.filter(g => g.keys.length).map(groupCardHTML).join("") +
+      '<button class="group-card glass" data-action="open-theme" data-key="g:all"><span class="g-ico plain">🗂️</span><span class="g-text"><b>Alle Themen A–Z</b><span class="g-sub">' +
+      plural(CATEGORIES.length, "Thema", "Themen") + " alphabetisch</span></span><span class=\"chev\">" + I.chevron + "</span></button></div>";
     html += '<p class="footnote">' + fmtNum.format(ITEMS.length) + " Lerninhalte in " + CATEGORIES.length + " Themen · 6 Lernarten</p>";
     $("#catContent").innerHTML = html;
   }
@@ -1583,27 +1707,47 @@
       default: return "";
     }
   }
-  function renderTheme() {
+  function renderTheme(dir) {
     const key = ui.themeKey;
     if (!key || !state) return;
-    const isMix = key === "mix";
-    const keys = isMix ? activeKeys() : [key];
+    const isGroup = isGroupKey(key);
+    const isMix = key === "mix" || isGroup;
+    const keys = keysFor(key);
     const cat = isMix ? null : CAT_BY_KEY[key];
+    const meta = metaFor(key);
     const c = themeCounts(keys);
     const seen = seenCount(keys);
-    const style = isMix ? catStyle({ color: "#5E5CE6" }) : catStyle(cat);
-    let html = '<button class="back-btn" data-action="theme-back">' + I.back + "Kategorien</button>";
-    html += '<div class="th-hero glass tinted' + (isMix ? " mix" : "") + '" style="' + style + '">' +
-      '<div class="th-emoji">' + (isMix ? "🎲" : cat.emoji) + "</div><h2>" + (isMix ? "Alles im Mix" : hyph(cat.name)) + "</h2>" +
-      "<p>" + esc(isMix ? "Alle Lernarten quer durch deine " + keys.length + " aktiven Themen – perfekt, wenn du dich überraschen lassen willst." : cat.desc) + "</p>" +
-      '<div class="th-stats"><span class="th-stat">' + plural(c.all, "Inhalt", "Inhalte") + '</span><span class="th-stat">' + Math.round(seen / Math.max(1, c.all) * 100) + ' % entdeckt</span><span class="th-stat">' + plural(seen, "gelernt", "gelernt") + "</span></div></div>";
+    const style = catStyle({ color: meta.color });
+    const prev = ui.navStack.length ? metaFor(ui.navStack[ui.navStack.length - 1]).short : "Kategorien";
+    let html = '<button class="back-btn" data-action="theme-back">' + I.back + esc(prev) + "</button>";
+    html += '<div class="th-hero glass tinted' + (key === "mix" ? " mix" : "") + '" style="' + style + '">' +
+      '<div class="th-emoji">' + meta.emoji + "</div><h2>" + hyph(meta.name) + "</h2>" +
+      "<p>" + esc(key === "mix" ? "Alle Lernarten quer durch deine " + keys.length + " aktiven Themen – perfekt, wenn du dich überraschen lassen willst." : meta.desc) + "</p>" +
+      '<div class="th-stats">' + (isGroup ? '<span class="th-stat">' + plural(keys.length, "Thema", "Themen") + "</span>" : "") + '<span class="th-stat">' + plural(c.all, "Inhalt", "Inhalte") + '</span><span class="th-stat">' + Math.round(seen / Math.max(1, c.all) * 100) + ' % entdeckt</span>' + (isGroup ? "" : '<span class="th-stat">' + plural(seen, "gelernt", "gelernt") + "</span>") + "</div>";
+    if (isGroup && key !== "g:all") {
+      const allOn = keys.every(k => state.active[k]);
+      html += '<div class="g-actions"><button class="btn-primary" style="' + style + '" data-action="start" data-mode="mix" data-key="' + key + '">' + I.play + "Gruppe lernen</button>" +
+        '<button class="btn-secondary" data-action="group-mix" data-key="' + key + '">' + (allOn ? "Alle aus dem Mix" : "Alle in den Mix") + "</button></div>";
+    }
+    html += "</div>";
+    if (isGroup) {
+      const cats = keys.map(k => CAT_BY_KEY[k]).sort(byName);
+      html += '<div class="section-title">Themen<small>A–Z</small></div>' +
+        (cats.some(x => !isActive(x)) ? '<p class="section-note">Mit ＋ nimmst du ein Thema in deinen täglichen Mix auf. Reinschauen geht jederzeit mit einem Tipp.</p>' : "") +
+        '<div class="theme-grid">' + cats.map(x => themeTileHTML(x)).join("") + "</div>";
+      if (key === "g:all") {
+        $("#themeContent").innerHTML = html + '<p class="footnote">' + fmtNum.format(ITEMS.length) + " Lerninhalte in " + CATEGORIES.length + " Themen</p>";
+        finishTheme(meta, dir);
+        return;
+      }
+    }
     if (!isMix) {
       const on = isActive(cat);
       html += '<div class="list glass" style="margin-top:14px"><div class="row setting-row"><span class="row-text"><span class="row-title">Im täglichen Mix</span><span class="row-sub">' +
         (on ? "Erscheint auf der Startseite und im Tagesstapel" : "Nur hier in der Themenauswahl") + "</span></span>" +
         '<label class="switch" style="--sw-on:' + cat.color + '"><input type="checkbox" data-toggle="cat" data-key="' + key + '"' + (on ? " checked" : "") + ' aria-label="Im täglichen Mix"><span class="track"></span></label></div></div>';
     }
-    html += '<div class="section-title">Wie möchtest du lernen?</div>';
+    html += '<div class="section-title">' + (isGroup ? "Die ganze Gruppe lernen" : "Wie möchtest du lernen?") + "</div>";
     html += '<button class="mode-feature glass" data-action="start" data-mode="mix" data-key="' + key + '"><span class="mode-ico" style="' + modeStyle("mix") + '">🎲</span><span class="row-text"><b>Mix aller Lernarten</b><span class="sub">Quiz, Wischen, Fakten und Wissen gemischt · ' + ROUND + " pro Runde</span></span><span class=\"chev\">" + I.chevron + "</span></button>";
     const modes = THEME_MODES.concat(c.review ? ["review"] : []).concat(c.saved ? ["saved"] : []);
     html += '<div class="list glass">' + modes.map(m => '<button class="row mode-row" data-action="start" data-mode="' + m + '" data-key="' + key + '"><span class="mode-ico" style="' + modeStyle(m) + '">' + MODES[m].icon + '</span><span class="row-text"><span class="row-title">' + esc(MODES[m].name) + '</span><span class="row-sub">' + modeSub(m, keys, c) + '</span></span><span class="chev">' + I.chevron + "</span></button>").join("") + "</div>";
@@ -1621,14 +1765,31 @@
         return '<div class="row cs-row"><span class="cs-status' + (mastered ? " ok" : "") + '">' + (mastered ? I.check : idx + 1) + '</span><span class="row-text"><span class="row-title">' + esc(card.title) + '</span><span class="row-sub">' + sub + "</span></span>" + btn + "</div>";
       }).join("") + "</div>";
     }
-    html += '<p class="footnote">' + (isMix ? "Themen für den Mix wählst du in den Kategorien." : plural(c.quiz, "Quizfrage", "Quizfragen") + " · " + plural(c.tf + c.hl, "Wisch-Karte", "Wisch-Karten") + " · " + plural(c.fact, "Fakt", "Fakten") + " · " + plural(c.wissen, "Text", "Texte")) + "</p>";
+    html += '<p class="footnote">' + (key === "mix" ? "Themen für den Mix wählst du in den Kategorien." : plural(c.quiz, "Quizfrage", "Quizfragen") + " · " + plural(c.tf + c.hl, "Wisch-Karte", "Wisch-Karten") + " · " + plural(c.fact, "Fakt", "Fakten") + " · " + plural(c.wissen, "Text", "Texte")) + "</p>";
     $("#themeContent").innerHTML = html;
-    setAccent(isMix ? "#BF5AF2" : cat.color);
-    $("#navTitle").textContent = isMix ? "Alles im Mix" : cat.short;
+    finishTheme(meta, dir);
+  }
+  function finishTheme(meta, dir) {
+    setAccent(ui.themeKey === "mix" ? "#BF5AF2" : meta.color);
+    $("#navTitle").textContent = meta.short;
+    const tc = $("#themeContent");
+    tc.classList.remove("nav-in", "nav-back");
+    if (dir && !reduceMotion) { void tc.offsetWidth; tc.classList.add(dir); }
   }
   function openThemePage(key) {
+    if (!isGroupKey(key) && key !== "mix") touchRecent(key);
+    if (ui.themeKey && ui.tab === "categories" && ui.themeKey !== key) {
+      // Innerhalb der Themenansicht weiter nach unten navigieren (Gruppe → Thema)
+      ui.navStack.push(ui.themeKey);
+      ui.themeKey = key;
+      renderTheme("nav-in");
+      $("#view-theme").scrollTop = 0;
+      updateNavbar();
+      haptic("light");
+      return;
+    }
+    ui.navStack = [];
     ui.themeKey = key;
-    if (key !== "mix") touchRecent(key);
     if (ui.tab !== "categories") {
       switchTab("categories", true);
     }
@@ -1648,6 +1809,13 @@
     if (instant) { void tv.offsetWidth; tv.classList.remove("instant"); cv.classList.remove("instant"); }
   }
   function themeBack() {
+    if (ui.navStack.length) {
+      ui.themeKey = ui.navStack.pop();
+      renderTheme("nav-back");
+      $("#view-theme").scrollTop = 0;
+      updateNavbar();
+      return;
+    }
     ui.themeKey = null;
     renderCategories();
     hideThemePage(false);
@@ -1684,13 +1852,26 @@
     if (sub) sub.textContent = on ? "Erscheint auf der Startseite und im Tagesstapel" : "Nur hier in der Themenauswahl";
     toast(on ? cat.short + " ist jetzt im Mix" : cat.short + " aus dem Mix genommen", on ? cat.emoji : "⏸️");
   }
+  function toggleGroupMix(key) {
+    const keys = keysFor(key);
+    const allOn = keys.every(k => state.active[k]);
+    if (allOn && CATEGORIES.every(c => !state.active[c.key] || keys.indexOf(c.key) !== -1)) {
+      haptic("error"); toast("Mindestens ein Thema muss im Mix bleiben", "☝️"); return;
+    }
+    keys.forEach(k => { state.active[k] = !allOn; });
+    onCategoriesChanged();
+    haptic(allOn ? "light" : "success");
+    renderCategories(); renderTheme(); updateBadge();
+    const m = metaFor(key);
+    toast(allOn ? m.name + " aus dem Mix genommen" : plural(keys.length, "Thema", "Themen") + " aus " + m.name + " im Mix", allOn ? "⏸️" : m.emoji);
+  }
   function addToMix(key, el) {
     const cat = CAT_BY_KEY[key];
     state.active[key] = true;
     onCategoriesChanged();
     haptic("success");
     const tile = el && el.closest(".tt-wrap");
-    const done = () => { renderCategories(); updateBadge(); toast(cat.short + " ist jetzt in deinem Mix · " + plural(BY_CAT[key].all.length, "Inhalt", "Inhalte"), cat.emoji); };
+    const done = () => { renderCategories(); if (ui.themeKey) renderTheme(); updateBadge(); toast(cat.short + " ist jetzt in deinem Mix · " + plural(BY_CAT[key].all.length, "Inhalt", "Inhalte"), cat.emoji); };
     if (tile && tile.animate && !reduceMotion) tile.animate([{ transform: "scale(1)" }, { transform: "scale(1.05)" }, { transform: "scale(0.6)", opacity: 0 }], { duration: 420, easing: "ease-out" }).onfinish = done;
     else done();
   }
@@ -1726,8 +1907,8 @@
     return ordered(pool).slice(0, n).map(it => it.id);
   }
   function startSession(mode, key, fixedQueue) {
-    const isMix = key === "mix";
-    const cats = isMix ? activeKeys() : [key];
+    const isMix = key === "mix" || isGroupKey(key);
+    const cats = keysFor(key);
     const n = mode === "karten" ? 5 : ROUND;
     const queue = fixedQueue || buildQueue(mode, cats, n);
     if (!queue.length) { toast(mode === "review" ? "Keine offenen Fehler – super!" : "Hier gibt es gerade nichts zu lernen", "✨"); return; }
@@ -1735,7 +1916,7 @@
     if (!isMix) touchRecent(key);
     ui.session = {
       deck: false, mode: mode, key: key, cats: cats, queue: queue, idx: 0, results: [], st: freshItemState(),
-      label: isMix ? "Alles im Mix" : cat.short, emoji: isMix ? "🎲" : cat.emoji
+      label: metaFor(key).short, emoji: metaFor(key).emoji
     };
     openPlayer();
   }
@@ -1814,7 +1995,7 @@
     }
     if (it.type === "wissen") {
       return '<article class="card glass tinted wissen-card" style="' + cs + '">' + '<div class="card-top">' + badgeHTML(cat) + '<span class="meta-tag">📖 Wissenswertes</span></div>' +
-        '<h2 class="card-title">' + esc(it.t) + '</h2><div class="card-actions">' + playBtn(it) + '</div><p class="story">' + esc(it.x) + "</p></article>";
+        '<h2 class="card-title">' + esc(it.t) + '</h2><div class="card-actions">' + playBtn(it) + "</div>" + paras(it.x) + "</article>";
     }
     let stamps, kicker, body, hint;
     if (it.type === "fact") {
@@ -2317,7 +2498,8 @@
       return '<button class="row prof-row" data-action="switch-profile" data-id="' + pr.id + '">' + avatarHTML(pr, 40) + '<span class="row-text"><span class="row-title">' + esc(pr.name) + '</span><span class="row-sub">🔥 ' + plural(s2.streak || 0, "Tag", "Tage") + " · " + plural(Object.keys(s2.seen || {}).length, "Inhalt", "Inhalte") + " gelernt</span></span>" +
         (cur ? '<span class="check">' + I.check + "</span>" : '<span class="chev">' + I.chevron + "</span>") + "</button>";
     }).join("") + '<button class="row prof-row" data-action="new-profile"><span class="add-ico">' + I.plus + '</span><span class="row-text"><span class="row-title" style="color:var(--tint)">Neues Profil anlegen</span><span class="row-sub">Für Familie, Freunde oder eine zweite Lernreise</span></span></button>';
-    const catRings = CATEGORIES.map(cat => {
+    const ringCats = CATEGORIES.filter(cat => isActive(cat) || BY_CAT[cat.key].all.some(it => state.seen[it.id]));
+    const catRings = ringCats.map(cat => {
       const all = BY_CAT[cat.key].all;
       const s2 = all.filter(it => state.seen[it.id]).length;
       return '<button class="cr" data-action="open-theme" data-key="' + cat.key + '"><span class="ring-wrap">' + ringSVG(66, 7, [{ pct: s2 / all.length, color: cat.color }]) +
@@ -2446,7 +2628,7 @@
     const prev = ui.tab;
     ui.tab = name;
     if (prev === "categories" && ui.themeKey) { hideThemePage(true); $("#view-categories").classList.remove("active"); }
-    if (!keepTheme && name === "categories") ui.themeKey = null;
+    if (!keepTheme && name === "categories") { ui.themeKey = null; ui.navStack = []; }
     renderTab(name);
     TABS.forEach(t => { const v = $("#view-" + t); v.classList.toggle("active", t === name && !(t === "categories" && ui.themeKey)); v.classList.remove("behind"); });
     if (name === "categories" && ui.themeKey) { $("#view-categories").classList.add("behind"); $("#view-theme").classList.add("active"); }
@@ -2589,6 +2771,7 @@
       case "open-theme": closeSheet(); openThemePage(el.dataset.key); break;
       case "theme-back": themeBack(); break;
       case "add-mix": addToMix(el.dataset.key, el); break;
+      case "group-mix": toggleGroupMix(el.dataset.key); break;
       case "blitz-answer": onBlitzAnswer(el); break;
       case "blitz-next": ui.blitz = null; { const tmp = document.createElement("div"); tmp.innerHTML = blitzHTML(); $("#blitzCard").replaceWith(tmp.firstChild); $("#blitzCard").animate && !reduceMotion && $("#blitzCard").animate([{ opacity: 0, transform: "translateY(8px)" }, { opacity: 1, transform: "none" }], { duration: 350, easing: "ease-out" }); } break;
       case "speak": { const it = ITEM_BY_ID[el.dataset.id]; if (it) TTS.toggle(it.id, speakTextOf(it)); } break;
