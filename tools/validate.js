@@ -14,7 +14,7 @@ const problems = [];
 const grouped = GROUPS.flatMap(g => g.keys);
 ALL_CATEGORIES.forEach(c => { const n = grouped.filter(k => k === c.key).length; if (n !== 1) problems.push(`Gruppe: ${c.key} ist ${n}× zugeordnet`); });
 grouped.forEach(k => { if (!ALL_CATEGORIES.some(c => c.key === k)) problems.push(`Gruppe: unbekanntes Thema ${k}`); });
-const WMIN = Number(process.env.WMIN || 0);
+const WMIN = Number(process.env.WMIN || 70);
 const seenText = new Map();
 const ids = new Set();
 const MIN = Number(process.env.MIN || 150);
