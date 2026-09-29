@@ -37,7 +37,7 @@ for (const cat of CATEGORIES) {
   w.forEach((x, i) => { const at = `${cat.key}:w${i}`; if (!Array.isArray(x) || x.length !== 2) problems.push(`Aufbau ${at}`); str(x[0], at); str(x[1], at); dup(x[1], at); });
   f.forEach((x, i) => { const at = `${cat.key}:f${i}`; str(x, at); dup(x, at); });
   qz.forEach((x, i) => { const at = `${cat.key}:q${i}`; if (!Array.isArray(x) || x.length !== 4) problems.push(`Aufbau ${at}`); str(x[0], at); str(x[3], at);
-    if (!Array.isArray(x[1]) || x[1].length < 3 || x[1].length > 4) problems.push(`Optionen ${at}`); else x[1].forEach(o => str(o, at));
+    if (!Array.isArray(x[1]) || x[1].length < 3 || x[1].length > 4) problems.push(`Optionen ${at}`); else x[1].forEach(o => { if (typeof o !== "string" || !o.trim()) problems.push(`Option leer: ${at}`); else if (/"/.test(o)) problems.push(`Gerades Anführungszeichen: ${at}`); });
     if (!(x[2] >= 0 && x[2] < (x[1] || []).length)) problems.push(`Index ${at}`); dup(x[0], at); });
   tf.forEach((x, i) => { const at = `${cat.key}:t${i}`; if (!Array.isArray(x) || x.length !== 3 || typeof x[1] !== "boolean") problems.push(`Aufbau ${at}`); str(x[0], at); str(x[2], at); dup(x[0], at); });
   hl.forEach((x, i) => { const at = `${cat.key}:h${i}`; if (!Array.isArray(x) || x.length < 4 || x.length > 5 || (x[2] !== 0 && x[2] !== 1)) problems.push(`Aufbau ${at}`); str(x[0], at); str(x[1], at); str(x[3], at);
