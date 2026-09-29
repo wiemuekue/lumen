@@ -1,0 +1,2579 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Lumen">
+<meta name="application-name" content="Lumen">
+<meta name="format-detection" content="telephone=no">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#EEF0F8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#07080F" media="(prefers-color-scheme: dark)">
+<title>Lumen</title>
+<style>
+  :root {
+    --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-rounded: ui-rounded, "SF Pro Rounded", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+
+    --bg: #EEF0F8;
+    --bg-grad: linear-gradient(160deg, #F5F2FC 0%, #EAF0FA 48%, #F7EFE8 100%);
+    --blob1: rgba(124, 108, 255, 0.36);
+    --blob2: rgba(255, 168, 88, 0.30);
+    --blob3: rgba(52, 199, 170, 0.24);
+    --accent-op: 0.30;
+
+    --glass: rgba(255, 255, 255, 0.55);
+    --glass-strong: rgba(255, 255, 255, 0.74);
+    --glass-soft: rgba(255, 255, 255, 0.42);
+    --glass-border: rgba(255, 255, 255, 0.25);
+    --hl: inset 0 1px 0 rgba(255, 255, 255, 0.7), inset 0 0 0 0.5px rgba(255, 255, 255, 0.35);
+    --shadow: 0 14px 40px rgba(40, 44, 90, 0.10), 0 2px 8px rgba(40, 44, 90, 0.05);
+    --shadow-lg: 0 24px 60px rgba(40, 44, 90, 0.16), 0 4px 14px rgba(40, 44, 90, 0.06);
+
+    --bar: rgba(244, 245, 251, 0.70);
+    --tab-bg: rgba(255, 255, 255, 0.58);
+    --tab-ind: rgba(118, 118, 128, 0.14);
+    --sheet-bg: rgba(246, 247, 252, 0.86);
+    --alert-bg: rgba(242, 242, 247, 0.84);
+
+    --label: #0B0B12;
+    --label2: rgba(60, 60, 67, 0.68);
+    --label3: rgba(60, 60, 67, 0.36);
+    --sep: rgba(60, 60, 67, 0.14);
+    --fill: rgba(118, 118, 128, 0.12);
+    --fill2: rgba(118, 118, 128, 0.20);
+    --switch-off: rgba(120, 120, 128, 0.20);
+
+    --tint: #5E5CE6;
+    --tint-rgb: 94, 92, 230;
+    --green: #34C759;
+    --green-rgb: 52, 199, 89;
+    --red: #FF3B30;
+    --red-rgb: 255, 59, 48;
+    --orange: #FF9500;
+
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-sheet: cubic-bezier(0.32, 0.72, 0, 1);
+    --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #07080F;
+      --bg-grad: linear-gradient(160deg, #0B0C18 0%, #07080F 52%, #100B14 100%);
+      --blob1: rgba(94, 92, 230, 0.34);
+      --blob2: rgba(255, 120, 60, 0.18);
+      --blob3: rgba(20, 170, 160, 0.20);
+      --accent-op: 0.32;
+
+      --glass: rgba(30, 32, 46, 0.52);
+      --glass-strong: rgba(38, 40, 56, 0.80);
+      --glass-soft: rgba(255, 255, 255, 0.06);
+      --glass-border: rgba(255, 255, 255, 0.25);
+      --hl: inset 0 1px 0 rgba(255, 255, 255, 0.16), inset 0 0 0 0.5px rgba(255, 255, 255, 0.06);
+      --shadow: 0 18px 48px rgba(0, 0, 0, 0.45), 0 2px 8px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 28px 70px rgba(0, 0, 0, 0.55), 0 4px 14px rgba(0, 0, 0, 0.35);
+
+      --bar: rgba(12, 13, 22, 0.62);
+      --tab-bg: rgba(30, 32, 46, 0.64);
+      --tab-ind: rgba(255, 255, 255, 0.12);
+      --sheet-bg: rgba(22, 23, 34, 0.88);
+      --alert-bg: rgba(40, 40, 52, 0.86);
+
+      --label: #FFFFFF;
+      --label2: rgba(235, 235, 245, 0.64);
+      --label3: rgba(235, 235, 245, 0.32);
+      --sep: rgba(255, 255, 255, 0.10);
+      --fill: rgba(118, 118, 128, 0.24);
+      --fill2: rgba(118, 118, 128, 0.36);
+      --switch-off: rgba(120, 120, 128, 0.34);
+
+      --tint: #7D7AFF;
+      --tint-rgb: 125, 122, 255;
+      --green: #30D158;
+      --green-rgb: 48, 209, 88;
+      --red: #FF453A;
+      --red-rgb: 255, 69, 58;
+      --orange: #FF9F0A;
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  [hidden] { display: none !important; }
+  html, body { height: 100%; overflow: hidden; overscroll-behavior: none; background: var(--bg); }
+  body {
+    font-family: var(--font);
+    color: var(--label);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    touch-action: manipulation;
+  }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; -webkit-appearance: none; appearance: none; touch-action: manipulation; text-align: inherit; }
+  button:focus-visible, input:focus-visible, label:focus-within { outline: 2px solid var(--tint); outline-offset: 2px; }
+  button:disabled { cursor: default; }
+  svg { display: block; }
+
+  .glass {
+    background: var(--glass);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    backdrop-filter: blur(28px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow), var(--hl);
+  }
+  .tinted { --ink: var(--c-lo); }
+  @media (prefers-color-scheme: dark) { .tinted { --ink: var(--c-hi); } }
+
+  /* ---------- Background ---------- */
+  #bg { position: fixed; inset: 0; z-index: 0; overflow: hidden; background: var(--bg-grad); pointer-events: none; }
+  .blob { position: absolute; border-radius: 50%; will-change: transform; }
+  .b1 { width: 80vmax; height: 80vmax; left: -30vmax; top: -34vmax; background: radial-gradient(closest-side, var(--blob1), transparent); animation: drift1 28s ease-in-out infinite alternate; }
+  .b2 { width: 70vmax; height: 70vmax; right: -30vmax; bottom: -26vmax; background: radial-gradient(closest-side, var(--blob2), transparent); animation: drift2 32s ease-in-out infinite alternate; }
+  .b3 { width: 55vmax; height: 55vmax; left: -18vmax; bottom: 4vh; background: radial-gradient(closest-side, var(--blob3), transparent); animation: drift3 36s ease-in-out infinite alternate; }
+  .b4 { width: 70vmax; height: 70vmax; right: -28vmax; top: 6vh; color: var(--tint); background: radial-gradient(closest-side, currentColor, transparent); opacity: var(--accent-op); transition: color 1.2s ease; animation: drift2 40s ease-in-out infinite alternate-reverse; }
+  @keyframes drift1 { to { transform: translate(12vmax, 10vmax) scale(1.08); } }
+  @keyframes drift2 { to { transform: translate(-10vmax, -8vmax) scale(1.12); } }
+  @keyframes drift3 { to { transform: translate(14vmax, -12vmax) scale(0.92); } }
+
+  /* ---------- App shell ---------- */
+  #app { position: fixed; inset: 0; z-index: 1; transform-origin: 50% 100%; transition: transform 0.5s var(--ease-sheet), border-radius 0.5s var(--ease-sheet), filter 0.5s; }
+  body.sheet-open #app { transform: scale(0.94) translateY(6px); border-radius: 22px; overflow: hidden; filter: brightness(0.86); }
+
+  .view {
+    position: absolute; inset: 0;
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: calc(env(safe-area-inset-bottom) + 60px);
+    opacity: 0; visibility: hidden;
+    transform: translateY(12px) scale(0.985);
+    transition: opacity 0.3s ease, transform 0.45s var(--ease-out), visibility 0s linear 0.45s;
+  }
+  .view.active { opacity: 1; visibility: visible; transform: none; transition: opacity 0.3s ease, transform 0.45s var(--ease-out), visibility 0s; }
+  .view-inner { max-width: 680px; margin: 0 auto; padding: 8px 16px 64px; }
+
+  #navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 20; height: calc(env(safe-area-inset-top) + 44px); padding-top: env(safe-area-inset-top); display: flex; align-items: center; justify-content: center; pointer-events: none; }
+  #navbar::before { content: ""; position: absolute; inset: 0; background: var(--bar); -webkit-backdrop-filter: blur(28px) saturate(180%); backdrop-filter: blur(28px) saturate(180%); border-bottom: 0.5px solid var(--sep); opacity: 0; transition: opacity 0.25s ease; }
+  #navbar.scrolled::before { opacity: 1; }
+  #navbar .nt { position: relative; font-size: 17px; font-weight: 600; letter-spacing: -0.01em; opacity: 0; transform: translateY(8px); transition: opacity 0.25s ease, transform 0.35s var(--ease-out); }
+  #navbar.titled .nt { opacity: 1; transform: none; }
+
+  .lh { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; padding: 14px 4px 16px; }
+  .eyebrow { font-size: 13px; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; color: var(--label2); margin-bottom: 2px; }
+  .lh h1 { font-family: var(--font-display); font-size: 34px; line-height: 41px; font-weight: 800; letter-spacing: -0.025em; }
+  .section-title { font-size: 13px; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; color: var(--label2); padding: 26px 6px 8px; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .section-title small { text-transform: none; letter-spacing: 0; font-weight: 500; font-size: 13px; }
+  .section-note { font-size: 14px; line-height: 1.4; color: var(--label2); padding: 0 6px 12px; margin-top: -2px; }
+  .footnote { font-size: 12.5px; color: var(--label3); text-align: center; padding: 22px 12px 0; line-height: 1.5; }
+
+  /* ---------- Tab bar ---------- */
+  #tabbar {
+    position: fixed; z-index: 30; left: 50%;
+    bottom: max(10px, calc(env(safe-area-inset-bottom) - 10px));
+    transform: translateX(-50%);
+    width: min(calc(100% - 28px), 440px); height: 64px;
+    border-radius: 32px; padding: 5px;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    background: var(--tab-bg);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    backdrop-filter: blur(28px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16), 0 2px 8px rgba(0, 0, 0, 0.06), var(--hl);
+    transition: opacity 0.4s ease, transform 0.5s var(--ease-sheet);
+  }
+  body.sheet-open #tabbar { opacity: 0; transform: translate(-50%, 30px); pointer-events: none; }
+  .tab-ind { position: absolute; top: 5px; bottom: 5px; left: 5px; width: calc((100% - 10px) / 4); border-radius: 27px; background: var(--tab-ind); box-shadow: var(--hl); transform: translateX(calc(var(--i, 0) * 100%)); transition: transform 0.55s var(--ease-spring); }
+  .tab { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: var(--label2); font-size: 10.5px; font-weight: 600; letter-spacing: 0.01em; border-radius: 27px; transition: color 0.25s ease, transform 0.2s ease; }
+  .tab:active { transform: scale(0.92); }
+  .tab svg { width: 25px; height: 25px; }
+  .tab svg .fillable { fill: currentColor; fill-opacity: 0; transition: fill-opacity 0.25s ease; }
+  .tab.active { color: var(--tint); }
+  .tab.active svg .fillable { fill-opacity: 0.22; }
+  .tab-badge { position: absolute; top: 3px; left: calc(50% + 5px); min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; background: var(--red); color: #fff; font-size: 11px; font-weight: 700; display: grid; place-items: center; box-shadow: 0 0 0 2px var(--tab-bg); font-variant-numeric: tabular-nums; }
+
+  /* ---------- Common controls ---------- */
+  .btn-primary, .btn-secondary { width: 100%; height: 54px; border-radius: 18px; font-size: 17px; font-weight: 600; letter-spacing: -0.01em; display: flex; align-items: center; justify-content: center; gap: 8px; transition: transform 0.15s ease, background 0.3s ease, box-shadow 0.3s ease, color 0.3s ease, opacity 0.3s ease; }
+  .btn-primary { color: #fff; background: linear-gradient(180deg, rgba(var(--c-rgb, var(--tint-rgb)), 1), rgba(var(--c-rgb, var(--tint-rgb)), 0.82)); box-shadow: 0 12px 26px rgba(var(--c-rgb, var(--tint-rgb)), 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.35); }
+  .btn-primary:active:not(:disabled), .btn-secondary:active { transform: scale(0.97); }
+  .btn-primary:disabled { background: var(--fill); color: var(--label3); box-shadow: none; }
+  .btn-secondary { background: var(--glass-soft); border: 1px solid var(--glass-border); color: var(--ink, var(--tint)); margin-top: 10px; }
+  .btn-primary svg, .btn-secondary svg { width: 18px; height: 18px; }
+
+  .switch { position: relative; display: inline-block; width: 51px; height: 31px; flex: none; }
+  .switch input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; z-index: 2; cursor: pointer; }
+  .switch .track { position: absolute; inset: 0; border-radius: 16px; background: var(--switch-off); transition: background 0.25s ease; }
+  .switch .track::after { content: ""; position: absolute; top: 2px; left: 2px; width: 27px; height: 27px; border-radius: 50%; background: #fff; box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15), 0 1px 1px rgba(0, 0, 0, 0.16); transition: transform 0.35s var(--ease-spring); }
+  .switch input:checked + .track { background: var(--sw-on, var(--green)); }
+  .switch input:checked + .track::after { transform: translateX(20px); }
+  .switch input:focus-visible + .track { outline: 2px solid var(--tint); outline-offset: 2px; }
+
+  .list { border-radius: 22px; overflow: hidden; }
+  .row { position: relative; display: flex; align-items: center; gap: 12px; width: 100%; min-height: 56px; padding: 11px 14px; text-align: left; }
+  .row + .row::before { content: ""; position: absolute; top: 0; right: 0; left: var(--inset, 14px); height: 0.5px; background: var(--sep); }
+  button.row:active, .row-main:active { background: var(--fill); }
+  .row-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+  .row-title { font-size: 16.5px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.3; }
+  .row-sub { font-size: 13.5px; color: var(--label2); line-height: 1.35; }
+  .chev { color: var(--label3); flex: none; }
+  .row.destructive { justify-content: center; color: var(--red); font-weight: 600; font-size: 17px; }
+
+  .seg-ctl { display: grid; grid-template-columns: repeat(3, 1fr); padding: 2px; border-radius: 10px; background: var(--fill); position: relative; min-width: 210px; }
+  .seg-ctl button { position: relative; z-index: 1; height: 30px; text-align: center; font-size: 13.5px; font-weight: 600; border-radius: 8px; color: var(--label); transition: background 0.25s ease, box-shadow 0.25s ease; }
+  .seg-ctl button.on { background: var(--glass-strong); box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12), 0 0 0 0.5px rgba(0, 0, 0, 0.04); }
+
+  .pill-btn { flex: none; height: 30px; padding: 0 14px; border-radius: 15px; font-size: 14px; font-weight: 600; background: rgba(var(--c-rgb, var(--tint-rgb)), 0.14); color: var(--ink, var(--tint)); transition: transform 0.15s ease; }
+  .pill-btn.solid { background: rgba(var(--c-rgb, var(--tint-rgb)), 0.95); color: #fff; }
+  .pill-btn:active { transform: scale(0.94); }
+
+  /* ---------- Today ---------- */
+  .streak-pill { flex: none; display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 14px 0 9px; border-radius: 20px; font-family: var(--font-rounded); font-weight: 700; font-size: 18px; font-variant-numeric: tabular-nums; transition: transform 0.15s ease; }
+  .streak-pill:active { transform: scale(0.94); }
+
+  .deck-summary { border-radius: 24px; padding: 14px 16px 12px; margin-bottom: 14px; }
+  .ds-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .ds-title { font-size: 16px; font-weight: 700; letter-spacing: -0.01em; }
+  .ds-sub { font-size: 13.5px; color: var(--label2); margin-top: 1px; }
+  .ring-wrap { position: relative; flex: none; display: grid; place-items: center; }
+  .ring-wrap .ring-center { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--font-rounded); font-weight: 700; font-size: 12.5px; font-variant-numeric: tabular-nums; }
+  .ring .ring-val { transition: stroke-dashoffset 1.2s var(--ease-out); }
+  .segments { display: flex; gap: 6px; margin-top: 12px; }
+  .seg { flex: 1; height: 22px; display: flex; align-items: center; border-radius: 6px; }
+  .seg i { display: block; width: 100%; height: 6px; border-radius: 3px; background: var(--fill2); transition: background 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease; }
+  .seg.solved i { background: var(--c); }
+  .seg.current i { background: rgba(var(--c-rgb), 0.45); box-shadow: 0 0 0 2px rgba(var(--c-rgb), 0.25); animation: segPulse 1.8s ease-in-out infinite; }
+  .seg.bonus i { height: 4px; opacity: 0.85; }
+  @keyframes segPulse { 50% { transform: scaleY(1.35); } }
+
+  .stage { position: relative; }
+  .stage.leaving > * { animation: cardOut 0.24s ease-in forwards; }
+  .stage.entering > * { animation: cardIn 0.5s var(--ease-out) both; }
+  @keyframes cardOut { to { opacity: 0; transform: translateX(-34px) scale(0.97); } }
+  @keyframes cardIn { from { opacity: 0; transform: translateX(38px) scale(0.97); } to { opacity: 1; transform: none; } }
+
+  .card { position: relative; border-radius: 30px; padding: 18px 18px 20px; overflow: hidden; }
+  .card::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 260px; background: radial-gradient(120% 100% at 0% 0%, rgba(var(--c-rgb), 0.22), transparent 62%); pointer-events: none; }
+  .card > * { position: relative; }
+  .card-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
+  .badge { display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 12px 0 8px; border-radius: 14px; background: rgba(var(--c-rgb), 0.15); border: 1px solid rgba(var(--c-rgb), 0.24); color: var(--ink); font-size: 12.5px; font-weight: 700; letter-spacing: 0.01em; min-width: 0; max-width: 72%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .badge .emo { font-size: 14px; }
+  .meta-tag { display: inline-flex; align-items: center; gap: 4px; flex: none; height: 24px; padding: 0 9px; border-radius: 12px; font-size: 12px; font-weight: 700; color: var(--label2); background: var(--fill); font-variant-numeric: tabular-nums; }
+  .card-title { font-family: var(--font-display); font-size: clamp(24px, 6.6vw, 30px); line-height: 1.12; font-weight: 800; letter-spacing: -0.024em; margin-bottom: 14px; text-wrap: balance; }
+  .card-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
+  .play { flex: none; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 14px 0 6px; border-radius: 18px; background: rgba(var(--c-rgb), 0.13); border: 1px solid rgba(var(--c-rgb), 0.18); color: var(--ink); font-size: 14px; font-weight: 600; transition: transform 0.15s ease, background 0.25s ease; }
+  .play:active { transform: scale(0.95); }
+  .play-ico { flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--c); color: #fff; display: grid; place-items: center; box-shadow: 0 4px 10px rgba(var(--c-rgb), 0.35); }
+  .play-ico svg { width: 12px; height: 12px; margin-left: 1px; }
+  .play .eq { display: none; align-items: flex-end; gap: 2px; height: 12px; }
+  .play .eq i { width: 3px; border-radius: 1.5px; background: #fff; animation: eq 0.9s ease-in-out infinite; }
+  .play .eq i:nth-child(1) { height: 60%; animation-delay: -0.3s; }
+  .play .eq i:nth-child(2) { height: 100%; animation-delay: -0.6s; }
+  .play .eq i:nth-child(3) { height: 45%; animation-delay: -0.1s; }
+  .play.playing .play-ico svg { display: none; }
+  .play.playing .eq { display: flex; }
+  .play-dur { color: var(--label2); font-weight: 500; font-variant-numeric: tabular-nums; }
+  @keyframes eq { 0%, 100% { transform: scaleY(0.35); } 50% { transform: scaleY(1); } }
+  .play .eq i { transform-origin: bottom; }
+  .mastered-note { font-size: 12.5px; font-weight: 600; color: var(--label2); display: inline-flex; align-items: center; gap: 5px; }
+  .mastered-note svg { color: var(--green); width: 14px; height: 14px; }
+
+  .story { font-size: 17px; line-height: 1.58; letter-spacing: -0.005em; -webkit-user-select: text; user-select: text; hyphens: auto; -webkit-hyphens: auto; }
+  .funfact { margin-top: 18px; padding: 14px 16px 15px; border-radius: 20px; background: rgba(var(--c-rgb), 0.10); border: 1px solid rgba(var(--c-rgb), 0.24); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18); }
+  .ff-head { display: flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink); margin-bottom: 6px; }
+  .ff-head svg { width: 16px; height: 16px; }
+  .funfact p { font-size: 15.5px; line-height: 1.52; -webkit-user-select: text; user-select: text; hyphens: auto; -webkit-hyphens: auto; }
+
+  .quiz { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--sep); }
+  .quiz-head { display: flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase; color: var(--label2); }
+  .quiz-head svg { width: 15px; height: 15px; }
+  .question { font-size: 18.5px; font-weight: 700; line-height: 1.35; letter-spacing: -0.012em; margin: 8px 0 14px; text-wrap: pretty; }
+  .options { display: flex; flex-direction: column; gap: 10px; }
+  .option { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 56px; padding: 11px 14px 11px 12px; border-radius: 18px; background: var(--glass-soft); border: 1px solid var(--glass-border); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), var(--hl); font-size: 16px; font-weight: 500; line-height: 1.35; text-align: left; transition: transform 0.15s ease, background 0.3s ease, border-color 0.3s ease, opacity 0.3s ease, color 0.3s ease; }
+  .option:active:not(:disabled) { transform: scale(0.98); }
+  .opt-letter { flex: none; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: var(--fill); font-family: var(--font-rounded); font-weight: 700; font-size: 14px; transition: background 0.3s ease, color 0.3s ease; }
+  .opt-text { flex: 1; }
+  .opt-mark { flex: none; width: 22px; height: 22px; opacity: 0; transform: scale(0.4); transition: opacity 0.25s ease, transform 0.4s var(--ease-spring); }
+  .opt-mark svg { width: 22px; height: 22px; }
+  .option.correct { background: rgba(var(--green-rgb), 0.16); border-color: rgba(var(--green-rgb), 0.55); color: var(--label); opacity: 1; }
+  .option.correct .opt-letter { background: var(--green); color: #fff; }
+  .option.correct .opt-mark { opacity: 1; transform: none; color: var(--green); }
+  .option.wrong { background: rgba(var(--red-rgb), 0.08); border-color: rgba(var(--red-rgb), 0.32); color: var(--label2); }
+  .option.wrong .opt-letter { background: rgba(var(--red-rgb), 0.85); color: #fff; }
+  .option.wrong .opt-mark { opacity: 1; transform: none; color: var(--red); }
+  .option.dim { opacity: 0.5; }
+  .option.pop { animation: pop 0.5s var(--ease-spring); }
+  .option.shake { animation: shake 0.42s ease; }
+  @keyframes pop { 0% { transform: scale(1); } 40% { transform: scale(1.03); } 100% { transform: scale(1); } }
+  @keyframes shake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-8px); } 40% { transform: translateX(7px); } 60% { transform: translateX(-5px); } 80% { transform: translateX(3px); } }
+  .hint { font-size: 14px; font-weight: 600; color: var(--red); margin-top: 10px; padding-left: 4px; animation: fadeUp 0.35s var(--ease-out); }
+  .explain { margin-top: 14px; padding: 13px 15px 14px; border-radius: 18px; background: rgba(var(--green-rgb), 0.12); border: 1px solid rgba(var(--green-rgb), 0.3); animation: fadeUp 0.45s var(--ease-out); }
+  .explain b { display: flex; align-items: center; gap: 6px; font-size: 14.5px; color: var(--green); margin-bottom: 4px; }
+  .explain b svg { width: 16px; height: 16px; }
+  .explain p { font-size: 15px; line-height: 1.5; -webkit-user-select: text; user-select: text; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  .card .btn-primary { margin-top: 18px; }
+
+  .complete { border-radius: 30px; padding: 26px 20px 20px; text-align: center; position: relative; overflow: hidden; }
+  .complete::before { content: ""; position: absolute; inset: 0; background: radial-gradient(80% 60% at 50% 0%, rgba(255, 149, 0, 0.22), transparent 70%); pointer-events: none; }
+  .complete > * { position: relative; }
+  .cp-flame { display: grid; place-items: center; margin-bottom: 6px; }
+  .complete h2 { font-family: var(--font-display); font-size: 28px; font-weight: 800; letter-spacing: -0.02em; }
+  .complete .cp-text { font-size: 16px; line-height: 1.5; color: var(--label2); margin: 6px auto 18px; max-width: 34ch; }
+  .cp-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px; }
+  .cp-stat { border-radius: 18px; padding: 12px 6px; background: var(--glass-soft); border: 1px solid var(--glass-border); }
+  .cp-stat b { display: block; font-family: var(--font-rounded); font-size: 24px; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .cp-stat span { font-size: 12px; color: var(--label2); font-weight: 600; }
+  .cp-next { display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 600; color: var(--label2); background: var(--fill); padding: 7px 12px; border-radius: 14px; margin-bottom: 16px; font-variant-numeric: tabular-nums; }
+  .cp-next svg { width: 15px; height: 15px; }
+
+  .today-row .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--c); flex: none; box-shadow: 0 0 0 4px rgba(var(--c-rgb), 0.16); }
+  .today-row .ok { color: var(--green); flex: none; }
+
+  /* ---------- Categories ---------- */
+  .cat-summary { display: flex; align-items: center; gap: 14px; border-radius: 22px; padding: 14px 16px; }
+  .cat-summary .big { font-family: var(--font-rounded); font-size: 30px; font-weight: 800; font-variant-numeric: tabular-nums; line-height: 1; }
+  .cat-summary .txt { font-size: 14px; color: var(--label2); line-height: 1.35; }
+  .cat-summary .txt b { color: var(--label); }
+  .cat-row { padding: 0 14px 0 0; gap: 8px; --inset: 72px; }
+  .row-main { flex: 1; min-width: 0; display: flex; align-items: center; gap: 12px; padding: 11px 4px 11px 14px; text-align: left; border-radius: 0; transition: background 0.2s ease; }
+  .cat-icon { flex: none; width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; font-size: 24px; background: linear-gradient(145deg, rgba(var(--c-rgb), 0.30), rgba(var(--c-rgb), 0.12)); border: 1px solid rgba(var(--c-rgb), 0.28); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35); transition: filter 0.3s ease, opacity 0.3s ease; }
+  .cat-row.off .cat-icon { filter: grayscale(0.9); opacity: 0.55; }
+  .cat-row.off .row-title { color: var(--label2); }
+  .mini-bar { display: block; height: 4px; border-radius: 2px; background: var(--fill); overflow: hidden; margin-top: 5px; max-width: 180px; }
+  .mini-bar i { display: block; height: 100%; border-radius: 2px; background: var(--c); transition: width 0.8s var(--ease-out); }
+  .new-tag { display: inline-block; vertical-align: 2px; margin-left: 6px; font-size: 10px; font-weight: 800; letter-spacing: 0.06em; padding: 2px 6px; border-radius: 6px; color: #fff; background: var(--c); }
+  .row-main .chev { margin-left: auto; }
+
+  .sug-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .sug { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 14px 14px 12px; border-radius: 24px; text-align: left; overflow: hidden; min-height: 176px; transition: transform 0.2s ease, opacity 0.35s ease; }
+  .sug::before { content: ""; position: absolute; inset: 0; background: radial-gradient(120% 90% at 100% 0%, rgba(var(--c-rgb), 0.28), transparent 60%); pointer-events: none; }
+  .sug > * { position: relative; }
+  .sug:active { transform: scale(0.96); }
+  .sug-emoji { font-size: 30px; line-height: 1; margin-bottom: 4px; }
+  .sug-name { font-size: 15.5px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.25; max-width: 100%; overflow-wrap: break-word; -webkit-hyphens: auto; hyphens: auto; }
+  .sug-desc { font-size: 12.5px; line-height: 1.4; color: var(--label2); flex: 1; }
+  .sug-foot { display: flex; align-items: center; justify-content: space-between; width: 100%; font-size: 12.5px; font-weight: 700; color: var(--ink); margin-top: 4px; }
+  .sug-plus { width: 30px; height: 30px; border-radius: 50%; background: var(--c); color: #fff; display: grid; place-items: center; box-shadow: 0 6px 14px rgba(var(--c-rgb), 0.4); }
+  .sug-plus svg { width: 16px; height: 16px; }
+  .sug.unlocking { animation: unlock 0.5s var(--ease-out) forwards; pointer-events: none; }
+  @keyframes unlock { 40% { transform: scale(1.05); } 100% { transform: scale(0.6); opacity: 0; } }
+  .all-unlocked { border-radius: 22px; padding: 18px; text-align: center; font-size: 15px; color: var(--label2); line-height: 1.45; }
+  .all-unlocked b { display: block; font-size: 26px; margin-bottom: 4px; }
+
+  /* ---------- Archive ---------- */
+  .search { display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 8px 0 12px; border-radius: 14px; background: var(--glass); -webkit-backdrop-filter: blur(28px) saturate(180%); backdrop-filter: blur(28px) saturate(180%); border: 1px solid var(--glass-border); box-shadow: var(--hl); color: var(--label2); }
+  .search svg { width: 18px; height: 18px; flex: none; }
+  .search input { flex: 1; min-width: 0; height: 100%; border: 0; outline: 0; background: transparent; color: var(--label); font: 400 17px var(--font); -webkit-appearance: none; appearance: none; -webkit-user-select: text; user-select: text; }
+  .search input::placeholder { color: var(--label3); }
+  .search input::-webkit-search-cancel-button, .search input::-webkit-search-decoration { -webkit-appearance: none; display: none; }
+  .search-clear { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; color: var(--label2); flex: none; }
+  .search-clear span { width: 18px; height: 18px; border-radius: 50%; background: var(--label3); color: var(--bg); display: grid; place-items: center; }
+  .search-clear svg { width: 10px; height: 10px; }
+  .chips { display: flex; gap: 8px; overflow-x: auto; overflow-y: hidden; margin: 6px -16px -8px; padding: 6px 16px 16px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .chips::-webkit-scrollbar { display: none; }
+  .chip { flex: none; display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 13px; border-radius: 17px; background: var(--glass); -webkit-backdrop-filter: blur(28px) saturate(180%); backdrop-filter: blur(28px) saturate(180%); border: 1px solid var(--glass-border); font-size: 14px; font-weight: 600; color: var(--label); white-space: nowrap; transition: background 0.25s ease, color 0.25s ease, transform 0.15s ease; }
+  .chip:active { transform: scale(0.95); }
+  .chip .n { font-size: 12px; color: var(--label2); font-variant-numeric: tabular-nums; }
+  .chip.on { background: var(--c, var(--tint)); color: #fff; border-color: transparent; box-shadow: 0 6px 16px rgba(var(--c-rgb, var(--tint-rgb)), 0.35); }
+  .chip.on .n { color: rgba(255, 255, 255, 0.8); }
+  .arc-row { align-items: stretch; --inset: 30px; }
+  .arc-bar { flex: none; width: 4px; border-radius: 2px; background: var(--c); margin: 3px 2px 3px 0; }
+  .arc-cat { font-size: 12px; font-weight: 700; color: var(--ink); letter-spacing: 0.01em; }
+  .arc-snip { font-size: 14px; line-height: 1.42; color: var(--label2); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .arc-row .chev { align-self: center; }
+  mark { background: rgba(var(--c-rgb, var(--tint-rgb)), 0.26); color: inherit; border-radius: 4px; padding: 0 1px; }
+  .empty { text-align: center; padding: 42px 22px 34px; border-radius: 26px; }
+  .empty .em { font-size: 46px; line-height: 1; margin-bottom: 12px; }
+  .empty h3 { font-size: 19px; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.01em; }
+  .empty p { font-size: 15px; color: var(--label2); line-height: 1.45; max-width: 32ch; margin: 0 auto; }
+  .empty .btn-primary { margin: 18px auto 0; max-width: 260px; }
+
+  /* ---------- Profile ---------- */
+  .hero { border-radius: 30px; padding: 22px 18px 18px; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(70% 55% at 50% 12%, rgba(255, 120, 0, 0.20), transparent 70%); pointer-events: none; }
+  .hero.cold::before { background: radial-gradient(70% 55% at 50% 12%, rgba(120, 120, 140, 0.16), transparent 70%); }
+  .hero > * { position: relative; }
+  .hero-num { font-family: var(--font-rounded); font-size: 64px; line-height: 1; font-weight: 800; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; margin-top: 2px; }
+  .hero-label { font-size: 15px; font-weight: 700; color: var(--label2); margin-top: 4px; }
+  .hero-sub { font-size: 14px; color: var(--label2); margin: 8px auto 0; max-width: 32ch; line-height: 1.4; }
+  .week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--sep); }
+  .wd { display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 700; color: var(--label2); }
+  .wd-dot { width: 32px; height: 32px; border-radius: 50%; background: var(--fill); display: grid; place-items: center; color: #fff; }
+  .wd-dot svg { width: 16px; height: 16px; }
+  .wd.done .wd-dot { background: linear-gradient(160deg, #FFB340, #FF5E3A); box-shadow: 0 4px 12px rgba(255, 94, 58, 0.35); }
+  .wd.today .wd-dot { box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--orange); }
+  .wd.today.done .wd-dot { box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--orange), 0 4px 12px rgba(255, 94, 58, 0.35); }
+  .wd.today { color: var(--label); }
+
+  .flame.lit .fo { transform-origin: 50% 92%; animation: flick 2.4s ease-in-out infinite; }
+  .flame.lit .fi { transform-origin: 50% 95%; animation: flick2 1.7s ease-in-out infinite; }
+  .flame.off { filter: grayscale(1); opacity: 0.4; }
+  @keyframes flick { 0%, 100% { transform: scale(1, 1) skewX(0); } 30% { transform: scale(0.97, 1.04) skewX(-1.5deg); } 60% { transform: scale(1.02, 0.97) skewX(1.2deg); } }
+  @keyframes flick2 { 0%, 100% { transform: scale(1); } 50% { transform: scale(0.9, 1.08); } }
+
+  .activity { border-radius: 26px; padding: 18px; display: flex; align-items: center; gap: 18px; }
+  .legend { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
+  .lg-item { display: flex; flex-direction: column; }
+  .lg-top { display: flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; color: var(--label2); }
+  .lg-top i { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+  .lg-val { font-family: var(--font-rounded); font-size: 21px; font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+  .lg-val small { font-size: 13px; font-weight: 700; color: var(--label2); }
+  .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 12px; }
+  .stat { border-radius: 22px; padding: 14px 14px 13px; }
+  .stat-ico { width: 34px; height: 34px; border-radius: 11px; display: grid; place-items: center; font-size: 18px; background: var(--fill); margin-bottom: 10px; }
+  .stat-val { font-family: var(--font-rounded); font-size: 28px; font-weight: 800; line-height: 1.05; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+  .stat-lbl { font-size: 13px; color: var(--label2); font-weight: 600; margin-top: 2px; }
+  .cat-rings { border-radius: 26px; padding: 18px 10px 12px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px 4px; }
+  .cr { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; padding: 2px; border-radius: 16px; transition: transform 0.15s ease; }
+  .cr:active { transform: scale(0.94); }
+  .cr .ring-center { font-size: 22px; }
+  .cr-name { font-size: 12.5px; font-weight: 700; line-height: 1.2; }
+  .cr-val { font-size: 11.5px; font-weight: 600; color: var(--label2); font-variant-numeric: tabular-nums; }
+  .install { border-radius: 22px; padding: 14px 16px; display: flex; gap: 12px; align-items: flex-start; margin-bottom: 14px; }
+  .install .ico { flex: none; width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; background: rgba(var(--tint-rgb), 0.15); color: var(--tint); }
+  .install .ico svg { width: 20px; height: 20px; }
+  .install b { display: block; font-size: 15px; margin-bottom: 2px; }
+  .install p { font-size: 13.5px; color: var(--label2); line-height: 1.4; }
+  .install .x { flex: none; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--fill); color: var(--label2); margin-left: auto; }
+  .install .x svg { width: 12px; height: 12px; }
+  .setting-row { justify-content: space-between; min-height: 58px; }
+  .setting-row .row-title { font-weight: 500; }
+  .setting-col { flex-direction: column; align-items: stretch; gap: 10px; }
+
+  /* ---------- Sheet ---------- */
+  #sheetBackdrop { position: fixed; inset: 0; z-index: 40; background: rgba(0, 0, 0, 0.3); opacity: 0; pointer-events: none; transition: opacity 0.45s ease; }
+  body.sheet-open #sheetBackdrop { opacity: 1; pointer-events: auto; }
+  #sheet { position: fixed; z-index: 41; left: 0; right: 0; bottom: 0; margin: 0 auto; max-width: 680px; height: calc(100% - env(safe-area-inset-top) - 12px); border-radius: 30px 30px 0 0; background: var(--sheet-bg); -webkit-backdrop-filter: blur(28px) saturate(180%); backdrop-filter: blur(28px) saturate(180%); border: 1px solid var(--glass-border); border-bottom: 0; box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.22), var(--hl); transform: translateY(105%); transition: transform 0.5s var(--ease-sheet); display: flex; flex-direction: column; visibility: hidden; }
+  body.sheet-open #sheet { transform: translateY(0); visibility: visible; }
+  body.sheet-closing #sheet { visibility: visible; }
+  .sheet-head { flex: none; height: 50px; position: relative; display: flex; justify-content: center; touch-action: none; }
+  .grabber { margin-top: 7px; width: 38px; height: 5px; border-radius: 3px; background: var(--label3); }
+  .sheet-close { position: absolute; right: 14px; top: 12px; width: 32px; height: 32px; border-radius: 50%; background: var(--fill); display: grid; place-items: center; color: var(--label2); }
+  .sheet-close svg { width: 13px; height: 13px; }
+  .sheet-body { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; padding: 0 16px calc(env(safe-area-inset-bottom) + 32px); }
+  .sheet-body .card { background: var(--glass-soft); -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .cs-hero { text-align: center; padding: 0 8px 6px; }
+  .cs-emoji { width: 76px; height: 76px; margin: 0 auto 12px; border-radius: 24px; display: grid; place-items: center; font-size: 40px; background: linear-gradient(145deg, rgba(var(--c-rgb), 0.35), rgba(var(--c-rgb), 0.12)); border: 1px solid rgba(var(--c-rgb), 0.3); box-shadow: 0 12px 30px rgba(var(--c-rgb), 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.4); }
+  .cs-hero h2 { font-family: var(--font-display); font-size: 25px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; }
+  .cs-hero p { font-size: 15px; color: var(--label2); line-height: 1.45; margin: 6px auto 0; max-width: 40ch; }
+  .cs-progress { margin: 16px auto 0; max-width: 340px; }
+  .cs-progress .bar { height: 8px; border-radius: 4px; background: var(--fill); overflow: hidden; }
+  .cs-progress .bar i { display: block; height: 100%; border-radius: 4px; background: var(--c); transition: width 0.8s var(--ease-out); }
+  .cs-progress span { display: block; font-size: 13px; font-weight: 600; color: var(--label2); margin-top: 6px; }
+  .cs-row { --inset: 58px; }
+  .cs-status { flex: none; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: var(--fill); font-family: var(--font-rounded); font-weight: 700; font-size: 14px; color: var(--label2); }
+  .cs-status.ok { background: var(--green); color: #fff; }
+  .cs-status svg { width: 16px; height: 16px; }
+
+  /* ---------- Toast & Alert ---------- */
+  #toast { position: fixed; z-index: 60; top: calc(env(safe-area-inset-top) + 8px); left: 50%; max-width: calc(100% - 32px); display: flex; align-items: center; gap: 10px; padding: 10px 18px 10px 12px; border-radius: 24px; font-size: 15px; font-weight: 600; letter-spacing: -0.01em; transform: translate(-50%, -160%) scale(0.9); opacity: 0; transition: transform 0.55s var(--ease-spring), opacity 0.3s ease; pointer-events: none; background: var(--glass-strong); }
+  #toast.show { transform: translate(-50%, 0) scale(1); opacity: 1; }
+  #toast .t-ico { font-size: 20px; line-height: 1; }
+  #alert { position: fixed; inset: 0; z-index: 70; display: grid; place-items: center; padding: 24px; background: rgba(0, 0, 0, 0.32); opacity: 0; pointer-events: none; transition: opacity 0.22s ease; }
+  #alert.show { opacity: 1; pointer-events: auto; }
+  .alert-box { width: 280px; border-radius: 18px; overflow: hidden; background: var(--alert-bg); -webkit-backdrop-filter: blur(28px) saturate(180%); backdrop-filter: blur(28px) saturate(180%); border: 1px solid var(--glass-border); text-align: center; transform: scale(1.12); transition: transform 0.35s var(--ease-spring); box-shadow: var(--shadow-lg); }
+  #alert.show .alert-box { transform: scale(1); }
+  .alert-box h3 { font-size: 17px; font-weight: 600; padding: 20px 18px 4px; letter-spacing: -0.01em; }
+  .alert-box p { font-size: 13.5px; line-height: 1.4; padding: 0 18px 18px; }
+  .alert-actions { display: flex; border-top: 0.5px solid var(--sep); }
+  .alert-actions button { flex: 1; height: 46px; font-size: 17px; color: var(--tint); }
+  .alert-actions button:active { background: var(--fill); }
+  .alert-actions button + button { border-left: 0.5px solid var(--sep); }
+  .alert-actions .destructive { color: var(--red); font-weight: 600; }
+
+  .confetti { position: fixed; inset: 0; z-index: 80; pointer-events: none; width: 100%; height: 100%; }
+  .haptic-proxy { position: fixed; left: -100px; top: 0; width: 1px; height: 1px; opacity: 0; pointer-events: none; overflow: hidden; }
+
+  @media (min-width: 560px) {
+    .sug-grid { grid-template-columns: repeat(3, 1fr); }
+    .cat-rings { grid-template-columns: repeat(4, 1fr); }
+    .stats-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  @media (max-width: 350px) {
+    .lh h1 { font-size: 30px; }
+    .sug-grid { grid-template-columns: 1fr; }
+    .activity { flex-direction: column; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.001s !important; animation-iteration-count: 1 !important; transition-duration: 0.001s !important; }
+  }
+</style>
+</head>
+<body>
+<noscript><p style="padding:40px 20px;font-family:-apple-system,sans-serif">Lumen benötigt JavaScript.</p></noscript>
+
+<div id="bg" aria-hidden="true"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="blob b4" id="accentBlob"></div></div>
+
+<div id="navbar" aria-hidden="true"><span class="nt" id="navTitle">Heute</span></div>
+
+<main id="app">
+  <section class="view active" id="view-today" data-title="Heute" aria-label="Heute">
+    <div class="view-inner">
+      <header class="lh">
+        <div><p class="eyebrow" id="todayEyebrow"></p><h1>Heute</h1></div>
+        <button class="streak-pill glass" id="streakPill" data-action="goto" data-tab="profile" aria-label="Streak anzeigen"></button>
+      </header>
+      <div id="deckSummary"></div>
+      <div id="deckStage" class="stage"></div>
+    </div>
+  </section>
+
+  <section class="view" id="view-categories" data-title="Kategorien" aria-label="Kategorien">
+    <div class="view-inner">
+      <header class="lh"><div><p class="eyebrow">Themen-Manager</p><h1>Kategorien</h1></div></header>
+      <div id="catContent"></div>
+    </div>
+  </section>
+
+  <section class="view" id="view-archive" data-title="Archiv" aria-label="Archiv">
+    <div class="view-inner">
+      <header class="lh"><div><p class="eyebrow" id="archiveEyebrow"></p><h1>Archiv</h1></div></header>
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L20 20"/></svg>
+        <input id="searchInput" type="search" placeholder="Titel, Texte, Fragen durchsuchen" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" aria-label="Archiv durchsuchen">
+        <button class="search-clear" id="searchClear" data-action="clear-search" aria-label="Suche löschen" hidden><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span></button>
+      </div>
+      <div class="chips" id="archiveChips"></div>
+      <div id="archiveList"></div>
+    </div>
+  </section>
+
+  <section class="view" id="view-profile" data-title="Profil" aria-label="Profil">
+    <div class="view-inner">
+      <header class="lh"><div><p class="eyebrow">Deine Lernreise</p><h1>Profil</h1></div></header>
+      <div id="profileContent"></div>
+    </div>
+  </section>
+</main>
+
+<nav id="tabbar" role="tablist" aria-label="Hauptnavigation">
+  <span class="tab-ind" id="tabInd"></span>
+  <button class="tab active" role="tab" aria-selected="true" data-action="tab" data-tab="today">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect class="fillable" x="3.5" y="8.5" width="17" height="12.5" rx="3.2"/><path d="M6.2 5.5h11.6"/><path d="M8.8 2.6h6.4"/></svg>
+    <span>Heute</span>
+    <span class="tab-badge" id="todayBadge" hidden></span>
+  </button>
+  <button class="tab" role="tab" aria-selected="false" data-action="tab" data-tab="categories">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect class="fillable" x="3.5" y="3.5" width="7.2" height="7.2" rx="2.2"/><rect class="fillable" x="13.3" y="3.5" width="7.2" height="7.2" rx="2.2"/><rect class="fillable" x="3.5" y="13.3" width="7.2" height="7.2" rx="2.2"/><rect class="fillable" x="13.3" y="13.3" width="7.2" height="7.2" rx="2.2"/></svg>
+    <span>Kategorien</span>
+  </button>
+  <button class="tab" role="tab" aria-selected="false" data-action="tab" data-tab="archive">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect class="fillable" x="2.8" y="4" width="18.4" height="5" rx="1.6"/><path class="fillable" d="M4.6 9v9.2A2.3 2.3 0 0 0 6.9 20.5h10.2a2.3 2.3 0 0 0 2.3-2.3V9"/><path d="M10 13h4"/></svg>
+    <span>Archiv</span>
+  </button>
+  <button class="tab" role="tab" aria-selected="false" data-action="tab" data-tab="profile">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle class="fillable" cx="12" cy="8.3" r="3.9"/><path class="fillable" d="M4.4 20.6c1.1-3.9 4.1-5.8 7.6-5.8s6.5 1.9 7.6 5.8z"/></svg>
+    <span>Profil</span>
+  </button>
+</nav>
+
+<div id="sheetBackdrop" data-action="close-sheet"></div>
+<div id="sheet" role="dialog" aria-modal="true" aria-label="Details">
+  <div class="sheet-head">
+    <div class="grabber"></div>
+    <button class="sheet-close" data-action="close-sheet" aria-label="Schließen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <div class="sheet-body" id="sheetBody"></div>
+</div>
+
+<div id="toast" class="glass" role="status" aria-live="polite"><span class="t-ico" id="toastIco"></span><span id="toastText"></span></div>
+<div id="alert" role="alertdialog" aria-modal="true"><div class="alert-box"><h3 id="alertTitle"></h3><p id="alertMsg"></p><div class="alert-actions" id="alertActions"></div></div></div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* =====================================================================
+     KATEGORIEN
+     ===================================================================== */
+  const CATEGORIES = [
+    { key: "schildkroeten", name: "Griechische Landschildkröten", short: "Schildkröten", emoji: "🐢", color: "#C8603E", suggested: false,
+      desc: "Testudo hermanni: Panzeranatomie, Winterstarre, Lebensraum und Ernährung einer mediterranen Überlebenskünstlerin." },
+    { key: "mythologie", name: "Griechische Mythologie", short: "Mythologie", emoji: "⚡", color: "#7C3AED", suggested: false,
+      desc: "Olympische Götter, Titanen, Schöpfungsmythen – und was Gestalten wie Prometheus und Hades bedeuten." },
+    { key: "voegel", name: "Deutsche Vogelwelt", short: "Vogelwelt", emoji: "🐦", color: "#0EA5E9", suggested: false,
+      desc: "Stand- und Zugvögel, Rufe und Gesänge sowie die Anpassungen von Eisvogel, Buntspecht und Rotkehlchen." },
+    { key: "pflanzen", name: "Deutsche Pflanzenwelt", short: "Pflanzenwelt", emoji: "🌿", color: "#059669", suggested: false,
+      desc: "Heilkräuter, Waldbaumarten, Frühblüher wie das Buschwindröschen und eingewanderte Neophyten." },
+    { key: "umwelt", name: "Umweltschutz & Kreislaufwirtschaft", short: "Kreislauf", emoji: "♻️", color: "#65A30D", suggested: false,
+      desc: "Cradle to Cradle, Mikroplastik im Wasserkreislauf, der Rebound-Effekt und kluge Upcycling-Strategien." },
+    { key: "kosmos", name: "Kosmos allgemein", short: "Kosmos", emoji: "🌌", color: "#2563EB", suggested: false,
+      desc: "Neutronensterne, Ereignishorizonte, das Echo des Urknalls und die wahren Maßstäbe unseres Sonnensystems." },
+    { key: "erde", name: "Erde allgemein", short: "Erde", emoji: "🌋", color: "#DC2626", suggested: false,
+      desc: "Plattentektonik, Tiefsee-Hydrothermalquellen, die Schichten der Atmosphäre und das Erdmagnetfeld." },
+    { key: "suedafrika", name: "Flora & Fauna in Südafrika", short: "Südafrika", emoji: "🦁", color: "#D97706", suggested: false,
+      desc: "Die Fynbos-Vegetation, die Big Five und besondere Tiere wie Kap-Klippschliefer und Brillenpinguin." },
+    { key: "meer", name: "Meeresbiologie & Tiefsee", short: "Tiefsee", emoji: "🐙", color: "#0D9488", suggested: true,
+      desc: "Leuchtende Tiefseebewohner, der Marianengraben und die rätselhafte Intelligenz der Kraken." },
+    { key: "stoa", name: "Antike Philosophie (Stoa)", short: "Stoa", emoji: "🏛️", color: "#64748B", suggested: true,
+      desc: "Zenon, Epiktet, Seneca und Mark Aurel: eine 2.300 Jahre alte Anleitung zur Gelassenheit." },
+    { key: "gehirn", name: "Menschliches Gehirn & Neurowissenschaften", short: "Gehirn", emoji: "🧠", color: "#DB2777", suggested: true,
+      desc: "Nervenzellen, Neuroplastizität und warum Schlaf für das Lernen so entscheidend ist." },
+    { key: "pilze", name: "Pilznetzwerke (Myzel)", short: "Myzel", emoji: "🍄", color: "#A16207", suggested: true,
+      desc: "Mykorrhiza, das Wood Wide Web und der vielleicht größte Organismus der Erde." },
+    { key: "mittelalter", name: "Mittelalterliche Alltagsgeschichte", short: "Mittelalter", emoji: "🏰", color: "#9F1239", suggested: true,
+      desc: "Was man aß, wie man die Zeit maß und warum die Badestube ein Treffpunkt war." }
+  ];
+
+  /* =====================================================================
+     LERNKARTEN (Offline-Datenbestand)
+     ===================================================================== */
+  const CARDS = [
+    /* ---------- Griechische Landschildkröten ---------- */
+    {
+      id: "sk-01", category: "Griechische Landschildkröten", tagColor: "#C8603E",
+      title: "Ein Haus aus Knochen und Horn",
+      story: "Der Panzer der Griechischen Landschildkröte ist kein Gehäuse, in das sie hineinschlüpft – er ist fest mit ihrem Skelett verwachsen. Der gewölbte Rückenpanzer (Carapax) besteht aus knöchernen Platten, die mit Rippen und Wirbelsäule verschmolzen sind; der flache Bauchpanzer (Plastron) ist über seitliche Brücken mit ihm verbunden. Darüber liegen Hornschilde aus Keratin, deren Nähte versetzt zu den Knochennähten verlaufen – wie bei einer gut gemauerten Wand erhöht das die Stabilität. Typisch für Testudo hermanni sind der meist zweigeteilte Schild über dem Schwanz und ein kräftiger Hornnagel an der Schwanzspitze.",
+      funFact: "Der Panzer ist durchblutet und von Nerven durchzogen: Schildkröten spüren Berührungen auf dem Rücken sehr genau – manche Tiere strecken sich sogar sichtlich entspannt, wenn man sie dort sanft krault.",
+      quiz: {
+        question: "Welches Merkmal unterscheidet die Griechische von der Maurischen Landschildkröte?",
+        options: ["Ein beweglicher Hinterlappen am Bauchpanzer", "Ein Hornnagel an der Schwanzspitze", "Hornige Sporne an den Oberschenkeln"],
+        correct: 1,
+        explanation: "Den Hornnagel an der Schwanzspitze besitzt Testudo hermanni. Oberschenkelsporne und ein beweglicher Plastron-Hinterlappen sind dagegen typische Merkmale der Maurischen Landschildkröte (Testudo graeca)."
+      }
+    },
+    {
+      id: "sk-02", category: "Griechische Landschildkröten", tagColor: "#C8603E",
+      title: "Monate im Energiesparmodus",
+      story: "Als wechselwarmes Tier kann die Griechische Landschildkröte ihre Körpertemperatur nicht selbst regulieren. Werden im Herbst die Tage kürzer und die Nächte kühler, stellt sie das Fressen ein, entleert ihren Darm und gräbt sich in lockeren Boden oder unter Laub ein. In der Winterstarre sinken Herzschlag und Atmung drastisch, der Stoffwechsel läuft nur noch auf Sparflamme – in freier Natur oft von November bis März. Ideal sind konstant etwa 4 bis 6 °C: Frost kann Augen und Gewebe schädigen, zu hohe Temperaturen zehren dagegen die Fettreserven vorzeitig auf.",
+      funFact: "Die Harnblase dient als Wasserspeicher: Während der Winterstarre kann die Schildkröte daraus Wasser zurück in den Körper aufnehmen – ein eingebauter Notvorrat für die lange Ruhezeit.",
+      quiz: {
+        question: "Welche Temperatur gilt als ideal für die Winterstarre?",
+        options: ["Konstant etwa 4 bis 6 °C", "Etwa 12 bis 15 °C", "Dauerhaft unter −5 °C"],
+        correct: 0,
+        explanation: "Bei 4 bis 6 °C ist der Stoffwechsel optimal gedrosselt. Wärmer verbraucht zu viele Reserven, Frost führt zu gefährlichen Gewebeschäden."
+      }
+    },
+    {
+      id: "sk-03", category: "Griechische Landschildkröten", tagColor: "#C8603E",
+      title: "Zuhause zwischen Macchia und Garrigue",
+      story: "Wild lebt Testudo hermanni rund um das nördliche Mittelmeer: Die westliche Unterart kommt etwa in Nordostspanien, Südfrankreich, auf Korsika, Sardinien, Sizilien und in Italien vor, die östliche vom Balkan bis nach Griechenland. Sie bevorzugt ein Mosaik aus immergrünem Buschland (Macchia), niedriger Felsheide (Garrigue), lichten Eichenwäldern und kräuterreichen Wiesen. Entscheidend ist der Wechsel aus sonnigen Plätzen zum Aufwärmen und schattigen Verstecken zum Abkühlen. Im Hochsommer ist sie vor allem morgens und am späten Nachmittag aktiv; bei großer Hitze legt sie sogar eine Sommerruhe ein.",
+      funFact: "Die größte Gefahr für wilde Bestände in Südfrankreich sind Waldbrände – Schildkröten sind schlicht zu langsam, um den Flammen zu entkommen. Im Massif des Maures päppeln Auffangstationen deshalb gezielt verletzte Tiere wieder auf.",
+      quiz: {
+        question: "Welche Landschaft ist ein typischer Lebensraum der Griechischen Landschildkröte?",
+        options: ["Feuchte Auwälder mit regelmäßiger Überflutung", "Alpine Geröllhalden oberhalb von 2.500 m", "Mediterrane Macchia mit sonnigen Lichtungen"],
+        correct: 2,
+        explanation: "Die Macchia bietet genau das nötige Mosaik: sonnige Offenflächen zum Aufwärmen, dichtes Gebüsch als Schattenversteck und vielfältige Wildkräuter als Nahrung."
+      }
+    },
+    {
+      id: "sk-04", category: "Griechische Landschildkröten", tagColor: "#C8603E",
+      title: "Wildkräuter statt Erdbeeren",
+      story: "Griechische Landschildkröten sind Pflanzenfresser, deren Verdauung auf karge, faserreiche Kost ausgelegt ist. In der Natur fressen sie vor allem Wildkräuter wie Löwenzahn, Wegerich, Wicken, Disteln und Blüten – nährstoffarm, aber reich an Rohfaser und Kalzium. Zu eiweiß- oder zuckerreiches Futter wie Obst, Supermarktsalat oder gar Tierfutter lässt den Panzer zu schnell wachsen: Es bilden sich unnatürliche Höcker, und die Nieren werden belastet. Für einen stabilen Panzer braucht die Schildkröte außerdem Kalzium und UV-Licht, mit dessen Hilfe sie in der Haut Vitamin D3 bildet.",
+      funFact: "Schildkröten haben keine Zähne. Stattdessen schneiden sie mit scharfkantigen Hornleisten – ähnlich einem Vogelschnabel –, die sich ein Leben lang durch Nachwachsen erneuern.",
+      quiz: {
+        question: "Was begünstigt die Höckerbildung am Panzer?",
+        options: ["Faserreiche Wildkräuter", "Zu eiweiß- und zuckerreiches Futter", "Regelmäßiges Sonnenbaden"],
+        correct: 1,
+        explanation: "Zu gehaltvolles Futter beschleunigt das Wachstum so stark, dass sich die Hornschilde pyramidenartig auftürmen. Faserreiche Wildkräuter und Sonnenlicht sind dagegen genau richtig."
+      }
+    },
+    {
+      id: "sk-05", category: "Griechische Landschildkröten", tagColor: "#C8603E",
+      title: "Das Nest entscheidet über das Geschlecht",
+      story: "Im Frühsommer gräbt das Weibchen mit den Hinterbeinen eine flaschenförmige Grube in sonnenbeschienenen Boden und legt meist zwei bis zwölf Eier hinein. Danach überlässt es das Gelege sich selbst – die Sonnenwärme übernimmt das Brüten. Nach etwa acht bis zwölf Wochen schlüpfen winzige Jungtiere, die oft kaum mehr als zehn Gramm wiegen. Erstaunlich: Die Temperatur im Nest legt fest, ob Männchen oder Weibchen entstehen – bei kühlerer Bebrütung um 26 bis 30 °C überwiegend Männchen, ab etwa 31,5 °C überwiegend Weibchen.",
+      funFact: "Frisch geschlüpfte Schildkröten tragen einen winzigen „Eizahn“ auf der Schnauze, mit dem sie die Schale von innen aufritzen. Er fällt schon nach wenigen Tagen ab.",
+      quiz: {
+        question: "Was bestimmt bei der Griechischen Landschildkröte das Geschlecht der Jungtiere?",
+        options: ["Die Temperatur während der Bebrütung", "Geschlechtschromosomen wie beim Menschen", "Die Größe des Eis"],
+        correct: 0,
+        explanation: "Sie hat eine temperaturabhängige Geschlechtsbestimmung: Schon wenige Grad Unterschied im Nest verschieben das Verhältnis von Männchen und Weibchen deutlich."
+      }
+    },
+
+    /* ---------- Griechische Mythologie ---------- */
+    {
+      id: "gm-01", category: "Griechische Mythologie", tagColor: "#7C3AED",
+      title: "Am Anfang war das Chaos",
+      story: "Laut Hesiods „Theogonie“, dem wichtigsten griechischen Schöpfungsgedicht aus dem 7. Jahrhundert vor Christus, stand am Anfang das Chaos – eine gähnende, leere Weite. Aus ihr gingen Gaia, die Erde, der finstere Tartaros und Eros, die Kraft der Anziehung, hervor. Gaia gebar Uranos, den Himmel, und mit ihm die zwölf Titanen, die einäugigen Kyklopen und die hundertarmigen Hekatoncheiren. Weil Uranos seine Kinder im Leib der Erde gefangen hielt, stiftete Gaia ihren jüngsten Sohn Kronos an, den Vater mit einer Sichel zu entmachten.",
+      funFact: "„Chaos“ bedeutete ursprünglich gar nicht Unordnung, sondern „klaffender Raum“ – das Wort ist mit dem griechischen Verb für „gähnen“ verwandt. Die heutige Bedeutung von Durcheinander entstand erst viel später.",
+      quiz: {
+        question: "Wer entmachtete den Himmelsgott Uranos?",
+        options: ["Zeus", "Prometheus", "Kronos"],
+        correct: 2,
+        explanation: "Kronos, der jüngste Titan, griff auf Gaias Anstiftung zur Sichel. Später ereilte ihn selbst dasselbe Schicksal – durch seinen Sohn Zeus."
+      }
+    },
+    {
+      id: "gm-02", category: "Griechische Mythologie", tagColor: "#7C3AED",
+      title: "Ein Stein in Windeln",
+      story: "Kronos fürchtete eine Prophezeiung, nach der ihn eines seiner Kinder stürzen würde – also verschlang er Hestia, Demeter, Hera, Hades und Poseidon gleich nach der Geburt. Als Zeus zur Welt kam, versteckte ihn seine Mutter Rhea in einer Höhle auf Kreta und reichte Kronos stattdessen einen in Windeln gewickelten Stein, den er ahnungslos hinunterschlang. Erwachsen geworden, zwang Zeus seinen Vater, die Geschwister wieder auszuspeien. Es folgte die Titanomachie, ein zehnjähriger Krieg zwischen Göttern und Titanen, den die Olympier mit Hilfe der Kyklopen gewannen – sie schmiedeten Zeus seinen Blitz.",
+      funFact: "Der ausgespiene Stein soll später in Delphi aufbewahrt worden sein. Der antike Reiseschriftsteller Pausanias beschreibt dort einen kleinen Stein, den man täglich mit Öl salbte – er galt als eben jener Stein des Kronos.",
+      quiz: {
+        question: "Was verschlang Kronos anstelle des neugeborenen Zeus?",
+        options: ["Einen Granatapfel", "Einen in Windeln gewickelten Stein", "Ein junges Lamm"],
+        correct: 1,
+        explanation: "Rhea überlistete Kronos mit einem gewickelten Stein. So konnte Zeus auf Kreta heimlich aufwachsen und später seinen Vater stürzen."
+      }
+    },
+    {
+      id: "gm-03", category: "Griechische Mythologie", tagColor: "#7C3AED",
+      title: "Zwölf Götter auf dem Olymp",
+      story: "Die wichtigsten Götter der Griechen residierten der Sage nach auf dem Olymp, mit 2.918 Metern dem höchsten Berg Griechenlands. Zu den Zwölf Olympiern zählen meist Zeus, Hera, Poseidon, Demeter, Athene, Apollon, Artemis, Ares, Aphrodite, Hephaistos, Hermes sowie Hestia oder Dionysos. Sie ernährten sich von Nektar und Ambrosia, und statt Blut floss in ihren Adern das goldene Ichor. Hades gehört, obwohl er ein Bruder des Zeus ist, meist nicht dazu – er herrscht fern vom Olymp über die Unterwelt.",
+      funFact: "Die Liste der Zwölf war nie ganz fest. Einer späten Überlieferung zufolge überließ die friedliebende Herdgöttin Hestia ihren Platz freiwillig dem jungen Weingott Dionysos, um Streit zu vermeiden.",
+      quiz: {
+        question: "Warum zählt Hades meist nicht zu den Zwölf Olympiern?",
+        options: ["Er herrscht in der Unterwelt statt auf dem Olymp", "Er ist kein Gott, sondern ein Titan", "Er wurde von Zeus verbannt"],
+        correct: 0,
+        explanation: "Hades ist ein vollwertiger Gott und Bruder des Zeus – sein Reich liegt aber unter der Erde. Deshalb wird er meist nicht zu den Göttern des Olymp gezählt."
+      }
+    },
+    {
+      id: "gm-04", category: "Griechische Mythologie", tagColor: "#7C3AED",
+      title: "Prometheus, der Vorausdenkende",
+      story: "Der Titan Prometheus, dessen Name „der Vorausdenkende“ bedeutet, gilt als großer Freund der Menschen – manchen Sagen zufolge formte er sie sogar aus Lehm. Beim Opfer in Mekone überlistete er Zeus: Er ließ ihn zwischen glänzend in Fett gehüllten Knochen und unscheinbar verpacktem Fleisch wählen, und Zeus griff zu den Knochen. Zur Strafe verweigerte Zeus den Menschen das Feuer, doch Prometheus stahl es und brachte es ihnen heimlich zurück. Dafür wurde er an einen Felsen im Kaukasus geschmiedet, wo ein Adler täglich von seiner Leber fraß, die nachts nachwuchs – bis Herakles ihn befreite.",
+      funFact: "Die menschliche Leber kann tatsächlich nachwachsen: Selbst wenn große Teile entfernt werden, regeneriert sie sich innerhalb weniger Wochen fast vollständig. Ob die alten Griechen das wussten, ist unter Historikern umstritten.",
+      quiz: {
+        question: "Worin schmuggelte Prometheus das Feuer zu den Menschen?",
+        options: ["In einer bronzenen Urne", "In einem hohlen Riesenfenchel-Stängel", "In einer Muschel des Poseidon"],
+        correct: 1,
+        explanation: "Im trockenen Mark des Riesenfenchels (griechisch Narthex) kann Glut lange weiterglimmen – ein cleveres Detail, das zeigt, wie praktisch die Mythen oft gedacht waren."
+      }
+    },
+    {
+      id: "gm-05", category: "Griechische Mythologie", tagColor: "#7C3AED",
+      title: "Hades, Herr der Schatten",
+      story: "Nach dem Sieg über die Titanen losten die Brüder Zeus, Poseidon und Hades die Welt unter sich aus: Zeus erhielt den Himmel, Poseidon das Meer und Hades die Unterwelt. Anders als oft dargestellt, war er kein Bösewicht, sondern ein strenger, gerechter Herrscher, der über die Ordnung des Totenreichs wachte. Der Fährmann Charon setzte die Seelen über den Fluss Acheron, der dreiköpfige Hund Kerberos bewachte das Tor. Weil Persephone, die Hades entführt hatte, in der Unterwelt Granatapfelkerne aß, muss sie jedes Jahr einige Monate bei ihm verbringen – dann trauert ihre Mutter Demeter, und die Natur ruht im Winter.",
+      funFact: "Hades trug auch den Beinamen Plouton, „der Reiche“ – denn aus der Erde stammen Getreide, Silber und Gold. Über den römischen Pluto gelangte dieser Name schließlich auch an den Zwergplaneten.",
+      quiz: {
+        question: "Wie erklärt der Mythos von Persephone den Winter?",
+        options: ["Zeus verbannt die Sonne für einige Monate", "Hades lässt den Fluss Styx über die Erde treten", "Persephone weilt einen Teil des Jahres in der Unterwelt, und Demeter trauert"],
+        correct: 2,
+        explanation: "Solange Persephone bei Hades ist, lässt ihre Mutter Demeter, Göttin des Ackerbaus, aus Kummer nichts wachsen. Kehrt die Tochter zurück, erblüht die Natur im Frühling neu."
+      }
+    },
+
+    /* ---------- Deutsche Vogelwelt ---------- */
+    {
+      id: "dv-01", category: "Deutsche Vogelwelt", tagColor: "#0EA5E9",
+      title: "Bleiben oder ziehen?",
+      story: "Viele heimische Brutvögel verlassen Deutschland im Herbst – andere trotzen dem Winter. Standvögel wie Kohlmeise, Haussperling oder Buntspecht bleiben ganzjährig und stellen im Winter auf Samen und Vorräte um. Langstreckenzieher wie Mauersegler, Kuckuck oder Rauchschwalbe fliegen bis ins Afrika südlich der Sahara, Kurzstreckenzieher wie der Hausrotschwanz überwintern im Mittelmeerraum. Dazwischen stehen Teilzieher wie Amsel, Star und Rotkehlchen, bei denen ein Teil der Population zieht und ein anderer bleibt. Zur Orientierung nutzen Zugvögel Sonne, Sterne und das Magnetfeld der Erde.",
+      funFact: "Mauersegler sind wahre Luftakrobaten: Außerhalb der Brutzeit landen manche Tiere bis zu zehn Monate lang kein einziges Mal – sie fressen, trinken und schlafen sogar im Flug.",
+      quiz: {
+        question: "Was ist ein Teilzieher?",
+        options: ["Ein Vogel, der nur einen Teil der Strecke fliegt und dann umkehrt", "Eine Art, bei der nur ein Teil der Population im Winter wegzieht", "Ein Vogel, der nur jedes zweite Jahr zieht"],
+        correct: 1,
+        explanation: "Bei Teilziehern wie der Amsel ziehen manche Individuen in den Süden, während andere – oft ältere Männchen oder Stadtvögel – im Brutgebiet überwintern."
+      }
+    },
+    {
+      id: "dv-02", category: "Deutsche Vogelwelt", tagColor: "#0EA5E9",
+      title: "Der fliegende Edelstein",
+      story: "Der Eisvogel ist kaum größer als ein Spatz, doch sein Gefieder leuchtet in schillerndem Türkis und Orange. Das Blau ist dabei keine Pigmentfarbe, sondern eine Strukturfarbe: Winzige Nanostrukturen in den Federn streuen das Licht so, dass vor allem blaue Wellenlängen zurückgeworfen werden. Von einem Ansitz über dem Wasser stößt er kopfüber hinab und packt kleine Fische mit seinem dolchartigen Schnabel. Seine Brutröhre gräbt er bis zu einem Meter tief in steile Uferwände – naturnahe Ufer sind für ihn deshalb überlebenswichtig.",
+      funFact: "Der Schnabel des Eisvogels stand Pate für den japanischen Hochgeschwindigkeitszug Shinkansen 500: Mit der schnabelförmigen Nase verschwand der laute Knall bei der Einfahrt in Tunnel, und der Zug wurde zugleich sparsamer.",
+      quiz: {
+        question: "Warum schimmert das Gefieder des Eisvogels blau?",
+        options: ["Wegen eines seltenen blauen Farbstoffs", "Weil es das Blau des Wassers spiegelt", "Durch Lichtstreuung an Nanostrukturen der Federn"],
+        correct: 2,
+        explanation: "Das Blau ist eine Strukturfarbe: Feinste Strukturen in den Federn lenken das Licht so, dass Blau verstärkt wird. Zerreibt man eine Feder, verschwindet die Farbe."
+      }
+    },
+    {
+      id: "dv-03", category: "Deutsche Vogelwelt", tagColor: "#0EA5E9",
+      title: "Trommelwirbel im Frühlingswald",
+      story: "Der Buntspecht ist der häufigste Specht Deutschlands und leicht an seinem schwarz-weißen Gefieder und dem leuchtend roten Unterschwanz zu erkennen. Im Frühjahr trommelt er mit mehr als zehn Schlägen pro Sekunde auf hohle Äste – nicht zur Nahrungssuche, sondern um sein Revier zu markieren und Weibchen anzulocken. Beim Klettern stützt er sich auf seine steifen Schwanzfedern, und seine Füße mit je zwei nach vorn und nach hinten gerichteten Zehen krallen sich in die Rinde. Eine extrem lange Zunge, die in einer Schlaufe um den Schädel geführt wird, angelt Larven selbst aus tiefen Bohrgängen.",
+      funFact: "Lange galt der Spechtschädel als eingebauter Stoßdämpfer. Hochgeschwindigkeitsaufnahmen zeigten 2022 jedoch: Der Kopf federt kaum ab – er wirkt eher wie ein harter Hammer. Sein kleines, leichtes Gehirn verkraftet die Wucht trotzdem.",
+      quiz: {
+        question: "Wozu trommelt der Buntspecht im Frühjahr vor allem?",
+        options: ["Um Insekten aus der Rinde zu scheuchen", "Um seinen Schnabel zu schärfen", "Um sein Revier zu markieren und Partner anzulocken"],
+        correct: 2,
+        explanation: "Das Trommeln ist die „Stimme“ des Spechts: ein akustisches Signal, das weit durch den Wald trägt – vergleichbar mit dem Reviergesang der Singvögel."
+      }
+    },
+    {
+      id: "dv-04", category: "Deutsche Vogelwelt", tagColor: "#0EA5E9",
+      title: "Das Rotkehlchen und der Magnetsinn",
+      story: "Mit seinen großen dunklen Augen und der orangeroten Brust ist das Rotkehlchen einer der beliebtesten Gartenvögel. Hinter dem niedlichen Äußeren steckt ein wehrhafter Charakter: Männchen wie Weibchen verteidigen auch im Winter eigene Reviere und singen dafür sogar in der kalten Jahreszeit. Oft folgt es Gärtnern beim Umgraben, um aufgeworfene Würmer zu erbeuten – ein Verhalten, das vermutlich auf das Begleiten wühlender Wildschweine zurückgeht. Weil es in der Dämmerung und an beleuchteten Straßen auch nachts singt, wird es gern für eine Nachtigall gehalten.",
+      funFact: "Am Rotkehlchen wiesen Frankfurter Forscher in den 1960er-Jahren erstmals nach, dass Zugvögel einen Magnetkompass besitzen. Nach heutigem Wissensstand sitzt dieser Sinn in lichtempfindlichen Proteinen im Auge – Vögel „sehen“ das Magnetfeld womöglich.",
+      quiz: {
+        question: "Welche Entdeckung gelang Forschern am Rotkehlchen?",
+        options: ["Der Magnetkompass von Zugvögeln", "Das Ultraschallhören von Singvögeln", "Die Winterstarre bei Kleinvögeln"],
+        correct: 0,
+        explanation: "Versuche mit Rotkehlchen in künstlichen Magnetfeldern zeigten, dass sie ihre Zugrichtung am Erdmagnetfeld ausrichten – ein Meilenstein der Verhaltensbiologie."
+      }
+    },
+    {
+      id: "dv-05", category: "Deutsche Vogelwelt", tagColor: "#0EA5E9",
+      title: "Gesang, Ruf und Morgenkonzert",
+      story: "Ornithologen unterscheiden zwischen Gesang und Ruf: Der oft komplexe Gesang dient vor allem der Revierverteidigung und Partnerwerbung, kurze Rufe dagegen warnen vor Feinden oder halten den Kontakt im Schwarm. Manche Arten erkennt man sofort am Klang – der Zilpzalp singt seinen eigenen Namen, die Kohlmeise wiederholt ein helles „zi-zi-bä“. Erzeugt werden die Töne in der Syrinx, einem Stimmorgan an der Gabelung der Luftröhre, das zwei Töne gleichzeitig hervorbringen kann. Im Frühling setzen die Arten in fester Reihenfolge ein, der sogenannten Vogeluhr: Hausrotschwanz und Rotkehlchen beginnen lange vor Sonnenaufgang, Buchfink und Haussperling deutlich später.",
+      funFact: "Stadtvögel singen anders als ihre Artgenossen auf dem Land: Kohlmeisen in lauten Städten verlegen ihren Gesang in höhere Tonlagen, damit er nicht im tiefen Brummen des Verkehrs untergeht.",
+      quiz: {
+        question: "Wo entsteht der Gesang der Vögel?",
+        options: ["Im Kehlkopf, wie beim Menschen", "In der Syrinx an der Gabelung der Luftröhre", "In speziellen Luftsäcken im Schnabel"],
+        correct: 1,
+        explanation: "Die Syrinx sitzt tief in der Brust, wo sich die Luftröhre in die Bronchien teilt. Da sie zwei Hälften hat, können Vögel sogar zwei Töne gleichzeitig erzeugen."
+      }
+    },
+
+    /* ---------- Deutsche Pflanzenwelt ---------- */
+    {
+      id: "dp-01", category: "Deutsche Pflanzenwelt", tagColor: "#059669",
+      title: "Wettlauf gegen das Blätterdach",
+      story: "Schon im März überzieht das Buschwindröschen den Boden vieler Laubwälder mit weißen Blütenteppichen. Als Frühblüher nutzt es ein kurzes Zeitfenster: Bevor Buchen und Eichen austreiben und den Waldboden beschatten, erreicht noch ein Großteil des Sonnenlichts den Grund. Die Energie für diesen Blitzstart hat die Pflanze im Vorjahr in ihrem unterirdischen Wurzelstock gespeichert. Sobald sich das Kronendach schließt, zieht sie ihre Blätter ein und überdauert den Rest des Jahres unsichtbar im Boden. Wie viele Hahnenfußgewächse ist sie übrigens giftig.",
+      funFact: "Weil sich das Buschwindröschen fast nur über seinen langsam wachsenden Wurzelstock ausbreitet, kommt es oft nur wenige Meter pro Jahrhundert voran. Große Blütenteppiche gelten darum als Hinweis auf sehr alte Waldstandorte.",
+      quiz: {
+        question: "Warum blühen Frühblüher wie das Buschwindröschen so früh im Jahr?",
+        options: ["Um Frost als Schutz vor Fraßfeinden zu nutzen", "Um das Licht vor dem Laubaustrieb der Bäume zu nutzen", "Weil ihre Bestäuber nur im März fliegen"],
+        correct: 1,
+        explanation: "Im noch kahlen Wald erreicht viel Sonnenlicht den Boden. Diese kurze Lichtphase nutzen Frühblüher für Blüte und Photosynthese, bevor das Blätterdach sie beschattet."
+      }
+    },
+    {
+      id: "dp-02", category: "Deutsche Pflanzenwelt", tagColor: "#059669",
+      title: "Kamille, Johanniskraut & Co.",
+      story: "Viele heimische Wildpflanzen sind seit Jahrhunderten fester Bestandteil der Volksheilkunde – einige ihrer Wirkungen sind heute wissenschaftlich gut belegt. Die Echte Kamille enthält entzündungshemmende Stoffe wie Bisabolol und Chamazulen, das ihrem ätherischen Öl die tiefblaue Farbe verleiht. Johanniskraut, das um den Johannistag am 24. Juni blüht, wird bei leichten depressiven Verstimmungen eingesetzt, kann aber die Wirkung anderer Medikamente wie der Antibabypille abschwächen. Und ein zerriebenes Blatt Spitzwegerich lindert unterwegs den Juckreiz nach Mückenstichen.",
+      funFact: "Hält man ein Blatt des Echten Johanniskrauts gegen das Licht, wirkt es wie durchlöchert. Die hellen Punkte sind Öldrüsen – daher der wissenschaftliche Name Hypericum perforatum, „das Durchlöcherte“.",
+      quiz: {
+        question: "Woran erkennt man die Echte Kamille sicher?",
+        options: ["An ihrem hohlen, kegelförmigen Blütenboden", "An ihren gelben Zungenblüten", "An ihrem völlig geruchlosen Kraut"],
+        correct: 0,
+        explanation: "Schneidet man das Blütenköpfchen längs durch, ist es bei der Echten Kamille innen hohl. Ähnliche Arten wie die Geruchlose Kamille haben einen gefüllten Blütenboden."
+      }
+    },
+    {
+      id: "dp-03", category: "Deutsche Pflanzenwelt", tagColor: "#059669",
+      title: "Das Land der Buchen",
+      story: "Ohne menschlichen Einfluss wäre Deutschland zum größten Teil von Buchen- und Buchenmischwäldern bedeckt – die Rotbuche ist hier die natürliche Königin des Waldes. Heute prägen jedoch Nadelbäume das Bild: Fichte und Kiefer machen zusammen gut 40 Prozent der Waldfläche aus, weil sie seit dem 19. Jahrhundert großflächig als schnellwachsendes Bauholz gepflanzt wurden. Hitze, Dürre und Borkenkäfer haben vor allem den Fichtenforsten in den letzten Jahren schwer zugesetzt. Förster setzen deshalb auf den Waldumbau hin zu klimastabileren Mischwäldern mit Buche, Eiche, Tanne und weiteren Arten.",
+      funFact: "Rund ein Viertel des weltweiten Verbreitungsgebiets der Rotbuche liegt in Deutschland. Besonders alte Buchenwälder, etwa im Nationalpark Hainich oder im Kellerwald, gehören deshalb zum UNESCO-Weltnaturerbe.",
+      quiz: {
+        question: "Welche Baumart würde in Deutschland ohne menschlichen Einfluss dominieren?",
+        options: ["Die Gemeine Fichte", "Die Waldkiefer", "Die Rotbuche"],
+        correct: 2,
+        explanation: "Die schattentolerante Rotbuche setzt sich auf den meisten Standorten Mitteleuropas gegen andere Baumarten durch. Fichten- und Kiefernforste sind überwiegend menschengemacht."
+      }
+    },
+    {
+      id: "dp-04", category: "Deutsche Pflanzenwelt", tagColor: "#059669",
+      title: "Neue Nachbarn: Neophyten",
+      story: "Als Neophyten bezeichnet man Pflanzen, die nach 1492 – also nach Beginn des Austauschs mit Amerika – durch den Menschen in neue Gebiete gelangt sind. Die meisten fügen sich unauffällig ein, und manche sind uns sogar unverzichtbar geworden, etwa Kartoffel oder Tomate. Einige wenige Arten gelten jedoch als invasiv: Das Drüsige Springkraut aus dem Himalaya schleudert seine Samen mehrere Meter weit und bildet an Bachufern dichte Bestände. Der Riesen-Bärenklau aus dem Kaukasus enthält Stoffe, die bei Hautkontakt und Sonnenlicht schwere, verbrennungsähnliche Wunden verursachen.",
+      funFact: "Der Japanische Staudenknöterich kann in der Hauptwachstumszeit mehrere Zentimeter pro Tag zulegen und drückt sich mit seinen Trieben sogar durch Asphalt. Schon ein fingernagelgroßes Wurzelstück reicht, um eine neue Pflanze zu bilden.",
+      quiz: {
+        question: "Welches Stichjahr trennt Neophyten von Archäophyten?",
+        options: ["1492", "1648", "1871"],
+        correct: 0,
+        explanation: "1492, das Jahr der Ankunft des Kolumbus in Amerika, markiert den Beginn des weltweiten Pflanzenaustauschs. Früher eingeführte Arten wie der Klatschmohn heißen Archäophyten."
+      }
+    },
+
+    /* ---------- Umweltschutz & Kreislaufwirtschaft ---------- */
+    {
+      id: "uk-01", category: "Umweltschutz & Kreislaufwirtschaft", tagColor: "#65A30D",
+      title: "Cradle to Cradle: Abfall ist Nahrung",
+      story: "Das Cradle-to-Cradle-Prinzip („von der Wiege zur Wiege“) wurde von dem deutschen Chemiker Michael Braungart und dem US-Architekten William McDonough entwickelt. Statt Produkte nach Gebrauch zu entsorgen – also „von der Wiege zur Bahre“ –, sollen alle Materialien dauerhaft in Kreisläufen bleiben. Verbrauchsgüter wie Textilfasern oder Verpackungen werden so gestaltet, dass sie im biologischen Kreislauf gefahrlos kompostiert werden können. Langlebige Materialien wie Metalle oder bestimmte Kunststoffe zirkulieren dagegen sortenrein im technischen Kreislauf und werden immer wieder zu gleichwertigen Produkten.",
+      funFact: "Braungart kritisiert reine Öko-Effizienz: Etwas „weniger schlecht“ zu machen, sei noch lange nicht gut. Sein Ziel ist Öko-Effektivität – Produkte, die der Umwelt im besten Fall sogar nützen, so wie ein Kirschbaum, der verschwenderisch blüht und dabei den Boden nährt.",
+      quiz: {
+        question: "Welche beiden Kreisläufe unterscheidet Cradle to Cradle?",
+        options: ["Den biologischen und den technischen Kreislauf", "Den nationalen und den globalen Kreislauf", "Den Energie- und den Wasserkreislauf"],
+        correct: 0,
+        explanation: "Biologische Nährstoffe kehren als Kompost in die Natur zurück, technische Nährstoffe werden ohne Qualitätsverlust immer wieder zu neuen Produkten verarbeitet."
+      }
+    },
+    {
+      id: "uk-02", category: "Umweltschutz & Kreislaufwirtschaft", tagColor: "#65A30D",
+      title: "Mikroplastik auf Weltreise",
+      story: "Als Mikroplastik gelten Kunststoffteilchen, die kleiner als fünf Millimeter sind. Primäres Mikroplastik wird bewusst in dieser Größe hergestellt oder entsteht direkt bei der Nutzung, etwa durch Reifenabrieb; sekundäres bildet sich, wenn größere Kunststoffteile durch Sonne, Wellen und Reibung zerfallen. Über Straßenabläufe, Abwasser und Flüsse gelangen die Partikel ins Meer, werden mit Gischt und Wind in die Atmosphäre getragen und regnen wieder ab – selbst im Schnee der Arktis und auf Alpengipfeln wurden sie nachgewiesen. Kläranlagen halten zwar einen Großteil zurück, doch der Klärschlamm landet teils wieder auf Äckern.",
+      funFact: "Die größte Quelle für Mikroplastik in Deutschland ist laut einer Studie des Fraunhofer-Instituts UMSICHT weder Kosmetik noch Kleidung, sondern der Abrieb von Autoreifen – über ein Kilogramm pro Kopf und Jahr.",
+      quiz: {
+        question: "Was ist laut der Fraunhofer-Studie die größte Mikroplastik-Quelle in Deutschland?",
+        options: ["Peelings und Duschgele", "Reifenabrieb im Straßenverkehr", "Plastiktüten aus dem Supermarkt"],
+        correct: 1,
+        explanation: "Reifenabrieb liegt mit Abstand vorn. Mikroperlen aus Kosmetik machen nur einen sehr kleinen Anteil der gesamten Mikroplastik-Emissionen aus."
+      }
+    },
+    {
+      id: "uk-03", category: "Umweltschutz & Kreislaufwirtschaft", tagColor: "#65A30D",
+      title: "Der Rebound-Effekt",
+      story: "Effizientere Technik spart nicht automatisch Ressourcen – manchmal verpufft die Ersparnis ganz oder teilweise. Beim direkten Rebound-Effekt wird die günstigere Leistung einfach häufiger genutzt: Mit sparsamen LED-Lampen beleuchten viele Menschen mehr Flächen und länger als zuvor. Beim indirekten Rebound fließt das eingesparte Geld in anderen Konsum, etwa wenn gesparte Heizkosten eine zusätzliche Flugreise finanzieren. Übersteigt der Mehrverbrauch die Einsparung sogar, spricht man von Backfire. Als Gegenmittel diskutieren Fachleute die Suffizienz – also bewusst weniger zu verbrauchen.",
+      funFact: "Schon 1865 beobachtete der britische Ökonom William Stanley Jevons, dass effizientere Dampfmaschinen den Kohleverbrauch Englands nicht senkten, sondern steigerten. Dieses Jevons-Paradoxon gilt als Urform des Rebound-Effekts.",
+      quiz: {
+        question: "Welches Beispiel beschreibt einen indirekten Rebound-Effekt?",
+        options: ["Ein sparsames Auto wird öfter gefahren", "Eine LED-Lampe hält länger als eine Glühbirne", "Mit dem gesparten Heizgeld wird eine Flugreise bezahlt"],
+        correct: 2,
+        explanation: "Beim indirekten Rebound wird die Ersparnis in einem anderen Bereich ausgegeben. Das öfter gefahrene Sparauto wäre dagegen ein direkter Rebound."
+      }
+    },
+    {
+      id: "uk-04", category: "Umweltschutz & Kreislaufwirtschaft", tagColor: "#65A30D",
+      title: "Upcycling: Aus alt mach wertvoll",
+      story: "Beim Upcycling werden ausgediente Materialien in Produkte verwandelt, die einen höheren Wert haben als das Ausgangsmaterial – aus Fahrradschläuchen werden Gürtel, aus Werbebannern Taschen, aus alten Fenstern Gewächshäuser. Das Gegenstück ist das Downcycling, bei dem die Qualität mit jedem Durchlauf sinkt, etwa wenn die Fasern von Recyclingpapier immer kürzer werden. Upcycling spart Rohstoffe und die Energie für aufwendiges Einschmelzen oder Zerkleinern. In der Abfallhierarchie des deutschen Kreislaufwirtschaftsgesetzes steht jedoch noch eine Stufe darüber: Abfall gar nicht erst entstehen zu lassen.",
+      funFact: "Eine der bekanntesten Upcycling-Marken entstand 1993 in Zürich: Zwei Grafikdesigner-Brüder nähten sich aus gebrauchten Lkw-Planen, Fahrradschläuchen und Autogurten wasserfeste Kuriertaschen – heute ein weltweit gefragtes Designobjekt.",
+      quiz: {
+        question: "Welche Stufe steht in der Abfallhierarchie ganz oben?",
+        options: ["Recycling", "Energetische Verwertung", "Vermeidung"],
+        correct: 2,
+        explanation: "Die Hierarchie lautet: Vermeidung, Vorbereitung zur Wiederverwendung, Recycling, sonstige (etwa energetische) Verwertung und erst zuletzt Beseitigung."
+      }
+    },
+
+    /* ---------- Kosmos allgemein ---------- */
+    {
+      id: "ko-01", category: "Kosmos allgemein", tagColor: "#2563EB",
+      title: "Neutronensterne: Ein Berg im Teelöffel",
+      story: "Wenn ein massereicher Stern am Ende seines Lebens in einer Supernova explodiert, kann sein Kern zu einem Neutronenstern kollabieren. Dabei wird mehr als die Masse unserer Sonne auf eine Kugel von nur etwa 20 Kilometern Durchmesser zusammengepresst – so dicht, dass Elektronen und Protonen zu Neutronen verschmelzen. Ein Teelöffel dieser Materie würde auf der Erde rund eine Milliarde Tonnen wiegen. Viele Neutronensterne rotieren rasend schnell und senden dabei wie ein kosmischer Leuchtturm regelmäßige Strahlungspulse aus – man nennt sie Pulsare.",
+      funFact: "Als die Astronomin Jocelyn Bell Burnell 1967 den ersten Pulsar entdeckte, waren die Signale so regelmäßig, dass das Team sie scherzhaft „LGM-1“ taufte – für „Little Green Men“.",
+      quiz: {
+        question: "Wie groß ist ein typischer Neutronenstern im Durchmesser?",
+        options: ["Etwa 20 Kilometer", "Etwa so groß wie die Erde", "Etwa so groß wie die Sonne"],
+        correct: 0,
+        explanation: "Ein Neutronenstern ist kaum größer als eine Großstadt, enthält aber mehr Masse als die Sonne – daraus ergibt sich seine unvorstellbare Dichte."
+      }
+    },
+    {
+      id: "ko-02", category: "Kosmos allgemein", tagColor: "#2563EB",
+      title: "Der Ereignishorizont",
+      story: "Ein Schwarzes Loch ist ein Bereich, in dem Masse so stark konzentriert ist, dass nichts seiner Anziehung entkommen kann. Die Grenze, ab der selbst Licht nicht mehr entweichen kann, heißt Ereignishorizont – er ist keine feste Oberfläche, sondern ein Punkt ohne Wiederkehr. Für einen fernen Beobachter scheint ein hineinfallendes Objekt am Horizont immer langsamer zu werden, zu erstarren und rötlich zu verblassen, weil die Zeit dort extrem gedehnt wird. 2019 gelang dem Event Horizon Telescope das erste Bild vom Schatten eines Schwarzen Lochs im Zentrum der Galaxie M87.",
+      funFact: "Würde man die Erde auf die Größe ihres Ereignishorizonts zusammenpressen, wäre sie nur etwa 1,8 Zentimeter groß – kleiner als eine Murmel. Bei der Sonne wären es rund sechs Kilometer.",
+      quiz: {
+        question: "Was kennzeichnet den Ereignishorizont eines Schwarzen Lochs?",
+        options: ["Er ist die feste, glühende Oberfläche des Schwarzen Lochs", "Ab ihm kann nicht einmal mehr Licht entkommen", "Er ist die Grenze, ab der Sterne Wasserstoff verbrennen"],
+        correct: 1,
+        explanation: "Innerhalb des Ereignishorizonts müsste man schneller als das Licht sein, um zu entkommen – und das ist nach der Relativitätstheorie unmöglich."
+      }
+    },
+    {
+      id: "ko-03", category: "Kosmos allgemein", tagColor: "#2563EB",
+      title: "Das Echo des Urknalls",
+      story: "Rund 380.000 Jahre nach dem Urknall war das Universum so weit abgekühlt, dass sich Elektronen und Atomkerne zu neutralen Atomen verbinden konnten. Plötzlich wurde der Kosmos durchsichtig, und das damals freigesetzte Licht durchquert das All bis heute. Durch die Ausdehnung des Universums wurde es inzwischen zu Mikrowellenstrahlung mit einer Temperatur von nur etwa 2,7 Kelvin gestreckt – das ist die kosmische Hintergrundstrahlung. Ihre winzigen Temperaturschwankungen von etwa einem Hunderttausendstel verraten, wo sich später Galaxien und Galaxienhaufen bildeten.",
+      funFact: "Entdeckt wurde die Strahlung 1964 zufällig von Arno Penzias und Robert Wilson. Sie hielten das hartnäckige Rauschen ihrer Antenne zunächst für eine Störung durch Taubenkot – und erhielten später dafür den Nobelpreis für Physik.",
+      quiz: {
+        question: "Welche Temperatur hat die kosmische Hintergrundstrahlung heute?",
+        options: ["Etwa 2,7 Kelvin", "Etwa 27 Kelvin", "Etwa 273 Kelvin"],
+        correct: 0,
+        explanation: "2,7 Kelvin sind nur knapp über dem absoluten Nullpunkt. Ursprünglich war die Strahlung rund 3.000 Kelvin heiß – die Ausdehnung des Alls hat sie extrem abgekühlt."
+      }
+    },
+    {
+      id: "ko-04", category: "Kosmos allgemein", tagColor: "#2563EB",
+      title: "Unser Sonnensystem im Maßstab",
+      story: "Stell dir die Sonne als Kugel mit einem Meter Durchmesser vor. Die Erde wäre dann knapp einen Zentimeter groß – etwa wie eine Erbse – und würde in rund 107 Metern Entfernung kreisen. Jupiter, der größte Planet, hätte die Größe einer Pampelmuse und wäre gut einen halben Kilometer entfernt, Neptun eine Walnuss in über drei Kilometern Abstand. Der nächste Stern, Proxima Centauri, läge in diesem Modell rund 29.000 Kilometer weit weg – fast drei Viertel des Erdumfangs. Das Licht braucht für die echte Strecke von der Sonne zur Erde etwa 8 Minuten und 20 Sekunden.",
+      funFact: "Die Raumsonde Voyager 1, 1977 gestartet, ist das am weitesten entfernte Objekt, das Menschen gebaut haben. Etwa Ende 2026 erreicht sie eine Entfernung von einem Lichttag – ihre Funksignale sind dann 24 Stunden zur Erde unterwegs.",
+      quiz: {
+        question: "Wie weit wäre die Erde von einer ein Meter großen Sonne entfernt?",
+        options: ["Etwa 10 Meter", "Etwa 107 Meter", "Etwa 2 Kilometer"],
+        correct: 1,
+        explanation: "Die Erde ist etwa 107 Sonnendurchmesser von der Sonne entfernt. Im Meter-Modell entspricht das ungefähr der Länge eines Fußballfeldes."
+      }
+    },
+
+    /* ---------- Erde allgemein ---------- */
+    {
+      id: "er-01", category: "Erde allgemein", tagColor: "#DC2626",
+      title: "Kontinente auf Wanderschaft",
+      story: "1912 stellte der deutsche Meteorologe Alfred Wegener die These auf, dass alle Kontinente einst einen Superkontinent bildeten und seitdem auseinanderdriften – und wurde dafür jahrzehntelang belächelt. Erst in den 1960er-Jahren lieferten Messungen am Meeresboden den Beweis: Die Erdkruste besteht aus starren Lithosphärenplatten, die auf dem zähplastischen Erdmantel gleiten. An Mittelozeanischen Rücken wie in Island weichen Platten auseinander und neuer Meeresboden entsteht, an Subduktionszonen taucht eine Platte unter die andere ab. Wo Kontinente kollidieren, falten sich Gebirge wie der Himalaya auf.",
+      funFact: "Die Platten bewegen sich etwa so schnell, wie unsere Fingernägel wachsen – wenige Zentimeter pro Jahr. Der Atlantik ist seit der Reise des Kolumbus 1492 dadurch um gut zehn Meter breiter geworden.",
+      quiz: {
+        question: "Wer begründete die Theorie der Kontinentaldrift?",
+        options: ["Charles Darwin", "Alexander von Humboldt", "Alfred Wegener"],
+        correct: 2,
+        explanation: "Alfred Wegener stützte sich auf passende Küstenlinien, Fossilien und Gesteine beiderseits des Atlantiks. Den Antriebsmechanismus konnte er allerdings noch nicht erklären."
+      }
+    },
+    {
+      id: "er-02", category: "Erde allgemein", tagColor: "#DC2626",
+      title: "Oasen in ewiger Finsternis",
+      story: "1977 stießen Forscher mit dem Tauchboot Alvin am Galápagos-Rift in rund 2.500 Metern Tiefe auf eine Sensation: heiße Quellen am Meeresboden, umgeben von einer üppigen Lebensgemeinschaft. An diesen Hydrothermalquellen tritt bis zu 400 °C heißes, mineralreiches Wasser aus, das wegen des enormen Drucks nicht kocht. Wenn gelöste Metallsulfide im kalten Meerwasser ausfallen, wachsen schornsteinartige Schlote empor – die Schwarzen Raucher. Grundlage des Lebens ist hier nicht Sonnenlicht, sondern Chemosynthese: Bakterien gewinnen Energie aus Schwefelwasserstoff und bilden so die Basis der Nahrungskette.",
+      funFact: "Der Riesenröhrenwurm Riftia wird über zwei Meter lang – und besitzt weder Mund noch Darm. Er lebt vollständig von Bakterien in seinem Körper, die ihn mit Nährstoffen versorgen. Seine leuchtend roten Kiemenbüschel verdankt er einem besonderen Hämoglobin.",
+      quiz: {
+        question: "Woher stammt die Energie für das Leben an Hydrothermalquellen?",
+        options: ["Aus der Chemosynthese von Bakterien", "Aus Photosynthese im schwachen Restlicht", "Allein aus absinkendem Plankton von der Oberfläche"],
+        correct: 0,
+        explanation: "In völliger Dunkelheit nutzen Bakterien chemische Energie aus Schwefelverbindungen, um organische Stoffe aufzubauen – ganz ohne Sonnenlicht."
+      }
+    },
+    {
+      id: "er-03", category: "Erde allgemein", tagColor: "#DC2626",
+      title: "Stockwerke des Himmels",
+      story: "Die Erdatmosphäre ist in Schichten gegliedert, die sich vor allem durch ihren Temperaturverlauf unterscheiden. In der Troposphäre, die an den Polen etwa 8 und am Äquator rund 17 Kilometer hoch reicht, spielt sich fast das gesamte Wetter ab. Darüber folgt die Stratosphäre mit der schützenden Ozonschicht, die UV-Strahlung absorbiert und die Luft dort erwärmt. In der eisigen Mesosphäre bis etwa 85 Kilometer Höhe verglühen die meisten Sternschnuppen; noch höher, in der Thermosphäre, tanzen Polarlichter und kreist die Internationale Raumstation.",
+      funFact: "In der Thermosphäre kann das Gas über 1.000 °C heiß werden – trotzdem würde man dort erfrieren. Die Teilchen sind so dünn verteilt, dass sie kaum Wärme an einen Körper abgeben können.",
+      quiz: {
+        question: "In welcher Schicht verglühen die meisten Sternschnuppen?",
+        options: ["Troposphäre", "Mesosphäre", "Exosphäre"],
+        correct: 1,
+        explanation: "In der Mesosphäre ist die Luft bereits dicht genug, um Meteoroiden durch Reibung stark zu erhitzen – sie verglühen meist in 70 bis 100 Kilometern Höhe."
+      }
+    },
+    {
+      id: "er-04", category: "Erde allgemein", tagColor: "#DC2626",
+      title: "Der unsichtbare Schutzschild",
+      story: "Tief unter unseren Füßen, im flüssigen äußeren Erdkern aus Eisen und Nickel, arbeitet ein gewaltiger Dynamo: Strömungen des leitfähigen Metalls erzeugen, angetrieben von Wärme und Erdrotation, das Magnetfeld unseres Planeten. Es reicht weit ins All und lenkt den Sonnenwind – einen Strom geladener Teilchen – größtenteils um die Erde herum. Wo Teilchen an den Polen dennoch eindringen, bringen sie die Luft zum Leuchten: Polarlichter entstehen. Das Feld ist nicht starr; die magnetischen Pole wandern, und in unregelmäßigen Abständen kehrt sich das Feld sogar ganz um – zuletzt vor etwa 780.000 Jahren.",
+      funFact: "Streng physikalisch liegt in der Arktis ein magnetischer Südpol: Der Nordpol einer Kompassnadel wird schließlich vom entgegengesetzten Pol angezogen. Geografisch nennen wir ihn trotzdem den magnetischen Nordpol.",
+      quiz: {
+        question: "Wann kehrte sich das Erdmagnetfeld zuletzt vollständig um?",
+        options: ["Vor etwa 2.000 Jahren", "Vor etwa 65 Millionen Jahren", "Vor etwa 780.000 Jahren"],
+        correct: 2,
+        explanation: "Die letzte vollständige Umpolung, die Brunhes-Matuyama-Umkehr, liegt rund 780.000 Jahre zurück. Sie ist in Vulkangestein und Meeresböden magnetisch „eingefroren“."
+      }
+    },
+
+    /* ---------- Flora & Fauna in Südafrika ---------- */
+    {
+      id: "sa-01", category: "Flora & Fauna in Südafrika", tagColor: "#D97706",
+      title: "Fynbos: Das kleinste Pflanzenreich der Welt",
+      story: "Die Südspitze Afrikas bildet ein eigenes Florenreich – das kleinste der sechs weltweit und zugleich eines der artenreichsten. Auf knapp 90.000 Quadratkilometern wachsen rund 9.000 Pflanzenarten, von denen etwa 70 Prozent nirgendwo sonst vorkommen. Die typische Vegetation heißt Fynbos, Afrikaans für „feiner Busch“, nach den schmalen, harten Blättern vieler Sträucher. Dazu gehören Proteen, Hunderte Erika-Arten und binsenartige Restiogewächse. Feuer ist hier kein Feind, sondern Teil des Kreislaufs: Viele Samen keimen erst nach einem Buschbrand.",
+      funFact: "Manche Fynbos-Samen reagieren auf Rauch: Bestimmte Verbindungen darin, die sogenannten Karrikine, signalisieren ihnen, dass die Konkurrenz verbrannt ist und Licht und Nährstoffe frei werden – das Startsignal zum Keimen.",
+      quiz: {
+        question: "Was bedeutet der Begriff „Fynbos“?",
+        options: ["Feiner Busch", "Heiliger Berg", "Rotes Land"],
+        correct: 0,
+        explanation: "„Fynbos“ ist Afrikaans und bedeutet „feiner Busch“ – eine Anspielung auf die schmalen, feinen Blätter vieler typischer Sträucher."
+      }
+    },
+    {
+      id: "sa-02", category: "Flora & Fauna in Südafrika", tagColor: "#D97706",
+      title: "Die Big Five",
+      story: "Löwe, Leopard, Elefant, Nashorn und Kaffernbüffel bilden die legendären Big Five Afrikas. Der Begriff stammt nicht aus der Biologie, sondern aus der Großwildjagd: Er bezeichnete die fünf Tiere, die zu Fuß am schwierigsten und gefährlichsten zu jagen waren. Heute sind die Big Five vor allem ein Magnet für Fotosafaris, etwa im Kruger-Nationalpark, der mit rund 19.500 Quadratkilometern fast so groß ist wie Rheinland-Pfalz. Südafrika beherbergt einen großen Teil aller Nashörner der Welt, die jedoch durch Wilderei für ihr Horn stark bedroht sind.",
+      funFact: "Die Big Five zieren die südafrikanischen Rand-Banknoten: Auf den Scheinen mit dem Porträt Nelson Mandelas ist jedem Wert ein Tier zugeordnet – vom Nashorn auf dem 10-Rand-Schein bis zum Leoparden auf dem 200-Rand-Schein.",
+      quiz: {
+        question: "Woher stammt der Begriff „Big Five“?",
+        options: ["Aus einer Zählung der fünf schwersten Tiere Afrikas", "Aus der Großwildjagd", "Aus einer Tourismus-Werbekampagne der 1990er-Jahre"],
+        correct: 1,
+        explanation: "Jäger bezeichneten so die fünf Arten, die zu Fuß am gefährlichsten zu erlegen waren. Mit Größe hat die Auswahl wenig zu tun – sonst gehörten Flusspferd und Giraffe dazu."
+      }
+    },
+    {
+      id: "sa-03", category: "Flora & Fauna in Südafrika", tagColor: "#D97706",
+      title: "Der Klippschliefer – ein Mini-Elefant?",
+      story: "Auf den Felsen des Tafelbergs sonnen sich oft Gruppen pelziger, murmeltiergroßer Tiere: Kap-Klippschliefer, auf Afrikaans „Dassies“ genannt. Obwohl sie wie Nagetiere aussehen, sind ihre nächsten lebenden Verwandten Elefanten und Seekühe – das verraten Zähne, Skelett und Erbgut. Ihre Körpertemperatur können sie nur schlecht regulieren, deshalb wärmen sie sich morgens gemeinsam in der Sonne auf. Ihre Fußsohlen sind weich, gummiartig und werden von Drüsen feucht gehalten, sodass sie wie Saugnäpfe auf steilem Fels haften.",
+      funFact: "Klippschliefer nutzen über Generationen dieselben Latrinen. Ihr eingetrockneter Urin, das „Hyraceum“, bildet Schichten, die teils Zehntausende Jahre alt sind – Forscher lesen darin wie in einem Archiv, wie sich das Klima verändert hat.",
+      quiz: {
+        question: "Welche Tiere sind die nächsten lebenden Verwandten des Klippschliefers?",
+        options: ["Murmeltiere und Biber", "Kaninchen und Hasen", "Elefanten und Seekühe"],
+        correct: 2,
+        explanation: "Klippschliefer, Elefanten und Seekühe gehen auf gemeinsame afrikanische Vorfahren zurück. Ein Hinweis: Ihre oberen Schneidezähne wachsen ähnlich wie kleine Stoßzähne."
+      }
+    },
+    {
+      id: "sa-04", category: "Flora & Fauna in Südafrika", tagColor: "#D97706",
+      title: "Pinguine im Sonnenschein",
+      story: "Der Brillenpinguin ist die einzige Pinguinart, die auf dem afrikanischen Kontinent brütet – an den Küsten Südafrikas und Namibias. Bekannt ist er für seine eselsartigen Rufe, die ihm im Englischen den Spitznamen „Jackass Penguin“ eingebracht haben. Berühmt ist die Kolonie am Boulders Beach bei Kapstadt, wo die Vögel zwischen Granitfelsen und Badegästen watscheln. Seit 2024 stuft die Weltnaturschutzunion IUCN die Art als vom Aussterben bedroht ein: Überfischung von Sardinen und Sardellen nimmt ihnen die Nahrung, und der historische Abbau von Guano zerstörte ihre Nistplätze.",
+      funFact: "Die rosafarbenen, unbefiederten Hautstellen über den Augen sind eine eingebaute Klimaanlage: Wird es heiß, strömt mehr Blut hindurch und gibt Wärme an die Luft ab – die Flecken leuchten dann kräftiger rosa.",
+      quiz: {
+        question: "Warum war der Guano-Abbau für die Brillenpinguine so verheerend?",
+        options: ["Guano war ihre wichtigste Nahrungsquelle", "Sie gruben ihre Nesthöhlen in die dicken Guanoschichten", "Der Abbau vergiftete das Meerwasser"],
+        correct: 1,
+        explanation: "In den meterdicken Guanoschichten legten die Pinguine kühle, geschützte Bruthöhlen an. Nach dem Abbau als Dünger mussten sie ungeschützt in der prallen Sonne brüten."
+      }
+    },
+
+    /* ---------- Vorschlag: Meeresbiologie & Tiefsee ---------- */
+    {
+      id: "mb-01", category: "Meeresbiologie & Tiefsee", tagColor: "#0D9488",
+      title: "Lichtshow in der Tiefe",
+      story: "Unterhalb von etwa 200 Metern wird das Sonnenlicht schwach, ab rund 1.000 Metern herrscht völlige Dunkelheit. Trotzdem ist die Tiefsee nicht finster: Rund drei Viertel der dort lebenden Tiere können selbst Licht erzeugen. Bei dieser Biolumineszenz reagiert der Leuchtstoff Luciferin mithilfe des Enzyms Luciferase mit Sauerstoff – kaltes Licht, fast ohne Wärmeverlust. Tiere nutzen es, um Beute anzulocken wie der Anglerfisch mit seiner Leuchtangel, um Partner zu finden oder um Angreifer zu blenden.",
+      funFact: "Die meisten Tiefseebewohner können rotes Licht nicht sehen. Der Schwarze Drachenfisch nutzt das aus: Er leuchtet mit rotem Licht wie mit einem geheimen Suchscheinwerfer und erspäht so Beute, ohne selbst bemerkt zu werden.",
+      quiz: {
+        question: "Welcher Anteil der Tiefseetiere kann selbst Licht erzeugen?",
+        options: ["Etwa drei Viertel", "Etwa ein Zehntel", "Nur einzelne Fischarten"],
+        correct: 0,
+        explanation: "Tauchroboter-Beobachtungen zeigen: Rund 75 Prozent der Tiere in der Tiefsee leuchten – Biolumineszenz ist dort eher die Regel als die Ausnahme."
+      }
+    },
+    {
+      id: "mb-02", category: "Meeresbiologie & Tiefsee", tagColor: "#0D9488",
+      title: "Hinab ins Challengertief",
+      story: "Der Marianengraben im westlichen Pazifik ist der tiefste Ort der Weltmeere: Sein Challengertief liegt fast 11.000 Meter unter dem Meeresspiegel. Dort unten lastet ein Druck von über 1.000 bar – als stünde ein Kleinwagen auf jedem Quadratzentimeter. Bereits 1960 tauchten Jacques Piccard und Don Walsh mit dem Tiefseetauchboot Trieste bis zum Grund, 2012 gelang dem Regisseur James Cameron der erste Solo-Tauchgang. Selbst in dieser Tiefe gibt es Leben, etwa Flohkrebse und einzellige Foraminiferen.",
+      funFact: "Würde man den Mount Everest in das Challengertief stellen, läge sein Gipfel noch immer rund zwei Kilometer unter der Meeresoberfläche.",
+      quiz: {
+        question: "Wer erreichte 1960 als Erste den Grund des Marianengrabens?",
+        options: ["James Cameron", "Jacques Piccard und Don Walsh", "Jacques-Yves Cousteau"],
+        correct: 1,
+        explanation: "Der Schweizer Jacques Piccard und der US-Marineoffizier Don Walsh erreichten am 23. Januar 1960 mit der Trieste den Grund. Erst 52 Jahre später folgte James Cameron."
+      }
+    },
+    {
+      id: "mb-03", category: "Meeresbiologie & Tiefsee", tagColor: "#0D9488",
+      title: "Drei Herzen und blaues Blut",
+      story: "Oktopusse gehören zu den intelligentesten wirbellosen Tieren: Sie öffnen Schraubgläser, lösen Labyrinthe und erkennen einzelne Menschen wieder. Rund zwei Drittel ihrer etwa 500 Millionen Nervenzellen sitzen nicht im Kopf, sondern in den acht Armen, die dadurch teilweise selbstständig agieren. Drei Herzen pumpen ihr Blut: Zwei versorgen die Kiemen, eines den restlichen Körper. Das Blut ist blau, weil der Sauerstoff nicht an eisenhaltiges Hämoglobin, sondern an kupferhaltiges Hämocyanin gebunden wird.",
+      funFact: "Mit ihren Saugnäpfen können Oktopusse schmecken: Tausende chemische Sinneszellen erlauben es ihnen, Beute in Felsspalten zu ertasten und zugleich zu „kosten“, ohne sie zu sehen.",
+      quiz: {
+        question: "Warum ist das Blut von Oktopussen blau?",
+        options: ["Wegen der Kälte in der Tiefsee", "Weil es kaum Sauerstoff enthält", "Wegen des kupferhaltigen Hämocyanins"],
+        correct: 2,
+        explanation: "Hämocyanin enthält Kupfer statt Eisen. Mit gebundenem Sauerstoff färbt es sich blau – so wie Hämoglobin unser Blut rot erscheinen lässt."
+      }
+    },
+
+    /* ---------- Vorschlag: Antike Philosophie (Stoa) ---------- */
+    {
+      id: "ph-01", category: "Antike Philosophie (Stoa)", tagColor: "#64748B",
+      title: "Philosophie in der Säulenhalle",
+      story: "Um 300 vor Christus begann Zenon von Kition in Athen zu lehren – nicht in einer Schule, sondern öffentlich in der Stoa Poikile, einer bunt bemalten Säulenhalle am Marktplatz. Nach diesem Ort wurde die ganze Denkrichtung benannt: die Stoa. Ihr Ziel war ein gelingendes Leben, die Eudaimonie, die man nicht durch Reichtum oder Ruhm, sondern allein durch Tugend erreicht. Als Kardinaltugenden galten Weisheit, Tapferkeit, Gerechtigkeit und Mäßigung – gelebt im Einklang mit der Natur und der Vernunft, dem Logos.",
+      funFact: "Zenon war ursprünglich Kaufmann. Der Legende nach erlitt er mit einer Ladung Purpur Schiffbruch, strandete in Athen und stieß dort in einem Buchladen auf Schriften über Sokrates. Später soll er gesagt haben: „Ich hatte eine gute Reise, als ich Schiffbruch erlitt.“",
+      quiz: {
+        question: "Woher hat die Stoa ihren Namen?",
+        options: ["Von ihrem Gründer Stoikos", "Von einer bemalten Säulenhalle in Athen", "Vom griechischen Wort für Gelassenheit"],
+        correct: 1,
+        explanation: "„Stoa“ heißt Säulenhalle. Zenon lehrte in der Stoa Poikile, der „bunten Halle“ an der Agora von Athen – daher der Name der Schule."
+      }
+    },
+    {
+      id: "ph-02", category: "Antike Philosophie (Stoa)", tagColor: "#64748B",
+      title: "Was liegt in deiner Macht?",
+      story: "Epiktet wurde als Sklave geboren und wurde nach seiner Freilassung zu einem der einflussreichsten Stoiker. Kern seiner Lehre ist die Unterscheidung zwischen dem, was in unserer Macht steht, und dem, was es nicht tut: Unsere Urteile, Absichten und Reaktionen können wir lenken – Körper, Besitz, Ruf und das Verhalten anderer dagegen nicht. Wer sich über Dinge außerhalb seiner Kontrolle grämt, macht sich unfrei. „Nicht die Dinge selbst beunruhigen die Menschen, sondern ihre Meinungen über die Dinge“, heißt es in seinem „Handbüchlein der Moral“, das sein Schüler Arrian aufzeichnete.",
+      funFact: "Epiktets Gedanke wurde zu einer Grundlage der modernen Psychotherapie: Die Begründer der kognitiven Verhaltenstherapie, Albert Ellis und Aaron T. Beck, beriefen sich ausdrücklich auf die Stoiker.",
+      quiz: {
+        question: "Was liegt laut Epiktet wirklich in unserer Macht?",
+        options: ["Unsere Urteile und Absichten", "Unsere Gesundheit und unser Besitz", "Unser Ruf bei anderen Menschen"],
+        correct: 0,
+        explanation: "Nur unser Inneres – Urteile, Wünsche, Absichten – liegt vollständig bei uns. Alles Äußere kann uns jederzeit genommen werden und sollte uns daher nicht beherrschen."
+      }
+    },
+    {
+      id: "ph-03", category: "Antike Philosophie (Stoa)", tagColor: "#64748B",
+      title: "Ein Kaiser schreibt an sich selbst",
+      story: "Marcus Aurelius regierte von 161 bis 180 nach Christus als römischer Kaiser – und war zugleich überzeugter Stoiker. Während langer Feldzüge an der Donau notierte er Gedanken, die nie für die Öffentlichkeit bestimmt waren: Heute kennen wir sie als „Selbstbetrachtungen“. Darin ermahnt er sich zu Gelassenheit, Pflichtbewusstsein und Demut angesichts der Vergänglichkeit. Ähnlich zeitlos schrieb der Philosoph Seneca über den Umgang mit Zeit: Wir hätten nicht zu wenig davon, sondern verschwendeten zu viel.",
+      funFact: "Obwohl er Römer war, schrieb Mark Aurel seine Selbstbetrachtungen auf Griechisch – der Sprache der Philosophie. Der Originaltitel lautet schlicht „An sich selbst“.",
+      quiz: {
+        question: "In welcher Sprache verfasste Mark Aurel seine Selbstbetrachtungen?",
+        options: ["Latein", "Aramäisch", "Griechisch"],
+        correct: 2,
+        explanation: "Griechisch galt in der gebildeten römischen Oberschicht als Sprache der Philosophie. Mark Aurel wählte sie auch für seine ganz privaten Notizen."
+      }
+    },
+
+    /* ---------- Vorschlag: Menschliches Gehirn & Neurowissenschaften ---------- */
+    {
+      id: "ne-01", category: "Menschliches Gehirn & Neurowissenschaften", tagColor: "#DB2777",
+      title: "86 Milliarden Nervenzellen",
+      story: "Das menschliche Gehirn besteht aus rund 86 Milliarden Nervenzellen, die über schätzungsweise 100 Billionen Synapsen miteinander verbunden sind. An diesen Kontaktstellen werden elektrische Signale in chemische Botenstoffe übersetzt und an die nächste Zelle weitergegeben. Gut isolierte Nervenfasern leiten Impulse mit bis zu 120 Metern pro Sekunde weiter – über 400 Kilometer pro Stunde. Obwohl das Gehirn nur etwa zwei Prozent des Körpergewichts ausmacht, verbraucht es rund ein Fünftel unserer Energie.",
+      funFact: "Das gesamte Gehirn arbeitet mit einer Leistung von nur etwa 20 Watt – weniger als eine klassische Glühbirne. Kein Supercomputer kommt auch nur annähernd an diese Energieeffizienz heran.",
+      quiz: {
+        question: "Wie viel Prozent der Körperenergie verbraucht das Gehirn etwa?",
+        options: ["Rund 2 Prozent", "Rund 20 Prozent", "Rund 50 Prozent"],
+        correct: 1,
+        explanation: "Das Gehirn ist ein Energiefresser: Bei nur zwei Prozent des Körpergewichts beansprucht es etwa 20 Prozent des Grundumsatzes – vor allem für die Signalübertragung."
+      }
+    },
+    {
+      id: "ne-02", category: "Menschliches Gehirn & Neurowissenschaften", tagColor: "#DB2777",
+      title: "Das formbare Gehirn",
+      story: "Lange glaubte man, das erwachsene Gehirn sei fertig verdrahtet. Heute weiß man: Es verändert sich ein Leben lang – diese Fähigkeit heißt Neuroplastizität. Schon 1949 beschrieb der Psychologe Donald Hebb das Prinzip, das oft mit „Neurons that fire together, wire together“ zusammengefasst wird: Werden Nervenzellen wiederholt gemeinsam aktiv, verstärken sich ihre Verbindungen. Deshalb festigt regelmäßiges Üben neue Fähigkeiten – und darum wirkt auch tägliches Lernen in kleinen Portionen so gut.",
+      funFact: "Londoner Taxifahrer müssen für ihre Lizenz Zehntausende Straßen auswendig lernen. Hirnscans zeigten, dass bei ihnen der hintere Teil des Hippocampus – wichtig für das räumliche Gedächtnis – größer ist als bei Vergleichspersonen.",
+      quiz: {
+        question: "Welche Hirnregion war bei Londoner Taxifahrern vergrößert?",
+        options: ["Das Kleinhirn", "Der Sehnerv", "Der Hippocampus"],
+        correct: 2,
+        explanation: "Der Hippocampus ist zentral für Orientierung und räumliches Gedächtnis. Jahrelanges Navigieren durch London hinterließ dort messbare Spuren."
+      }
+    },
+    {
+      id: "ne-03", category: "Menschliches Gehirn & Neurowissenschaften", tagColor: "#DB2777",
+      title: "Nachts räumt das Gehirn auf",
+      story: "Schlaf ist für das Gehirn alles andere als Stillstand. Im Tiefschlaf spielt der Hippocampus die Erlebnisse des Tages wiederholt ab und überträgt wichtige Inhalte in den Langzeitspeicher der Großhirnrinde – deshalb bleibt, was man vor dem Schlafen lernt, oft besonders gut hängen. Zugleich arbeitet ein Reinigungssystem: Das 2012 beschriebene glymphatische System spült im Schlaf verstärkt Hirnflüssigkeit durch das Gewebe und transportiert Stoffwechselabfälle ab. Dazu gehören auch Eiweiße wie Beta-Amyloid, die mit der Alzheimer-Krankheit in Verbindung gebracht werden.",
+      funFact: "In Versuchen an Mäusen weitete sich der Raum zwischen den Hirnzellen im Schlaf um rund 60 Prozent – die Hirnflüssigkeit konnte dadurch deutlich schneller zirkulieren als im Wachzustand.",
+      quiz: {
+        question: "Wie heißt das Reinigungssystem, das im Schlaf Abfallstoffe aus dem Gehirn spült?",
+        options: ["Das glymphatische System", "Das limbische System", "Das vegetative System"],
+        correct: 0,
+        explanation: "Der Name verbindet „Glia“ (Stützzellen des Gehirns) und „lymphatisch“: Gliazellen steuern den Fluss der Hirnflüssigkeit, der Abfälle abtransportiert."
+      }
+    },
+
+    /* ---------- Vorschlag: Pilznetzwerke (Myzel) ---------- */
+    {
+      id: "my-01", category: "Pilznetzwerke (Myzel)", tagColor: "#A16207",
+      title: "Eine uralte Partnerschaft",
+      story: "Unter fast jedem Waldboden liegt ein riesiges Geflecht aus feinsten Pilzfäden, den Hyphen – zusammen bilden sie das Myzel. Mit den Wurzeln der meisten Landpflanzen gehen Pilze eine Symbiose ein, die Mykorrhiza. Der Pilz erschließt mit seinen hauchdünnen Fäden Wasser und Nährstoffe wie Phosphor und Stickstoff, die die Pflanze allein kaum erreichen würde. Im Gegenzug erhält er Zucker aus der Photosynthese – bei manchen Bäumen einen beträchtlichen Teil ihrer Produktion. Diese Partnerschaft ist über 400 Millionen Jahre alt und half den ersten Pflanzen, das Land zu erobern.",
+      funFact: "Steinpilze und Pfifferlinge lassen sich deshalb kaum züchten: Sie brauchen einen lebenden Baumpartner wie Fichte, Kiefer oder Buche. Der Fliegenpilz etwa lebt besonders gern mit Birken und Fichten zusammen.",
+      quiz: {
+        question: "Was erhält der Pilz in der Mykorrhiza-Symbiose von der Pflanze?",
+        options: ["Stickstoff aus der Luft", "Zucker aus der Photosynthese", "Wasser aus den Blättern"],
+        correct: 1,
+        explanation: "Pilze können keine Photosynthese betreiben. Den Zucker liefert die Pflanze – im Tausch gegen Wasser und Mineralstoffe, die der Pilz aus dem Boden holt."
+      }
+    },
+    {
+      id: "my-02", category: "Pilznetzwerke (Myzel)", tagColor: "#A16207",
+      title: "Das Wood Wide Web",
+      story: "1997 veröffentlichte die kanadische Forstwissenschaftlerin Suzanne Simard eine vielbeachtete Studie: Sie zeigte, dass Kohlenstoff über gemeinsame Pilznetzwerke zwischen Birken und Douglasien wandern kann. Die Fachzeitschrift Nature prägte dafür den Begriff „Wood Wide Web“. Seither wird erforscht, ob Bäume über das Myzel Nährstoffe, Wasser und sogar Warnsignale austauschen. Wichtig ist dabei Genauigkeit: Wie stark große „Mutterbäume“ ihren Nachwuchs gezielt versorgen, ist unter Forschenden umstritten – die Netzwerke selbst sind jedoch real und ökologisch bedeutsam.",
+      funFact: "Ein Gramm Waldboden kann Hunderte Meter Pilzfäden enthalten. Würde man das Myzel unter einem einzigen Fußabdruck aneinanderreihen, käme man auf viele Kilometer.",
+      quiz: {
+        question: "Was zeigte Suzanne Simard 1997?",
+        options: ["Dass Bäume über Duftstoffe miteinander sprechen", "Dass Pilze Photosynthese betreiben können", "Dass Kohlenstoff über Pilznetzwerke zwischen Bäumen wandern kann"],
+        correct: 2,
+        explanation: "Mit markiertem Kohlenstoff wies Simard nach, dass Stoffe über Mykorrhiza-Netzwerke von einem Baum zum anderen gelangen können – der Startschuss für das „Wood Wide Web“."
+      }
+    },
+    {
+      id: "my-03", category: "Pilznetzwerke (Myzel)", tagColor: "#A16207",
+      title: "Der größte Organismus der Welt?",
+      story: "Im Malheur National Forest im US-Bundesstaat Oregon wächst ein Dunkler Hallimasch, dessen Myzel sich über fast zehn Quadratkilometer erstreckt – eine Fläche von rund 1.300 Fußballfeldern. Genetische Tests zeigten, dass es sich um ein einziges Individuum handelt, das je nach Schätzung zwischen 2.000 und über 8.000 Jahre alt sein könnte. Der Pilz breitet sich mit schnürsenkelartigen Strängen unter der Rinde und im Boden aus und befällt geschwächte Bäume. Oberirdisch sichtbar sind nur die honiggelben Fruchtkörper im Herbst – der eigentliche Pilz bleibt verborgen.",
+      funFact: "Das Myzel des Hallimaschs kann im Dunkeln schwach grünlich leuchten. Dieses „Leuchtholz“ ließ vermodernde Baumstämme in Wäldern früher geheimnisvoll schimmern.",
+      quiz: {
+        question: "Welche Fläche bedeckt der riesige Hallimasch in Oregon ungefähr?",
+        options: ["Etwa einen Hektar", "Fast zehn Quadratkilometer", "Etwa 500 Quadratkilometer"],
+        correct: 1,
+        explanation: "Rund 9,6 Quadratkilometer – damit gilt der Pilz als einer der größten bekannten Organismen der Erde, gemessen an seiner Fläche."
+      }
+    },
+
+    /* ---------- Vorschlag: Mittelalterliche Alltagsgeschichte ---------- */
+    {
+      id: "ma-01", category: "Mittelalterliche Alltagsgeschichte", tagColor: "#9F1239",
+      title: "Brei, Brot und Bier",
+      story: "Grundlage der mittelalterlichen Ernährung war Getreide: Die meisten Menschen aßen täglich Brei oder Mus aus Hafer, Gerste oder Hirse sowie Brot, dazu Hülsenfrüchte, Kohl und Rüben. Fleisch kam bei einfachen Leuten vor allem an Festtagen auf den Tisch, und an weit über hundert Fasttagen im Jahr war es ohnehin verboten. Kartoffeln, Tomaten, Mais oder Paprika kannte man in Europa noch gar nicht – sie kamen erst nach der Entdeckung Amerikas. Gewürze wie Pfeffer waren dagegen so kostbar, dass reiche Kaufleute spöttisch „Pfeffersäcke“ genannt wurden.",
+      funFact: "Dass man im Mittelalter nur Bier getrunken habe, weil Wasser ungenießbar gewesen sei, ist ein Mythos. Brunnen- und Quellwasser wurde selbstverständlich getrunken – Bier war jedoch ein wichtiger Kalorienlieferant, oft dünn und nur schwach alkoholisch.",
+      quiz: {
+        question: "Welches Lebensmittel gab es im mittelalterlichen Europa noch nicht?",
+        options: ["Hafer", "Kartoffeln", "Kohl"],
+        correct: 1,
+        explanation: "Die Kartoffel stammt aus den Anden und gelangte erst im 16. Jahrhundert nach Europa. In Deutschland verbreitete sie sich als Grundnahrungsmittel sogar erst im 18. Jahrhundert."
+      }
+    },
+    {
+      id: "ma-02", category: "Mittelalterliche Alltagsgeschichte", tagColor: "#9F1239",
+      title: "Als Stunden unterschiedlich lang waren",
+      story: "Im Mittelalter bestimmten die Glocken der Klöster und Kirchen den Takt des Tages. Sie riefen zu den Stundengebeten – von der Matutin in der Nacht über Prim, Terz, Sext und Non bis zu Vesper und Komplet am Abend. Die Zeit selbst wurde meist in Temporalstunden gemessen: Der helle Tag wurde in zwölf gleiche Teile geteilt, sodass eine Stunde im Sommer deutlich länger dauerte als im Winter. Erst ab dem späten 13. Jahrhundert verbreiteten sich mechanische Räderuhren, die jede Stunde gleich lang schlagen ließen.",
+      funFact: "Viele Wörter erinnern noch an diese Ordnung: Die süddeutsche „Vesper“ als Zwischenmahlzeit geht auf das Abendgebet zurück, und das englische „noon“ stammt von der Non – dem Gebet zur neunten Stunde, das sich mit der Zeit auf den Mittag verschob.",
+      quiz: {
+        question: "Warum war eine Stunde im Mittelalter im Sommer länger als im Winter?",
+        options: ["Weil die Kirchenglocken im Sommer langsamer schlugen", "Weil man den hellen Tag in zwölf gleiche Teile teilte", "Weil Sonnenuhren im Winter nicht funktionierten"],
+        correct: 1,
+        explanation: "Bei Temporalstunden hängt die Länge vom Tageslicht ab: Im Juni ist der helle Tag viel länger als im Dezember – also auch jede seiner zwölf Stunden."
+      }
+    },
+    {
+      id: "ma-03", category: "Mittelalterliche Alltagsgeschichte", tagColor: "#9F1239",
+      title: "Samstags in die Badestube",
+      story: "Das Bild vom schmutzigen Mittelalter ist weitgehend ein Klischee. In vielen Städten gab es öffentliche Badestuben, in denen man schwitzte, sich wusch und Neuigkeiten austauschte – oft war der Samstag der klassische Badetag. Betrieben wurden sie von Badern, die zugleich Haare schnitten, rasierten, Zähne zogen und zur Ader ließen. Erst im 16. Jahrhundert ging die Badekultur stark zurück: Die Angst vor Seuchen wie der Syphilis wuchs, und steigende Holzpreise machten das Heizen teuer.",
+      funFact: "Handwerksgesellen erhielten mancherorts ein „Badegeld“ als festen Bestandteil ihres Lohns – damit sie sich den wöchentlichen Besuch in der Badestube leisten konnten.",
+      quiz: {
+        question: "Warum gingen die Badestuben im 16. Jahrhundert stark zurück?",
+        options: ["Wegen Seuchenangst und steigender Holzpreise", "Wegen eines kirchlichen Badeverbots", "Weil private Badezimmer in Mode kamen"],
+        correct: 0,
+        explanation: "Syphilis und andere Seuchen machten das gemeinsame Baden verdächtig, während Holz knapp und teuer wurde. Private Badezimmer kamen erst Jahrhunderte später auf."
+      }
+    }
+  ];
+
+  /* =====================================================================
+     HILFSFUNKTIONEN
+     ===================================================================== */
+  const $ = (s, r) => (r || document).querySelector(s);
+  const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
+  const CAT_BY_NAME = Object.fromEntries(CATEGORIES.map(c => [c.name, c]));
+  const CAT_BY_KEY = Object.fromEntries(CATEGORIES.map(c => [c.key, c]));
+  const CARD_BY_ID = Object.fromEntries(CARDS.map(c => [c.id, c]));
+  const catOf = card => CAT_BY_NAME[card.category];
+  const cardsOf = cat => CARDS.filter(c => c.category === cat.name);
+  const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  const isStandalone = window.navigator.standalone === true || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
+  }
+  function rgbOf(hex) {
+    const n = parseInt(hex.slice(1), 16);
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  }
+  function mixHex(hex, target, t) {
+    const a = rgbOf(hex);
+    const m = v => Math.round(v + (target - v) * t);
+    return "rgb(" + m(a[0]) + "," + m(a[1]) + "," + m(a[2]) + ")";
+  }
+  function catStyle(cat) {
+    const c = rgbOf(cat.color);
+    return "--c:" + cat.color + ";--c-rgb:" + c.join(",") + ";--c-hi:" + mixHex(cat.color, 255, 0.4) + ";--c-lo:" + mixHex(cat.color, 0, 0.18);
+  }
+  const pad = n => String(n).padStart(2, "0");
+  const keyOf = d => d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
+  const todayKey = () => keyOf(new Date());
+  function dateOfKey(k) { const p = k.split("-").map(Number); return new Date(p[0], p[1] - 1, p[2]); }
+  function shiftKey(k, days) { const d = dateOfKey(k); d.setDate(d.getDate() + days); return keyOf(d); }
+  const fmtLong = new Intl.DateTimeFormat("de-DE", { weekday: "long", day: "numeric", month: "long" });
+  const fmtDate = new Intl.DateTimeFormat("de-DE", { day: "numeric", month: "long", year: "numeric" });
+  const fmtWd = new Intl.DateTimeFormat("de-DE", { weekday: "short" });
+
+  const SOFT = { "Neurowissenschaften": "Neuro&shy;wissen&shy;schaften", "Landschildkröten": "Land&shy;schild&shy;kröten", "Kreislaufwirtschaft": "Kreislauf&shy;wirtschaft", "Alltagsgeschichte": "Alltags&shy;geschichte", "Meeresbiologie": "Meeres&shy;biologie" };
+  const hyph = s => esc(s).replace(/[A-Za-zÄÖÜäöüß]+/g, w => SOFT[w] || w);
+  function plural(n, one, many) { return n + " " + (n === 1 ? one : many); }
+
+  // Deterministischer Pseudo-Zufall (Seed = Datum)
+  function hashStr(s) {
+    let h = 1779033703 ^ s.length;
+    for (let i = 0; i < s.length; i++) {
+      h = Math.imul(h ^ s.charCodeAt(i), 3432918353);
+      h = (h << 13) | (h >>> 19);
+    }
+    h = Math.imul(h ^ (h >>> 16), 2246822507);
+    h = Math.imul(h ^ (h >>> 13), 3266489909);
+    return (h ^= h >>> 16) >>> 0;
+  }
+  function mulberry32(a) {
+    return function () {
+      a |= 0; a = (a + 0x6D2B79F5) | 0;
+      let t = Math.imul(a ^ (a >>> 15), 1 | a);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+  function shuffle(arr, rng) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(rng() * (i + 1));
+      const t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+
+  /* =====================================================================
+     ZUSTAND & PERSISTENZ (localStorage)
+     ===================================================================== */
+  const STORE_KEY = "lumen.state.v1";
+  function defaultState() {
+    const active = {};
+    CATEGORIES.forEach(c => { active[c.key] = !c.suggested; });
+    return {
+      active: active,
+      unlocked: [],
+      mastered: {},
+      streak: 0,
+      best: 0,
+      lastDone: null,
+      history: [],
+      daily: null,
+      stats: { answered: 0, firstTry: 0, wrong: 0 },
+      settings: { haptics: true, rate: 1, hideInstall: false }
+    };
+  }
+  function loadState() {
+    const d = defaultState();
+    try {
+      const raw = localStorage.getItem(STORE_KEY);
+      if (!raw) return d;
+      const s = JSON.parse(raw);
+      if (!s || typeof s !== "object") return d;
+      const out = Object.assign(d, s);
+      out.active = Object.assign(defaultState().active, s.active || {});
+      out.stats = Object.assign(defaultState().stats, s.stats || {});
+      out.settings = Object.assign(defaultState().settings, s.settings || {});
+      out.unlocked = Array.isArray(s.unlocked) ? s.unlocked.filter(k => CAT_BY_KEY[k]) : [];
+      out.history = Array.isArray(s.history) ? s.history : [];
+      out.mastered = s.mastered && typeof s.mastered === "object" ? s.mastered : {};
+      if (out.daily && (!Array.isArray(out.daily.ids) || !out.daily.date)) out.daily = null;
+      if (out.daily) {
+        out.daily.ids = out.daily.ids.filter(id => CARD_BY_ID[id]);
+        out.daily.bonus = (out.daily.bonus || []).filter(id => CARD_BY_ID[id]);
+        out.daily.solved = out.daily.solved || {};
+        out.daily.wrong = out.daily.wrong || {};
+        out.daily.review = out.daily.review || [];
+      }
+      return out;
+    } catch (e) {
+      return d;
+    }
+  }
+  let state = loadState();
+  function save() {
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) { /* Speicher nicht verfügbar */ }
+  }
+
+  const ui = { tab: "today", focusId: null, celebrate: false, archiveQuery: "", archiveFilter: "all", sheet: null };
+
+  const isAvailable = cat => !cat.suggested || state.unlocked.indexOf(cat.key) !== -1;
+  const isActive = cat => isAvailable(cat) && !!state.active[cat.key];
+  const activeCats = () => CATEGORIES.filter(isActive);
+  const availableCards = () => CARDS.filter(c => isAvailable(catOf(c)));
+  const isMastered = id => !!state.mastered[id] && !!CARD_BY_ID[id];
+  const masteredIds = () => Object.keys(state.mastered).filter(id => CARD_BY_ID[id]);
+
+  function normalizeStreak() {
+    const t = todayKey();
+    if (state.lastDone && state.lastDone !== t && state.lastDone !== shiftKey(t, -1)) {
+      state.streak = 0;
+    }
+  }
+  const doneToday = () => state.lastDone === todayKey();
+
+  /* =====================================================================
+     TAGES-DECK
+     ===================================================================== */
+  function pickCards(rng, count, exclude) {
+    const cats = shuffle(activeCats(), rng);
+    const fresh = {}, review = {};
+    cats.forEach(c => {
+      const list = cardsOf(c).filter(x => !exclude.has(x.id));
+      fresh[c.key] = shuffle(list.filter(x => !isMastered(x.id)), rng);
+      review[c.key] = shuffle(list.filter(x => isMastered(x.id)), rng);
+    });
+    const out = [];
+    [fresh, review].forEach(bucket => {
+      let progress = true;
+      while (out.length < count && progress) {
+        progress = false;
+        for (const c of cats) {
+          if (out.length >= count) break;
+          const l = bucket[c.key];
+          if (l.length) { out.push(l.shift().id); progress = true; }
+        }
+      }
+    });
+    return out;
+  }
+  function buildDeck(key) {
+    const rng = mulberry32(hashStr("lumen|" + key));
+    const size = 3 + Math.floor(rng() * 3); // 3–5 Karten
+    const ids = pickCards(rng, size, new Set());
+    return { date: key, size: size, ids: ids, bonus: [], solved: {}, wrong: {}, review: ids.filter(isMastered), done: false };
+  }
+  function ensureDeck() {
+    const t = todayKey();
+    if (!state.daily || state.daily.date !== t) {
+      normalizeStreak();
+      state.daily = buildDeck(t);
+      ui.focusId = null;
+      save();
+    }
+    return state.daily;
+  }
+  function sequence() { const d = state.daily; return d.ids.concat(d.bonus); }
+  function currentCardId() {
+    const seq = sequence();
+    if (ui.focusId && seq.indexOf(ui.focusId) !== -1) return ui.focusId;
+    const d = state.daily;
+    for (const id of seq) if (!d.solved[id]) return id;
+    return null;
+  }
+  function checkCompletion() {
+    const d = state.daily;
+    if (d.done || !d.ids.length) return false;
+    if (!d.ids.every(id => d.solved[id])) return false;
+    d.done = true;
+    const t = d.date;
+    if (state.lastDone !== t) {
+      state.streak = state.lastDone === shiftKey(t, -1) ? state.streak + 1 : 1;
+      state.lastDone = t;
+      state.best = Math.max(state.best, state.streak);
+      if (state.history.indexOf(t) === -1) state.history.push(t);
+      if (state.history.length > 400) state.history = state.history.slice(-400);
+    }
+    ui.celebrate = true;
+    return true;
+  }
+  function onCategoriesChanged() {
+    const d = ensureDeck();
+    const anySolved = d.ids.some(id => d.solved[id]);
+    const stillActive = id => isActive(catOf(CARD_BY_ID[id]));
+    if (!d.done && !anySolved) {
+      const nd = buildDeck(d.date);
+      nd.bonus = d.bonus.filter(id => d.solved[id] || stillActive(id));
+      nd.ids = nd.ids.filter(id => nd.bonus.indexOf(id) === -1);
+      nd.bonus.forEach(id => { if (d.solved[id]) nd.solved[id] = true; });
+      state.daily = nd;
+    } else if (!d.done) {
+      const keep = d.ids.filter(id => d.solved[id] || stillActive(id));
+      const missing = d.ids.length - keep.length;
+      if (missing > 0) {
+        const rng = mulberry32(hashStr("refill|" + d.date + "|" + Date.now()));
+        const extra = pickCards(rng, missing, new Set(keep.concat(d.bonus)));
+        extra.forEach(id => { if (isMastered(id)) d.review.push(id); });
+        d.ids = keep.concat(extra);
+      }
+      d.bonus = d.bonus.filter(id => d.solved[id] || stillActive(id));
+      if (checkCompletion()) ui.celebrate = false;
+    } else {
+      d.bonus = d.bonus.filter(id => d.solved[id] || stillActive(id));
+    }
+    if (ui.focusId && sequence().indexOf(ui.focusId) === -1) ui.focusId = null;
+    save();
+  }
+
+  /* =====================================================================
+     HAPTIK
+     ===================================================================== */
+  let hapticLabel = null;
+  function setupHapticProxy() {
+    try {
+      const wrap = document.createElement("div");
+      wrap.className = "haptic-proxy";
+      wrap.setAttribute("aria-hidden", "true");
+      wrap.innerHTML = '<label><input type="checkbox" switch tabindex="-1"></label>';
+      document.body.appendChild(wrap);
+      hapticLabel = wrap.querySelector("label");
+    } catch (e) { hapticLabel = null; }
+  }
+  function haptic(kind) {
+    if (!state.settings.haptics) return;
+    const pattern = kind === "success" ? [30] : kind === "error" ? [80, 50, 80] : [10];
+    if (typeof navigator.vibrate === "function") {
+      try { navigator.vibrate(pattern); } catch (e) { /* nicht unterstützt */ }
+      return;
+    }
+    // iOS-Safari kennt navigator.vibrate nicht – Fallback über den nativen Switch-Haptik-Trigger (iOS 18+)
+    if (isIOS && hapticLabel) {
+      try {
+        hapticLabel.click();
+        if (kind === "error") setTimeout(() => { try { hapticLabel.click(); } catch (e) { /* ignorieren */ } }, 130);
+      } catch (e) { /* ignorieren */ }
+    }
+  }
+
+  /* =====================================================================
+     VORLESEN (Text-to-Speech)
+     ===================================================================== */
+  const TTS = {
+    ok: "speechSynthesis" in window && "SpeechSynthesisUtterance" in window,
+    id: null,
+    token: 0,
+    voice: null,
+    init() {
+      if (!this.ok) return;
+      const pick = () => { this.voice = pickVoice(); if (ui.tab === "profile") renderVoiceName(); };
+      pick();
+      try { speechSynthesis.addEventListener("voiceschanged", pick); } catch (e) { speechSynthesis.onvoiceschanged = pick; }
+    },
+    chunks(card) {
+      const text = card.title + ". " + card.story + " Schon gewusst? " + card.funFact;
+      const parts = text.match(/[^.!?…]+[.!?…]+["“”«»)]*\s*|[^.!?…]+$/g) || [text];
+      const out = [];
+      let buf = "";
+      parts.forEach(p => { buf += p; if (buf.length > 150) { out.push(buf.trim()); buf = ""; } });
+      if (buf.trim()) out.push(buf.trim());
+      return out;
+    },
+    toggle(card) {
+      if (!this.ok || !card) return;
+      if (this.id === card.id) { this.stop(); return; }
+      this.play(card);
+    },
+    play(card) {
+      this.stop();
+      const my = ++this.token;
+      this.id = card.id;
+      const chunks = this.chunks(card);
+      try {
+        chunks.forEach((c, i) => {
+          const u = new SpeechSynthesisUtterance(c);
+          u.lang = "de-DE";
+          if (this.voice) u.voice = this.voice;
+          u.rate = state.settings.rate;
+          u.pitch = 1;
+          if (i === chunks.length - 1) u.onend = () => { if (my === this.token) this.finish(); };
+          u.onerror = ev => { if (my === this.token && ev.error !== "interrupted" && ev.error !== "canceled") this.finish(); };
+          speechSynthesis.speak(u);
+        });
+        if (speechSynthesis.paused) speechSynthesis.resume();
+      } catch (e) {
+        this.finish();
+        toast("Vorlesen ist auf diesem Gerät nicht verfügbar", "🔇");
+        return;
+      }
+      haptic("light");
+      this.sync();
+    },
+    stop() {
+      if (!this.ok) return;
+      this.token++;
+      try { if (speechSynthesis.speaking || speechSynthesis.pending) speechSynthesis.cancel(); } catch (e) { /* ignorieren */ }
+      this.id = null;
+      this.sync();
+    },
+    finish() { this.id = null; this.sync(); },
+    sync() {
+      $$(".play").forEach(b => {
+        const on = b.dataset.id === this.id;
+        b.classList.toggle("playing", on);
+        const l = b.querySelector(".play-label");
+        if (l) l.textContent = on ? "Stopp" : "Anhören";
+        b.setAttribute("aria-label", on ? "Vorlesen stoppen" : "Karte vorlesen");
+      });
+    }
+  };
+  function pickVoice() {
+    let vs = [];
+    try { vs = speechSynthesis.getVoices() || []; } catch (e) { vs = []; }
+    const de = vs.filter(v => /^de([-_]|$)/i.test(v.lang));
+    if (!de.length) return null;
+    const score = v =>
+      (/de[-_]DE/i.test(v.lang) ? 4 : 0) +
+      (/(premium|enhanced|erweitert|natural|neural)/i.test(v.name) ? 3 : 0) +
+      (/(anna|helena|petra|markus|yannick|viktor|martin|google deutsch)/i.test(v.name) ? 2 : 0) +
+      (v.localService ? 1 : 0);
+    return de.slice().sort((a, b) => score(b) - score(a))[0];
+  }
+  function speakDuration(card) {
+    const words = (card.title + " " + card.story + " " + card.funFact).split(/\s+/).length;
+    const sec = Math.round(words / (2.35 * state.settings.rate));
+    return sec < 60 ? "≈ " + Math.max(10, Math.round(sec / 5) * 5) + " Sek." : "≈ " + Math.round(sec / 60) + " Min.";
+  }
+
+  /* =====================================================================
+     ICONS
+     ===================================================================== */
+  const I = {
+    play: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.9v14.2c0 .9 1 1.4 1.7 1l11-7.1c.7-.4.7-1.4 0-1.8l-11-7.1C8 3.5 7 4 7 4.9z"/></svg>',
+    bulb: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21.2h4M12 2.8a6.2 6.2 0 0 0-3.7 11.2c.7.5 1.2 1.3 1.2 2.2h5c0-.9.5-1.7 1.2-2.2A6.2 6.2 0 0 0 12 2.8z"/></svg>',
+    quiz: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.2"/><path d="M9.4 9.3a2.7 2.7 0 0 1 5.2 1c0 1.8-2.6 2.3-2.6 3.9"/><path d="M12 17.3h.01"/></svg>',
+    check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+    checkCircle: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="currentColor"/><path d="M7 12.4l3.3 3.3L17.2 8.8" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    crossCircle: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="currentColor"/><path d="M8.3 8.3l7.4 7.4M15.7 8.3l-7.4 7.4" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></svg>',
+    chevron: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>',
+    arrow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
+    lock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V7.8a4 4 0 0 1 8 0v2.7"/></svg>',
+    plus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
+    sparkle: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5c.5 4.6 2.9 7 7.5 7.5-4.6.5-7 2.9-7.5 7.5-.5-4.6-2.9-7-7.5-7.5 4.6-.5 7-2.9 7.5-7.5z"/><path d="M19 15.5c.2 1.8 1.2 2.8 3 3-1.8.2-2.8 1.2-3 3-.2-1.8-1.2-2.8-3-3 1.8-.2 2.8-1.2 3-3z" opacity=".7"/></svg>',
+    clock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.5V12l3 2"/></svg>',
+    share: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M8 7l4-4 4 4"/><path d="M6 11H5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1h-1"/></svg>',
+    close: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+    repeat: '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg>',
+    star: '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4-4.7-4.4 6.4-.8z"/></svg>'
+  };
+  let flameSeq = 0;
+  function flameSVG(size, lit) {
+    const id = "fl" + (++flameSeq);
+    return '<svg class="flame ' + (lit ? "lit" : "off") + '" width="' + size + '" height="' + size + '" viewBox="0 0 64 64" aria-hidden="true">' +
+      '<defs><linearGradient id="' + id + 'a" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#FF2D55"/><stop offset=".5" stop-color="#FF7A00"/><stop offset="1" stop-color="#FFCC00"/></linearGradient>' +
+      '<linearGradient id="' + id + 'b" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#FFB000"/><stop offset="1" stop-color="#FFF4B8"/></linearGradient></defs>' +
+      '<path class="fo" fill="url(#' + id + 'a)" d="M32 3c2 11 12 16 16 26 3 7 3 15 0 21-4 8-10 11-16 11-8 0-16-6-17-16-1-8 3-14 7-18 0 5 2 8 5 9-2-10 1-23 5-33z"/>' +
+      '<path class="fi" fill="url(#' + id + 'b)" d="M32 30c2 7 9 10 9 18 0 6-4 10-9 10s-9-4-9-9c0-5 3-8 5-10 0 3 1 5 3 5-1-5-1-10 1-14z"/></svg>';
+  }
+  function ringSVG(size, stroke, rings) {
+    const c = size / 2;
+    let r = (size - stroke) / 2;
+    let out = '<svg class="ring" width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + " " + size + '" aria-hidden="true">';
+    rings.forEach(rg => {
+      const C = 2 * Math.PI * r;
+      const p = Math.max(0, Math.min(1, rg.pct || 0));
+      out += '<circle cx="' + c + '" cy="' + c + '" r="' + r + '" fill="none" style="stroke:' + rg.color + ';stroke-opacity:.18" stroke-width="' + stroke + '"/>';
+      out += '<circle class="ring-val" cx="' + c + '" cy="' + c + '" r="' + r + '" fill="none" style="stroke:' + rg.color + ";stroke-dashoffset:" + C.toFixed(2) + ";" + (p === 0 ? "stroke-opacity:0;" : "") + '" stroke-width="' + stroke + '" stroke-linecap="round" stroke-dasharray="' + C.toFixed(2) + '" data-to="' + (C * (1 - p)).toFixed(2) + '" transform="rotate(-90 ' + c + " " + c + ')"/>';
+      r -= stroke + 2.5;
+    });
+    return out + "</svg>";
+  }
+  function animateRings(root) {
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      $$(".ring-val[data-to]", root).forEach(el => { el.style.strokeDashoffset = el.dataset.to; });
+    }));
+  }
+
+  /* =====================================================================
+     KARTEN-DARSTELLUNG
+     ===================================================================== */
+  function cardHTML(card, o) {
+    const cat = catOf(card);
+    const q = card.quiz;
+    const solved = !!o.solved;
+    const wrong = o.wrong || [];
+    const letters = ["A", "B", "C"];
+    const opts = q.options.map((txt, i) => {
+      let cls = "option";
+      let dis = false;
+      if (solved) { cls += i === q.correct ? " correct" : " dim"; dis = true; }
+      else if (wrong.indexOf(i) !== -1) { cls += " wrong"; dis = true; }
+      if (o.mode === "read") dis = true;
+      const act = o.mode === "deck" ? ' data-action="answer" data-id="' + card.id + '" data-i="' + i + '"' : "";
+      return '<button class="' + cls + '"' + act + (dis ? " disabled" : "") + '>' +
+        '<span class="opt-letter">' + letters[i] + '</span><span class="opt-text">' + esc(txt) + '</span>' +
+        '<span class="opt-mark">' + (i === q.correct ? I.checkCircle : I.crossCircle) + "</span></button>";
+    }).join("");
+
+    let meta = "";
+    if (o.mode === "deck") {
+      const tags = [];
+      if (o.isReview) tags.push('<span class="meta-tag">' + I.repeat + " Wiederholung</span>");
+      if (o.isBonus) tags.push('<span class="meta-tag">' + I.star + " Bonus</span>");
+      tags.push('<span class="meta-tag">' + (o.pos + 1) + " / " + o.total + "</span>");
+      meta = '<span style="display:flex;gap:6px;flex:none">' + tags.join("") + "</span>";
+    }
+
+    const playBtn = TTS.ok
+      ? '<button class="play" data-action="speak" data-id="' + card.id + '" aria-label="Karte vorlesen"><span class="play-ico">' + I.play +
+        '<span class="eq"><i></i><i></i><i></i></span></span><span class="play-label">Anhören</span><span class="play-dur">' + speakDuration(card) + "</span></button>"
+      : "<span></span>";
+
+    const masteredNote = o.mode === "read" && isMastered(card.id)
+      ? '<span class="mastered-note">' + I.checkCircle + " Gemeistert am " + fmtDate.format(new Date(state.mastered[card.id])) + "</span>"
+      : "";
+
+    const explain = '<div class="explain" ' + (solved || o.mode === "read" ? "" : "hidden") + '><b>' + I.check + " Richtig!</b><p>" + esc(q.explanation) + "</p></div>";
+    const hint = o.mode === "deck" && !solved && wrong.length ? '<p class="hint">Nicht ganz – versuch es noch einmal.</p>' : "";
+
+    let nextBtn = "";
+    if (o.mode === "deck") {
+      const label = solved ? nextLabel(o.openAfter) : I.lock + " Beantworte das Quiz";
+      nextBtn = '<button class="btn-primary next" data-action="next"' + (solved ? "" : " disabled") + ">" + label + "</button>";
+    }
+
+    return '<article class="card glass tinted" style="' + catStyle(cat) + '" data-card="' + card.id + '">' +
+      '<div class="card-top"><span class="badge"><span class="emo">' + cat.emoji + "</span>" + esc(card.category) + "</span>" + meta + "</div>" +
+      '<h2 class="card-title">' + esc(card.title) + "</h2>" +
+      '<div class="card-actions">' + playBtn + masteredNote + "</div>" +
+      '<p class="story">' + esc(card.story) + "</p>" +
+      '<div class="funfact"><div class="ff-head">' + I.bulb + "Schon gewusst?</div><p>" + esc(card.funFact) + "</p></div>" +
+      '<div class="quiz"><div class="quiz-head">' + I.quiz + 'Quiz</div><p class="question">' + esc(q.question) + "</p>" +
+      '<div class="options">' + opts + "</div>" + hint + explain + "</div>" +
+      nextBtn + "</article>";
+  }
+
+  /* =====================================================================
+     TAB: HEUTE
+     ===================================================================== */
+  function renderStreakPill() {
+    const pill = $("#streakPill");
+    pill.innerHTML = flameSVG(24, state.streak > 0) + "<span>" + state.streak + "</span>";
+    pill.setAttribute("aria-label", "Streak: " + plural(state.streak, "Tag", "Tage"));
+  }
+  function renderSummary() {
+    const d = state.daily;
+    const seq = sequence();
+    const solvedCore = d.ids.filter(id => d.solved[id]).length;
+    const cur = currentCardId();
+    const segs = seq.map(id => {
+      const cat = catOf(CARD_BY_ID[id]);
+      const cls = ["seg"];
+      if (d.solved[id]) cls.push("solved");
+      if (id === cur) cls.push("current");
+      if (d.bonus.indexOf(id) !== -1) cls.push("bonus");
+      return '<button class="' + cls.join(" ") + '" style="' + catStyle(cat) + '" data-action="focus" data-id="' + id + '" aria-label="' + esc(CARD_BY_ID[id].title) + '"><i></i></button>';
+    }).join("");
+    const pct = d.ids.length ? solvedCore / d.ids.length : 0;
+    let sub;
+    if (d.done) sub = "Tagesziel erreicht · " + plural(d.ids.length, "Karte", "Karten") + " gelöst";
+    else sub = solvedCore + " von " + d.ids.length + " Karten gelöst";
+    const bonusSolved = d.bonus.filter(id => d.solved[id]).length;
+    if (d.bonus.length) sub += " · " + bonusSolved + "/" + d.bonus.length + " Bonus";
+    $("#deckSummary").innerHTML =
+      '<div class="deck-summary glass"><div class="ds-top"><div><div class="ds-title">Dein Tagesstapel</div><div class="ds-sub">' + sub + "</div></div>" +
+      '<div class="ring-wrap">' + ringSVG(46, 5, [{ pct: pct, color: d.done ? "var(--green)" : "var(--tint)" }]) +
+      '<span class="ring-center">' + (d.done ? '<span style="display:block;color:var(--green);width:18px;height:18px">' + I.check + "</span>" : solvedCore + "/" + d.ids.length) + "</span></div></div>" +
+      '<div class="segments">' + segs + "</div></div>";
+    animateRings($("#deckSummary"));
+  }
+  function renderToday(animate) {
+    ensureDeck();
+    const d = state.daily;
+    $("#todayEyebrow").textContent = fmtLong.format(new Date());
+    renderStreakPill();
+    renderSummary();
+    const stage = $("#deckStage");
+    const cur = currentCardId();
+    const seq = sequence();
+    if (cur) {
+      const card = CARD_BY_ID[cur];
+      const openAfter = seq.filter(id => !d.solved[id] && id !== cur);
+      stage.innerHTML = cardHTML(card, {
+        mode: "deck",
+        pos: seq.indexOf(cur),
+        total: seq.length,
+        solved: !!d.solved[cur],
+        wrong: d.wrong[cur] || [],
+        isBonus: d.bonus.indexOf(cur) !== -1,
+        isReview: d.review.indexOf(cur) !== -1,
+        openAfter: openAfter.length
+      });
+      setAccent(catOf(card).color);
+    } else {
+      stage.innerHTML = completeHTML();
+      setAccent("#FF9500");
+    }
+    if (animate) {
+      stage.classList.remove("entering");
+      void stage.offsetWidth;
+      stage.classList.add("entering");
+    }
+    TTS.sync();
+    updateBadge();
+  }
+  function completeHTML() {
+    const d = state.daily;
+    const seq = sequence();
+    const firstTry = seq.filter(id => d.solved[id] && !(d.wrong[id] || []).length).length;
+    const solvedN = seq.filter(id => d.solved[id]).length;
+    const acc = solvedN ? Math.round(firstTry / solvedN * 100) : 0;
+    const pool = CARDS.filter(c => isActive(catOf(c)) && seq.indexOf(c.id) === -1 && !isMastered(c.id));
+    const bonusBtn = pool.length
+      ? '<button class="btn-primary" data-action="bonus">' + I.sparkle + " Bonuskarte ziehen</button>"
+      : '<button class="btn-primary" data-action="goto" data-tab="categories">' + I.plus + " Neue Themen freischalten</button>";
+    const rows = seq.map(id => {
+      const c = CARD_BY_ID[id];
+      const cat = catOf(c);
+      return '<button class="row today-row tinted" style="' + catStyle(cat) + ';--inset:36px" data-action="read" data-id="' + id + '">' +
+        '<span class="dot"></span><span class="row-text"><span class="row-title">' + esc(c.title) + '</span><span class="row-sub">' + cat.emoji + " " + esc(cat.short) + (d.bonus.indexOf(id) !== -1 ? " · Bonus" : "") + "</span></span>" +
+        '<span class="chev">' + I.chevron + "</span></button>";
+    }).join("");
+    return '<div class="complete glass">' +
+      '<div class="cp-flame">' + flameSVG(92, true) + "</div>" +
+      "<h2>Tagesziel erreicht!</h2>" +
+      '<p class="cp-text">Stark – alle Karten von heute sitzen. Deine Serie steht bei ' + plural(state.streak, "Tag", "Tagen") + ".</p>" +
+      '<div class="cp-stats"><div class="cp-stat"><b>' + state.streak + '</b><span>Streak</span></div><div class="cp-stat"><b>' + solvedN + '</b><span>Gelöst</span></div><div class="cp-stat"><b>' + acc + '%</b><span>1. Versuch</span></div></div>' +
+      '<div class="cp-next" id="countdown">' + I.clock + "<span>" + countdownText() + "</span></div>" +
+      bonusBtn +
+      '<button class="btn-secondary" data-action="goto" data-tab="archive">Zum Archiv</button></div>' +
+      '<div class="section-title">Heute gelernt</div><div class="list glass">' + rows + "</div>";
+  }
+  function nextLabel(openLeft) {
+    if (openLeft > 0) return "Weiter " + I.arrow;
+    return ui.celebrate ? I.sparkle + " Tagesziel abschließen" : I.sparkle + " Fertig";
+  }
+  function countdownText() {
+    const now = new Date();
+    const mid = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+    const mins = Math.max(1, Math.ceil((mid - now) / 60000));
+    const h = Math.floor(mins / 60), m = mins % 60;
+    return "Neuer Stapel in " + (h ? h + " Std. " : "") + m + " Min.";
+  }
+  function setAccent(hex) { $("#accentBlob").style.color = hex; }
+  function updateBadge() {
+    const d = state.daily;
+    if (!d) return;
+    const open = sequence().filter(id => !d.solved[id]).length;
+    const b = $("#todayBadge");
+    b.hidden = open === 0;
+    b.textContent = open;
+  }
+
+  function onAnswer(btn) {
+    const card = CARD_BY_ID[btn.dataset.id];
+    const i = Number(btn.dataset.i);
+    const d = state.daily;
+    if (!card || d.solved[card.id] || btn.disabled) return;
+    const cardEl = btn.closest(".card");
+    const quiz = btn.closest(".quiz");
+    if (i === card.quiz.correct) {
+      d.solved[card.id] = true;
+      ui.focusId = card.id;
+      state.stats.answered++;
+      if (!(d.wrong[card.id] || []).length) state.stats.firstTry++;
+      if (!state.mastered[card.id]) state.mastered[card.id] = Date.now();
+      checkCompletion();
+      save();
+      haptic("success");
+      $$(".option", quiz).forEach((b, idx) => {
+        b.disabled = true;
+        b.classList.remove("wrong");
+        if (idx === card.quiz.correct) b.classList.add("correct", "pop");
+        else b.classList.add("dim");
+      });
+      const h = $(".hint", quiz); if (h) h.remove();
+      const ex = $(".explain", quiz); ex.hidden = false;
+      const seq = sequence();
+      const openLeft = seq.filter(id => !d.solved[id]).length;
+      const next = $(".next", cardEl);
+      next.disabled = false;
+      next.innerHTML = nextLabel(openLeft);
+      renderSummary();
+      renderStreakPill();
+      updateBadge();
+      setTimeout(() => { try { next.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "nearest" }); } catch (e) { next.scrollIntoView(false); } }, 260);
+    } else {
+      const w = d.wrong[card.id] || (d.wrong[card.id] = []);
+      if (w.indexOf(i) === -1) w.push(i);
+      state.stats.wrong++;
+      save();
+      haptic("error");
+      btn.classList.add("wrong");
+      btn.classList.remove("shake");
+      void btn.offsetWidth;
+      btn.classList.add("shake");
+      btn.disabled = true;
+      if (!$(".hint", quiz)) {
+        const p = document.createElement("p");
+        p.className = "hint";
+        p.textContent = "Nicht ganz – versuch es noch einmal.";
+        $(".options", quiz).after(p);
+      }
+    }
+  }
+  function onNext() {
+    TTS.stop();
+    ui.focusId = null;
+    const stage = $("#deckStage");
+    const celebrate = ui.celebrate;
+    ui.celebrate = false;
+    const go = () => {
+      stage.classList.remove("leaving");
+      renderToday(true);
+      const v = $("#view-today");
+      v.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+      if (celebrate) {
+        confetti();
+        haptic("success");
+        toast("Tagesziel erreicht – " + plural(state.streak, "Tag", "Tage") + " in Folge!", "🔥");
+      }
+    };
+    if (reduceMotion) { go(); return; }
+    stage.classList.remove("entering");
+    stage.classList.add("leaving");
+    setTimeout(go, 230);
+  }
+  function drawBonus() {
+    const d = state.daily;
+    const seq = sequence();
+    const pool = CARDS.filter(c => isActive(catOf(c)) && seq.indexOf(c.id) === -1 && !isMastered(c.id));
+    if (!pool.length) { toast("Alle Karten deiner Themen sind gemeistert!", "🏆"); return; }
+    const pick = pool[Math.floor(Math.random() * pool.length)];
+    d.bonus.push(pick.id);
+    save();
+    ui.focusId = null;
+    haptic("light");
+    renderToday(true);
+    $("#view-today").scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+  }
+  function learnNow(id) {
+    const d = ensureDeck();
+    if (d.ids.indexOf(id) === -1 && d.bonus.indexOf(id) === -1) { d.bonus.push(id); save(); }
+    ui.focusId = id;
+    closeSheet();
+    switchTab("today");
+    renderToday(true);
+    $("#view-today").scrollTo({ top: 0 });
+  }
+
+  /* =====================================================================
+     TAB: KATEGORIEN
+     ===================================================================== */
+  function renderCategories() {
+    const avail = CATEGORIES.filter(isAvailable);
+    const activeN = avail.filter(c => state.active[c.key]).length;
+    const cardN = CARDS.filter(c => isActive(catOf(c))).length;
+    const rows = avail.map(cat => {
+      const list = cardsOf(cat);
+      const m = list.filter(c => isMastered(c.id)).length;
+      const on = !!state.active[cat.key];
+      return '<div class="row cat-row tinted' + (on ? "" : " off") + '" style="' + catStyle(cat) + '" data-row="' + cat.key + '">' +
+        '<button class="row-main" data-action="cat" data-key="' + cat.key + '">' +
+        '<span class="cat-icon">' + cat.emoji + "</span>" +
+        '<span class="row-text"><span class="row-title">' + hyph(cat.name) + (cat.suggested ? '<span class="new-tag">NEU</span>' : "") + "</span>" +
+        '<span class="row-sub">' + plural(list.length, "Karte", "Karten") + " · " + m + " gemeistert" + (on ? "" : " · pausiert") + "</span>" +
+        '<span class="mini-bar"><i style="width:' + Math.round(m / list.length * 100) + '%"></i></span></span></button>' +
+        '<label class="switch" style="--sw-on:' + cat.color + '"><input type="checkbox" data-toggle="cat" data-key="' + cat.key + '"' + (on ? " checked" : "") + ' aria-label="' + esc(cat.name) + ' aktiv"><span class="track"></span></label></div>';
+    }).join("");
+
+    const sugg = CATEGORIES.filter(c => c.suggested && !isAvailable(c));
+    const suggHTML = sugg.length
+      ? '<div class="sug-grid">' + sugg.map(cat =>
+          '<button class="sug glass tinted" style="' + catStyle(cat) + '" data-action="unlock" data-key="' + cat.key + '" aria-label="' + esc(cat.name) + ' freischalten">' +
+          '<span class="sug-emoji">' + cat.emoji + '</span><span class="sug-name">' + hyph(cat.name) + '</span><span class="sug-desc">' + esc(cat.desc) + "</span>" +
+          '<span class="sug-foot"><span>' + plural(cardsOf(cat).length, "Karte", "Karten") + '</span><span class="sug-plus">' + I.plus + "</span></span></button>").join("") + "</div>"
+      : '<div class="all-unlocked glass"><b>🎉</b>Du hast alle vorgeschlagenen Themenfelder freigeschaltet. Neugier ist die beste Lernstrategie!</div>';
+
+    $("#catContent").innerHTML =
+      '<div class="cat-summary glass"><div class="big" id="catActiveN">' + activeN + '</div><div class="txt" id="catSummaryTxt"><b>' + (activeN === 1 ? "Thema" : "Themen") + " aktiv</b> von " + avail.length + "<br>" + cardN + " Karten im täglichen Mix</div></div>" +
+      '<div class="section-title">Deine Themen</div>' +
+      '<p class="section-note">Tippe auf ein Thema für Details. Mit dem Schalter pausierst du es im Tagesstapel.</p>' +
+      '<div class="list glass">' + rows + "</div>" +
+      '<div class="section-title">Vorgeschlagene Themenfelder</div>' +
+      '<p class="section-note">Ein Tipp genügt – das Thema wird sofort mit Beispielkarten freigeschaltet.</p>' +
+      suggHTML +
+      '<p class="footnote">' + CARDS.length + " Lernkarten in " + CATEGORIES.length + " Themenfeldern · vollständig offline</p>";
+  }
+  function updateCatSummary() {
+    const avail = CATEGORIES.filter(isAvailable);
+    const activeN = avail.filter(c => state.active[c.key]).length;
+    const cardN = CARDS.filter(c => isActive(catOf(c))).length;
+    const n = $("#catActiveN"), t = $("#catSummaryTxt");
+    if (n) n.textContent = activeN;
+    if (t) t.innerHTML = "<b>" + (activeN === 1 ? "Thema" : "Themen") + " aktiv</b> von " + avail.length + "<br>" + cardN + " Karten im täglichen Mix";
+    avail.forEach(cat => {
+      const row = document.querySelector('[data-row="' + cat.key + '"]');
+      if (!row) return;
+      const on = !!state.active[cat.key];
+      row.classList.toggle("off", !on);
+      const list = cardsOf(cat);
+      const m = list.filter(c => isMastered(c.id)).length;
+      $(".row-sub", row).textContent = plural(list.length, "Karte", "Karten") + " · " + m + " gemeistert" + (on ? "" : " · pausiert");
+    });
+  }
+  function toggleCategory(key, on, input) {
+    if (!on && activeCats().length <= 1 && state.active[key]) {
+      input.checked = true;
+      haptic("error");
+      toast("Mindestens ein Thema muss aktiv bleiben", "☝️");
+      return;
+    }
+    state.active[key] = on;
+    haptic("light");
+    onCategoriesChanged();
+    $$('[data-toggle="cat"][data-key="' + key + '"]').forEach(i => { i.checked = on; });
+    updateCatSummary();
+    updateBadge();
+    if (ui.sheet && ui.sheet.type === "cat" && ui.sheet.key === key) renderCategorySheet(key);
+    const cat = CAT_BY_KEY[key];
+    toast(on ? cat.short + " ist wieder aktiv" : cat.short + " pausiert", on ? cat.emoji : "⏸️");
+  }
+  function unlockCategory(key, el) {
+    const cat = CAT_BY_KEY[key];
+    if (!cat || isAvailable(cat)) return;
+    const done = () => {
+      state.unlocked.push(key);
+      state.active[key] = true;
+      onCategoriesChanged();
+      save();
+      renderCategories();
+      updateBadge();
+      toast(cat.short + " freigeschaltet · " + plural(cardsOf(cat).length, "neue Karte", "neue Karten"), cat.emoji);
+      const row = document.querySelector('[data-row="' + key + '"]');
+      if (row && row.animate && !reduceMotion) row.animate([{ background: "rgba(" + rgbOf(cat.color).join(",") + ",.22)" }, { background: "transparent" }], { duration: 1400, easing: "ease-out" });
+    };
+    haptic("success");
+    if (el && !reduceMotion) { el.classList.add("unlocking"); setTimeout(done, 420); } else done();
+  }
+
+  function openCategorySheet(key) {
+    ui.sheet = { type: "cat", key: key };
+    renderCategorySheet(key);
+    openSheet();
+  }
+  function renderCategorySheet(key) {
+    const cat = CAT_BY_KEY[key];
+    const list = cardsOf(cat);
+    const m = list.filter(c => isMastered(c.id)).length;
+    const d = ensureDeck();
+    const seq = sequence();
+    const rows = list.map((c, idx) => {
+      const mastered = isMastered(c.id);
+      const inDeck = seq.indexOf(c.id) !== -1 && !d.solved[c.id];
+      let sub, btn;
+      if (mastered) { sub = "Gemeistert am " + fmtDate.format(new Date(state.mastered[c.id])); btn = '<button class="pill-btn" data-action="read" data-id="' + c.id + '">Lesen</button>'; }
+      else if (inDeck) { sub = "Im heutigen Stapel"; btn = '<button class="pill-btn" data-action="learn" data-id="' + c.id + '">Öffnen</button>'; }
+      else { sub = "Noch nicht gelernt"; btn = '<button class="pill-btn solid" data-action="learn" data-id="' + c.id + '">Lernen</button>'; }
+      return '<div class="row cs-row"><span class="cs-status' + (mastered ? " ok" : "") + '">' + (mastered ? I.check : idx + 1) + "</span>" +
+        '<span class="row-text"><span class="row-title">' + esc(c.title) + '</span><span class="row-sub">' + sub + "</span></span>" + btn + "</div>";
+    }).join("");
+    const on = !!state.active[key];
+    $("#sheetBody").innerHTML =
+      '<div class="tinted" style="' + catStyle(cat) + '">' +
+      '<div class="cs-hero"><div class="cs-emoji">' + cat.emoji + "</div><h2>" + hyph(cat.name) + "</h2><p>" + esc(cat.desc) + "</p>" +
+      '<div class="cs-progress"><div class="bar"><i style="width:' + Math.round(m / list.length * 100) + '%"></i></div><span>' + m + " von " + list.length + " Karten gemeistert</span></div></div>" +
+      '<div class="list glass" style="margin-top:18px"><div class="row setting-row"><span class="row-text"><span class="row-title">Im Tagesstapel</span><span class="row-sub">' + (on ? "Karten erscheinen in deinem täglichen Mix" : "Thema ist pausiert") + "</span></span>" +
+      '<label class="switch" style="--sw-on:' + cat.color + '"><input type="checkbox" data-toggle="cat" data-key="' + key + '"' + (on ? " checked" : "") + ' aria-label="Im Tagesstapel"><span class="track"></span></label></div></div>' +
+      '<div class="section-title">Karten</div><div class="list glass">' + rows + "</div></div>";
+  }
+
+  /* =====================================================================
+     TAB: ARCHIV
+     ===================================================================== */
+  function fold(s) {
+    let o = "";
+    for (let i = 0; i < s.length; i++) {
+      const ch = s[i];
+      let f = ch.normalize ? ch.normalize("NFD")[0] : ch;
+      const low = f.toLowerCase();
+      o += low.length === 1 ? low : f;
+    }
+    return o;
+  }
+  function termsOf(q) { return fold(q.trim()).split(/\s+/).filter(Boolean); }
+  function haystack(c) {
+    return [c.title, c.category, c.story, c.funFact, c.quiz.question, c.quiz.options.join(" "), c.quiz.explanation].join(" \n ");
+  }
+  function highlight(text, terms) {
+    if (!terms.length) return esc(text);
+    const f = fold(text);
+    const ranges = [];
+    terms.forEach(t => {
+      let i = f.indexOf(t);
+      while (i !== -1 && t.length) { ranges.push([i, i + t.length]); i = f.indexOf(t, i + t.length); }
+    });
+    if (!ranges.length) return esc(text);
+    ranges.sort((a, b) => a[0] - b[0]);
+    const merged = [];
+    ranges.forEach(r => {
+      const last = merged[merged.length - 1];
+      if (last && r[0] <= last[1]) last[1] = Math.max(last[1], r[1]); else merged.push(r.slice());
+    });
+    let out = "", pos = 0;
+    merged.forEach(r => { out += esc(text.slice(pos, r[0])) + "<mark>" + esc(text.slice(r[0], r[1])) + "</mark>"; pos = r[1]; });
+    return out + esc(text.slice(pos));
+  }
+  function snippet(c, terms) {
+    const sources = [c.story, c.funFact, c.quiz.question, c.quiz.explanation];
+    if (terms.length) {
+      for (const s of sources) {
+        const f = fold(s);
+        let idx = -1;
+        for (const t of terms) { const i = f.indexOf(t); if (i !== -1 && (idx === -1 || i < idx)) idx = i; }
+        if (idx !== -1) {
+          let start = Math.max(0, idx - 48);
+          if (start > 0) { const sp = s.indexOf(" ", start); if (sp !== -1 && sp < idx) start = sp + 1; }
+          const piece = s.slice(start, start + 170);
+          return (start > 0 ? "… " : "") + highlight(piece, terms) + (start + 170 < s.length ? " …" : "");
+        }
+      }
+    }
+    return esc(c.story.length > 150 ? c.story.slice(0, 150).replace(/\s+\S*$/, "") + " …" : c.story);
+  }
+  function renderArchive() {
+    const ids = masteredIds();
+    $("#archiveEyebrow").textContent = plural(ids.length, "Karte", "Karten") + " gemeistert";
+    const counts = {};
+    ids.forEach(id => { const k = catOf(CARD_BY_ID[id]).key; counts[k] = (counts[k] || 0) + 1; });
+    if (ui.archiveFilter !== "all" && !counts[ui.archiveFilter]) ui.archiveFilter = "all";
+    const chips = ['<button class="chip' + (ui.archiveFilter === "all" ? " on" : "") + '" data-action="chip" data-key="all">Alle <span class="n">' + ids.length + "</span></button>"]
+      .concat(CATEGORIES.filter(c => counts[c.key]).map(c =>
+        '<button class="chip' + (ui.archiveFilter === c.key ? " on" : "") + '" style="' + catStyle(c) + '" data-action="chip" data-key="' + c.key + '">' + c.emoji + " " + esc(c.short) + ' <span class="n">' + counts[c.key] + "</span></button>"));
+    $("#archiveChips").innerHTML = ids.length ? chips.join("") : "";
+    $("#archiveChips").hidden = !ids.length;
+    renderArchiveList();
+  }
+  function renderArchiveList() {
+    const ids = masteredIds();
+    const box = $("#archiveList");
+    const q = ui.archiveQuery;
+    $("#searchClear").hidden = !q;
+    if (!ids.length) {
+      box.innerHTML = '<div class="empty glass"><div class="em">🗂️</div><h3>Noch leer – aber nicht mehr lange</h3><p>Jede Karte, deren Quiz du richtig beantwortest, landet automatisch hier und bleibt jederzeit durchsuchbar.</p>' +
+        '<button class="btn-primary" data-action="goto" data-tab="today">Zum Tagesstapel</button></div>';
+      return;
+    }
+    const terms = termsOf(q);
+    let list = ids.map(id => CARD_BY_ID[id]);
+    if (ui.archiveFilter !== "all") list = list.filter(c => catOf(c).key === ui.archiveFilter);
+    if (terms.length) list = list.filter(c => { const h = fold(haystack(c)); return terms.every(t => h.indexOf(t) !== -1); });
+    list.sort((a, b) => state.mastered[b.id] - state.mastered[a.id]);
+    if (!list.length) {
+      box.innerHTML = '<div class="empty glass"><div class="em">🔍</div><h3>Keine Treffer</h3><p>Für „' + esc(q) + "“ wurde nichts gefunden. Probiere einen anderen Begriff oder Filter.</p></div>";
+      return;
+    }
+    const t = todayKey(), y = shiftKey(t, -1);
+    const groups = [];
+    list.forEach(c => {
+      const k = keyOf(new Date(state.mastered[c.id]));
+      let g = groups[groups.length - 1];
+      if (!g || g.key !== k) { g = { key: k, items: [] }; groups.push(g); }
+      g.items.push(c);
+    });
+    box.innerHTML = (terms.length ? '<p class="section-note" style="padding-top:12px;margin:0">' + plural(list.length, "Treffer", "Treffer") + " für „" + esc(q.trim()) + "“</p>" : "") +
+      groups.map((g, gi) => {
+        const label = g.key === t ? "Heute" : g.key === y ? "Gestern" : fmtLong.format(dateOfKey(g.key));
+        return '<div class="section-title"' + (gi === 0 ? ' style="padding-top:' + (terms.length ? 4 : 14) + 'px"' : "") + ">" + esc(label) + "<small>" + g.items.length + "</small></div>" +
+          '<div class="list glass">' + g.items.map(c => {
+            const cat = catOf(c);
+            return '<button class="row arc-row tinted" style="' + catStyle(cat) + '" data-action="read" data-id="' + c.id + '">' +
+              '<span class="arc-bar"></span><span class="row-text"><span class="arc-cat">' + cat.emoji + " " + esc(cat.short) + "</span>" +
+              '<span class="row-title">' + highlight(c.title, terms) + '</span><span class="arc-snip">' + snippet(c, terms) + "</span></span>" +
+              '<span class="chev">' + I.chevron + "</span></button>";
+          }).join("") + "</div>";
+      }).join("");
+  }
+
+  function openReader(id) {
+    const card = CARD_BY_ID[id];
+    if (!card) return;
+    ui.sheet = { type: "read", id: id };
+    $("#sheetBody").innerHTML = cardHTML(card, { mode: "read", solved: true });
+    TTS.sync();
+    openSheet();
+  }
+
+  /* =====================================================================
+     TAB: PROFIL
+     ===================================================================== */
+  function renderProfile() {
+    normalizeStreak();
+    const t = todayKey();
+    const lit = state.streak > 0;
+    const week = [];
+    for (let i = 6; i >= 0; i--) {
+      const k = shiftKey(t, -i);
+      const done = state.history.indexOf(k) !== -1;
+      const wd = fmtWd.format(dateOfKey(k)).replace(".", "").slice(0, 2);
+      week.push('<div class="wd' + (done ? " done" : "") + (i === 0 ? " today" : "") + '"><span class="wd-dot">' + (done ? I.check : "") + "</span><span>" + esc(wd) + "</span></div>");
+    }
+    const weekDone = week.filter(w => w.indexOf(" done") !== -1).length;
+    const avail = availableCards();
+    const mIds = masteredIds();
+    const mAvail = avail.filter(c => isMastered(c.id)).length;
+    const acc = state.stats.answered ? state.stats.firstTry / state.stats.answered : 0;
+    let sub;
+    if (doneToday()) sub = "Heute erledigt – die Flamme brennt weiter. 🔥";
+    else if (lit) sub = "Löse heute deinen Stapel, um die Serie zu halten.";
+    else sub = "Löse deinen ersten Tagesstapel und entfache die Flamme.";
+
+    const install = isIOS && !isStandalone && !state.settings.hideInstall
+      ? '<div class="install glass"><span class="ico">' + I.share + '</span><div><b>Als App installieren</b><p>Tippe in Safari auf „Teilen“ und dann auf „Zum Home-Bildschirm“ – Lumen startet danach im Vollbild wie eine native App.</p></div><button class="x" data-action="dismiss-install" aria-label="Hinweis ausblenden">' + I.close + "</button></div>"
+      : "";
+
+    const catRings = CATEGORIES.filter(isAvailable).map(cat => {
+      const list = cardsOf(cat);
+      const m = list.filter(c => isMastered(c.id)).length;
+      return '<button class="cr" data-action="cat" data-key="' + cat.key + '"><span class="ring-wrap">' + ringSVG(66, 7, [{ pct: m / list.length, color: cat.color }]) +
+        '<span class="ring-center">' + cat.emoji + '</span></span><span class="cr-name">' + esc(cat.short) + '</span><span class="cr-val">' + m + " / " + list.length + "</span></button>";
+    }).join("");
+
+    const rates = [[0.85, "Ruhig"], [1, "Normal"], [1.15, "Zügig"]];
+    const rateBtns = rates.map(r => '<button class="' + (state.settings.rate === r[0] ? "on" : "") + '" data-action="rate" data-rate="' + r[0] + '">' + r[1] + "</button>").join("");
+
+    $("#profileContent").innerHTML = install +
+      '<div class="hero glass' + (lit ? "" : " cold") + '">' + '<div style="display:grid;place-items:center">' + flameSVG(88, lit) + "</div>" +
+      '<div class="hero-num">' + state.streak + '</div><div class="hero-label">' + (state.streak === 1 ? "Tag" : "Tage") + " in Folge · Rekord " + state.best + "</div>" +
+      '<p class="hero-sub">' + sub + '</p><div class="week">' + week.join("") + "</div></div>" +
+
+      '<div class="section-title">Aktivität</div>' +
+      '<div class="activity glass"><div class="ring-wrap">' + ringSVG(136, 15, [
+        { pct: avail.length ? mAvail / avail.length : 0, color: "#FF2D55" },
+        { pct: acc, color: "#30D158" },
+        { pct: weekDone / 7, color: "#0A84FF" }
+      ]) + "</div>" +
+      '<div class="legend">' +
+      '<div class="lg-item"><span class="lg-top"><i style="background:#FF2D55"></i>Gesamtfortschritt</span><span class="lg-val">' + mAvail + "<small> / " + avail.length + " Karten</small></span></div>" +
+      '<div class="lg-item"><span class="lg-top"><i style="background:#30D158"></i>Treffer im 1. Versuch</span><span class="lg-val">' + Math.round(acc * 100) + "<small> %</small></span></div>" +
+      '<div class="lg-item"><span class="lg-top"><i style="background:#0A84FF"></i>Wochenziel</span><span class="lg-val">' + weekDone + "<small> / 7 Tage</small></span></div>" +
+      "</div></div>" +
+
+      '<div class="stats-grid">' +
+      '<div class="stat glass"><div class="stat-ico">📚</div><div class="stat-val">' + mIds.length + '</div><div class="stat-lbl">Karten gemeistert</div></div>' +
+      '<div class="stat glass"><div class="stat-ico">✅</div><div class="stat-val">' + state.stats.answered + '</div><div class="stat-lbl">Quizfragen gelöst</div></div>' +
+      '<div class="stat glass"><div class="stat-ico">🏆</div><div class="stat-val">' + state.best + '</div><div class="stat-lbl">Längste Serie</div></div>' +
+      '<div class="stat glass"><div class="stat-ico">📅</div><div class="stat-val">' + state.history.length + '</div><div class="stat-lbl">Lerntage gesamt</div></div>' +
+      "</div>" +
+
+      '<div class="section-title">Fortschritt nach Thema</div>' +
+      '<div class="cat-rings glass">' + catRings + "</div>" +
+
+      '<div class="section-title">Einstellungen</div>' +
+      '<div class="list glass">' +
+      '<div class="row setting-row"><span class="row-text"><span class="row-title">Haptisches Feedback</span><span class="row-sub">Vibration bei richtigen und falschen Antworten</span></span>' +
+      '<label class="switch"><input type="checkbox" data-toggle="haptics"' + (state.settings.haptics ? " checked" : "") + ' aria-label="Haptisches Feedback"><span class="track"></span></label></div>' +
+      '<div class="row setting-row setting-col"><span class="row-text"><span class="row-title">Vorlesetempo</span><span class="row-sub" id="voiceName"></span></span><div class="seg-ctl">' + rateBtns + "</div></div>" +
+      "</div>" +
+      '<div class="list glass" style="margin-top:14px"><button class="row destructive" data-action="reset">Fortschritt zurücksetzen</button></div>' +
+      '<p class="footnote">Lumen · ' + CARDS.length + " Lernkarten · " + CATEGORIES.length + " Themenfelder<br>Alle Inhalte und Daten bleiben auf diesem Gerät.</p>";
+    renderVoiceName();
+    animateRings($("#profileContent"));
+  }
+  function renderVoiceName() {
+    const el = $("#voiceName");
+    if (!el) return;
+    if (!TTS.ok) el.textContent = "Vorlesen wird von diesem Browser nicht unterstützt";
+    else el.textContent = TTS.voice ? "Stimme: " + TTS.voice.name : "Stimme: Systemstandard (Deutsch)";
+  }
+
+  /* =====================================================================
+     NAVIGATION, SHEET, TOAST, ALERT
+     ===================================================================== */
+  const TABS = ["today", "categories", "archive", "profile"];
+  const TITLES = { today: "Heute", categories: "Kategorien", archive: "Archiv", profile: "Profil" };
+  function renderTab(name) {
+    if (name === "today") renderToday(false);
+    else if (name === "categories") renderCategories();
+    else if (name === "archive") renderArchive();
+    else if (name === "profile") renderProfile();
+  }
+  function switchTab(name) {
+    if (TABS.indexOf(name) === -1) return;
+    const view = $("#view-" + name);
+    if (name === ui.tab) {
+      view.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+      return;
+    }
+    TTS.stop();
+    ui.tab = name;
+    renderTab(name);
+    $$(".view").forEach(v => v.classList.toggle("active", v === view));
+    $$(".tab").forEach(t => {
+      const on = t.dataset.tab === name;
+      t.classList.toggle("active", on);
+      t.setAttribute("aria-selected", on ? "true" : "false");
+    });
+    $("#tabInd").style.setProperty("--i", TABS.indexOf(name));
+    $("#navTitle").textContent = TITLES[name];
+    if (name !== "today") setAccent(name === "categories" ? "#34C759" : name === "archive" ? "#0A84FF" : "#FF9500");
+    else { const cur = currentCardId(); setAccent(cur ? catOf(CARD_BY_ID[cur]).color : "#FF9500"); }
+    updateNavbar();
+    haptic("light");
+  }
+  function updateNavbar() {
+    const v = $("#view-" + ui.tab);
+    const y = v ? v.scrollTop : 0;
+    const nb = $("#navbar");
+    nb.classList.toggle("scrolled", y > 4);
+    nb.classList.toggle("titled", y > 52);
+  }
+
+  function openSheet() {
+    document.body.classList.remove("sheet-closing");
+    document.body.classList.add("sheet-open");
+    $("#sheet").style.transform = "";
+    $("#sheetBody").scrollTop = 0;
+    haptic("light");
+  }
+  let closeTimer = null;
+  function closeSheet() {
+    if (!document.body.classList.contains("sheet-open")) return;
+    const sheet = $("#sheet");
+    sheet.style.transform = "";
+    document.body.classList.add("sheet-closing");
+    document.body.classList.remove("sheet-open");
+    if (ui.sheet && ui.sheet.type === "read") TTS.stop();
+    ui.sheet = null;
+    clearTimeout(closeTimer);
+    closeTimer = setTimeout(() => document.body.classList.remove("sheet-closing"), 520);
+    if (ui.tab === "categories") renderCategories();
+    else if (ui.tab === "profile") renderProfile();
+  }
+  (function setupSheetDrag() {
+    const sheet = $("#sheet"), body = $("#sheetBody");
+    let startY = 0, dy = 0, dragging = false, t0 = 0, fromHead = false;
+    sheet.addEventListener("touchstart", e => {
+      if (!document.body.classList.contains("sheet-open")) return;
+      fromHead = !!e.target.closest(".sheet-head");
+      if (!fromHead && body.scrollTop > 0) return;
+      startY = e.touches[0].clientY; dy = 0; dragging = true; t0 = Date.now();
+    }, { passive: true });
+    sheet.addEventListener("touchmove", e => {
+      if (!dragging) return;
+      dy = e.touches[0].clientY - startY;
+      if (dy <= 0) {
+        sheet.style.transform = "";
+        if (!fromHead) { dragging = false; sheet.style.transition = ""; }
+        return;
+      }
+      if (e.cancelable) e.preventDefault();
+      sheet.style.transition = "none";
+      sheet.style.transform = "translateY(" + dy + "px)";
+    }, { passive: false });
+    const end = () => {
+      if (!dragging) return;
+      dragging = false;
+      sheet.style.transition = "";
+      const v = dy / Math.max(1, Date.now() - t0);
+      if (dy > 140 || (dy > 40 && v > 0.55)) closeSheet(); else sheet.style.transform = "";
+    };
+    sheet.addEventListener("touchend", end);
+    sheet.addEventListener("touchcancel", end);
+  })();
+
+  let toastTimer = null;
+  function toast(text, icon) {
+    const el = $("#toast");
+    $("#toastIco").textContent = icon || "✨";
+    $("#toastText").textContent = text;
+    el.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.remove("show"), 2400);
+  }
+  function showAlert(title, msg, actions) {
+    $("#alertTitle").textContent = title;
+    $("#alertMsg").textContent = msg;
+    const box = $("#alertActions");
+    box.innerHTML = "";
+    actions.forEach(a => {
+      const b = document.createElement("button");
+      b.textContent = a.label;
+      if (a.style) b.className = a.style;
+      b.addEventListener("click", () => { $("#alert").classList.remove("show"); if (a.onTap) a.onTap(); });
+      box.appendChild(b);
+    });
+    $("#alert").classList.add("show");
+  }
+
+  function confetti() {
+    if (reduceMotion) return;
+    const cv = document.createElement("canvas");
+    cv.className = "confetti";
+    document.body.appendChild(cv);
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const W = window.innerWidth, H = window.innerHeight;
+    cv.width = W * dpr; cv.height = H * dpr;
+    const g = cv.getContext("2d");
+    g.scale(dpr, dpr);
+    const colors = CATEGORIES.map(c => c.color).concat(["#FFD60A", "#FF9F0A", "#30D158", "#FF375F"]);
+    const parts = [];
+    for (let i = 0; i < 150; i++) {
+      const ang = -Math.PI / 2 + (Math.random() - 0.5) * 1.9;
+      const sp = 7 + Math.random() * 11;
+      parts.push({
+        x: W / 2 + (Math.random() - 0.5) * 40, y: H * 0.34,
+        vx: Math.cos(ang) * sp, vy: Math.sin(ang) * sp,
+        w: 6 + Math.random() * 6, h: 9 + Math.random() * 8,
+        r: Math.random() * Math.PI, vr: (Math.random() - 0.5) * 0.35,
+        c: colors[Math.floor(Math.random() * colors.length)], round: Math.random() < 0.3
+      });
+    }
+    const t0 = performance.now();
+    function frame(t) {
+      const el = (t - t0) / 1000;
+      g.clearRect(0, 0, W, H);
+      const alpha = Math.max(0, 1 - Math.max(0, el - 1.9) / 1.1);
+      parts.forEach(p => {
+        p.vy += 0.32; p.vx *= 0.985; p.vy *= 0.985;
+        p.x += p.vx; p.y += p.vy; p.r += p.vr;
+        g.save();
+        g.globalAlpha = alpha;
+        g.translate(p.x, p.y);
+        g.rotate(p.r);
+        g.fillStyle = p.c;
+        if (p.round) { g.beginPath(); g.arc(0, 0, p.w / 2, 0, Math.PI * 2); g.fill(); }
+        else g.fillRect(-p.w / 2, -p.h / 2, p.w, p.h * Math.abs(Math.cos(p.r * 1.7)) + 1.5);
+        g.restore();
+      });
+      if (el < 3) requestAnimationFrame(frame); else cv.remove();
+    }
+    requestAnimationFrame(frame);
+  }
+
+  /* =====================================================================
+     EVENTS
+     ===================================================================== */
+  document.addEventListener("click", e => {
+    const el = e.target.closest("[data-action]");
+    if (!el) return;
+    const a = el.dataset.action;
+    switch (a) {
+      case "tab": switchTab(el.dataset.tab); break;
+      case "goto": closeSheet(); switchTab(el.dataset.tab); break;
+      case "answer": onAnswer(el); break;
+      case "next": onNext(); break;
+      case "focus":
+        TTS.stop();
+        ui.focusId = el.dataset.id;
+        renderToday(true);
+        haptic("light");
+        break;
+      case "speak": TTS.toggle(CARD_BY_ID[el.dataset.id]); break;
+      case "read": openReader(el.dataset.id); break;
+      case "cat": openCategorySheet(el.dataset.key); break;
+      case "unlock": unlockCategory(el.dataset.key, el); break;
+      case "learn": learnNow(el.dataset.id); break;
+      case "bonus": drawBonus(); break;
+      case "close-sheet": closeSheet(); break;
+      case "chip":
+        ui.archiveFilter = el.dataset.key;
+        haptic("light");
+        renderArchive();
+        break;
+      case "clear-search":
+        ui.archiveQuery = "";
+        $("#searchInput").value = "";
+        renderArchiveList();
+        $("#searchInput").focus();
+        break;
+      case "rate":
+        state.settings.rate = Number(el.dataset.rate);
+        save();
+        $$(".seg-ctl button").forEach(b => b.classList.toggle("on", b === el));
+        haptic("light");
+        break;
+      case "dismiss-install":
+        state.settings.hideInstall = true;
+        save();
+        renderProfile();
+        break;
+      case "reset":
+        showAlert("Fortschritt zurücksetzen?", "Streak, Archiv, Statistiken und freigeschaltete Themen werden gelöscht. Das kann nicht rückgängig gemacht werden.", [
+          { label: "Abbrechen", style: "cancel" },
+          { label: "Zurücksetzen", style: "destructive", onTap: () => {
+            const settings = state.settings;
+            state = defaultState();
+            state.settings = settings;
+            ui.focusId = null; ui.archiveFilter = "all"; ui.archiveQuery = "";
+            $("#searchInput").value = "";
+            ensureDeck();
+            save();
+            renderProfile();
+            updateBadge();
+            haptic("error");
+            toast("Alles zurückgesetzt – auf ein Neues!", "🌱");
+          } }
+        ]);
+        break;
+    }
+  });
+  document.addEventListener("change", e => {
+    const t = e.target;
+    if (t.matches('[data-toggle="cat"]')) toggleCategory(t.dataset.key, t.checked, t);
+    else if (t.matches('[data-toggle="haptics"]')) {
+      state.settings.haptics = t.checked;
+      save();
+      if (t.checked) haptic("success");
+    }
+  });
+  $("#searchInput").addEventListener("input", e => { ui.archiveQuery = e.target.value; renderArchiveList(); });
+  $("#searchInput").addEventListener("keydown", e => { if (e.key === "Enter") e.target.blur(); });
+  $$(".view").forEach(v => v.addEventListener("scroll", () => { if (v.classList.contains("active")) updateNavbar(); }, { passive: true }));
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") { if ($("#alert").classList.contains("show")) $("#alert").classList.remove("show"); else closeSheet(); }
+  });
+
+  function checkDay() {
+    if (state.daily && state.daily.date !== todayKey()) {
+      normalizeStreak();
+      ensureDeck();
+      save();
+      renderTab(ui.tab);
+      updateBadge();
+      toast("Neuer Tag, neuer Stapel!", "☀️");
+    } else {
+      const cd = $("#countdown span");
+      if (cd) cd.textContent = countdownText();
+    }
+  }
+  setInterval(checkDay, 30000);
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) checkDay(); else TTS.stop(); });
+  window.addEventListener("pagehide", () => TTS.stop());
+
+  /* =====================================================================
+     APP-ICON (zur Laufzeit erzeugt, keine externen Assets)
+     ===================================================================== */
+  function makeIcon() {
+    try {
+      const S = 180;
+      const c = document.createElement("canvas");
+      c.width = c.height = S;
+      const g = c.getContext("2d");
+      const bg = g.createLinearGradient(0, 0, S, S);
+      bg.addColorStop(0, "#2B2A8C");
+      bg.addColorStop(0.55, "#6D3FE0");
+      bg.addColorStop(1, "#FF8A3D");
+      g.fillStyle = bg;
+      g.fillRect(0, 0, S, S);
+      const glow = g.createRadialGradient(S * 0.3, S * 0.2, 4, S * 0.3, S * 0.2, S * 0.8);
+      glow.addColorStop(0, "rgba(255,255,255,0.35)");
+      glow.addColorStop(1, "rgba(255,255,255,0)");
+      g.fillStyle = glow;
+      g.fillRect(0, 0, S, S);
+      g.fillStyle = "rgba(255,255,255,0.18)";
+      g.beginPath(); g.arc(S / 2, S / 2, 58, 0, Math.PI * 2); g.fill();
+      const star = (cx, cy, r, k) => {
+        g.beginPath();
+        g.moveTo(cx, cy - r);
+        g.quadraticCurveTo(cx + r * k, cy - r * k, cx + r, cy);
+        g.quadraticCurveTo(cx + r * k, cy + r * k, cx, cy + r);
+        g.quadraticCurveTo(cx - r * k, cy + r * k, cx - r, cy);
+        g.quadraticCurveTo(cx - r * k, cy - r * k, cx, cy - r);
+        g.closePath();
+        g.fill();
+      };
+      g.fillStyle = "#FFFFFF";
+      g.shadowColor = "rgba(255,200,120,0.9)";
+      g.shadowBlur = 18;
+      star(S / 2, S / 2, 46, 0.16);
+      g.shadowBlur = 8;
+      g.fillStyle = "rgba(255,255,255,0.9)";
+      star(S * 0.73, S * 0.28, 14, 0.18);
+      const url = c.toDataURL("image/png");
+      [["apple-touch-icon", null], ["icon", "image/png"]].forEach(p => {
+        const l = document.createElement("link");
+        l.rel = p[0];
+        if (p[1]) l.type = p[1];
+        l.href = url;
+        document.head.appendChild(l);
+      });
+    } catch (e) { /* Icon optional */ }
+  }
+
+  /* =====================================================================
+     START
+     ===================================================================== */
+  setupHapticProxy();
+  makeIcon();
+  TTS.init();
+  normalizeStreak();
+  ensureDeck();
+  save();
+  renderToday(false);
+  updateNavbar();
+})();
+</script>
+</body>
+</html>
