@@ -6433,12 +6433,12 @@
       c.width = c.height = S;
       const g = c.getContext("2d");
       const bg = g.createLinearGradient(0, 0, S, S);
-      bg.addColorStop(0, "#2B2A8C"); bg.addColorStop(0.55, "#6D3FE0"); bg.addColorStop(1, "#FF8A3D");
+      bg.addColorStop(0, "#1D3F8F"); bg.addColorStop(0.5, "#0C1A45"); bg.addColorStop(1, "#020308");
       g.fillStyle = bg; g.fillRect(0, 0, S, S);
       const glow = g.createRadialGradient(S * 0.3, S * 0.2, 4, S * 0.3, S * 0.2, S * 0.8);
-      glow.addColorStop(0, "rgba(255,255,255,0.35)"); glow.addColorStop(1, "rgba(255,255,255,0)");
+      glow.addColorStop(0, "rgba(140,185,255,0.32)"); glow.addColorStop(1, "rgba(140,185,255,0)");
       g.fillStyle = glow; g.fillRect(0, 0, S, S);
-      g.fillStyle = "rgba(255,255,255,0.18)";
+      g.fillStyle = "rgba(150,190,255,0.14)";
       g.beginPath(); g.arc(S / 2, S / 2, 58, 0, Math.PI * 2); g.fill();
       const star = (cx, cy, r, k) => {
         g.beginPath(); g.moveTo(cx, cy - r);
@@ -6448,7 +6448,7 @@
         g.quadraticCurveTo(cx - r * k, cy - r * k, cx, cy - r);
         g.closePath(); g.fill();
       };
-      g.fillStyle = "#FFFFFF"; g.shadowColor = "rgba(255,200,120,0.9)"; g.shadowBlur = 18;
+      g.fillStyle = "#FFFFFF"; g.shadowColor = "rgba(130,180,255,0.95)"; g.shadowBlur = 18;
       star(S / 2, S / 2, 46, 0.16);
       g.shadowBlur = 8; g.fillStyle = "rgba(255,255,255,0.9)";
       star(S * 0.73, S * 0.28, 14, 0.18);
