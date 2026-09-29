@@ -368,6 +368,10 @@
   .tt-add { position: absolute; z-index: 2; top: 12px; right: 12px; width: 34px; height: 34px; border-radius: 50%; background: var(--c); color: #fff; display: grid; place-items: center; box-shadow: 0 6px 14px rgba(var(--c-rgb), 0.4); transition: transform 0.15s ease; }
   .tt-add:active { transform: scale(0.88); }
   .tt-add svg { width: 16px; height: 16px; }
+  .theme-grid.recent { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .theme-grid.recent .theme-tile { min-height: 124px; padding: 12px; border-radius: 22px; }
+  .theme-grid.recent .cat-icon { width: 40px; height: 40px; border-radius: 12px; font-size: 21px; }
+  .theme-grid.recent .tt-name { font-size: 13.5px; }
   .new-tag { display: inline-block; vertical-align: 1px; margin-left: 4px; font-size: 9.5px; font-weight: 800; letter-spacing: 0.06em; padding: 2px 5px; border-radius: 5px; color: #fff; background: var(--c); }
 
   .back-btn { display: inline-flex; align-items: center; gap: 2px; height: 38px; padding: 0 12px 0 4px; margin: 6px 0 0 -4px; border-radius: 19px; color: var(--tint); font-size: 17px; font-weight: 500; transition: opacity 0.15s ease; }
@@ -626,6 +630,7 @@
 
   @media (min-width: 560px) {
     .theme-grid { grid-template-columns: repeat(3, 1fr); }
+    .theme-grid.recent { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .cat-rings { grid-template-columns: repeat(4, 1fr); }
     .stats-grid { grid-template-columns: repeat(3, 1fr); }
     .mode-grid { grid-template-columns: repeat(6, 1fr); }
@@ -633,6 +638,7 @@
   @media (max-width: 350px) {
     .lh h1 { font-size: 29px; }
     .theme-grid { grid-template-columns: 1fr; }
+    .theme-grid.recent { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .activity { flex-direction: column; }
     .mode-grid { grid-template-columns: repeat(2, 1fr); }
   }
@@ -960,7 +966,7 @@
     CATEGORIES.forEach(c => { active[c.key] = !c.suggested; });
     return {
       active: active, mastered: {}, seen: {}, correct: {}, saved: {},
-      streak: 0, best: 0, lastDone: null, history: [], daily: null,
+      streak: 0, best: 0, lastDone: null, history: [], daily: null, recent: [],
       stats: { answered: 0, firstTry: 0, wrong: 0, quizRight: 0, quizTotal: 0, tfRight: 0, tfTotal: 0, hlRight: 0, hlTotal: 0, factsNew: 0, factsKnown: 0, sessions: 0 },
       settings: { haptics: true, rate: 1, voice: voice || "female", hideInstall: false }
     };
@@ -973,6 +979,7 @@
     out.settings = Object.assign(defaultState().settings, (s && s.settings) || {});
     ["mastered", "seen", "correct", "saved"].forEach(k => { if (!out[k] || typeof out[k] !== "object") out[k] = {}; });
     if (!Array.isArray(out.history)) out.history = [];
+    out.recent = Array.isArray(out.recent) ? out.recent.filter(k => CAT_BY_KEY[k]) : [];
     if (out.daily && (!Array.isArray(out.daily.ids) || !out.daily.date)) out.daily = null;
     if (out.daily) {
       const dd = out.daily;
@@ -1509,23 +1516,45 @@
   /* =====================================================================
      KATEGORIEN & THEMENSEITE
      ===================================================================== */
-  function themeTileHTML(cat) {
+  function touchRecent(key) {
+    if (!state || !CAT_BY_KEY[key]) return;
+    state.recent = [key].concat(state.recent.filter(k => k !== key)).slice(0, 6);
+    save();
+  }
+  function recentKeys(n) {
+    const out = state.recent.slice();
+    if (out.length < n) {
+      // Fallback für ältere Profile: Themen nach zuletzt gesehenen Inhalten
+      const last = {};
+      Object.keys(state.seen).forEach(id => {
+        const it = ITEM_BY_ID[id];
+        if (it && (!last[it.cat] || state.seen[id] > last[it.cat])) last[it.cat] = state.seen[id];
+      });
+      Object.keys(last).sort((a, b) => last[b] - last[a]).forEach(k => { if (out.indexOf(k) === -1) out.push(k); });
+    }
+    return out.slice(0, n);
+  }
+  function themeTileHTML(cat, compact) {
     const on = isActive(cat);
     const tot = BY_CAT[cat.key].all.length, s = BY_CAT[cat.key].all.filter(it => state.seen[it.id]).length;
     return '<div class="tt-wrap"><button class="theme-tile glass tinted' + (on ? "" : " off") + '" style="' + catStyle(cat) + '" data-action="open-theme" data-key="' + cat.key + '">' +
       '<span class="cat-icon">' + cat.emoji + '</span><span class="tt-name">' + hyph(cat.name) + (cat.suggested && !on ? '<span class="new-tag">NEU</span>' : "") + "</span>" +
-      '<span class="tt-sub">' + plural(tot, "Inhalt", "Inhalte") + " · " + Math.round(s / tot * 100) + ' %</span><span class="mini-bar"><i style="width:' + Math.round(s / tot * 100) + '%"></i></span></button>' +
-      (on ? "" : '<button class="tt-add" style="' + catStyle(cat) + '" data-action="add-mix" data-key="' + cat.key + '" aria-label="' + esc(cat.name) + ' zum Mix hinzufügen">' + I.plus + "</button>") + "</div>";
+      '<span class="tt-sub">' + (compact ? "" : plural(tot, "Inhalt", "Inhalte") + " · ") + Math.round(s / tot * 100) + ' %</span><span class="mini-bar"><i style="width:' + Math.round(s / tot * 100) + '%"></i></span></button>' +
+      (on || compact ? "" : '<button class="tt-add" style="' + catStyle(cat) + '" data-action="add-mix" data-key="' + cat.key + '" aria-label="' + esc(cat.name) + ' zum Mix hinzufügen">' + I.plus + "</button>") + "</div>";
   }
   function renderCategories() {
     if (!state) return;
     const act = activeCats(), rest = CATEGORIES.filter(c => !isActive(c));
     let html = '<button class="mix-hero" data-action="open-theme" data-key="mix"><span class="mh-emoji">🎲</span><span class="mh-text"><b>Alles im Mix</b><span>' +
       plural(act.length, "Thema", "Themen") + " · " + plural(totalCount(act.map(c => c.key)), "Inhalt", "Inhalte") + " · alle Lernarten</span></span>" + '<span style="color:#fff;opacity:.9">' + I.chevron + "</span></button>";
-    html += '<div class="section-title">Deine Themen<small>im täglichen Mix</small></div><div class="theme-grid">' + act.map(themeTileHTML).join("") + "</div>";
-    if (rest.length) {
-      html += '<div class="section-title">Weitere Themen entdecken</div><p class="section-note">Mit ＋ nimmst du ein Thema in deinen Mix auf. Reinschnuppern geht jederzeit mit einem Tipp.</p><div class="theme-grid">' + rest.map(themeTileHTML).join("") + "</div>";
+    const recent = recentKeys(3).map(k => CAT_BY_KEY[k]);
+    if (recent.length) {
+      html += '<div class="section-title">Zuletzt benutzt</div><div class="theme-grid recent">' + recent.map(c => themeTileHTML(c, true)).join("") + "</div>";
     }
+    const all = CATEGORIES.slice().sort((a, b) => a.name.localeCompare(b.name, "de"));
+    html += '<div class="section-title">Alle Themen<small>A–Z · ' + act.length + " im Mix</small></div>" +
+      (rest.length ? '<p class="section-note">Mit ＋ nimmst du ein Thema in deinen täglichen Mix auf. Reinschauen geht jederzeit mit einem Tipp.</p>' : "") +
+      '<div class="theme-grid">' + all.map(c => themeTileHTML(c)).join("") + "</div>";
     html += '<p class="footnote">' + fmtNum.format(ITEMS.length) + " Lerninhalte in " + CATEGORIES.length + " Themen · 6 Lernarten</p>";
     $("#catContent").innerHTML = html;
   }
@@ -1599,6 +1628,7 @@
   }
   function openThemePage(key) {
     ui.themeKey = key;
+    if (key !== "mix") touchRecent(key);
     if (ui.tab !== "categories") {
       switchTab("categories", true);
     }
@@ -1702,6 +1732,7 @@
     const queue = fixedQueue || buildQueue(mode, cats, n);
     if (!queue.length) { toast(mode === "review" ? "Keine offenen Fehler – super!" : "Hier gibt es gerade nichts zu lernen", "✨"); return; }
     const cat = isMix ? null : CAT_BY_KEY[key];
+    if (!isMix) touchRecent(key);
     ui.session = {
       deck: false, mode: mode, key: key, cats: cats, queue: queue, idx: 0, results: [], st: freshItemState(),
       label: isMix ? "Alles im Mix" : cat.short, emoji: isMix ? "🎲" : cat.emoji
