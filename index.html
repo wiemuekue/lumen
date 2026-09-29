@@ -898,7 +898,37 @@
     { key: "olympia", name: "Olympia & Sportgeschichte", short: "Sport", emoji: "🏅", color: "#D97706", suggested: true,
       desc: "Antike Spiele, moderne Olympiaden, Rekorde, Legenden und die Geschichte großer Sportarten." },
     { key: "kaffee", name: "Kaffee, Tee & Kakao", short: "Kaffee & Tee", emoji: "☕", color: "#92400E", suggested: true,
-      desc: "Herkunft, Anbau, Verarbeitung, Kultur und Wirkung der drei großen Genussgetränke." }
+      desc: "Herkunft, Anbau, Verarbeitung, Kultur und Wirkung der drei großen Genussgetränke." },
+    { key: "wein", name: "Wein & Weinbau", short: "Wein", emoji: "🍷", color: "#9F1239", suggested: true,
+      desc: "Rebsorten, Anbaugebiete, Weinbereitung, Verkostung und die Kulturgeschichte des Weins." },
+    { key: "dgeschichte", name: "Deutsche Geschichte", short: "Dt. Geschichte", emoji: "🦅", color: "#374151", suggested: true,
+      desc: "Vom Heiligen Römischen Reich über Kaiserreich, Weimar, NS-Zeit und Teilung bis zur Einheit." },
+    { key: "weltgeschichte", name: "Grundzüge der Weltgeschichte", short: "Weltgeschichte", emoji: "📜", color: "#9A3412", suggested: true,
+      desc: "Die großen Linien: erste Zivilisationen, Weltreiche, Revolutionen, Kolonialismus und Globalisierung." },
+    { key: "philosophie", name: "Philosophie, Ethik & Moral", short: "Philosophie", emoji: "🦉", color: "#6D28D9", suggested: true,
+      desc: "Große Denker und Fragen: Was ist gut, gerecht, wahr – und wie sollen wir leben?" },
+    { key: "religion", name: "Religionen & weltanschauliche Systeme", short: "Religionen", emoji: "🕊️", color: "#A16207", suggested: true,
+      desc: "Weltreligionen, Glaubenspraxis, Feste und Weltanschauungen – sachlich erklärt und verglichen." },
+    { key: "denken", name: "Kritisches Denken & Argumentation", short: "Kritisch denken", emoji: "🧩", color: "#0891B2", suggested: true,
+      desc: "Gute Argumente erkennen, Fehlschlüsse entlarven, Belege prüfen und klarer entscheiden." },
+    { key: "geld", name: "Geld, Märkte & Wirtschaftssysteme", short: "Wirtschaft", emoji: "💶", color: "#047857", suggested: true,
+      desc: "Wie Geld entsteht, Märkte funktionieren, Zinsen, Inflation, Börse und Wirtschaftsordnungen." },
+    { key: "recht", name: "Recht & Staatswesen", short: "Recht & Staat", emoji: "⚖️", color: "#1E3A8A", suggested: true,
+      desc: "Grundgesetz, Gewaltenteilung, Gerichte, Wahlen, Föderalismus und die Grundlagen unseres Rechts." },
+    { key: "geopolitik", name: "Geopolitik & die globale Weltordnung", short: "Geopolitik", emoji: "🗺️", color: "#155E75", suggested: true,
+      desc: "Macht, Bündnisse, internationale Organisationen, Rohstoffe und die Kräfte, die die Welt ordnen." },
+    { key: "medien", name: "Medien, Nachrichten & Desinformation", short: "Medien", emoji: "📰", color: "#475569", suggested: true,
+      desc: "Wie Nachrichten entstehen, wie Algorithmen filtern und wie man Falschmeldungen erkennt." },
+    { key: "evolution", name: "Menschliche Biologie & Evolution", short: "Evolution", emoji: "🧬", color: "#059669", suggested: true,
+      desc: "Gene, Zellen, Vererbung und die lange Geschichte, wie der Mensch zum Menschen wurde." },
+    { key: "pharma", name: "Pharmazie & Wirkstoffe im Körper", short: "Pharmazie", emoji: "💊", color: "#DB2777", suggested: true,
+      desc: "Wie Medikamente wirken, entstehen und geprüft werden – vom Wirkstoff bis zur Wechselwirkung." },
+    { key: "energie", name: "Energie & Infrastruktur", short: "Energie", emoji: "🔌", color: "#C2410C", suggested: true,
+      desc: "Strom, Netze, Kraftwerke, Speicher, Wasser, Verkehr – die Adern, die unsere Gesellschaft versorgen." },
+    { key: "digital", name: "Digitale Infrastruktur & Informationsarchitektur", short: "Digitale Infrastruktur", emoji: "🌐", color: "#2563EB", suggested: true,
+      desc: "Kabel, Rechenzentren, Protokolle, Datenbanken und wie Informationen geordnet und gefunden werden." },
+    { key: "ki", name: "KI, Agenten & Sprachmodelle", short: "KI", emoji: "🤖", color: "#7C3AED", suggested: true,
+      desc: "Wie künstliche Intelligenz lernt, was Sprachmodelle und Agenten können – und wo ihre Grenzen liegen." },
   ];
 
   const GROUPS = [
@@ -906,15 +936,20 @@
       keys: ["tiere", "schildkroeten", "voegel", "insekten", "haustiere", "dinos", "meer", "pflanzen", "pilze", "regenwald", "suedafrika", "nationalparks"] },
     { key: "erde", name: "Erde, Klima & Weltall", emoji: "🌍", color: "#2563EB", desc: "Unser Planet, sein Wetter, seine Zukunft – und alles, was dahinter liegt.",
       keys: ["erde", "wetter", "umwelt", "kosmos"] },
-    { key: "mensch", name: "Mensch & Körper", emoji: "🫀", color: "#E11D48", desc: "Wie unser Körper funktioniert, wie wir denken, fühlen und uns ernähren.",
-      keys: ["koerper", "gehirn", "psychologie", "kueche"] },
-    { key: "kultur", name: "Geschichte & Kultur", emoji: "🏺", color: "#B45309", desc: "Alte Reiche, Mythen, Märchen, Kunst, Musik, Sprache und große Entdeckungen.",
-      keys: ["aegypten", "rom", "mittelalter", "mythologie", "nordisch", "maerchen", "stoa", "entdecker", "erfindungen", "kunst", "musik", "bauwerke", "sprache"] },
-    { key: "technik", name: "Wissenschaft & Technik", emoji: "⚛️", color: "#4F46E5", desc: "Physik, Chemie, Mathe, Computer und der Aufbruch ins All.",
-      keys: ["physik", "chemie", "mathe", "computer", "raumfahrt"] },
+    { key: "mensch", name: "Mensch & Körper", emoji: "🫀", color: "#E11D48", desc: "Wie unser Körper funktioniert, woher wir kommen, wie wir denken, fühlen, uns ernähren und heilen.",
+      keys: ["koerper", "gehirn", "psychologie", "kueche", "evolution", "pharma"] },
+    { key: "kultur", name: "Geschichte & Kultur", emoji: "🏺", color: "#B45309", desc: "Weltgeschichte und deutsche Geschichte, alte Reiche, Mythen, Märchen, Kunst, Musik und Sprache.",
+      keys: ["weltgeschichte", "dgeschichte", "aegypten", "rom", "mittelalter", "mythologie", "nordisch", "maerchen", "entdecker", "erfindungen", "kunst", "musik", "bauwerke", "sprache"] },
+    { key: "denken", name: "Philosophie, Religion & Denken", emoji: "💭", color: "#6D28D9", desc: "Große Fragen, Glaubenswelten, Ethik und die Kunst, klar zu denken.",
+      keys: ["philosophie", "stoa", "religion", "denken"] },
+    { key: "gesellschaft", name: "Gesellschaft, Recht & Wirtschaft", emoji: "🗳️", color: "#1E3A8A", desc: "Wie Staat, Recht, Geld, Medien und Weltpolitik unser Zusammenleben ordnen.",
+      keys: ["recht", "geld", "geopolitik", "medien"] },
+    { key: "technik", name: "Wissenschaft & Technik", emoji: "⚛️", color: "#4F46E5", desc: "Physik, Chemie, Mathe, Computer, Energie, Netze, KI und der Aufbruch ins All.",
+      keys: ["physik", "chemie", "mathe", "computer", "digital", "ki", "energie", "raumfahrt"] },
     { key: "welt", name: "Welt & Freizeit", emoji: "✈️", color: "#0891B2", desc: "Länder und Lebensart, Film, Sport, Genuss und Abenteuer unter Wasser.",
-      keys: ["griechenland", "italien", "sa", "laender", "tauchen", "disney", "film", "olympia", "kaffee"] }
+      keys: ["griechenland", "italien", "sa", "laender", "tauchen", "disney", "film", "olympia", "kaffee", "wein"] }
   ];
+
 
   const CONTENT = {};
   ALL_CATEGORIES.forEach(c => { CONTENT[c.key] = {}; });
