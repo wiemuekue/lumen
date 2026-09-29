@@ -449,6 +449,21 @@
   .empty p { font-size: 15px; color: var(--label2); line-height: 1.45; max-width: 32ch; margin: 0 auto; }
   .empty .btn-primary { margin: 18px auto 0; max-width: 260px; }
   .more-btn { margin-top: 14px; }
+  /* Lexikon */
+  .lex-link { display: flex; align-items: center; gap: 12px; width: 100%; margin-top: 12px; padding: 12px 14px; border-radius: 22px; text-align: left; transition: transform 0.15s ease; }
+  .lex-link:active { transform: scale(0.98); }
+  .lex-link .lex-ico { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; font-size: 21px; flex: none; background: rgba(var(--c-rgb, var(--tint-rgb)), 0.16); }
+  .lex-link .row-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+  .lex-link .chev { color: var(--label3); }
+  .lex-search { width: 100%; margin-top: 12px; text-align: left; cursor: text; }
+  .lex-search span { flex: 1; min-width: 0; color: var(--label3); font-size: 17px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .lex-search b { font-size: 18px; padding-right: 4px; }
+  .lex-hero h2 { font-size: 24px; }
+  .lex-tools { margin-top: 14px; }
+  .lex-cats { margin-top: 2px; }
+  .lex-index { display: flex; flex-wrap: wrap; gap: 6px; padding: 14px 2px 2px; }
+  .lex-index button { min-width: 36px; height: 36px; padding: 0 8px; border-radius: 11px; font-size: 15px; font-weight: 700; color: var(--label); background: var(--glass); -webkit-backdrop-filter: blur(28px) saturate(180%); backdrop-filter: blur(28px) saturate(180%); border: 1px solid var(--glass-border); transition: transform 0.15s ease; }
+  .lex-index button:active { transform: scale(0.9); }
 
   /* ---------- Profil ---------- */
   .me { border-radius: 30px; padding: 22px 18px 18px; text-align: center; }
@@ -1134,7 +1149,7 @@
     return '<span class="avatar" style="--s:' + size + "px;--a1:" + col[0] + ";--a2:" + col[1] + '">' + esc((p && p.avatar) || "🙂") + "</span>";
   }
 
-  const ui = { tab: "today", focusId: null, celebrate: false, blitz: null, arcQuery: "", arcFilter: "all", arcType: "all", arcLimit: 60, sheet: null, session: null, themeKey: null, navStack: [], edit: null };
+  const ui = { tab: "today", focusId: null, celebrate: false, blitz: null, arcQuery: "", arcFilter: "all", arcType: "all", arcLimit: 60, sheet: null, session: null, themeKey: null, navStack: [], edit: null, lex: { q: "", type: "topics", limit: 80, cat: null, focus: false } };
 
   const isActive = cat => !!state.active[cat.key];
   const activeCats = () => CATEGORIES.filter(isActive);
@@ -1625,6 +1640,7 @@
     return [key];
   }
   function metaFor(key) {
+    if (isLexKey(key)) { const m = metaFor(lexScopeKey(key)); return { name: "Lexikon", short: "Lexikon", emoji: "📚", color: m.color, desc: m.desc }; }
     if (key === "mix") return { name: "Alles im Mix", short: "Alles im Mix", emoji: "🎲", color: "#5E5CE6" };
     if (key === "g:all") return { name: "Alle Themen A–Z", short: "Alle Themen", emoji: "🗂️", color: "#5E5CE6", desc: "Jedes Thema auf einen Blick – alphabetisch sortiert." };
     if (isGroupKey(key)) { const g = GROUP_BY_KEY[key.slice(2)]; return { name: g.name, short: g.name, emoji: g.emoji, color: g.color, desc: g.desc }; }
@@ -1671,6 +1687,7 @@
     const act = activeCats(), rest = CATEGORIES.filter(c => !isActive(c));
     let html = '<button class="mix-hero" data-action="open-theme" data-key="mix"><span class="mh-emoji">🎲</span><span class="mh-text"><b>Alles im Mix</b><span>' +
       plural(act.length, "Thema", "Themen") + " · " + plural(totalCount(act.map(c => c.key)), "Inhalt", "Inhalte") + " · alle Lernarten</span></span>" + '<span style="color:#fff;opacity:.9">' + I.chevron + "</span></button>";
+    html += '<button class="search lex-search" data-action="open-lex" data-key="lex:all" data-focus="1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L20 20"/></svg><span>Lexikon: alle Themen durchsuchen</span><b>📚</b></button>';
     const recent = recentKeys(3).map(k => CAT_BY_KEY[k]);
     if (recent.length) {
       html += '<div class="section-title">Zuletzt benutzt</div><div class="theme-grid recent">' + recent.map(c => themeTileHTML(c, true)).join("") + "</div>";
@@ -1710,6 +1727,7 @@
   function renderTheme(dir) {
     const key = ui.themeKey;
     if (!key || !state) return;
+    if (isLexKey(key)) { renderLexicon(dir); return; }
     const isGroup = isGroupKey(key);
     const isMix = key === "mix" || isGroup;
     const keys = keysFor(key);
@@ -1730,6 +1748,7 @@
         '<button class="btn-secondary" data-action="group-mix" data-key="' + key + '">' + (allOn ? "Alle aus dem Mix" : "Alle in den Mix") + "</button></div>";
     }
     html += "</div>";
+    if (key !== "mix") html += lexLinkHTML(key, style);
     if (isGroup) {
       const cats = keys.map(k => CAT_BY_KEY[k]).sort(byName);
       html += '<div class="section-title">Themen<small>A–Z</small></div>' +
@@ -2374,7 +2393,10 @@
   }
   function snippet(it, terms) {
     const base = baseSnippet(it);
-    const src = terms.length ? fullText(it) : base;
+    let src = terms.length ? fullText(it) : base;
+    // Der Titel steht schon darüber – im Ausschnitt nur den Text dahinter zeigen
+    const tt = titleOf(it);
+    if (terms.length && src.indexOf(tt) === 0 && src.length > tt.length + 4) src = src.slice(tt.length).replace(/^\s*\n\s*/, "");
     if (terms.length) {
       const f = fold(src);
       let idx = -1;
@@ -2459,6 +2481,126 @@
     $("#sheetBody").innerHTML = readerHTML(it);
     TTS.sync();
     openSheet();
+  }
+
+  /* =====================================================================
+     LEXIKON – nachschlagen & stöbern (pro Thema, Gruppe oder alle)
+     ===================================================================== */
+  const isLexKey = key => typeof key === "string" && key.indexOf("lex:") === 0;
+  const LEX_TYPES = {
+    all: { label: "Alles", types: ["wissen", "card", "fact", "quiz", "tf", "hl"] },
+    topics: { label: "📖 Stichwörter", types: ["wissen", "card"] },
+    fact: { label: "💡 Fakten", types: ["fact"] },
+    ask: { label: "🧠 Fragen & Antworten", types: ["quiz", "tf", "hl"] }
+  };
+  const LEX_FOLD = {};
+  let lexTimer = 0;
+  function lexScopeKey(key) { const s = key.slice(4); return s === "all" ? "g:all" : s; }
+  // ae/oe/ue/ß wie ä/ö/ü/ss behandeln, damit „kaese“ auch „Käse“ findet
+  const digraph = s => s.replace(/ß/g, "ss").replace(/ae/g, "a").replace(/oe/g, "o").replace(/ue/g, "u");
+  function lexFold(it) { return LEX_FOLD[it.id] || (LEX_FOLD[it.id] = digraph(fold(fullText(it) + " \n " + CAT_BY_KEY[it.cat].name))); }
+  // Sortiert nach dem eigentlichen Stichwort: „Die Stieleiche“ steht unter S
+  function sortTitle(t) { const q = /^[„“"»«‚‘'(\s]+/; return String(t).replace(q, "").replace(/^(der|die|das|ein|eine|the)\s+/i, "").replace(q, ""); }
+  function lexSortKey(it) { return fold(sortTitle(titleOf(it))); }
+  function lexLetter(it) { const c = lexSortKey(it).charAt(0).toUpperCase(); return /[A-Z]/.test(c) ? c : "#"; }
+  function lexItems(keys, types) { const out = []; keys.forEach(k => types.forEach(t => BY_CAT[k][t].forEach(it => out.push(it)))); return out; }
+  function lexCountsHTML(keys) {
+    const n = t => lexItems(keys, LEX_TYPES[t].types).length;
+    return plural(n("topics"), "Stichwort", "Stichwörter") + " · " + plural(n("fact"), "Fakt", "Fakten") + " · " + plural(n("ask"), "Frage", "Fragen");
+  }
+  function lexLinkHTML(key, style) {
+    const scope = key === "g:all" ? "all" : key;
+    return '<button class="lex-link glass" style="' + style + '" data-action="open-lex" data-key="lex:' + scope + '"><span class="lex-ico">📚</span><span class="row-text"><span class="row-title">Lexikon</span><span class="row-sub">' +
+      lexCountsHTML(keysFor(key)) + " – suchen &amp; stöbern</span></span><span class=\"chev\">" + I.chevron + "</span></button>";
+  }
+  function lexRow(it, terms, multi) {
+    const cat = CAT_BY_KEY[it.cat];
+    const info = TYPE_INFO[it.type];
+    return '<button class="row arc-row tinted" style="' + catStyle(cat) + '" data-action="lex-read" data-id="' + esc(it.id) + '"><span class="arc-bar"></span><span class="row-text">' +
+      '<span class="arc-cat">' + (multi ? cat.emoji + " " + esc(cat.short) + " · " : "") + info.icon + " " + info.label + (state.seen[it.id] ? " · ✓" : "") + (state.saved[it.id] ? " · ⭐" : "") + "</span>" +
+      '<span class="row-title">' + highlight(titleOf(it), terms) + '</span><span class="arc-snip">' + snippet(it, terms) + '</span></span><span class="chev">' + I.chevron + "</span></button>";
+  }
+  function renderLexicon(dir) {
+    const key = ui.themeKey, scope = lexScopeKey(key), keys = keysFor(scope);
+    const sm = metaFor(scope);
+    const style = catStyle({ color: sm.color });
+    const prev = ui.navStack.length ? metaFor(ui.navStack[ui.navStack.length - 1]).short : "Kategorien";
+    const intro = scope === "g:all" ? "Alle " + keys.length + " Themen zum Nachschlagen – durchsuche jeden Text, jede Frage und jeden Fakt." :
+      (keys.length > 1 ? "Alle " + keys.length + " Themen dieser Gruppe zum Nachschlagen und Stöbern." : "Alles aus diesem Thema zum Nachschlagen und Stöbern.");
+    let html = '<button class="back-btn" data-action="theme-back">' + I.back + esc(prev) + "</button>";
+    html += '<div class="th-hero glass tinted lex-hero" style="' + style + '"><div class="th-emoji">📚</div><h2>Lexikon' + (scope === "g:all" ? "" : " · " + hyph(sm.short)) + "</h2><p>" + esc(intro) + '</p><div class="th-stats"><span class="th-stat">' + lexCountsHTML(keys).split(" · ").join('</span><span class="th-stat">') + "</span></div></div>";
+    html += '<div class="search lex-tools"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L20 20"/></svg>' +
+      '<input id="lexInput" type="search" value="' + esc(ui.lex.q) + '" placeholder="' + (scope === "g:all" ? "Alle Themen durchsuchen" : "In " + esc(sm.short) + " suchen") + '" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" aria-label="Lexikon durchsuchen">' +
+      '<button class="search-clear" id="lexClear" data-action="lex-clear" aria-label="Suche löschen" hidden><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span></button></div>';
+    html += '<div class="chips" id="lexTypes"></div><div id="lexList"></div>';
+    $("#themeContent").innerHTML = html;
+    renderLexList();
+    finishTheme(metaFor(key), dir);
+    if (ui.lex.focus) { ui.lex.focus = false; setTimeout(() => { const i = $("#lexInput"); if (i && ui.themeKey === key) i.focus(); }, 460); }
+  }
+  function renderLexList() {
+    const box = $("#lexList");
+    if (!box || !isLexKey(ui.themeKey)) return;
+    const keys = keysFor(lexScopeKey(ui.themeKey));
+    let multi = keys.length > 1;
+    const q = ui.lex.q, terms = termsOf(q);
+    $("#lexClear").hidden = !q;
+    const mterms = terms.map(digraph);
+    const match = it => mterms.every(t => lexFold(it).indexOf(t) !== -1);
+    if (!terms.length && ui.lex.type === "all") ui.lex.type = "topics";
+    const order = terms.length ? ["all", "topics", "fact", "ask"] : ["topics", "fact", "ask"];
+    const counts = {};
+    order.forEach(t => { const l = lexItems(keys, LEX_TYPES[t].types); counts[t] = terms.length ? l.filter(match).length : l.length; });
+    $("#lexTypes").innerHTML = order.map(t => '<button class="chip' + (ui.lex.type === t ? " on" : "") + '" data-action="lex-type" data-key="' + t + '">' + LEX_TYPES[t].label + ' <span class="n">' + fmtNum.format(counts[t]) + "</span></button>").join("");
+    let list = lexItems(keys, LEX_TYPES[ui.lex.type].types);
+    const byKey = (a, b) => lexSortKey(a).localeCompare(lexSortKey(b), "de");
+
+    // Suche: Treffer im Titel zuerst, dann alphabetisch
+    if (terms.length) {
+      list = list.filter(match);
+      if (!list.length) {
+        const elsewhere = order.filter(t => t !== ui.lex.type && counts[t]);
+        box.innerHTML = '<div class="empty glass" style="margin-top:14px"><div class="em">🔍</div><h3>Keine Treffer</h3><p>' + "Für „" + esc(q.trim()) + "“ wurde hier nichts gefunden." +
+          (elsewhere.length ? " In „" + LEX_TYPES[elsewhere[0]].label.replace(/^\S+\s/, "") + "“ gibt es " + plural(counts[elsewhere[0]], "Treffer", "Treffer") + "." : " Probiere einen anderen Begriff.") + "</p></div>";
+        return;
+      }
+      const inTitle = it => { const f = digraph(fold(titleOf(it))); return mterms.every(t => f.indexOf(t) !== -1) ? 0 : 1; };
+      list.sort((a, b) => inTitle(a) - inTitle(b) || byKey(a, b));
+      const shown = list.slice(0, ui.lex.limit);
+      box.innerHTML = '<p class="section-note" style="padding-top:12px;margin:0">' + plural(list.length, "Treffer", "Treffer") + " für „" + esc(q.trim()) + "“</p>" +
+        '<div class="list glass" style="margin-top:8px">' + shown.map(it => lexRow(it, terms, multi)).join("") + "</div>" +
+        (list.length > shown.length ? '<button class="btn-secondary more-btn" data-action="lex-more">Weitere ' + Math.min(80, list.length - shown.length) + " anzeigen</button>" : "");
+      return;
+    }
+
+    // Stöbern: Fakten und Fragen in Gruppen themenweise, sonst A–Z mit Buchstabenleiste
+    let pre = "";
+    if (multi && ui.lex.type !== "topics") {
+      const cats = keys.map(k => CAT_BY_KEY[k]).sort((a, b) => a.short.localeCompare(b.short, "de"));
+      if (!ui.lex.cat || keys.indexOf(ui.lex.cat) === -1) ui.lex.cat = cats[0].key;
+      pre = '<div class="chips lex-cats">' + cats.map(c => '<button class="chip' + (ui.lex.cat === c.key ? " on" : "") + '" style="' + catStyle(c) + '" data-action="lex-cat" data-key="' + c.key + '">' + c.emoji + " " + esc(c.short) + "</button>").join("") + "</div>";
+      list = list.filter(it => it.cat === ui.lex.cat);
+      multi = false;
+    }
+    list.sort(byKey);
+    const sections = [];
+    list.forEach(it => {
+      const L = lexLetter(it);
+      let s = sections[sections.length - 1];
+      if (!s || s.L !== L) { s = { L: L, items: [] }; sections.push(s); }
+      s.items.push(it);
+    });
+    const index = sections.length > 3 ? '<nav class="lex-index" aria-label="Buchstaben">' + sections.map(s => '<button data-action="lex-jump" data-l="' + s.L + '">' + (s.L === "#" ? "0–9" : s.L) + "</button>").join("") + "</nav>" : "";
+    box.innerHTML = pre + index + sections.map(s => '<div class="section-title lex-sec" id="lex-' + (s.L === "#" ? "num" : s.L) + '">' + (s.L === "#" ? "0–9" : s.L) + "<small>" + s.items.length + "</small></div>" +
+      '<div class="list glass">' + s.items.map(it => lexRow(it, [], multi)).join("") + "</div>").join("") +
+      '<p class="footnote">' + plural(list.length, "Eintrag", "Einträge") + " · Tippen zum Lesen, ⭐ zum Merken</p>";
+  }
+  function lexJump(L) {
+    const el = $("#lex-" + (L === "#" ? "num" : L)), tv = $("#view-theme");
+    if (!el) return;
+    const top = el.getBoundingClientRect().top - tv.getBoundingClientRect().top + tv.scrollTop - $("#navbar").offsetHeight - 4;
+    tv.scrollTo({ top: Math.max(0, top), behavior: reduceMotion ? "auto" : "smooth" });
+    haptic("light");
   }
 
   /* =====================================================================
@@ -2784,6 +2926,13 @@
       case "pl-save": { const it = curItem(); if (it) toggleSave(it.id); } break;
       case "toggle-save": toggleSave(el.dataset.id); break;
       case "read": openReader(el.dataset.id); break;
+      case "open-lex": closeSheet(); ui.lex = { q: "", type: "topics", limit: 80, cat: null, focus: el.dataset.focus === "1" }; openThemePage(el.dataset.key); break;
+      case "lex-read": { const it = ITEM_BY_ID[el.dataset.id]; if (!it) break; if (it.type === "wissen" || it.type === "fact") { markSeen(it.id); save(); } openReader(it.id); } break;
+      case "lex-type": ui.lex.type = el.dataset.key; ui.lex.limit = 80; haptic("light"); renderLexList(); break;
+      case "lex-cat": ui.lex.cat = el.dataset.key; haptic("light"); renderLexList(); break;
+      case "lex-more": ui.lex.limit += 80; renderLexList(); break;
+      case "lex-jump": lexJump(el.dataset.l); break;
+      case "lex-clear": { ui.lex.q = ""; ui.lex.limit = 80; const i = $("#lexInput"); if (i) { i.value = ""; i.focus(); } renderLexList(); } break;
       case "close-sheet": closeSheet(); break;
       case "chip": ui.arcFilter = el.dataset.key; ui.arcLimit = 60; haptic("light"); renderArchive(); break;
       case "arc-type": ui.arcType = el.dataset.key; ui.arcLimit = 60; haptic("light"); renderArchive(); break;
@@ -2852,6 +3001,12 @@
   });
   $("#searchInput").addEventListener("input", e => { ui.arcQuery = e.target.value; ui.arcLimit = 60; renderArchiveList(); });
   $("#searchInput").addEventListener("keydown", e => { if (e.key === "Enter") e.target.blur(); });
+  document.addEventListener("input", e => {
+    if (e.target.id !== "lexInput") return;
+    ui.lex.q = e.target.value; ui.lex.limit = 80;
+    clearTimeout(lexTimer); lexTimer = setTimeout(renderLexList, 110);
+  });
+  document.addEventListener("keydown", e => { if (e.target.id === "lexInput" && e.key === "Enter") e.target.blur(); });
   $("#obName").addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); saveEditor(); } });
   $$(".view").forEach(v => v.addEventListener("scroll", () => { if (v === activeView()) updateNavbar(); }, { passive: true }));
   document.addEventListener("keydown", e => {
