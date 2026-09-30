@@ -531,7 +531,8 @@ const LEGACY_CARDS = [
         question: "Wie viel Prozent der Körperenergie verbraucht das Gehirn etwa?",
         options: ["Rund 2 Prozent", "Rund 20 Prozent", "Rund 50 Prozent"],
         correct: 1,
-        explanation: "Das Gehirn ist ein Energiefresser: Bei nur zwei Prozent des Körpergewichts beansprucht es etwa 20 Prozent des Grundumsatzes – vor allem für die Signalübertragung."
+        explanation: "Das Gehirn verbraucht rund 20 Prozent der Körperenergie, vor allem für die Signalübertragung zwischen Nervenzellen. Bei Babys ist der Anteil sogar noch deutlich höher.",
+        hint: "Das Gehirn macht nur rund zwei Prozent des Körpergewichts aus. Nervenzellen müssen aber ständig elektrische Spannungen aufbauen, auch im Schlaf, und das kostet viel Energie."
       }
     },
     {
@@ -543,7 +544,8 @@ const LEGACY_CARDS = [
         question: "Welche Hirnregion war bei Londoner Taxifahrern vergrößert?",
         options: ["Das Kleinhirn", "Der Sehnerv", "Der Hippocampus"],
         correct: 2,
-        explanation: "Der Hippocampus ist zentral für Orientierung und räumliches Gedächtnis. Jahrelanges Navigieren durch London hinterließ dort messbare Spuren."
+        explanation: "Bei Londoner Taxifahrern war der Hippocampus vergrößert, der für Orientierung und räumliches Gedächtnis zentral ist. Die Studie von 2000 zeigte, dass sich das erwachsene Gehirn durch Training verändert.",
+        hint: "Londoner Taxifahrer müssen für ihre Prüfung Zehntausende Straßen auswendig lernen. Gesucht ist eine Hirnregion, deren Name an ein Seepferdchen erinnert."
       }
     },
     {
@@ -555,7 +557,8 @@ const LEGACY_CARDS = [
         question: "Wie heißt das Reinigungssystem, das im Schlaf Abfallstoffe aus dem Gehirn spült?",
         options: ["Das glymphatische System", "Das limbische System", "Das vegetative System"],
         correct: 0,
-        explanation: "Der Name verbindet „Glia“ (Stützzellen des Gehirns) und „lymphatisch“: Gliazellen steuern den Fluss der Hirnflüssigkeit, der Abfälle abtransportiert."
+        explanation: "Das glymphatische System spült im Schlaf Abfallstoffe aus dem Gehirn, darunter Eiweiße, die mit Alzheimer in Verbindung stehen. Es wurde erst 2012 beschrieben.",
+        hint: "Der Name verbindet die Gliazellen, die Stützzellen des Gehirns, mit dem Lymphsystem, das im übrigen Körper Abfallstoffe abtransportiert."
       }
     },
 
