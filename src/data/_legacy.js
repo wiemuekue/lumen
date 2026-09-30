@@ -583,7 +583,8 @@ const LEGACY_CARDS = [
         question: "Was erhält der Pilz in der Mykorrhiza-Symbiose von der Pflanze?",
         options: ["Stickstoff aus der Luft", "Zucker aus der Photosynthese", "Wasser aus den Blättern"],
         correct: 1,
-        explanation: "Pilze können keine Photosynthese betreiben. Den Zucker liefert die Pflanze – im Tausch gegen Wasser und Mineralstoffe, die der Pilz aus dem Boden holt."
+        explanation: "In der Mykorrhiza erhält der Pilz Zucker aus der Photosynthese der Pflanze. Im Tausch liefert er Wasser und Mineralstoffe, die er mit seinen feinen Fäden aus dem Boden holt.",
+        hint: "Pilze haben kein Blattgrün und können nicht selbst Nahrung aus Licht herstellen. Bäume geben ihnen etwas ab, das in ihren Blättern entsteht."
       }
     },
     {
@@ -595,7 +596,8 @@ const LEGACY_CARDS = [
         question: "Was zeigte Suzanne Simard 1997?",
         options: ["Dass Bäume über Duftstoffe miteinander sprechen", "Dass Pilze Photosynthese betreiben können", "Dass Kohlenstoff über Pilznetzwerke zwischen Bäumen wandern kann"],
         correct: 2,
-        explanation: "Mit markiertem Kohlenstoff wies Simard nach, dass Stoffe über Mykorrhiza-Netzwerke von einem Baum zum anderen gelangen können – der Startschuss für das „Wood Wide Web“."
+        explanation: "Suzanne Simard zeigte 1997, dass Kohlenstoff über Pilznetzwerke zwischen Bäumen wandern kann. Das war der Startschuss für das sogenannte Wood Wide Web, dessen Deutung heute diskutiert wird.",
+        hint: "Die kanadische Forstwissenschaftlerin markierte Kohlenstoff in Birken und Douglasien und verfolgte, wohin er wanderte. Die Bäume waren über den Boden verbunden."
       }
     },
     {
@@ -607,7 +609,8 @@ const LEGACY_CARDS = [
         question: "Welche Fläche bedeckt der riesige Hallimasch in Oregon ungefähr?",
         options: ["Etwa einen Hektar", "Fast zehn Quadratkilometer", "Etwa 500 Quadratkilometer"],
         correct: 1,
-        explanation: "Rund 9,6 Quadratkilometer – damit gilt der Pilz als einer der größten bekannten Organismen der Erde, gemessen an seiner Fläche."
+        explanation: "Der riesige Hallimasch in Oregon bedeckt rund 9,6 Quadratkilometer. Damit gilt er als einer der größten bekannten Organismen der Erde, gemessen an seiner Fläche.",
+        hint: "Der Pilz breitet sich unterirdisch in einem Nationalforst aus. Seine Fläche entspricht etwa der von mehr als tausend Fußballfeldern."
       }
     },
 
