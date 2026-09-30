@@ -303,6 +303,14 @@
   .explain b { display: flex; align-items: center; gap: 6px; font-size: 14.5px; color: var(--green); margin-bottom: 4px; }
   .explain.bad b { color: var(--red); }
   .explain b svg { width: 16px; height: 16px; }
+  .explain p, .res-explain { text-wrap: pretty; }
+  .ctx { margin: 2px 0 14px; }
+  .ctx-btn { display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 14px; border-radius: 17px; font-size: 14px; font-weight: 700; color: var(--ink); background: rgba(var(--c-rgb), 0.12); border: 1px solid rgba(var(--c-rgb), 0.26); }
+  .ctx-btn:active { transform: scale(0.97); }
+  .ctx-text { margin: 0; padding: 11px 14px 12px; border-radius: 16px; font-size: 15px; line-height: 1.5; font-weight: 500; text-align: left; background: rgba(var(--c-rgb), 0.10); border: 1px solid rgba(var(--c-rgb), 0.22); animation: fadeUp 0.35s var(--ease-out); -webkit-user-select: text; user-select: text; }
+  .ctx-text b { display: block; font-size: 11.5px; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink); margin-bottom: 3px; }
+  .sw-body .ctx { margin: 16px 0 0; }
+  .sw-body .ctx-text { font-family: var(--font); font-size: 15px; }
   .explain p { font-size: 15px; line-height: 1.5; -webkit-user-select: text; user-select: text; }
   @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
@@ -326,6 +334,12 @@
   .deck-done { display: flex; align-items: center; gap: 12px; margin: 4px 0 12px; }
   .deck-done b { font-size: 17px; }
   .deck-done p { font-size: 13.5px; color: var(--label2); font-variant-numeric: tabular-nums; }
+  .day-card::before { content: ""; position: absolute; inset: 0; background: radial-gradient(120% 90% at 100% 0%, rgba(94, 92, 230, 0.20), transparent 62%), radial-gradient(90% 70% at 0% 100%, rgba(255, 159, 10, 0.12), transparent 60%); pointer-events: none; }
+  .day-when { font-size: 12px; font-weight: 700; color: var(--label2); white-space: nowrap; }
+  .day-main { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+  .day-emo { flex: none; width: 48px; height: 48px; border-radius: 15px; display: grid; place-items: center; font-size: 27px; background: var(--glass-soft); border: 1px solid var(--glass-border); }
+  .day-title { font-family: var(--font-display); font-size: 20px; line-height: 1.22; font-weight: 800; letter-spacing: -0.01em; text-wrap: balance; }
+  .day-text { font-size: 16px; line-height: 1.5; font-weight: 500; color: var(--label); -webkit-user-select: text; user-select: text; hyphens: auto; -webkit-hyphens: auto; text-wrap: pretty; }
   .fact-text { font-size: 17px; line-height: 1.5; font-weight: 500; -webkit-user-select: text; user-select: text; hyphens: auto; -webkit-hyphens: auto; }
   .blitz-next { margin-top: 12px; }
   .mode-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
@@ -788,8 +802,6 @@
     <div class="ob-emojis glass" id="obEmojis"></div>
     <span class="ob-label">Farbe</span>
     <div class="ob-colors" id="obColors"></div>
-    <span class="ob-label">Vorlesestimme</span>
-    <div class="ob-voice-row"><div class="seg-ctl two" id="obVoice"></div><button class="icon-btn" data-action="ob-voice-test" aria-label="Stimme probehören"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.9v14.2c0 .9 1 1.4 1.7 1l11-7.1c.7-.4.7-1.4 0-1.8l-11-7.1C8 3.5 7 4 7 4.9z"/></svg></button></div>
     <button class="btn-primary ob-save" id="obSave" data-action="ob-save">Los geht’s</button>
   </div>
 </div>
@@ -978,7 +990,7 @@
     cards.forEach(c => {
       CARD_BY_ID[c.id] = c;
       add({ id: c.id, type: "card", card: c });
-      add({ id: c.id + ":q", type: "quiz", q: c.quiz.question, o: c.quiz.options, a: c.quiz.correct, x: c.quiz.explanation, from: c.id });
+      add({ id: c.id + ":q", type: "quiz", q: c.quiz.question, o: c.quiz.options, a: c.quiz.correct, x: c.quiz.explanation, k: c.quiz.hint || "", from: c.id });
       add({ id: c.id + ":f", type: "fact", f: c.funFact, from: c.id });
     });
     (src.wissen || []).forEach((w, i) => add({ id: cat.key + ":w" + i, type: "wissen", t: w[0], x: w[1] }));
@@ -990,20 +1002,10 @@
       let h = 2166136261;
       for (let c = 0; c < id.length; c++) { h ^= id.charCodeAt(c); h = Math.imul(h, 16777619) >>> 0; }
       for (let k = order.length - 1; k > 0; k--) { h = Math.imul(h ^ (h >>> 15), 2246822507) >>> 0; const j = h % (k + 1); const t = order[k]; order[k] = order[j]; order[j] = t; }
-      add({ id: id, type: "quiz", q: q[0], o: order.map(k => q[1][k]), a: order.indexOf(q[2]), x: q[3] });
+      add({ id: id, type: "quiz", q: q[0], o: order.map(k => q[1][k]), a: order.indexOf(q[2]), x: q[3], k: q[4] || "" });
     });
-    (src.tf || []).forEach((t, i) => add({ id: cat.key + ":t" + i, type: "tf", s: t[0], a: !!t[1], x: t[2] }));
-    (src.hl || []).forEach((h, i) => {
-      // Bei etwa der Hälfte der Vergleiche die Seiten tauschen, damit „rechts“ nicht immer „größer“ bedeutet
-      const id = cat.key + ":h" + i;
-      let hh = 0;
-      for (let c = 0; c < id.length; c++) hh = (Math.imul(hh, 31) + id.charCodeAt(c)) >>> 0;
-      const swap = ((hh >>> 3) & 1) === 1;
-      const l = (h[4] || ["kleiner", "größer"]).slice();
-      const a = h[2] ? 1 : 0;
-      add({ id: id, type: "hl", ref: h[0], p: h[1], a: swap ? 1 - a : a, x: h[3], l: swap ? [l[1], l[0]] : l, swap: swap });
-    });
-    b.all = [].concat(b.card, b.wissen, b.fact, b.quiz, b.tf, b.hl);
+    (src.tf || []).forEach((t, i) => add({ id: cat.key + ":t" + i, type: "tf", s: t[0], a: !!t[1], x: t[2], k: t[3] || "" }));
+    b.all = [].concat(b.card, b.wissen, b.fact, b.quiz, b.tf);
     BY_CAT[cat.key] = b;
   });
   const ALL_CARDS = Object.values(CARD_BY_ID);
@@ -1013,22 +1015,20 @@
     wissen: { label: "Wissenswertes", icon: "📖" },
     fact: { label: "Fun Fact", icon: "💡" },
     quiz: { label: "Quiz", icon: "🧠" },
-    tf: { label: "Richtig oder Falsch", icon: "✅" },
-    hl: { label: "Größer oder Kleiner", icon: "⚖️" }
+    tf: { label: "Richtig oder Falsch", icon: "✅" }
   };
   const MODES = {
-    mix: { name: "Mix aller Lernarten", short: "Mix", icon: "🎲", color: "#5E5CE6", types: ["quiz", "tf", "hl", "fact", "wissen", "card"], desc: "Von allem etwas – bunt gemischt" },
+    mix: { name: "Mix aller Lernarten", short: "Mix", icon: "🎲", color: "#5E5CE6", types: ["quiz", "tf", "fact", "wissen", "card"], desc: "Von allem etwas – bunt gemischt" },
     quiz: { name: "Quiz", short: "Quiz", icon: "🧠", color: "#0A84FF", types: ["quiz"], desc: "Multiple Choice mit Erklärung" },
     tf: { name: "Richtig oder Falsch", short: "Richtig/Falsch", icon: "✅", color: "#30D158", types: ["tf"], desc: "Nach rechts oder links wischen" },
-    hl: { name: "Größer oder Kleiner", short: "Größer/Kleiner", icon: "⚖️", color: "#FF9F0A", types: ["hl"], desc: "Schätzen, vergleichen, wischen" },
     fact: { name: "Fun Facts", short: "Fun Facts", icon: "💡", color: "#FFB800", types: ["fact"], desc: "Überraschendes zum Staunen" },
     wissen: { name: "Wissenswertes", short: "Wissen", icon: "📖", color: "#BF5AF2", types: ["wissen", "card"], desc: "Ausführlich erklärt, Zusammenhänge verstehen" },
     karten: { name: "Lernkarten", short: "Lernkarten", icon: "🗂️", color: "#FF375F", types: ["card"], desc: "Geschichte, Fun Fact und Quiz" },
-    review: { name: "Fehler wiederholen", short: "Wiederholen", icon: "🔁", color: "#FF453A", types: ["quiz", "tf", "hl", "card"], desc: "Was beim letzten Mal nicht saß" },
-    saved: { name: "Gemerkte Inhalte", short: "Gemerkt", icon: "⭐", color: "#FFB800", types: ["card", "wissen", "fact", "quiz", "tf", "hl"], desc: "Deine Favoriten" }
+    review: { name: "Fehler wiederholen", short: "Wiederholen", icon: "🔁", color: "#FF453A", types: ["quiz", "tf", "card"], desc: "Was beim letzten Mal nicht saß" },
+    saved: { name: "Gemerkte Inhalte", short: "Gemerkt", icon: "⭐", color: "#FFB800", types: ["card", "wissen", "fact", "quiz", "tf"], desc: "Deine Favoriten" }
   };
-  const QUICK_MODES = ["mix", "quiz", "tf", "hl", "fact", "wissen"];
-  const THEME_MODES = ["quiz", "tf", "hl", "fact", "wissen", "karten"];
+  const QUICK_MODES = ["mix", "quiz", "tf", "fact", "wissen", "karten"];
+  const THEME_MODES = ["quiz", "tf", "fact", "wissen", "karten"];
   const ROUND = 10;
 
   /* =====================================================================
@@ -1306,11 +1306,10 @@
   }
 
   /* =====================================================================
-     VORLESEN (weibliche oder männliche Stimme)
+     VORLESEN (automatisch die beste deutsche Standardstimme)
      ===================================================================== */
-  const FEMALE_RX = /(anna|helena|petra|katja|hedda|marlene|vicki|sandy|shelley|grandma|amala|seraphina|louisa|elke|klara|tanja|ingrid|google deutsch|\bfemale\b|weiblich)/i;
-  const MALE_RX = /(markus|yannick|martin|viktor|stefan|conrad|eddy|\bflo\b|reed|rocko|grandpa|killian|florian|ralf|jonas|\bhans\b|\bmale\b|männlich)/i;
   const CLASSIC_RX = /(anna|helena|petra|katja|markus|yannick|martin|viktor|stefan|conrad|google deutsch)/i;
+  const NOVELTY_RX = /(grandma|grandpa|eddy|\bflo\b|reed|rocko|sandy|shelley|bubbles|bells|boing|jester|whisper|zarvox|trinoids|organ|cellos|bahh|albert|fred|junior|ralph|kathy|superstar|wobble|good news|bad news)/i;
   const TTS = {
     ok: "speechSynthesis" in window && "SpeechSynthesisUtterance" in window,
     id: null, token: 0, voice: null, exact: false,
@@ -1322,15 +1321,13 @@
     },
     pick() {
       if (!this.ok) return;
-      const r = pickVoice(state ? state.settings.voice : "female");
-      this.voice = r.voice; this.exact = r.exact;
+      this.voice = pickVoice(); this.exact = !!this.voice;
     },
     speak(id, text) {
       if (!this.ok) { toast("Vorlesen wird hier nicht unterstützt", "🔇"); return; }
       this.stop();
       const my = ++this.token;
       this.id = id;
-      const gender = state ? state.settings.voice : "female";
       const parts = String(text).match(/[^.!?…]+[.!?…]+["“”«»)]*\s*|[^.!?…]+$/g) || [text];
       const chunks = [];
       let buf = "";
@@ -1342,7 +1339,6 @@
           u.lang = "de-DE";
           if (this.voice) u.voice = this.voice;
           u.rate = state ? state.settings.rate : 1;
-          u.pitch = this.exact ? 1 : (gender === "male" ? 0.72 : 1.1);
           if (i === chunks.length - 1) u.onend = () => { if (my === this.token) this.finish(); };
           u.onerror = ev => { if (my === this.token && ev.error !== "interrupted" && ev.error !== "canceled") this.finish(); };
           speechSynthesis.speak(u);
@@ -1369,19 +1365,13 @@
       });
     }
   };
-  function pickVoice(gender) {
+  function pickVoice() {
     let vs = [];
     try { vs = speechSynthesis.getVoices() || []; } catch (e) { vs = []; }
     const de = vs.filter(v => /^de([-_]|$)/i.test(v.lang));
-    if (!de.length) return { voice: null, exact: false };
-    const rx = gender === "male" ? MALE_RX : FEMALE_RX;
-    const other = gender === "male" ? FEMALE_RX : MALE_RX;
-    const score = v => (/de[-_]DE/i.test(v.lang) ? 4 : 0) + (/(premium|enhanced|erweitert|natural|neural|online)/i.test(v.name) ? 3 : 0) + (CLASSIC_RX.test(v.name) ? 2 : 0) + (/(grandma|grandpa)/i.test(v.name) ? -3 : 0) + (v.localService ? 1 : 0);
-    const best = list => list.slice().sort((a, b) => score(b) - score(a))[0];
-    const match = de.filter(v => rx.test(v.name) && !other.test(v.name));
-    if (match.length) return { voice: best(match), exact: true };
-    const neutral = de.filter(v => !other.test(v.name));
-    return { voice: best(neutral.length ? neutral : de), exact: false };
+    if (!de.length) return null;
+    const score = v => (/de[-_]DE/i.test(v.lang) ? 4 : 0) + (/(premium|enhanced|erweitert|natural|neural|online)/i.test(v.name) ? 3 : 0) + (CLASSIC_RX.test(v.name) ? 2 : 0) + (NOVELTY_RX.test(v.name) ? -6 : 0) + (v.default ? 1 : 0) + (v.localService ? 1 : 0);
+    return de.slice().sort((a, b) => score(b) - score(a))[0];
   }
   function speakTextOf(it) {
     switch (it.type) {
@@ -1390,7 +1380,7 @@
       case "fact": return "Schon gewusst? " + it.f;
       case "quiz": return it.q + " " + it.o.map((o, i) => ["A", "B", "C", "D"][i] + ": " + o + ".").join(" ");
       case "tf": return "Richtig oder falsch? " + it.s;
-      case "hl": return it.ref + " " + it.p;
+      case "day": return it.kicker + ". " + it.t + ". " + it.x;
       default: return "";
     }
   }
@@ -1483,18 +1473,35 @@
   function explainHTML(it, ok, show) {
     return '<div class="explain' + (ok ? "" : " bad") + '"' + (show ? "" : " hidden") + "><b>" + (ok ? I.check + " Richtig!" : I.cross + " Leider falsch") + "</b><p>" + esc(it.x) + "</p></div>";
   }
+  // Kontext-Tipp: erklärt den Hintergrund einer Frage, ohne die Antwort zu verraten
+  function hintHTML(it) {
+    if (!it.k) return "";
+    const open = !!(ui.hints && ui.hints[it.id]);
+    return '<div class="ctx">' + (open ? "" : '<button class="ctx-btn" data-action="hint" data-id="' + esc(it.id) + '">💡 Kontext-Tipp</button>') +
+      '<p class="ctx-text"' + (open ? "" : " hidden") + "><b>Kontext-Tipp</b>" + esc(it.k) + "</p></div>";
+  }
+  function showHint(btn) {
+    const id = btn.dataset.id;
+    ui.hints = ui.hints || {};
+    ui.hints[id] = true;
+    const box = btn.closest(".ctx");
+    const p = box && box.querySelector(".ctx-text");
+    if (p) p.hidden = false;
+    btn.remove();
+    haptic("light");
+  }
   function badgeHTML(cat) { return '<span class="badge"><span class="emo">' + cat.emoji + "</span>" + esc(cat.short) + "</span>"; }
 
   // Vollständige Lernkarte (Story, Fun Fact, Quiz)
   function cardHTML(card, o) {
     const cat = catOfCard(card);
     const it = ITEM_BY_ID[card.id];
-    const q = { id: card.id, o: card.quiz.options, a: card.quiz.correct, x: card.quiz.explanation };
+    const q = { id: card.id, o: card.quiz.options, a: card.quiz.correct, x: card.quiz.explanation, k: card.quiz.hint || "" };
     let quiz = "";
     if (o.mode !== "noquiz") {
       const read = o.mode === "read";
       const solved = read || !!o.solved;
-      quiz = '<div class="quiz"><div class="quiz-head">' + I.quiz + 'Quiz</div><p class="question">' + esc(card.quiz.question) + "</p>" +
+      quiz = '<div class="quiz"><div class="quiz-head">' + I.quiz + 'Quiz</div><p class="question">' + esc(card.quiz.question) + "</p>" + (solved ? "" : hintHTML(q)) +
         '<div class="options">' + optionsHTML(q, { solved: solved, wrong: o.wrong, action: read ? null : "card-answer", readOnly: read }) + "</div>" +
         (!read && !solved && (o.wrong || []).length ? '<p class="hint">Nicht ganz – versuch es noch einmal.</p>' : "") +
         explainHTML(q, true, solved) + "</div>";
@@ -1587,8 +1594,24 @@
     const ok = answered && ui.blitz.pick === it.a;
     return '<div class="home-card glass tinted" id="blitzCard" style="' + catStyle(cat) + '">' +
       '<div class="hc-head"><span class="hc-kicker">⚡ Blitzfrage</span>' + badgeHTML(cat) + "</div>" +
-      '<p class="question">' + esc(it.q) + '</p><div class="options">' + optionsHTML(it, { solved: answered, pick: ui.blitz.pick, oneShot: true, action: "blitz-answer" }) + "</div>" +
+      '<p class="question">' + esc(it.q) + "</p>" + (answered ? "" : hintHTML(it)) + '<div class="options">' + optionsHTML(it, { solved: answered, pick: ui.blitz.pick, oneShot: true, action: "blitz-answer" }) + "</div>" +
       (answered ? explainHTML(it, ok, true) + '<button class="btn-secondary btn-small blitz-next" data-action="blitz-next">Nächste Frage ' + I.arrow + "</button>" : "") + "</div>";
+  }
+  // Tagesfakt: etwas, das an diesem Kalendertag passiert ist oder heute gefeiert wird
+  const fmtDayMonth = new Intl.DateTimeFormat("de-DE", { day: "numeric", month: "long" });
+  function dayFactHTML() {
+    if (typeof DAY_FACTS === "undefined") return "";
+    const d = new Date();
+    const k = String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+    const f = DAY_FACTS[k];
+    if (!f) return "";
+    const yrs = f.y ? d.getFullYear() - f.y : 0;
+    const when = f.y ? (yrs > 0 ? "Heute vor " + plural(yrs, "Jahr", "Jahren") + " · " + (f.y < 0 ? -f.y + " v. Chr." : f.y) : "Heute im Jahr " + f.y) : "Jedes Jahr";
+    ui.dayItem = { id: "day:" + k, type: "day", kicker: "Heute, " + fmtDayMonth.format(d), t: f.t, x: f.x };
+    return '<article class="home-card glass day-card">' +
+      '<div class="hc-head"><span class="hc-kicker">📅 Heute, ' + esc(fmtDayMonth.format(d)) + '</span><span class="day-when">' + esc(when) + "</span></div>" +
+      '<div class="day-main"><span class="day-emo" aria-hidden="true">' + esc(f.e) + '</span><h3 class="day-title">' + esc(f.t) + "</h3></div>" +
+      '<p class="day-text">' + esc(f.x) + '</p><div class="card-actions" style="margin:12px 0 0">' + playBtn(ui.dayItem) + "</div></article>";
   }
   function factOfDay() {
     const pool = [];
@@ -1608,7 +1631,7 @@
 
     const keys = activeKeys();
     const fact = factOfDay();
-    let html = deckCardHTML();
+    let html = dayFactHTML() + deckCardHTML();
     const reviewN = keys.reduce((n, k) => n + BY_CAT[k].all.filter(it => state.correct[it.id] === 0).length, 0);
     html += '<div class="section-title" style="padding-top:12px">Alles im Mix<small>' + plural(keys.length, "Thema", "Themen") + "</small></div>";
     html += '<div class="mode-grid">' + QUICK_MODES.map(m => '<button class="mode-tile glass" data-action="start" data-mode="' + m + '" data-key="mix"><span class="mode-ico" style="' + modeStyle(m) + '">' + MODES[m].icon + "</span>" + esc(MODES[m].short) + "</button>").join("") + "</div>";
@@ -1625,7 +1648,7 @@
     if (fact) {
       const fc = catOfItem(fact);
       const saved = !!state.saved[fact.id];
-      html += '<div class="home-card glass tinted" style="' + catStyle(fc) + '"><div class="hc-head"><span class="hc-kicker">💡 Fakt des Tages</span>' + badgeHTML(fc) + "</div>" +
+      html += '<div class="home-card glass tinted" style="' + catStyle(fc) + '"><div class="hc-head"><span class="hc-kicker">💡 Fundstück des Tages</span>' + badgeHTML(fc) + "</div>" +
         '<p class="fact-text">' + esc(fact.f) + '</p><div class="card-actions" style="margin:12px 0 0">' + playBtn(fact) +
         '<button class="icon-btn' + (saved ? " on" : "") + '" data-action="toggle-save" data-id="' + esc(fact.id) + '" aria-label="Merken">' + (saved ? I.starFill : I.star) + "</button></div></div>";
     }
@@ -2044,7 +2067,7 @@
     if (st.decided !== null && (it.type === "tf" || it.type === "hl")) return resultHTML(it);
     const head = '<div class="card-top">' + badgeHTML(cat) + playBtn(it, true) + "</div>";
     if (it.type === "quiz") {
-      return '<article class="card glass tinted" style="' + cs + '">' + head + '<div class="quiz bare"><div class="quiz-head">' + I.quiz + 'Quiz</div><p class="question big">' + esc(it.q) + "</p>" +
+      return '<article class="card glass tinted" style="' + cs + '">' + head + '<div class="quiz bare"><div class="quiz-head">' + I.quiz + 'Quiz</div><p class="question big">' + esc(it.q) + "</p>" + (st.answered ? "" : hintHTML(it)) +
         '<div class="options">' + optionsHTML(it, { solved: st.answered, pick: st.pick, oneShot: true, action: "pl-answer" }) + "</div>" + (st.answered ? explainHTML(it, st.ok, true) : "") + "</div></article>";
     }
     if (it.type === "wissen") {
@@ -2060,7 +2083,7 @@
     } else if (it.type === "tf") {
       stamps = '<span class="stamp no">Falsch</span><span class="stamp yes">Richtig</span>';
       kicker = "✅ Richtig oder falsch?";
-      body = '<p class="sw-text">' + esc(it.s) + "</p>";
+      body = '<p class="sw-text">' + esc(it.s) + "</p>" + hintHTML(it);
       hint = "<span>← Falsch</span><span>Richtig →</span>";
     } else {
       const hi = it.swap ? it.l[0] : it.l[1], lo = it.swap ? it.l[1] : it.l[0];
@@ -2523,10 +2546,10 @@
      ===================================================================== */
   const isLexKey = key => typeof key === "string" && key.indexOf("lex:") === 0;
   const LEX_TYPES = {
-    all: { label: "Alles", types: ["wissen", "card", "fact", "quiz", "tf", "hl"] },
+    all: { label: "Alles", types: ["wissen", "card", "fact", "quiz", "tf"] },
     topics: { label: "📖 Stichwörter", types: ["wissen", "card"] },
     fact: { label: "💡 Fakten", types: ["fact"] },
-    ask: { label: "🧠 Fragen & Antworten", types: ["quiz", "tf", "hl"] }
+    ask: { label: "🧠 Fragen & Antworten", types: ["quiz", "tf"] }
   };
   const LEX_FOLD = {};
   let lexTimer = 0;
@@ -2706,9 +2729,8 @@
       "</div>" +
       '<div class="section-title">Fortschritt nach Thema</div><div class="cat-rings glass">' + catRings + "</div>" +
       '<div class="section-title">Einstellungen</div><div class="list glass">' +
-      '<div class="row setting-row setting-col"><span class="row-text"><span class="row-title">Vorlesestimme</span><span class="row-sub voice-note" id="voiceName"></span></span><div class="ob-voice-row"><div class="seg-ctl two">' +
-      '<button class="' + (state.settings.voice === "female" ? "on" : "") + '" data-action="voice" data-v="female">👩 Weiblich</button><button class="' + (state.settings.voice === "male" ? "on" : "") + '" data-action="voice" data-v="male">👨 Männlich</button></div>' +
-      '<button class="icon-btn" data-action="voice-test" aria-label="Probehören">' + I.play.replace("<svg", '<svg width="16" height="16"') + "</button></div></div>" +
+      '<div class="row setting-row"><span class="row-text"><span class="row-title">Vorlesestimme</span><span class="row-sub voice-note" id="voiceName"></span></span>' +
+      '<button class="icon-btn" data-action="voice-test" aria-label="Probehören">' + I.play.replace("<svg", '<svg width="16" height="16"') + "</button></div>" +
       '<div class="row setting-row setting-col"><span class="row-text"><span class="row-title">Vorlesetempo</span></span><div class="seg-ctl">' + rates.map(r => '<button class="' + (state.settings.rate === r[0] ? "on" : "") + '" data-action="rate" data-rate="' + r[0] + '">' + r[1] + "</button>").join("") + "</div></div>" +
       '<div class="row setting-row"><span class="row-text"><span class="row-title">Haptisches Feedback</span><span class="row-sub">Vibration bei richtigen und falschen Antworten</span></span><label class="switch"><input type="checkbox" data-toggle="haptics"' + (state.settings.haptics ? " checked" : "") + ' aria-label="Haptisches Feedback"><span class="track"></span></label></div>' +
       "</div>" +
@@ -2721,10 +2743,7 @@
     const el = $("#voiceName");
     if (!el) return;
     if (!TTS.ok) { el.textContent = "Vorlesen wird von diesem Browser nicht unterstützt."; return; }
-    const g = state.settings.voice;
-    if (TTS.voice && TTS.exact) el.textContent = "Aktiv: " + TTS.voice.name;
-    else if (TTS.voice) el.textContent = "Keine " + (g === "male" ? "männliche" : "weibliche") + " deutsche Stimme installiert – " + TTS.voice.name + " wird mit " + (g === "male" ? "tieferer" : "höherer") + " Tonlage genutzt. Weitere Stimmen: iOS-Einstellungen → Bedienungshilfen → Gesprochene Inhalte → Stimmen → Deutsch.";
-    else el.textContent = "Systemstimme (Deutsch)";
+    el.textContent = TTS.voice ? "Deutsche Standardstimme: " + TTS.voice.name : "Deutsche Standardstimme des Systems";
   }
   function voiceSample() {
     const p = currentProfile();
@@ -2737,7 +2756,7 @@
     ui.edit = { mode: mode, name: p ? p.name : "", avatar: p ? p.avatar : AVATARS[Math.floor(Math.random() * 8)], color: p ? p.color : Math.floor(Math.random() * AV_COLORS.length), voice: state ? state.settings.voice : "female" };
     const first = !root.profiles.length;
     $("#obTitle").textContent = mode === "edit" ? "Profil bearbeiten" : first ? "Willkommen bei Lumen" : "Neues Profil";
-    $("#obSub").textContent = mode === "edit" ? "Name, Avatar, Farbe und Stimme kannst du jederzeit ändern." : first ? "Lege dein Profil an – dein Fortschritt, deine Serie und deine Einstellungen werden lokal auf diesem Gerät gespeichert." : "Jedes Profil hat eigenen Fortschritt, eigene Serie und eigene Einstellungen.";
+    $("#obSub").textContent = mode === "edit" ? "Name, Avatar und Farbe kannst du jederzeit ändern." : first ? "Lege dein Profil an – dein Fortschritt, deine Serie und deine Einstellungen werden lokal auf diesem Gerät gespeichert." : "Jedes Profil hat eigenen Fortschritt, eigene Serie und eigene Einstellungen.";
     $("#obNote").innerHTML = first && !root.migrated && loadLegacy() ? '<div class="ob-note">✨ Dein bisheriger Fortschritt aus der ersten Lumen-Version wird automatisch in dieses Profil übernommen.</div>' : "";
     $("#obCancel").hidden = first;
     $("#obSave").textContent = mode === "edit" ? "Speichern" : "Los geht’s";
@@ -2751,7 +2770,6 @@
     $("#obAvatar").innerHTML = avatarHTML({ avatar: e.avatar, color: e.color }, 96);
     $("#obEmojis").innerHTML = AVATARS.map(a => '<button class="ob-emoji' + (a === e.avatar ? " on" : "") + '" data-action="ob-avatar" data-v="' + a + '" aria-label="Avatar ' + a + '">' + a + "</button>").join("");
     $("#obColors").innerHTML = AV_COLORS.map((c, i) => '<button class="ob-color' + (i === e.color ? " on" : "") + '" style="--a1:' + c[0] + ";--a2:" + c[1] + '" data-action="ob-color" data-v="' + i + '" aria-label="Farbe ' + (i + 1) + '"></button>').join("");
-    $("#obVoice").innerHTML = '<button class="' + (e.voice === "female" ? "on" : "") + '" data-action="ob-voice" data-v="female">👩 Weiblich</button><button class="' + (e.voice === "male" ? "on" : "") + '" data-action="ob-voice" data-v="male">👨 Männlich</button>';
   }
   function saveEditor() {
     const e = ui.edit;
@@ -2765,8 +2783,6 @@
     if (e.mode === "edit") {
       const p = currentProfile();
       p.name = name; p.avatar = e.avatar; p.color = e.color;
-      state.settings.voice = e.voice;
-      TTS.pick();
       save();
       closeEditor();
       renderAll();
@@ -2951,10 +2967,11 @@
       case "group-mix": toggleGroupMix(el.dataset.key); break;
       case "blitz-answer": onBlitzAnswer(el); break;
       case "blitz-next": ui.blitz = null; { const tmp = document.createElement("div"); tmp.innerHTML = blitzHTML(); $("#blitzCard").replaceWith(tmp.firstChild); $("#blitzCard").animate && !reduceMotion && $("#blitzCard").animate([{ opacity: 0, transform: "translateY(8px)" }, { opacity: 1, transform: "none" }], { duration: 350, easing: "ease-out" }); } break;
-      case "speak": { const it = ITEM_BY_ID[el.dataset.id]; if (it) TTS.toggle(it.id, speakTextOf(it)); } break;
+      case "speak": { const it = ITEM_BY_ID[el.dataset.id] || (ui.dayItem && ui.dayItem.id === el.dataset.id ? ui.dayItem : null); if (it) TTS.toggle(it.id, speakTextOf(it)); } break;
       case "pl-close": closePlayer(); break;
       case "pl-next": if (!el.disabled) plNext(); break;
       case "pl-answer": onPlayerAnswer(el); break;
+      case "hint": showHint(el); break;
       case "card-answer": onCardAnswer(el); break;
       case "pl-swipe": plSwipeButton(Number(el.dataset.v)); break;
       case "pl-again": playAgain(); break;
@@ -2977,10 +2994,6 @@
         state.settings.rate = Number(el.dataset.rate); save();
         $$('[data-action="rate"]').forEach(b => b.classList.toggle("on", b === el));
         haptic("light"); break;
-      case "voice":
-        state.settings.voice = el.dataset.v; save(); TTS.pick();
-        $$('[data-action="voice"]').forEach(b => b.classList.toggle("on", b === el));
-        renderVoiceName(); haptic("light"); voiceSample(); break;
       case "voice-test": voiceSample(); break;
       case "dismiss-install": state.settings.hideInstall = true; save(); renderProfile(); break;
       case "switch-profile": if (el.dataset.id !== root.current) switchProfile(el.dataset.id); break;
@@ -2988,16 +3001,6 @@
       case "edit-profile": openProfileEditor("edit"); break;
       case "ob-avatar": ui.edit.avatar = el.dataset.v; ui.edit.name = $("#obName").value; renderEditor(); haptic("light"); break;
       case "ob-color": ui.edit.color = Number(el.dataset.v); renderEditor(); haptic("light"); break;
-      case "ob-voice": ui.edit.voice = el.dataset.v; renderEditor(); haptic("light"); break;
-      case "ob-voice-test": {
-        const g = ui.edit ? ui.edit.voice : "female";
-        const r = pickVoice(g); const old = { v: TTS.voice, e: TTS.exact, s: state ? state.settings.voice : null };
-        TTS.voice = r.voice; TTS.exact = r.exact;
-        if (state) state.settings.voice = g;
-        TTS.speak("voice-test", "Hallo" + ($("#obName").value.trim() ? " " + $("#obName").value.trim() : "") + "! So klinge ich, wenn ich dir in Lumen etwas vorlese.");
-        if (state) state.settings.voice = old.s;
-        TTS.voice = old.v; TTS.exact = old.e;
-      } break;
       case "ob-save": saveEditor(); break;
       case "ob-cancel": closeEditor(); break;
       case "reset":

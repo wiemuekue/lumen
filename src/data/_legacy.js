@@ -72,7 +72,8 @@ const LEGACY_CARDS = [
         question: "Wer entmachtete den Himmelsgott Uranos?",
         options: ["Zeus", "Prometheus", "Kronos"],
         correct: 2,
-        explanation: "Kronos, der jüngste Titan, griff auf Gaias Anstiftung zur Sichel. Später ereilte ihn selbst dasselbe Schicksal – durch seinen Sohn Zeus."
+        explanation: "Kronos, der jüngste der Titanen, griff auf Anstiftung seiner Mutter Gaia zur Sichel und entmachtete seinen Vater Uranos. Später ereilte ihn dasselbe Schicksal: Sein eigener Sohn Zeus stürzte ihn.",
+        hint: "In der griechischen Schöpfungsgeschichte herrschte zuerst der Himmelsgott über die Welt. Seine Frau Gaia, die Erde, stiftete eines ihrer Kinder, die Titanen, zum Aufstand gegen ihn an."
       }
     },
     {
@@ -84,7 +85,8 @@ const LEGACY_CARDS = [
         question: "Was verschlang Kronos anstelle des neugeborenen Zeus?",
         options: ["Einen Granatapfel", "Einen in Windeln gewickelten Stein", "Ein junges Lamm"],
         correct: 1,
-        explanation: "Rhea überlistete Kronos mit einem gewickelten Stein. So konnte Zeus auf Kreta heimlich aufwachsen und später seinen Vater stürzen."
+        explanation: "Rhea reichte Kronos einen in Windeln gewickelten Stein, den er ohne Argwohn hinunterschluckte. So konnte Zeus heimlich in einer Höhle auf Kreta aufwachsen und später seinen Vater stürzen und die Geschwister befreien.",
+        hint: "Kronos fürchtete eine Prophezeiung, nach der ihn eines seiner Kinder stürzen würde. Deshalb verschlang er jedes Neugeborene. Seine Frau Rhea wollte ihr jüngstes Kind retten und griff zu einer List."
       }
     },
     {
@@ -96,7 +98,8 @@ const LEGACY_CARDS = [
         question: "Warum zählt Hades meist nicht zu den Zwölf Olympiern?",
         options: ["Er herrscht in der Unterwelt statt auf dem Olymp", "Er ist kein Gott, sondern ein Titan", "Er wurde von Zeus verbannt"],
         correct: 0,
-        explanation: "Hades ist ein vollwertiger Gott und Bruder des Zeus – sein Reich liegt aber unter der Erde. Deshalb wird er meist nicht zu den Göttern des Olymp gezählt."
+        explanation: "Hades ist ein vollwertiger Gott und Bruder des Zeus. Bei der Aufteilung der Welt erhielt er aber die Unterwelt und lebte dort statt auf dem Olymp. Deshalb zählt man ihn meist nicht zu den Zwölf Olympiern.",
+        hint: "Die Zwölf Olympier waren die wichtigsten Götter, die auf dem Berg Olymp wohnten. Denk daran, welches Reich bei der Aufteilung der Welt an einen der drei Brüder Zeus, Poseidon und Hades fiel."
       }
     },
     {
@@ -108,7 +111,8 @@ const LEGACY_CARDS = [
         question: "Worin schmuggelte Prometheus das Feuer zu den Menschen?",
         options: ["In einer bronzenen Urne", "In einem hohlen Riesenfenchel-Stängel", "In einer Muschel des Poseidon"],
         correct: 1,
-        explanation: "Im trockenen Mark des Riesenfenchels (griechisch Narthex) kann Glut lange weiterglimmen – ein cleveres Detail, das zeigt, wie praktisch die Mythen oft gedacht waren."
+        explanation: "Im trockenen, schwammigen Mark des Riesenfenchels, griechisch Narthex, kann Glut lange weiterglimmen, ohne dass man es von außen sieht. Solche Stängel nutzte man tatsächlich, um Feuer zu transportieren – ein Beispiel, wie praktisch Mythen oft gedacht waren.",
+        hint: "Prometheus stahl das Feuer von den Göttern, um es den Menschen zu bringen. Er brauchte ein unauffälliges Versteck, in dem Glut auf einem langen Weg nicht erlischt – am besten etwas Pflanzliches."
       }
     },
     {
@@ -120,7 +124,8 @@ const LEGACY_CARDS = [
         question: "Wie erklärt der Mythos von Persephone den Winter?",
         options: ["Zeus verbannt die Sonne für einige Monate", "Hades lässt den Fluss Styx über die Erde treten", "Persephone weilt einen Teil des Jahres in der Unterwelt, und Demeter trauert"],
         correct: 2,
-        explanation: "Solange Persephone bei Hades ist, lässt ihre Mutter Demeter, Göttin des Ackerbaus, aus Kummer nichts wachsen. Kehrt die Tochter zurück, erblüht die Natur im Frühling neu."
+        explanation: "Solange Persephone bei Hades in der Unterwelt ist, lässt ihre Mutter Demeter aus Kummer nichts wachsen, und es wird Winter. Kehrt die Tochter im Frühling zurück, freut sich Demeter, und die Natur erblüht neu.",
+        hint: "Demeter war die Göttin des Getreides und der Fruchtbarkeit. Ihre Tochter wurde vom Herrscher der Unterwelt entführt – überlege, wie die Trauer einer Erntegöttin sich auf die Natur auswirken könnte."
       }
     },
 
