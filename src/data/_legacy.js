@@ -201,7 +201,8 @@ const LEGACY_CARDS = [
         question: "Warum blühen Frühblüher wie das Buschwindröschen so früh im Jahr?",
         options: ["Um Frost als Schutz vor Fraßfeinden zu nutzen", "Um das Licht vor dem Laubaustrieb der Bäume zu nutzen", "Weil ihre Bestäuber nur im März fliegen"],
         correct: 1,
-        explanation: "Im noch kahlen Wald erreicht viel Sonnenlicht den Boden. Diese kurze Lichtphase nutzen Frühblüher für Blüte und Photosynthese, bevor das Blätterdach sie beschattet."
+        explanation: "Frühblüher blühen so früh, um das Licht vor dem Laubaustrieb der Bäume zu nutzen. Diese kurze Lichtphase nutzen sie für Blüte und Photosynthese.",
+        hint: "Im Frühjahr sind die Bäume noch kahl, und der Waldboden bekommt viel Sonne. Ab Mai ist es unter dem Blätterdach schattig."
       }
     },
     {
@@ -213,7 +214,8 @@ const LEGACY_CARDS = [
         question: "Woran erkennt man die Echte Kamille sicher?",
         options: ["An ihrem hohlen, kegelförmigen Blütenboden", "An ihren gelben Zungenblüten", "An ihrem völlig geruchlosen Kraut"],
         correct: 0,
-        explanation: "Schneidet man das Blütenköpfchen längs durch, ist es bei der Echten Kamille innen hohl. Ähnliche Arten wie die Geruchlose Kamille haben einen gefüllten Blütenboden."
+        explanation: "Die Echte Kamille erkennt man sicher an ihrem hohlen, kegelförmigen Blütenboden. Ähnliche Arten wie die Geruchlose Kamille haben einen gefüllten Blütenboden.",
+        hint: "Es gibt mehrere ähnliche Kamillenarten mit weißen Zungenblüten. Ein Längsschnitt durch das gelbe Köpfchen verrät die echte."
       }
     },
     {
@@ -225,7 +227,8 @@ const LEGACY_CARDS = [
         question: "Welche Baumart würde in Deutschland ohne menschlichen Einfluss dominieren?",
         options: ["Die Gemeine Fichte", "Die Waldkiefer", "Die Rotbuche"],
         correct: 2,
-        explanation: "Die schattentolerante Rotbuche setzt sich auf den meisten Standorten Mitteleuropas gegen andere Baumarten durch. Fichten- und Kiefernforste sind überwiegend menschengemacht."
+        explanation: "Ohne menschlichen Einfluss würde in Deutschland die Rotbuche dominieren. Fichten- und Kiefernforste sind überwiegend vom Menschen gepflanzt.",
+        hint: "Der gesuchte Laubbaum verträgt viel Schatten und verdrängt mit seinem dichten Kronendach andere Arten. Seine Früchte heißen Eckern."
       }
     },
     {
@@ -237,7 +240,8 @@ const LEGACY_CARDS = [
         question: "Welches Stichjahr trennt Neophyten von Archäophyten?",
         options: ["1492", "1648", "1871"],
         correct: 0,
-        explanation: "1492, das Jahr der Ankunft des Kolumbus in Amerika, markiert den Beginn des weltweiten Pflanzenaustauschs. Früher eingeführte Arten wie der Klatschmohn heißen Archäophyten."
+        explanation: "Das Stichjahr 1492 trennt Neophyten von Archäophyten. Früher eingeführte Arten wie der Klatschmohn heißen Archäophyten, spätere wie die Kartoffel Neophyten.",
+        hint: "Das Stichjahr markiert den Beginn des weltweiten Austauschs von Pflanzen zwischen den Kontinenten, als Kolumbus Amerika erreichte."
       }
     },
 
