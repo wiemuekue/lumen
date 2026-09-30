@@ -459,7 +459,8 @@ const LEGACY_CARDS = [
         question: "Welcher Anteil der Tiefseetiere kann selbst Licht erzeugen?",
         options: ["Etwa drei Viertel", "Etwa ein Zehntel", "Nur einzelne Fischarten"],
         correct: 0,
-        explanation: "Tauchroboter-Beobachtungen zeigen: Rund 75 Prozent der Tiere in der Tiefsee leuchten – Biolumineszenz ist dort eher die Regel als die Ausnahme."
+        explanation: "Rund 75 Prozent der Tiefseetiere erzeugen selbst Licht, das zeigen Beobachtungen mit Tauchrobotern. Biolumineszenz ist dort eher die Regel als die Ausnahme.",
+        hint: "In der Tiefsee ist es stockdunkel. Tiere nutzen eigenes Licht, um Beute anzulocken, Partner zu finden oder Feinde zu blenden. Es ist dort keine Seltenheit."
       }
     },
     {
@@ -471,7 +472,8 @@ const LEGACY_CARDS = [
         question: "Wer erreichte 1960 als Erste den Grund des Marianengrabens?",
         options: ["James Cameron", "Jacques Piccard und Don Walsh", "Jacques-Yves Cousteau"],
         correct: 1,
-        explanation: "Der Schweizer Jacques Piccard und der US-Marineoffizier Don Walsh erreichten am 23. Januar 1960 mit der Trieste den Grund. Erst 52 Jahre später folgte James Cameron."
+        explanation: "Jacques Piccard und Don Walsh erreichten am 23. Januar 1960 mit der Trieste den Grund des Marianengrabens. Erst 52 Jahre später folgte James Cameron allein.",
+        hint: "Die Tauchfahrt gelang 1960 mit dem Tiefseeboot Trieste, das ein Schweizer Forscher mit seinem Vater entwickelt hatte. Ein US-Marineoffizier war mit an Bord."
       }
     },
     {
@@ -483,7 +485,8 @@ const LEGACY_CARDS = [
         question: "Warum ist das Blut von Oktopussen blau?",
         options: ["Wegen der Kälte in der Tiefsee", "Weil es kaum Sauerstoff enthält", "Wegen des kupferhaltigen Hämocyanins"],
         correct: 2,
-        explanation: "Hämocyanin enthält Kupfer statt Eisen. Mit gebundenem Sauerstoff färbt es sich blau – so wie Hämoglobin unser Blut rot erscheinen lässt."
+        explanation: "Das Blut von Oktopussen ist blau wegen des kupferhaltigen Hämocyanins. Mit gebundenem Sauerstoff färbt es sich blau, so wie Hämoglobin unser Blut rot macht.",
+        hint: "Unser Blut ist rot, weil ein eisenhaltiger Farbstoff Sauerstoff transportiert. Oktopusse nutzen dafür ein anderes Metall."
       }
     },
 
