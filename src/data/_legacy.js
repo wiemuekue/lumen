@@ -301,7 +301,8 @@ const LEGACY_CARDS = [
         question: "Wie groß ist ein typischer Neutronenstern im Durchmesser?",
         options: ["Etwa 20 Kilometer", "Etwa so groß wie die Erde", "Etwa so groß wie die Sonne"],
         correct: 0,
-        explanation: "Ein Neutronenstern ist kaum größer als eine Großstadt, enthält aber mehr Masse als die Sonne – daraus ergibt sich seine unvorstellbare Dichte."
+        explanation: "Ein Neutronenstern misst nur etwa 20 Kilometer, kaum mehr als eine Großstadt, enthält aber mehr Masse als die Sonne. Daraus ergibt sich seine unvorstellbare Dichte.",
+        hint: "Ein Neutronenstern ist der Rest eines explodierten Riesensterns. Seine Materie ist so dicht gepresst, dass ein Teelöffel davon Milliarden Tonnen wiegen würde."
       }
     },
     {
@@ -313,7 +314,8 @@ const LEGACY_CARDS = [
         question: "Was kennzeichnet den Ereignishorizont eines Schwarzen Lochs?",
         options: ["Er ist die feste, glühende Oberfläche des Schwarzen Lochs", "Ab ihm kann nicht einmal mehr Licht entkommen", "Er ist die Grenze, ab der Sterne Wasserstoff verbrennen"],
         correct: 1,
-        explanation: "Innerhalb des Ereignishorizonts müsste man schneller als das Licht sein, um zu entkommen – und das ist nach der Relativitätstheorie unmöglich."
+        explanation: "Ab dem Ereignishorizont kann nicht einmal Licht entkommen. Man müsste schneller als das Licht sein, und das ist nach der Relativitätstheorie unmöglich.",
+        hint: "Je näher man einem Schwarzen Loch kommt, desto schneller müsste man fliegen, um ihm zu entkommen. Irgendwann reicht selbst die höchste mögliche Geschwindigkeit nicht mehr."
       }
     },
     {
@@ -325,7 +327,8 @@ const LEGACY_CARDS = [
         question: "Welche Temperatur hat die kosmische Hintergrundstrahlung heute?",
         options: ["Etwa 2,7 Kelvin", "Etwa 27 Kelvin", "Etwa 273 Kelvin"],
         correct: 0,
-        explanation: "2,7 Kelvin sind nur knapp über dem absoluten Nullpunkt. Ursprünglich war die Strahlung rund 3.000 Kelvin heiß – die Ausdehnung des Alls hat sie extrem abgekühlt."
+        explanation: "Die Hintergrundstrahlung hat heute etwa 2,7 Kelvin, knapp über dem absoluten Nullpunkt. Ursprünglich war sie rund 3.000 Kelvin heiß – die Ausdehnung des Alls hat sie abgekühlt.",
+        hint: "Die Strahlung ist das Nachglühen des Urknalls. Durch die Ausdehnung des Alls hat sie sich extrem abgekühlt, fast bis zum absoluten Nullpunkt."
       }
     },
     {
@@ -337,7 +340,8 @@ const LEGACY_CARDS = [
         question: "Wie weit wäre die Erde von einer ein Meter großen Sonne entfernt?",
         options: ["Etwa 10 Meter", "Etwa 107 Meter", "Etwa 2 Kilometer"],
         correct: 1,
-        explanation: "Die Erde ist etwa 107 Sonnendurchmesser von der Sonne entfernt. Im Meter-Modell entspricht das ungefähr der Länge eines Fußballfeldes."
+        explanation: "Die Erde ist etwa 107 Sonnendurchmesser von der Sonne entfernt. Im Meter-Modell entspricht das ungefähr der Länge eines Fußballfeldes, die Erde wäre knapp einen Zentimeter groß.",
+        hint: "Der Abstand der Erde zur Sonne entspricht etwas mehr als hundert Sonnendurchmessern. Im Modell hätte die Erde nur die Größe einer Erbse."
       }
     },
 
