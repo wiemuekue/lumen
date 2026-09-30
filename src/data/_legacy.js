@@ -617,7 +617,8 @@ const LEGACY_CARDS = [
         question: "Welches Lebensmittel gab es im mittelalterlichen Europa noch nicht?",
         options: ["Hafer", "Kartoffeln", "Kohl"],
         correct: 1,
-        explanation: "Die Kartoffel stammt aus den Anden und gelangte erst im 16. Jahrhundert nach Europa. In Deutschland verbreitete sie sich als Grundnahrungsmittel sogar erst im 18. Jahrhundert."
+        explanation: "Kartoffeln gab es im mittelalterlichen Europa noch nicht. Sie stammen aus den Anden und kamen im 16. Jahrhundert nach Europa, in Deutschland wurden sie erst im 18. Jahrhundert Grundnahrungsmittel.",
+        hint: "Viele heutige Grundnahrungsmittel stammen ursprünglich aus Amerika. Kolumbus erreichte Amerika erst 1492, am Ende des Mittelalters."
       }
     },
     {
@@ -629,7 +630,8 @@ const LEGACY_CARDS = [
         question: "Warum war eine Stunde im Mittelalter im Sommer länger als im Winter?",
         options: ["Weil die Kirchenglocken im Sommer langsamer schlugen", "Weil man den hellen Tag in zwölf gleiche Teile teilte", "Weil Sonnenuhren im Winter nicht funktionierten"],
         correct: 1,
-        explanation: "Bei Temporalstunden hängt die Länge vom Tageslicht ab: Im Juni ist der helle Tag viel länger als im Dezember – also auch jede seiner zwölf Stunden."
+        explanation: "Man teilte den hellen Tag in zwölf gleiche Teile, sogenannte Temporalstunden. Im Juni ist der helle Tag viel länger als im Dezember, also auch jede seiner Stunden.",
+        hint: "Mechanische Uhren waren selten. Viele Menschen richteten sich nach dem Sonnenlicht und teilten die Zeit vom Sonnenaufgang bis zum Sonnenuntergang ein."
       }
     },
     {
@@ -641,7 +643,8 @@ const LEGACY_CARDS = [
         question: "Warum gingen die Badestuben im 16. Jahrhundert stark zurück?",
         options: ["Wegen Seuchenangst und steigender Holzpreise", "Wegen eines kirchlichen Badeverbots", "Weil private Badezimmer in Mode kamen"],
         correct: 0,
-        explanation: "Syphilis und andere Seuchen machten das gemeinsame Baden verdächtig, während Holz knapp und teuer wurde. Private Badezimmer kamen erst Jahrhunderte später auf."
+        explanation: "Die Badestuben gingen wegen Seuchenangst und steigender Holzpreise zurück. Syphilis und andere Seuchen machten das gemeinsame Baden verdächtig, private Badezimmer kamen erst Jahrhunderte später.",
+        hint: "Badestuben waren im Spätmittelalter beliebte Treffpunkte, beheizt mit viel Brennholz. Dann breitete sich eine neue Krankheit aus."
       }
     }
   ];
