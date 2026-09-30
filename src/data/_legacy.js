@@ -351,7 +351,8 @@ const LEGACY_CARDS = [
         question: "Wer begründete die Theorie der Kontinentaldrift?",
         options: ["Charles Darwin", "Alexander von Humboldt", "Alfred Wegener"],
         correct: 2,
-        explanation: "Alfred Wegener stützte sich auf passende Küstenlinien, Fossilien und Gesteine beiderseits des Atlantiks. Den Antriebsmechanismus konnte er allerdings noch nicht erklären."
+        explanation: "Alfred Wegener stellte 1912 die Theorie der Kontinentaldrift vor und stützte sich auf passende Küstenlinien, Fossilien und Gesteine. Den Antrieb konnte er nicht erklären, deshalb wurde er lange belächelt. Erst die Plattentektonik bestätigte ihn.",
+        hint: "Der Begründer war ein deutscher Meteorologe und Polarforscher, der 1930 auf einer Grönland-Expedition ums Leben kam. Ihm fiel auf, dass die Küsten Afrikas und Südamerikas wie Puzzleteile zusammenpassen."
       }
     },
     {
@@ -363,7 +364,8 @@ const LEGACY_CARDS = [
         question: "Woher stammt die Energie für das Leben an Hydrothermalquellen?",
         options: ["Aus der Chemosynthese von Bakterien", "Aus Photosynthese im schwachen Restlicht", "Allein aus absinkendem Plankton von der Oberfläche"],
         correct: 0,
-        explanation: "In völliger Dunkelheit nutzen Bakterien chemische Energie aus Schwefelverbindungen, um organische Stoffe aufzubauen – ganz ohne Sonnenlicht."
+        explanation: "Bakterien nutzen an Hydrothermalquellen chemische Energie aus Schwefelverbindungen, um organische Stoffe aufzubauen – ganz ohne Sonnenlicht. Man nennt das Chemosynthese. Von ihnen leben Röhrenwürmer, Muscheln und Krebse.",
+        hint: "An den heißen Quellen der Tiefsee ist es völlig dunkel, Pflanzen können dort nicht wachsen. Aus den Schloten strömt aber Wasser mit gelösten Schwefelverbindungen."
       }
     },
     {
@@ -375,7 +377,8 @@ const LEGACY_CARDS = [
         question: "In welcher Schicht verglühen die meisten Sternschnuppen?",
         options: ["Troposphäre", "Mesosphäre", "Exosphäre"],
         correct: 1,
-        explanation: "In der Mesosphäre ist die Luft bereits dicht genug, um Meteoroiden durch Reibung stark zu erhitzen – sie verglühen meist in 70 bis 100 Kilometern Höhe."
+        explanation: "Die meisten Sternschnuppen verglühen in der Mesosphäre in 70 bis 100 Kilometern Höhe. Dort ist die Luft schon dicht genug, um die Teilchen stark zu erhitzen. Die meisten sind nur so groß wie ein Sandkorn.",
+        hint: "Sternschnuppen sind kleine Gesteinsbrocken, die mit hoher Geschwindigkeit in die Atmosphäre eintreten. Die gesuchte Schicht liegt oberhalb der Stratosphäre mit der Ozonschicht, in 50 bis 85 Kilometern Höhe."
       }
     },
     {
@@ -387,7 +390,8 @@ const LEGACY_CARDS = [
         question: "Wann kehrte sich das Erdmagnetfeld zuletzt vollständig um?",
         options: ["Vor etwa 2.000 Jahren", "Vor etwa 65 Millionen Jahren", "Vor etwa 780.000 Jahren"],
         correct: 2,
-        explanation: "Die letzte vollständige Umpolung, die Brunhes-Matuyama-Umkehr, liegt rund 780.000 Jahre zurück. Sie ist in Vulkangestein und Meeresböden magnetisch „eingefroren“."
+        explanation: "Die letzte vollständige Umpolung, die Brunhes-Matuyama-Umkehr, liegt rund 780.000 Jahre zurück. Umpolungen kommen unregelmäßig vor. Während einer Umkehr wird das Feld schwächer, verschwindet aber nicht ganz.",
+        hint: "Umpolungen des Magnetfelds sind in Vulkangestein und Meeresböden gespeichert. Die letzte liegt lange vor der Zeit der Neandertaler, aber viel näher an uns als das Ende der Dinosaurier."
       }
     },
 
