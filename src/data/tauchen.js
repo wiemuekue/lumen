@@ -31,7 +31,7 @@ CONTENT.tauchen = {
       id: "tc-03", category: "Tauchen", tagColor: "#0891B2",
       title: "Die Taucherkrankheit",
       story: "Unter Druck löst sich Stickstoff aus der Atemluft im Blut und im Gewebe. Taucht man zu schnell auf, kann er – wie Kohlensäure beim Öffnen einer Sprudelflasche – Bläschen bilden, die Gelenke schmerzen lassen oder sogar Lähmungen verursachen. Deshalb planen Taucher ihre Tauchgänge mit Nullzeiten, steigen langsam auf und legen in etwa fünf Metern einen Sicherheitsstopp von drei Minuten ein. Im Notfall hilft reiner Sauerstoff und die Behandlung in einer Druckkammer.",
-      funFact: "Beschrieben wurde die Krankheit zuerst bei Arbeitern, die in Druckkammern unter Wasser Brückenfundamente bauten – etwa für die Brooklyn Bridge. Daher heißt sie auch Caissonkrankheit.",
+      funFact: "Bekannt wurde die Krankheit bei Arbeitern, die in Druckkammern unter Wasser Fundamente bauten – etwa für die Brooklyn Bridge. Daher heißt sie auch Caissonkrankheit.",
       quiz: {
         question: "Wie wird die Taucherkrankheit behandelt?",
         options: ["Mit einem heißen Bad", "Mit Sauerstoff und in der Druckkammer", "Durch schnelles Auftauchen"],
