@@ -144,7 +144,8 @@ const LEGACY_CARDS = [
         question: "Was ist ein Teilzieher?",
         options: ["Ein Vogel, der nur einen Teil der Strecke fliegt und dann umkehrt", "Eine Art, bei der nur ein Teil der Population im Winter wegzieht", "Ein Vogel, der nur jedes zweite Jahr zieht"],
         correct: 1,
-        explanation: "Bei Teilziehern wie der Amsel ziehen manche Individuen in den Süden, während andere – oft ältere Männchen oder Stadtvögel – im Brutgebiet überwintern."
+        explanation: "Bei Teilziehern wie der Amsel ziehen manche Individuen in den Süden, während andere – oft ältere Männchen oder Stadtvögel – im Brutgebiet überwintern.",
+        hint: "Bei manchen Arten ziehen nicht alle Tiere gleich. Ob ein Vogel bleibt, hängt etwa von Alter, Geschlecht oder Wohnort ab."
       }
     },
     {
@@ -156,7 +157,8 @@ const LEGACY_CARDS = [
         question: "Warum schimmert das Gefieder des Eisvogels blau?",
         options: ["Wegen eines seltenen blauen Farbstoffs", "Weil es das Blau des Wassers spiegelt", "Durch Lichtstreuung an Nanostrukturen der Federn"],
         correct: 2,
-        explanation: "Das Blau ist eine Strukturfarbe: Feinste Strukturen in den Federn lenken das Licht so, dass Blau verstärkt wird. Zerreibt man eine Feder, verschwindet die Farbe."
+        explanation: "Das Blau ist eine Strukturfarbe: Feinste Strukturen in den Federn lenken das Licht so, dass Blau verstärkt wird. Zerreibt man eine Feder, verschwindet die Farbe.",
+        hint: "Manche Farben entstehen nicht durch Pigmente, sondern dadurch, wie Licht auf winzige Oberflächen trifft, ähnlich wie bei Seifenblasen."
       }
     },
     {
@@ -168,7 +170,8 @@ const LEGACY_CARDS = [
         question: "Wozu trommelt der Buntspecht im Frühjahr vor allem?",
         options: ["Um Insekten aus der Rinde zu scheuchen", "Um seinen Schnabel zu schärfen", "Um sein Revier zu markieren und Partner anzulocken"],
         correct: 2,
-        explanation: "Das Trommeln ist die „Stimme“ des Spechts: ein akustisches Signal, das weit durch den Wald trägt – vergleichbar mit dem Reviergesang der Singvögel."
+        explanation: "Das Trommeln ist die „Stimme“ des Spechts: ein akustisches Signal, das weit durch den Wald trägt – vergleichbar mit dem Reviergesang der Singvögel.",
+        hint: "Spechte können nicht singen wie Amseln oder Nachtigallen. Sie nutzen stattdessen trockene, hohle Äste als Resonanzkörper."
       }
     },
     {
@@ -180,7 +183,8 @@ const LEGACY_CARDS = [
         question: "Welche Entdeckung gelang Forschern am Rotkehlchen?",
         options: ["Der Magnetkompass von Zugvögeln", "Das Ultraschallhören von Singvögeln", "Die Winterstarre bei Kleinvögeln"],
         correct: 0,
-        explanation: "Versuche mit Rotkehlchen in künstlichen Magnetfeldern zeigten, dass sie ihre Zugrichtung am Erdmagnetfeld ausrichten – ein Meilenstein der Verhaltensbiologie."
+        explanation: "Versuche mit Rotkehlchen in künstlichen Magnetfeldern zeigten, dass sie ihre Zugrichtung am Erdmagnetfeld ausrichten – ein Meilenstein der Verhaltensbiologie.",
+        hint: "In den 1960er-Jahren untersuchten Frankfurter Forscher, wie Zugvögel nachts ihre Richtung finden, auch ganz ohne Sterne."
       }
     },
     {
@@ -192,7 +196,8 @@ const LEGACY_CARDS = [
         question: "Wo entsteht der Gesang der Vögel?",
         options: ["Im Kehlkopf, wie beim Menschen", "In der Syrinx an der Gabelung der Luftröhre", "In speziellen Luftsäcken im Schnabel"],
         correct: 1,
-        explanation: "Die Syrinx sitzt tief in der Brust, wo sich die Luftröhre in die Bronchien teilt. Da sie zwei Hälften hat, können Vögel sogar zwei Töne gleichzeitig erzeugen."
+        explanation: "Die Syrinx sitzt tief in der Brust, wo sich die Luftröhre in die Bronchien teilt. Da sie zwei Hälften hat, können Vögel sogar zwei Töne gleichzeitig erzeugen.",
+        hint: "Vögel haben zwar einen Kehlkopf, aber ihr eigentliches Stimmorgan liegt viel tiefer im Körper."
       }
     },
 
