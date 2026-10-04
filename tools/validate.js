@@ -25,8 +25,8 @@ const dup = (t, where) => {
 const str = (v, where) => { if (typeof v !== "string" || v.trim().length < 3) problems.push(`Text fehlt: ${where}`); else if (/"/.test(v)) problems.push(`Gerades Anführungszeichen: ${where}`); };
 const rows = [];
 let total = 0;
-// Kontext-Tipps und Erklärungen: Pflicht, sobald ein Thema überarbeitet ist (oder überall mit STRICT=1)
-const STRICT = process.env.STRICT === "1";
+// Kontext-Tipps und Erklärungen: Pflicht für alle Themen (STRICT=0 schaltet die Prüfung auf überarbeitete Themen zurück)
+const STRICT = process.env.STRICT !== "0";
 const EXMIN = 16, HMIN = 10;
 const nWords = t => String(t || "").trim().split(/\s+/).filter(Boolean).length;
 const fold = t => String(t).toLowerCase().replace(/ß/g, "ss").replace(/[^a-zäöü0-9]/g, "");
