@@ -106,9 +106,14 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   [hidden] { display: none !important; }
   html, body { height: 100%; overflow: hidden; overscroll-behavior: none; background: var(--bg); }
-  /* iOS-Homescreen-App: Manche iOS-Versionen verkürzen den sichtbaren Bereich unten.
-     --vgap (per Skript gemessen) zieht alle Vollbild-Ebenen bis an den echten Bildschirmrand. */
+  /* iOS-Homescreen-App: Manche iOS-Versionen melden unten einen zu kurzen Anzeigebereich.
+     Dann (Klasse vgap) wird das Dokument um die gemessene Lücke verlängert, und die
+     Vollbild-Ebenen hängen am verlängerten body statt am zu kurzen Viewport. */
   :root { --vgap: 0px; }
+  html.vgap { height: calc(100% + var(--vgap)); }
+  html.vgap body { position: relative; }
+  html.vgap #bg, html.vgap #app, html.vgap #player, html.vgap #onboard, html.vgap #sheetBackdrop { position: absolute; }
+  html.vgap #tabbar, html.vgap #sheet { position: absolute; }
   body {
     font-family: var(--font); color: var(--label);
     -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
@@ -127,7 +132,7 @@
   @media (prefers-color-scheme: dark) { .tinted { --ink: var(--c-hi); } }
 
   /* ---------- Hintergrund ---------- */
-  #bg { position: fixed; inset: 0 0 calc(-1 * var(--vgap)) 0; z-index: 0; overflow: hidden; background: var(--bg-grad); pointer-events: none; }
+  #bg { position: fixed; inset: 0; z-index: 0; overflow: hidden; background: var(--bg-grad); pointer-events: none; }
   .blob { position: absolute; border-radius: 50%; will-change: transform; }
   .b1 { width: 80vmax; height: 80vmax; left: -30vmax; top: -34vmax; background: radial-gradient(closest-side, var(--blob1), transparent); animation: drift1 28s ease-in-out infinite alternate; }
   .b2 { width: 70vmax; height: 70vmax; right: -30vmax; bottom: -26vmax; background: radial-gradient(closest-side, var(--blob2), transparent); animation: drift2 32s ease-in-out infinite alternate; }
@@ -138,7 +143,7 @@
   @keyframes drift3 { to { transform: translate(14vmax, -12vmax) scale(0.92); } }
 
   /* ---------- App-Rahmen ---------- */
-  #app { position: fixed; inset: 0 0 calc(-1 * var(--vgap)) 0; z-index: 1; transform-origin: 50% 100%; transition: transform 0.5s var(--ease-sheet), border-radius 0.5s var(--ease-sheet), filter 0.5s; }
+  #app { position: fixed; inset: 0; z-index: 1; transform-origin: 50% 100%; transition: transform 0.5s var(--ease-sheet), border-radius 0.5s var(--ease-sheet), filter 0.5s; }
   body.sheet-open #app { transform: scale(0.94) translateY(6px); border-radius: 22px; overflow: hidden; filter: brightness(0.86); }
 
   .view {
@@ -175,7 +180,7 @@
   /* ---------- Tab-Leiste ---------- */
   #tabbar {
     position: fixed; z-index: 30; left: 50%;
-    bottom: calc(max(10px, calc(env(safe-area-inset-bottom) - 10px)) - var(--vgap));
+    bottom: max(10px, calc(env(safe-area-inset-bottom) - 10px));
     transform: translateX(-50%); width: min(calc(100% - 28px), 440px); height: 64px;
     border-radius: 32px; padding: 5px; display: grid; grid-template-columns: repeat(4, 1fr);
     background: var(--tab-bg); -webkit-backdrop-filter: blur(28px) saturate(180%); backdrop-filter: blur(28px) saturate(180%);
@@ -541,7 +546,7 @@
 
   /* ---------- Lern-Player ---------- */
   #player {
-    position: fixed; inset: 0 0 calc(-1 * var(--vgap)) 0; z-index: 45; display: flex; flex-direction: column;
+    position: fixed; inset: 0; z-index: 45; display: flex; flex-direction: column;
     background: radial-gradient(90% 45% at 85% 0%, rgba(var(--pc-rgb, 94, 92, 230), 0.30), transparent 70%), radial-gradient(80% 40% at 0% 100%, rgba(var(--pc-rgb, 94, 92, 230), 0.16), transparent 70%), var(--bg-grad);
     background-color: var(--bg);
     transform: translateY(100%); visibility: hidden;
@@ -622,9 +627,9 @@
   .sum-list { margin-top: 16px; text-align: left; }
 
   /* ---------- Sheet ---------- */
-  #sheetBackdrop { position: fixed; inset: 0 0 calc(-1 * var(--vgap)) 0; z-index: 50; background: rgba(0, 0, 0, 0.3); opacity: 0; pointer-events: none; transition: opacity 0.45s ease; }
+  #sheetBackdrop { position: fixed; inset: 0; z-index: 50; background: rgba(0, 0, 0, 0.3); opacity: 0; pointer-events: none; transition: opacity 0.45s ease; }
   body.sheet-open #sheetBackdrop { opacity: 1; pointer-events: auto; }
-  #sheet { position: fixed; z-index: 51; left: 0; right: 0; bottom: calc(-1 * var(--vgap)); margin: 0 auto; max-width: 680px; height: calc(100% + var(--vgap) - env(safe-area-inset-top) - 12px); border-radius: 30px 30px 0 0; background: var(--sheet-bg); -webkit-backdrop-filter: blur(28px) saturate(180%); backdrop-filter: blur(28px) saturate(180%); border: 1px solid var(--glass-border); border-bottom: 0; box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.22), var(--hl); transform: translateY(105%); transition: transform 0.5s var(--ease-sheet); display: flex; flex-direction: column; visibility: hidden; }
+  #sheet { position: fixed; z-index: 51; left: 0; right: 0; bottom: 0; margin: 0 auto; max-width: 680px; height: calc(100% - env(safe-area-inset-top) - 12px); border-radius: 30px 30px 0 0; background: var(--sheet-bg); -webkit-backdrop-filter: blur(28px) saturate(180%); backdrop-filter: blur(28px) saturate(180%); border: 1px solid var(--glass-border); border-bottom: 0; box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.22), var(--hl); transform: translateY(105%); transition: transform 0.5s var(--ease-sheet); display: flex; flex-direction: column; visibility: hidden; }
   body.sheet-open #sheet { transform: translateY(0); visibility: visible; }
   body.sheet-closing #sheet { visibility: visible; }
   .sheet-head { flex: none; height: 50px; position: relative; display: flex; justify-content: center; touch-action: none; }
@@ -635,7 +640,7 @@
   .sheet-body .card, .sheet-body .result { background: var(--glass-soft); -webkit-backdrop-filter: none; backdrop-filter: none; }
 
   /* ---------- Profil-Editor / Willkommen ---------- */
-  #onboard { position: fixed; inset: 0 0 calc(-1 * var(--vgap)) 0; z-index: 65; overflow-y: auto; -webkit-overflow-scrolling: touch; background: var(--bg-grad); background-color: var(--bg); opacity: 0; visibility: hidden; transition: opacity 0.35s ease, visibility 0s linear 0.35s; }
+  #onboard { position: fixed; inset: 0; z-index: 65; overflow-y: auto; -webkit-overflow-scrolling: touch; background: var(--bg-grad); background-color: var(--bg); opacity: 0; visibility: hidden; transition: opacity 0.35s ease, visibility 0s linear 0.35s; }
   #onboard.show { opacity: 1; visibility: visible; transition: opacity 0.35s ease, visibility 0s; }
   .ob-inner { max-width: 520px; margin: 0 auto; padding: calc(env(safe-area-inset-top) + 12px) 20px calc(env(safe-area-inset-bottom) + 30px); }
   .ob-top { display: flex; justify-content: flex-end; min-height: 38px; }
@@ -823,6 +828,8 @@
       let gap = Math.round(fullH - innerHeight);
       if (Math.abs(fullW - innerWidth) > 2 || gap < 0 || gap > 150) gap = 0;
       document.documentElement.style.setProperty("--vgap", gap + "px");
+      document.documentElement.classList.toggle("vgap", gap > 0);
+      window.__vgap = gap;
     };
     fix();
     addEventListener("resize", fix);
@@ -2687,6 +2694,19 @@
   /* =====================================================================
      PROFIL
      ===================================================================== */
+  // Kleine Anzeige-Diagnose (nur als Homescreen-App), hilft bei Darstellungsfehlern auf iOS
+  function displayDiag() {
+    if (!(navigator.standalone === true || (window.matchMedia && matchMedia("(display-mode: standalone)").matches))) return "";
+    const probe = document.createElement("div");
+    probe.style.cssText = "position:fixed;top:0;left:0;width:1px;height:100vh;padding-bottom:env(safe-area-inset-bottom);padding-top:env(safe-area-inset-top);visibility:hidden;pointer-events:none";
+    document.body.appendChild(probe);
+    const cs = getComputedStyle(probe), vh = parseFloat(cs.height);
+    const st = parseFloat(cs.paddingTop), sb = parseFloat(cs.paddingBottom);
+    probe.remove();
+    const vv = window.visualViewport ? Math.round(visualViewport.height) : "–";
+    return '<p class="footnote" style="padding-top:8px;font-size:11px">Anzeige: ' + [innerWidth + "×" + innerHeight, "Bildschirm " + screen.width + "×" + screen.height, "vh " + Math.round(vh), "vv " + vv, "Doc " + document.documentElement.clientHeight, "Rand " + Math.round(st) + "/" + Math.round(sb), "Lücke " + (window.__vgap || 0)].join(" · ") + "</p>";
+  }
+
   function renderProfile() {
     if (!state) return;
     normalizeStreak();
@@ -2758,7 +2778,7 @@
       '<div class="row setting-row"><span class="row-text"><span class="row-title">Haptisches Feedback</span><span class="row-sub">Vibration bei richtigen und falschen Antworten</span></span><label class="switch"><input type="checkbox" data-toggle="haptics"' + (state.settings.haptics ? " checked" : "") + ' aria-label="Haptisches Feedback"><span class="track"></span></label></div>' +
       "</div>" +
       '<div class="list glass" style="margin-top:14px"><button class="row destructive" data-action="reset">Fortschritt zurücksetzen</button><button class="row destructive" data-action="delete-profile">Profil löschen</button></div>' +
-      '<p class="footnote">Lumen · ' + fmtNum.format(ITEMS.length) + " Lerninhalte · " + CATEGORIES.length + " Themen<br>Profile und Fortschritt bleiben nur auf diesem Gerät gespeichert.</p>";
+      '<p class="footnote">Lumen · ' + fmtNum.format(ITEMS.length) + " Lerninhalte · " + CATEGORIES.length + " Themen<br>Profile und Fortschritt bleiben nur auf diesem Gerät gespeichert.</p>" + displayDiag();
     renderVoiceName();
     animateRings($("#profileContent"));
   }
