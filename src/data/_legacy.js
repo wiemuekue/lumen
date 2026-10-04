@@ -509,7 +509,8 @@ const LEGACY_CARDS = [
         question: "Woher hat die Stoa ihren Namen?",
         options: ["Von ihrem Gründer Stoikos", "Von einer bemalten Säulenhalle in Athen", "Vom griechischen Wort für Gelassenheit"],
         correct: 1,
-        explanation: "„Stoa“ heißt Säulenhalle. Zenon lehrte in der Stoa Poikile, der „bunten Halle“ an der Agora von Athen – daher der Name der Schule."
+        explanation: "„Stoa“ heißt Säulenhalle. Zenon lehrte in der Stoa Poikile, der „bunten Halle“ an der Agora von Athen – daher der Name der Schule.",
+        hint: "Zenon besaß kein eigenes Schulgebäude. Er unterrichtete öffentlich an einem belebten Ort am Marktplatz von Athen."
       }
     },
     {
@@ -521,7 +522,8 @@ const LEGACY_CARDS = [
         question: "Was liegt laut Epiktet wirklich in unserer Macht?",
         options: ["Unsere Urteile und Absichten", "Unsere Gesundheit und unser Besitz", "Unser Ruf bei anderen Menschen"],
         correct: 0,
-        explanation: "Nur unser Inneres – Urteile, Wünsche, Absichten – liegt vollständig bei uns. Alles Äußere kann uns jederzeit genommen werden und sollte uns daher nicht beherrschen."
+        explanation: "Nur unser Inneres – Urteile, Wünsche, Absichten – liegt vollständig bei uns. Alles Äußere kann uns jederzeit genommen werden und sollte uns daher nicht beherrschen.",
+        hint: "Epiktet war Sklave gewesen und wusste, wie schnell Besitz, Gesundheit und Freiheit verloren gehen können."
       }
     },
     {
@@ -533,7 +535,8 @@ const LEGACY_CARDS = [
         question: "In welcher Sprache verfasste Mark Aurel seine Selbstbetrachtungen?",
         options: ["Latein", "Aramäisch", "Griechisch"],
         correct: 2,
-        explanation: "Griechisch galt in der gebildeten römischen Oberschicht als Sprache der Philosophie. Mark Aurel wählte sie auch für seine ganz privaten Notizen."
+        explanation: "Griechisch galt in der gebildeten römischen Oberschicht als Sprache der Philosophie. Mark Aurel wählte sie auch für seine ganz privaten Notizen.",
+        hint: "Gebildete Römer lernten neben Latein eine zweite Sprache, in der Platon und Aristoteles geschrieben hatten."
       }
     },
 
