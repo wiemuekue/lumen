@@ -260,7 +260,8 @@ const LEGACY_CARDS = [
         question: "Welche beiden Kreisläufe unterscheidet Cradle to Cradle?",
         options: ["Den biologischen und den technischen Kreislauf", "Den nationalen und den globalen Kreislauf", "Den Energie- und den Wasserkreislauf"],
         correct: 0,
-        explanation: "Biologische Nährstoffe kehren als Kompost in die Natur zurück, technische Nährstoffe werden ohne Qualitätsverlust immer wieder zu neuen Produkten verarbeitet."
+        explanation: "Biologische Nährstoffe kehren als Kompost in die Natur zurück, technische Nährstoffe werden ohne Qualitätsverlust immer wieder zu neuen Produkten verarbeitet.",
+        hint: "Das Konzept unterscheidet Stoffe, die gefahrlos verrotten können, von solchen, die man immer wieder neu verarbeitet."
       }
     },
     {
@@ -272,7 +273,8 @@ const LEGACY_CARDS = [
         question: "Was ist laut der Fraunhofer-Studie die größte Mikroplastik-Quelle in Deutschland?",
         options: ["Peelings und Duschgele", "Reifenabrieb im Straßenverkehr", "Plastiktüten aus dem Supermarkt"],
         correct: 1,
-        explanation: "Reifenabrieb liegt mit Abstand vorn. Mikroperlen aus Kosmetik machen nur einen sehr kleinen Anteil der gesamten Mikroplastik-Emissionen aus."
+        explanation: "Reifenabrieb liegt mit Abstand vorn. Mikroperlen aus Kosmetik machen nur einen sehr kleinen Anteil der gesamten Mikroplastik-Emissionen aus.",
+        hint: "Mikroplastik entsteht nicht nur aus Produkten mit Plastikkügelchen, sondern vor allem durch Abnutzung und Verschleiß im Alltag."
       }
     },
     {
@@ -284,7 +286,8 @@ const LEGACY_CARDS = [
         question: "Welches Beispiel beschreibt einen indirekten Rebound-Effekt?",
         options: ["Ein sparsames Auto wird öfter gefahren", "Eine LED-Lampe hält länger als eine Glühbirne", "Mit dem gesparten Heizgeld wird eine Flugreise bezahlt"],
         correct: 2,
-        explanation: "Beim indirekten Rebound wird die Ersparnis in einem anderen Bereich ausgegeben. Das öfter gefahrene Sparauto wäre dagegen ein direkter Rebound."
+        explanation: "Beim indirekten Rebound wird die Ersparnis in einem anderen Bereich ausgegeben. Das öfter gefahrene Sparauto wäre dagegen ein direkter Rebound.",
+        hint: "Beim Rebound-Effekt wird eine Einsparung durch zusätzlichen Verbrauch wieder aufgezehrt. Direkt heißt: beim selben Produkt."
       }
     },
     {
@@ -296,7 +299,8 @@ const LEGACY_CARDS = [
         question: "Welche Stufe steht in der Abfallhierarchie ganz oben?",
         options: ["Recycling", "Energetische Verwertung", "Vermeidung"],
         correct: 2,
-        explanation: "Die Hierarchie lautet: Vermeidung, Vorbereitung zur Wiederverwendung, Recycling, sonstige (etwa energetische) Verwertung und erst zuletzt Beseitigung."
+        explanation: "Die Hierarchie lautet: Vermeidung, Vorbereitung zur Wiederverwendung, Recycling, sonstige (etwa energetische) Verwertung und erst zuletzt Beseitigung.",
+        hint: "Die Abfallhierarchie ordnet Maßnahmen danach, wie gut sie für die Umwelt sind. Die Beseitigung steht ganz unten."
       }
     },
 
