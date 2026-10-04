@@ -10,7 +10,8 @@ const LEGACY_CARDS = [
         question: "Welches Merkmal unterscheidet die Griechische von der Maurischen Landschildkröte?",
         options: ["Ein beweglicher Hinterlappen am Bauchpanzer", "Ein Hornnagel an der Schwanzspitze", "Hornige Sporne an den Oberschenkeln"],
         correct: 1,
-        explanation: "Den Hornnagel an der Schwanzspitze besitzt Testudo hermanni. Oberschenkelsporne und ein beweglicher Plastron-Hinterlappen sind dagegen typische Merkmale der Maurischen Landschildkröte (Testudo graeca)."
+        explanation: "Den Hornnagel an der Schwanzspitze besitzt Testudo hermanni. Oberschenkelsporne und ein beweglicher Plastron-Hinterlappen sind dagegen typische Merkmale der Maurischen Landschildkröte (Testudo graeca).",
+        hint: "Beide Arten sehen sich sehr ähnlich. Fachleute schauen deshalb genau auf das Hinterende des Tieres und auf die Beine."
       }
     },
     {
@@ -22,7 +23,8 @@ const LEGACY_CARDS = [
         question: "Welche Temperatur gilt als ideal für die Winterstarre?",
         options: ["Konstant etwa 4 bis 6 °C", "Etwa 12 bis 15 °C", "Dauerhaft unter −5 °C"],
         correct: 0,
-        explanation: "Bei 4 bis 6 °C ist der Stoffwechsel optimal gedrosselt. Wärmer verbraucht zu viele Reserven, Frost führt zu gefährlichen Gewebeschäden."
+        explanation: "Bei 4 bis 6 °C ist der Stoffwechsel optimal gedrosselt. Wärmer verbraucht zu viele Reserven, Frost führt zu gefährlichen Gewebeschäden.",
+        hint: "In der Winterstarre soll der Stoffwechsel fast ruhen, ohne dass das Tier friert. Ein Kühlschrank hält die Temperatur gleichmäßig."
       }
     },
     {
@@ -34,7 +36,8 @@ const LEGACY_CARDS = [
         question: "Welche Landschaft ist ein typischer Lebensraum der Griechischen Landschildkröte?",
         options: ["Feuchte Auwälder mit regelmäßiger Überflutung", "Alpine Geröllhalden oberhalb von 2.500 m", "Mediterrane Macchia mit sonnigen Lichtungen"],
         correct: 2,
-        explanation: "Die Macchia bietet genau das nötige Mosaik: sonnige Offenflächen zum Aufwärmen, dichtes Gebüsch als Schattenversteck und vielfältige Wildkräuter als Nahrung."
+        explanation: "Die Macchia bietet genau das nötige Mosaik: sonnige Offenflächen zum Aufwärmen, dichtes Gebüsch als Schattenversteck und vielfältige Wildkräuter als Nahrung.",
+        hint: "Die Art lebt rund ums nördliche Mittelmeer. Sie braucht Sonne zum Aufwärmen, Schatten zum Abkühlen und viele Kräuter."
       }
     },
     {
@@ -46,7 +49,8 @@ const LEGACY_CARDS = [
         question: "Was begünstigt die Höckerbildung am Panzer?",
         options: ["Faserreiche Wildkräuter", "Zu eiweiß- und zuckerreiches Futter", "Regelmäßiges Sonnenbaden"],
         correct: 1,
-        explanation: "Zu gehaltvolles Futter beschleunigt das Wachstum so stark, dass sich die Hornschilde pyramidenartig auftürmen. Faserreiche Wildkräuter und Sonnenlicht sind dagegen genau richtig."
+        explanation: "Zu gehaltvolles Futter beschleunigt das Wachstum so stark, dass sich die Hornschilde pyramidenartig auftürmen. Faserreiche Wildkräuter und Sonnenlicht sind dagegen genau richtig.",
+        hint: "Die Hornschilde wachsen von unten nach. Wächst das Tier zu schnell, wölben sie sich wie kleine Pyramiden auf."
       }
     },
     {
@@ -58,7 +62,8 @@ const LEGACY_CARDS = [
         question: "Was bestimmt bei der Griechischen Landschildkröte das Geschlecht der Jungtiere?",
         options: ["Die Temperatur während der Bebrütung", "Geschlechtschromosomen wie beim Menschen", "Die Größe des Eis"],
         correct: 0,
-        explanation: "Sie hat eine temperaturabhängige Geschlechtsbestimmung: Schon wenige Grad Unterschied im Nest verschieben das Verhältnis von Männchen und Weibchen deutlich."
+        explanation: "Sie hat eine temperaturabhängige Geschlechtsbestimmung: Schon wenige Grad Unterschied im Nest verschieben das Verhältnis von Männchen und Weibchen deutlich.",
+        hint: "Bei vielen Reptilien entscheiden keine Erbanlagen über Männchen oder Weibchen, sondern äußere Bedingungen im Nest."
       }
     },
 
