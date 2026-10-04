@@ -418,7 +418,8 @@ const LEGACY_CARDS = [
         question: "Was bedeutet der Begriff „Fynbos“?",
         options: ["Feiner Busch", "Heiliger Berg", "Rotes Land"],
         correct: 0,
-        explanation: "„Fynbos“ ist Afrikaans und bedeutet „feiner Busch“ – eine Anspielung auf die schmalen, feinen Blätter vieler typischer Sträucher."
+        explanation: "„Fynbos“ ist Afrikaans und bedeutet „feiner Busch“ – eine Anspielung auf die schmalen, feinen Blätter vieler typischer Sträucher.",
+        hint: "Der Name stammt aus dem Afrikaans und beschreibt die Pflanzen selbst. Viele Sträucher dort haben schmale, nadelartige Blätter."
       }
     },
     {
@@ -430,7 +431,8 @@ const LEGACY_CARDS = [
         question: "Woher stammt der Begriff „Big Five“?",
         options: ["Aus einer Zählung der fünf schwersten Tiere Afrikas", "Aus der Großwildjagd", "Aus einer Tourismus-Werbekampagne der 1990er-Jahre"],
         correct: 1,
-        explanation: "Jäger bezeichneten so die fünf Arten, die zu Fuß am gefährlichsten zu erlegen waren. Mit Größe hat die Auswahl wenig zu tun – sonst gehörten Flusspferd und Giraffe dazu."
+        explanation: "Jäger bezeichneten so die fünf Arten, die zu Fuß am gefährlichsten zu erlegen waren. Mit Größe hat die Auswahl wenig zu tun – sonst gehörten Flusspferd und Giraffe dazu.",
+        hint: "Zu den Big Five zählen Löwe, Leopard, Elefant, Nashorn und Kaffernbüffel. Flusspferd und Giraffe fehlen, obwohl sie groß sind."
       }
     },
     {
@@ -442,7 +444,8 @@ const LEGACY_CARDS = [
         question: "Welche Tiere sind die nächsten lebenden Verwandten des Klippschliefers?",
         options: ["Murmeltiere und Biber", "Kaninchen und Hasen", "Elefanten und Seekühe"],
         correct: 2,
-        explanation: "Klippschliefer, Elefanten und Seekühe gehen auf gemeinsame afrikanische Vorfahren zurück. Ein Hinweis: Ihre oberen Schneidezähne wachsen ähnlich wie kleine Stoßzähne."
+        explanation: "Klippschliefer, Elefanten und Seekühe gehen auf gemeinsame afrikanische Vorfahren zurück. Ein Hinweis: Ihre oberen Schneidezähne wachsen ähnlich wie kleine Stoßzähne.",
+        hint: "Der Klippschliefer sieht aus wie ein großes Meerschweinchen. Sein Gebiss und seine Füße verraten aber eine überraschende Abstammung."
       }
     },
     {
@@ -454,7 +457,8 @@ const LEGACY_CARDS = [
         question: "Warum war der Guano-Abbau für die Brillenpinguine so verheerend?",
         options: ["Guano war ihre wichtigste Nahrungsquelle", "Sie gruben ihre Nesthöhlen in die dicken Guanoschichten", "Der Abbau vergiftete das Meerwasser"],
         correct: 1,
-        explanation: "In den meterdicken Guanoschichten legten die Pinguine kühle, geschützte Bruthöhlen an. Nach dem Abbau als Dünger mussten sie ungeschützt in der prallen Sonne brüten."
+        explanation: "In den meterdicken Guanoschichten legten die Pinguine kühle, geschützte Bruthöhlen an. Nach dem Abbau als Dünger mussten sie ungeschützt in der prallen Sonne brüten.",
+        hint: "Guano ist getrockneter Vogelkot, der sich auf Inseln über Jahrhunderte meterhoch ablagerte. Man nutzte ihn als Dünger."
       }
     },
 
